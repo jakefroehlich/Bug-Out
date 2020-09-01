@@ -32,11 +32,6 @@ const NavBar = ({ whoAmI, user }) => {
       <nav className="navbar is-light" role="navigation" aria-label="main navigation">
         <Link to="/" className="navbar-item">Home</Link>
         <Link to="/login" className="navbar-item">{user.email? 'Log Out' : 'Login'}</Link>
-        {isAdmin &&
-          <Link to="/admin" className="navbar-item">Admin</Link>}
-        {isMember || isAdmin &&
-          <Link to="/request" className="navbar-item">Submit Request</Link>
-        }
       </nav>
     </div>
   );

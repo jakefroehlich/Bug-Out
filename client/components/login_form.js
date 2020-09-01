@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { whoami } from '../store/thunks/loginThunks';
-import { Login, Logout } from './index';
+import Login  from './login/login';
+import Logout  from './login/logout';
 
 class LoginForm extends Component{
   constructor() {

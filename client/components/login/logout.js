@@ -10,6 +10,7 @@ const Logout = ({ user, logout }) => (
       !
     </h2>
     <button
+      type='button'
       onClick={logout}
     >
       Logout

@@ -1,9 +1,10 @@
 const path = require('path');
 const chalk = require('chalk');
-const app =require('./server');
-const routes=require('./routes/index');
 const express= require('express');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
+const app =require('./server');
+const routes=require('./routes/index');
 const { models: { Session, User } } = require('../db/index');
 
 const PORT = process.env.PORT || 3000;
@@ -51,6 +52,7 @@ const startServer = () => new Promise((res)=>{
   })
 })
 
+// eslint-disable-next-line no-shadow
 routes.forEach(({path, router})=>{
   app.use(path, router);
 })

@@ -14,7 +14,7 @@ class LoggedIn extends Component{
     const { loggedIn } = this.props.user;
     return(
       <div>
-         <h3>{loggedIn ? 'You are logged in.' : 'Failed to login.'}</h3>
+        <h3>{loggedIn ? 'You are logged in.' : 'Failed to login.'}</h3>
       </div>
     )
   }

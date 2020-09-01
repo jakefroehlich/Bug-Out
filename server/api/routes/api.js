@@ -1,6 +1,7 @@
 const { Router } = require('express');
-const { models:{ User, Session } }= require('../../db/index');
 const bcrypt = require('bcrypt');
+const { models:{ User, Session } }= require('../../db/index');
+
 const apiRouter = Router();
 
 

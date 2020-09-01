@@ -1,5 +1,5 @@
-import { login, logout, loginFail } from '../actions';
 import axios from 'axios';
+import { login, logout, loginFail } from '../actions';
 
 export const loginThunk = (email, password) => (dispatch) => {
   return axios

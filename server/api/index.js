@@ -41,7 +41,7 @@ app.use(async (req, res, next)=>{
 
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
-
+app.use(cors())
 app.use(express.json());
 
 const startServer = () => new Promise((res)=>{

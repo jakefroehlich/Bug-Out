@@ -1,4 +1,5 @@
-const { UUID, UUIDV4 } = require('sequelize');
+const { UUID, UUIDV4, STRING } = require('sequelize');
+
 const db = require('./db');
 
 const GameSession = db.define('gameSession',{
@@ -9,4 +10,4 @@ const GameSession = db.define('gameSession',{
   },
 })
 
-module.exports=GameSession;
+module.exports = GameSession;

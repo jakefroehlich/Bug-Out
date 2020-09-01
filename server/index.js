@@ -1,6 +1,7 @@
 const dotenv=require('dotenv');
 const { startServer } = require('./api/index');
 const chalk=require('chalk');
+const Pusher = require('pusher');
 
 const { seed, sync } = require('./db/index');
 

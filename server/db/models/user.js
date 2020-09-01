@@ -56,4 +56,4 @@ User.beforeCreate(async (instance) => {
   instance.password = hash;
 });
 
-module.exports=User;
+module.exports = User;

@@ -6,15 +6,13 @@ const users = [
   {
     email: 'admin',
     name: 'admin',
-    password: '!nvestig8',
-    department: 'SCPO',
+    password: 'password',
     role: 'admin',
   },
   {
     email: 'member',
     name: 'member',
-    department: 'Local PD',
-    password: '!nvestig8',
+    password: 'password',
     role: 'member',
   },
   

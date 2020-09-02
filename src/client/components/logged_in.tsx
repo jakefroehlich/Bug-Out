@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { whoami } from '../store/thunks/loginThunks';
 
-const LoggedIn = ({ user, whoami }) => {
+const LoggedIn = ({ user, whoAmI }) => {
   useEffect(() => { 
     const getData = async () => {
-      await whoami();
+      await whoAmI();
     };
     getData();
   }, []); // empty array calls it once
@@ -20,7 +20,7 @@ const LoggedIn = ({ user, whoami }) => {
 
 const mapStateToProps = ({ user }) => ({ user });
 const mapDispatchToProps = (dispatch) => ({
-  whoami: () => dispatch(whoami()),
+  whoAmI: () => dispatch(whoami()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoggedIn);

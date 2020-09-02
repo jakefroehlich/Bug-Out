@@ -1,21 +1,15 @@
 const path = require('path');
 const chalk = require('chalk');
-<<<<<<< HEAD:server/api/index.js
 const {app, server} = require('./socket');
 const routes = require('./routes/index');
 const express = require('express');
-=======
-const express= require('express');
->>>>>>> 69a4be768f4eede86bb32219a96179faeaabd4cd:src/server/api/index.js
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
-const app =require('./server');
-const routes=require('./routes/index');
 const { models: { Session, User } } = require('../db/index');
 
 const PORT = process.env.PORT || 3000;
-const PUBLIC_PATH = path.join(__dirname, '../../public');
-const DIST_PATH = path.join(__dirname, '../../dist');
+const PUBLIC_PATH = path.join(__dirname, '../../../public');
+const DIST_PATH = path.join(__dirname, '../../../dist');
 
 app.use(cookieParser());
 
@@ -58,12 +52,7 @@ const startServer = () => new Promise((res) => {
   })
 })
 
-<<<<<<< HEAD:server/api/index.js
 routes.forEach(({ path, router }) => {
-=======
-// eslint-disable-next-line no-shadow
-routes.forEach(({path, router})=>{
->>>>>>> 69a4be768f4eede86bb32219a96179faeaabd4cd:src/server/api/index.js
   app.use(path, router);
 })
 

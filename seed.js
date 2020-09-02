@@ -1,6 +1,6 @@
 const chalk = require('chalk');
-const { sync } = require('./server/db/index');
-const { models: { User } } = require('./server/db/models/index');
+const { sync } = require('./src/server/db/index');
+const { models: { User } } = require('./src/server/db/models/index');
 
 const users = [
   {

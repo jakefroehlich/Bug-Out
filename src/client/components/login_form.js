@@ -1,31 +1,25 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { whoami } from '../store/thunks/loginThunks';
 import Login  from './login/login';
 import Logout  from './login/logout';
 
-class LoginForm extends Component{
-  constructor() {
-    super();
-    this.showLoginOrLogout = this.showLoginOrLogout.bind(this);
+const LoginForm = ({user, whoAmI}) => {
+  useEffect(() => {
+    const getData = async () => {
+      await whoAmI();
+    }
+    getData();
+  }, []);
+
+  const showLoginOrLogout = () => {
+    return user.loggedIn ? <Logout /> : <Login />;
   }
 
-  componentDidMount(){
-    whoami()
-  }
-  
-  showLoginOrLogout(){
-    return this.props.user.loggedIn ? <Logout /> : <Login />;
-  }
-
-  render(){
-    
-    return (
-      <div>
-        {this.showLoginOrLogout()}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {showLoginOrLogout()}
+    </div>)
 }
 
 const mapStateToProps = ({ user }) => ({ user });

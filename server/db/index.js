@@ -1,4 +1,5 @@
-const { db, models} = require('./models/index');
+const {  models} = require('./models/index');
+const db = require('./db');
 const { User } = models;
 const chalk = require('chalk');
 

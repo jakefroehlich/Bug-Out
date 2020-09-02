@@ -46,7 +46,7 @@ module.exports = {
     'no-param-reassign': 'off',
   },
   settings: {
-    resolver: {
+    'import/resolver': {
       node: {
         extensions: ['.js', '.jsx', '.ts', '.tsx']
       }

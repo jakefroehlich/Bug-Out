@@ -1,5 +1,6 @@
 const chalk = require('chalk');
-const { db, models} = require('./models/index');
+const db = require('./db');
+const { models } = require('./models/index');
 
 const sync=async(force = false) => {
   try{

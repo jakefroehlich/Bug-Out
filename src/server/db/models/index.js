@@ -1,4 +1,3 @@
-const db = require('./db');
 const User = require('./user');
 const Session = require('./session');
 const GameSession = require('./gameSession');
@@ -10,7 +9,6 @@ GameSession.hasMany(User);
 User.belongsTo(GameSession);
 
 module.exports={
-  db,
   models: {
     User,
     Session,

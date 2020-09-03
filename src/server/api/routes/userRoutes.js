@@ -2,9 +2,9 @@ const { Router } = require('express');
 const bcrypt = require('bcrypt');
 const { models:{ User, Session } }= require('../../db/index');
 
-const apiRouter = Router();
+const userRouter = Router();
 
-apiRouter.post('/login', async (req, res)=>{
+userRouter.post('/login', async (req, res)=>{
   const { email, password } = req.body;
   const user = await User.findOne({
     where: {
@@ -25,7 +25,7 @@ apiRouter.post('/login', async (req, res)=>{
   }
 })
 
-apiRouter.get('/whoami', (req, res) => {
+userRouter.get('/whoami', (req, res) => {
   if (req.user) {
     res.send({
       email: req.user.email,
@@ -42,7 +42,7 @@ apiRouter.get('/whoami', (req, res) => {
 });
 
 // create a user
-apiRouter.post("/create", async (req, res) => {
+userRouter.post("/create", async (req, res) => {
   try {
     const { email, name, password } = req.body;
     const createdUser = await User.create({ email, name, password });
@@ -54,7 +54,7 @@ apiRouter.post("/create", async (req, res) => {
 })
 
 // add name to seesion for guest users 
-apiRouter.put("/guest-session", async (req, res) => {
+userRouter.put("/guest-session", async (req, res) => {
   try {
     const { name } = req.body;
     await Session.update({name}, {where : {id: req.session_id}})
@@ -66,7 +66,7 @@ apiRouter.put("/guest-session", async (req, res) => {
 })
 
 // adds users to a game session
-apiRouter.put("/session/:id", async (req, res) => {
+userRouter.put("/session/:id", async (req, res) => {
   try {
     const {id} = req.params;
     const { gameSessionId } = req.body;
@@ -79,7 +79,7 @@ apiRouter.put("/session/:id", async (req, res) => {
 })
 
 // add stats to the user's profile after the game
-apiRouter.put("/user/:id", async (req, res) => {
+userRouter.put("/user/:id", async (req, res) => {
   try {
     const {id} = req.params;
     const { score, winner } = req.body;
@@ -99,5 +99,5 @@ apiRouter.put("/user/:id", async (req, res) => {
 
 module.exports={
   path: '/user',
-  router: apiRouter
+  router: userRouter
 }

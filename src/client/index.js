@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import { Home } from './components'
+import { Home } from './components/index'
 import store from './store';
 
 const App = () => {

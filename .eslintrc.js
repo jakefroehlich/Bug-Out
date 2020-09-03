@@ -13,6 +13,11 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
   ],
+  // env: {
+  //   "jest/globals": true,
+  //   "browser": true,
+  //   "node": true
+  // },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -53,6 +58,10 @@ module.exports = {
     },
     react: {
       version: 'detect',
-    }
+    },
+    'import/extensions': ['.js', '.jsx', '.ts', '.tsx', '.d.ts'],
+    'import/parser' : {
+      '@typescript-eslint/parser': ['.ts', '.tsx', '.d.ts']
+  },
   }
 };

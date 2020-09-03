@@ -1,6 +1,6 @@
-const chalk = require('chalk');
-const { sync } = require('./src/server/db/index');
-const { models: { User } } = require('./src/server/db/models/index');
+import chalk from 'chalk';
+import { sync } from './src/server/db/index';
+import { models } from './src/server/db/models/index';
 
 const users = [
   {
@@ -21,7 +21,7 @@ const users = [
 const seed = async () => {
   try {
     users.map(user => {
-      return User.create(user);
+      return models.User.create(user);
     });
     
     console.log(chalk.green('DB SEEDED'));

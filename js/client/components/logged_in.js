@@ -59,12 +59,12 @@ var react_1 = __importStar(require("react"));
 var react_redux_1 = require("react-redux");
 var loginThunks_1 = require("../store/thunks/loginThunks");
 var LoggedIn = function (_a) {
-    var user = _a.user, whoami = _a.whoami;
+    var user = _a.user, whoAmI = _a.whoAmI;
     react_1.useEffect(function () {
         var getData = function () { return __awaiter(void 0, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, whoami()];
+                    case 0: return [4 /*yield*/, whoAmI()];
                     case 1:
                         _a.sent();
                         return [2 /*return*/];
@@ -82,6 +82,6 @@ var mapStateToProps = function (_a) {
     return ({ user: user });
 };
 var mapDispatchToProps = function (dispatch) { return ({
-    whoami: function () { return dispatch(loginThunks_1.whoami()); },
+    whoAmI: function () { return dispatch(loginThunks_1.whoami()); },
 }); };
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(LoggedIn);

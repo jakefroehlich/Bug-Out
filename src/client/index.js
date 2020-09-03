@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Home } from './components/index'
+import Home from './components/home.tsx'
 import store from './store';
 
 const App = () => {
@@ -11,8 +11,8 @@ const App = () => {
       <BrowserRouter>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={LoginForm} />
-          <Route exact path="/account" component={LoggedIn} />
+          {/* <Route exact path="/login" component={LoginForm} />
+          <Route exact path="/account" component={LoggedIn} /> */}
           <Redirect to='/' />
         </Switch>
       </BrowserRouter>

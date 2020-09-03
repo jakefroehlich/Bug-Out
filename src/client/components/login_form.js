@@ -19,7 +19,8 @@ const LoginForm = ({user, whoAmI}) => {
   return (
     <div>
       {showLoginOrLogout()}
-    </div>)
+    </div>
+)
 }
 
 const mapStateToProps = ({ user }) => ({ user });

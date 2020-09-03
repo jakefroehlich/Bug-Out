@@ -1,6 +1,8 @@
+/* eslint-disable import/extensions */
+
 // import LoginForm from './login_form';
 // import LoggedIn from './logged_in';
-import Home from './home';
+// import Home from './home';
 // import Home from './home';
 // import Home from '../../../js/client/components';
 // import Login from './login/login';
@@ -9,7 +11,7 @@ import Home from './home';
 export {
   // LoginForm,
   // LoggedIn,
-  Home,
+  // Home,
   // Login,
   // Logout,
 }

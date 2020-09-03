@@ -1,3 +1,4 @@
-const apiRouter = require('./api');
+const gameRouter = require('./gameRoutes');
+const userRouter = require('./userRoutes');
 
-module.exports=[apiRouter];
+module.exports=[userRouter, gameRouter];

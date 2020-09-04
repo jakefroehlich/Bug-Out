@@ -1,5 +1,5 @@
 const { UUID, UUIDV4, ENUM, STRING } = require('sequelize');
-const db = require('./db');
+const db = require('../db');
 
 const Prompt = db.define('prompt',{
   id:{

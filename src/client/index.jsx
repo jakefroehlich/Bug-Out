@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Home } from './components/index'
+import { Home, LoggedIn, LoginForm} from './components/index.jsx'
 import store from './store';
 
 const App = () => {

@@ -1,3 +1,3 @@
 const apiRouter = require('./api');
 
-module.exports=[apiRouter];
+module.exports= apiRouter;

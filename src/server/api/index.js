@@ -3,7 +3,7 @@ const { green } = require('chalk');
 const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const apiRouter = require('./routes/index');
+const {apiRouter, userRouter, gameRouter} = require('./routes/index');
 const db = require('../db/index');
 const { app, server } = require('./socket');
 

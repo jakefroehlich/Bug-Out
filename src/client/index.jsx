@@ -2,11 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
-<<<<<<< HEAD:src/client/index.js
-import Home from './components/home.tsx'
-=======
 import { Home, LoggedIn, LoginForm} from './components/index.jsx'
->>>>>>> byets:src/client/index.jsx
 import store from './store';
 
 const App = () => {

@@ -1,8 +1,9 @@
 const gameRouter = require('./gameRoutes');
 const userRouter = require('./userRoutes');
+const apiRouter = require('./api');
 
-<<<<<<< HEAD
-module.exports=[userRouter, gameRouter];
-=======
-module.exports= apiRouter;
->>>>>>> byets
+module.exports= {
+    apiRouter,
+    userRouter,
+    gameRouter
+};

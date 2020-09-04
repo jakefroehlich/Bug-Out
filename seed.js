@@ -1,6 +1,9 @@
-import chalk from 'chalk';
-import { sync } from './src/server/db/index';
-import { models } from './src/server/db/models/index';
+// import chalk from 'chalk';
+const chalk = require('chalk');
+// import { sync } from './src/server/db/index';
+const { sync } = require('./src/server/db/index');
+// import { models } from './src/server/db/models/index';
+const { models } = require('./src/server/db/models/index');
 
 const users = [
   {

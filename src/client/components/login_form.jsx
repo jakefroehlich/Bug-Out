@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { whoami } from '../store/thunks/loginThunks';
-import Login  from './login/login.jsx';
-import Logout  from './login/logout.jsx';
+import Login  from './login/login';
+import Logout  from './login/logout';
 
 const LoginForm = ({user, whoAmI}) => {
   useEffect(() => {

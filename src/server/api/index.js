@@ -1,15 +1,17 @@
-const path = require('path');
-const chalk = require('chalk');
-const {app, server} = require('./socket');
-const routes = require('./routes/index');
+const { join } = require('path');
+const { green } = require('chalk');
+const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const cors = require('cors')
-const { models: { Session, User } } = require('../db/index');
+const {apiRouter, userRouter, gameRouter} = require('./routes/index');
+const db = require('../db/index');
+const { app, server } = require('./socket');
+
+const { models: { Session, User } } = db;
 
 const PORT = process.env.PORT || 3000;
-const PUBLIC_PATH = path.join(__dirname, '../../../public');
-const DIST_PATH = path.join(__dirname, '../../../dist');
+const PUBLIC_PATH = join(__dirname, '../../../public');
+const DIST_PATH = join(__dirname, '../../../dist');
 
 app.use(cookieParser());
 
@@ -44,20 +46,17 @@ app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
 app.use(cors())
 app.use(express.json());
+app.use('/api', apiRouter.router);
 
 const startServer = () => new Promise((res) => {
   server.listen(PORT, () => {
-    console.log(chalk.green(`server listening on port ${PORT}`))
+    console.log(green(`server listening on port ${PORT}`))
     res()
   })
 })
 
-routes.forEach(({ path, router }) => {
-  app.use(path, router);
-})
-
 app.get('*', (req, res) => {
-  res.sendFile(path.join(PUBLIC_PATH, './index.html'));
+  res.sendFile(join(PUBLIC_PATH, './index.html'));
 });
 
 module.exports = {

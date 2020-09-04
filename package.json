@@ -4,14 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile": "tsc",
-    "build": "npm run compile && webpack --mode=\"production\"",
+    "build": "webpack --mode=\"production\"",
     "build:watch": "webpack --watch --mode=\"development\"",
     "start:server": "node src/server/index.js",
     "start:watch": "node-dev --respawn src/server/index.js",
-    "start:dev": "tsc --watch & npm run start:server & npm run build:watch",
+    "start:dev": "npm run start:server & npm run build:watch",
     "start": "node server",
-    "lint": "eslint . --ext .ts,.tsx,.js"
+    "lint": "eslint . --ext .jsx,.js"
   },
   "keywords": [],
   "author": "",

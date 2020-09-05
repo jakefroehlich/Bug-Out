@@ -19,7 +19,7 @@ const LandingPage = (props) => {
             onChange={(e) => setName(e.target.value)}
           />
           <Button onClick={() => {
-            props.playAsGuest(name)
+            props.playAsGuestThunk(name)
             setName('')
           }}
           >Play as Guest
@@ -34,8 +34,5 @@ const LandingPage = (props) => {
 }
 
 const mapStateToProps = ({ user }) => ({ user });
-const mapDispatchToProps = (dispatch) => ({
-  playAsGuest: (name) => dispatch(playAsGuestThunk(name)),
-});
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage); 
+export default connect(mapStateToProps, {playAsGuestThunk})(LandingPage); 

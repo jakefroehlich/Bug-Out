@@ -28,6 +28,6 @@ gameRouter.get('/prompt:difficulty', async (req, res)=>{
 })
 
 module.exports={
-  path: '/gameRouter',
+  path: '/game',
   router: gameRouter
 }

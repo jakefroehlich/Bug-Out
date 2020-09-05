@@ -1,4 +1,4 @@
-const { UUID, UUIDV4 } = require('sequelize');
+const { UUID, UUIDV4, INTEGER } = require('sequelize');
 const db = require('../db');
 
 const GameSession = db.define('gameSession',{
@@ -7,6 +7,9 @@ const GameSession = db.define('gameSession',{
     defaultValue: UUIDV4,
     primaryKey:true
   },
+  rounds:{
+    type: INTEGER
+  }
 })
 
 module.exports = GameSession;

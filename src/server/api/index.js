@@ -5,6 +5,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const {
   apiRouter,
+  userRouter,
+  gameRouter
   // TODO: userRouter,
   // TODO: gameRouter,
 } = require('./routes/index');
@@ -51,6 +53,8 @@ app.use(express.static(DIST_PATH));
 app.use(cors())
 app.use(express.json());
 app.use('/api', apiRouter.router);
+app.use('/user', userRouter.router);
+app.use('/game', gameRouter.router);
 
 const startServer = () => new Promise((res) => {
   server.listen(PORT, () => {

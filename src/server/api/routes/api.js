@@ -43,6 +43,5 @@ apiRouter.get('/whoami', (req, res) => {
 });
 
 module.exports= {
-  path: '/api',
   router: apiRouter
 }

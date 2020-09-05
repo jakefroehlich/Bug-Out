@@ -39,8 +39,27 @@ const loginReducer=(state=initialState, action)=>{
   }
 }
 
+const initialGameState={
+  rounds:'',
+  players:[],
+  active: false,
+}
+
+const gameReducer=(state=initialGameState, action)=>{
+  switch(action.type){
+    case types.NEW_GAME:
+      return {
+        ...state,
+        active:true,
+        rounds:action.payload
+      };
+    default: return state;
+  }
+}
+
 const reducer = combineReducers({
   user: loginReducer,
+  game: gameReducer
 });
 
 export default reducer;

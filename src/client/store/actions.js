@@ -3,7 +3,8 @@ export const types = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   LOGIN_FAIL: 'LOGIN_FAIL',
-  PLAY_AS_GUEST: 'PLAY_AS_GUEST'
+  PLAY_AS_GUEST: 'PLAY_AS_GUEST',
+  NEW_GAME: 'NEW_GAME'
 }
 
 const changeInitialLoading=()=>({
@@ -30,10 +31,16 @@ const playAsGuest = (name) =>({
   payload: name
 })
 
+const newGame = (rounds)=>({
+  type: types.NEW_GAME,
+  payload: rounds
+})
+
 export {
   changeInitialLoading,
   login,
   logout,
   loginFail,
-  playAsGuest
+  playAsGuest,
+  newGame
 }

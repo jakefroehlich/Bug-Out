@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from "@chakra-ui/core";
-import { LoginForm, LoggedIn, About, LandingPage, CreateGame} from './components'
+import { LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame} from './components'
 import store from './store';
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
             <Route exact path="/login" component={LoginForm} />
             <Route exact path="/account" component={LoggedIn} />
             <Route exact path="/create" component={CreateGame} />
+            <Route exact path="/loading-game" component={LoadingGame} />
             <Redirect to='/' />
           </Switch>
         </BrowserRouter>

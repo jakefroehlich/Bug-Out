@@ -57,8 +57,6 @@ userRouter.post("/create", async (req, res) => {
 userRouter.put("/guest-session", async (req, res) => {
   try {
     const { name } = req.body;
-    console.log(req.session_id)
-    console.log(name)
     await Session.update({name}, {where : {id: req.session_id}})
     res.sendStatus(200)
   } catch (e) {
@@ -68,11 +66,11 @@ userRouter.put("/guest-session", async (req, res) => {
 })
 
 // adds users to a game session
-userRouter.put("/session/:id", async (req, res) => {
+userRouter.put("/session", async (req, res) => {
   try {
-    const {id} = req.params;
-    const { gameSessionId } = req.body;
-    await Session.update({gameSessionId}, {where : {id}})
+    const sessionId=req.session_id;
+    const gameSessionId = req.body.id
+    await Session.update({gameSessionId}, {where : {id: sessionId}})
     res.sendStatus(200)
   } catch (e) {
     res.sendStatus(500);

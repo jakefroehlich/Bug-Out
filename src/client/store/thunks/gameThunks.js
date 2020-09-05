@@ -14,12 +14,25 @@ export const playAsGuestThunk = (name) => (dispatch) => {
 };
 
 export const createGameThunk = (rounds) => (dispatch) => {
-  console.log(rounds)
   return axios
     .post('/game/gameSession', {rounds})
-    .then(() => {
+    .then(({data}) => {
       dispatch(newGame(rounds));
+      axios.put('/user/session', {data})
     })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const findRandomGame = () => () => {
+  return axios
+    .get('/game/gameSession')
+      .then(({data}) => {
+        const {id} = data
+        axios.put(`/user/session`, {id})
+        // dispatch(newGame(rounds));
+      })
     .catch((e) => {
       console.log(e);
     });

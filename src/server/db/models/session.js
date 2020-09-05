@@ -7,7 +7,7 @@ const Session = db.define('session',{
     defaultValue: UUIDV4,
     primaryKey:true
   },
-  userName: {
+  name: {
     type: STRING,
   },
 })

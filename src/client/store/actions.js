@@ -3,6 +3,7 @@ export const types = {
   LOGIN: 'LOGIN',
   LOGOUT: 'LOGOUT',
   LOGIN_FAIL: 'LOGIN_FAIL',
+  PLAY_AS_GUEST: 'PLAY_AS_GUEST'
 }
 
 const changeInitialLoading=()=>({
@@ -24,9 +25,15 @@ const loginFail = (message) => ({
   message,
 });
 
+const playAsGuest = (name) =>({
+  type: types.PLAY_AS_GUEST,
+  payload: name
+})
+
 export {
   changeInitialLoading,
   login,
   logout,
   loginFail,
+  playAsGuest
 }

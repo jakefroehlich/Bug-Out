@@ -57,6 +57,8 @@ userRouter.post("/create", async (req, res) => {
 userRouter.put("/guest-session", async (req, res) => {
   try {
     const { name } = req.body;
+    console.log(req.session_id)
+    console.log(name)
     await Session.update({name}, {where : {id: req.session_id}})
     res.sendStatus(200)
   } catch (e) {

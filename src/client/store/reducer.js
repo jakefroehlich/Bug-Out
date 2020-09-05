@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import { types } from './actions';
 
 const initialState={
+  name:'',
   email:'',
   loggedIn: false,
   initialLoadingComplete: false,
@@ -21,6 +22,7 @@ const loginReducer=(state=initialState, action)=>{
         ...state,
         email: null,
         loggedIn: false,
+        name: '',
         role: 'guest'
       };
     case types.INITIAL_LOADING_COMPLETE:
@@ -28,6 +30,11 @@ const loginReducer=(state=initialState, action)=>{
         ...state,
         initialLoadingComplete: true
       };
+    case types.PLAY_AS_GUEST:
+      return {
+        ...state,
+        name: action.payload.name
+      }
     default: return state;
   }
 }

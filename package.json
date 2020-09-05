@@ -9,7 +9,7 @@
     "start:server": "node src/server/index.js",
     "start:watch": "node-dev --respawn src/server/index.js",
     "start:dev": "npm run start:server & npm run build:watch",
-    "start": "node server",
+    "start": "node src/server",
     "lint": "eslint . --ext .jsx,.js",
     "test": "jest"
   },
@@ -17,6 +17,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
     "@types/react": "^16.9.49",
     "@types/react-redux": "^7.1.9",
     "axios": "^0.19.2",
@@ -26,6 +29,7 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "emotion-theming": "^10.0.27",
     "eslint-plugin-react": "^7.20.6",
     "express": "^4.17.1",
     "node-dev": "^5.1.0",

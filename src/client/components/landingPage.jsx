@@ -1,33 +1,26 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
 
 const LandingPage = () => {
-  const [name, setName] = useState('Guest')
+  const [name, setName] = useState('')
 
   return (
-    <div>
-      <div>
-        <h1>Bug Out!</h1>
-        <p>Explanations</p>
-      </div>
-      <div>
-        <label>
-          Name:
-          <input
+    <div style={{textAlign:'center', display:'flex', justifyContent:'center'}}>
+      <Box w="100%" p={4} borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg">
+        <Text fontSize="6xl">Bug Out!</Text>
+        <Text fontSize="md">Explanations</Text>
+        <FormControl>
+          <Input
+            placeholder='Enter your name to play'
             type='text'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-        </label>
-
-        <button
-          type='button'
-          onClick={() => null}
-        >
-          Join Game
-        </button>
-      </div>
+          <Button onClick={() => null}>Join Game</Button>
+        </FormControl>
+      </Box>
     </div>
   )
 }

@@ -33,7 +33,21 @@ export const getCurrentGameThunk = () => (dispatch) => {
     .then((game) => {
       console.log('game from server is ',game.data)
       dispatch(getCurrentGame(game.data));
+
     })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const findRandomGame = () => () => {
+  return axios
+    .get('/game/gameSession')
+      .then(({data}) => {
+        const {id} = data
+        axios.put(`/user/session/`, id)
+        // dispatch(newGame(rounds));
+      })
     .catch((e) => {
       console.log(e);
     });

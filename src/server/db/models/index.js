@@ -5,8 +5,8 @@ const GameSession = require('./gameSession');
 User.hasMany(Session);
 Session.belongsTo(User);
 
-GameSession.hasMany(User);
-User.belongsTo(GameSession);
+GameSession.hasMany(Session);
+Session.belongsTo(GameSession);
 
 GameSession.hasMany(Session);
 Session.belongsTo(GameSession);

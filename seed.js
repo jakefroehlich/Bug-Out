@@ -26,7 +26,7 @@ const seed = async () => {
     users.map(user => {
       return models.User.create(user);
     });
-    
+    models.GameSession.create()
     console.log(chalk.green('DB SEEDED'));
 
   } catch (e) {

@@ -4,7 +4,8 @@ export const types = {
   LOGOUT: 'LOGOUT',
   LOGIN_FAIL: 'LOGIN_FAIL',
   PLAY_AS_GUEST: 'PLAY_AS_GUEST',
-  NEW_GAME: 'NEW_GAME'
+  NEW_GAME: 'NEW_GAME',
+  GET_CURRENT_GAME: 'GET_CURRENT_GAME'
 }
 
 const changeInitialLoading=()=>({
@@ -28,12 +29,17 @@ const loginFail = (message) => ({
 
 const playAsGuest = (name) =>({
   type: types.PLAY_AS_GUEST,
-  payload: name
+  payload: name,
 })
 
-const newGame = (rounds)=>({
+const newGame = (game)=>({
   type: types.NEW_GAME,
-  payload: rounds
+  payload: game,
+})
+
+const getCurrentGame = (game) => ({
+  type: types. GET_CURRENT_GAME,
+  payload: game,
 })
 
 export {
@@ -42,5 +48,6 @@ export {
   logout,
   loginFail,
   playAsGuest,
-  newGame
+  newGame,
+  getCurrentGame,
 }

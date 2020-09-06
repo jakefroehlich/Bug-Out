@@ -1,6 +1,7 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { playAsGuest, newGame } from '../actions'
+import { playAsGuest, newGame,getCurrentGame } from '../actions'
 
 export const playAsGuestThunk = (name) => (dispatch) => {
   return axios
@@ -13,12 +14,25 @@ export const playAsGuestThunk = (name) => (dispatch) => {
     });
 };
 
-export const createGameThunk = (rounds) => (dispatch) => {
+export const createGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds)
   return axios
-    .post('/game/gameSession', {rounds})
-    .then(() => {
-      dispatch(newGame(rounds));
+    .post('/game/createNew', {rounds, difficulty})
+    .then((game) => {
+      console.log('game data from createNew is ',game.data)
+      dispatch(newGame(game.data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const getCurrentGameThunk = () => (dispatch) => {
+  return axios
+    .get('/game/current')
+    .then((game) => {
+      console.log('game from server is ',game.data)
+      dispatch(getCurrentGame(game.data));
     })
     .catch((e) => {
       console.log(e);

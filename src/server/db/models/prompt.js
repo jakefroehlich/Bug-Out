@@ -8,7 +8,7 @@ const Prompt = db.define('prompt',{
     primaryKey:true
   },
   difficulty:{
-    type:ENUM('easy', 'medium', 'hard'),
+    type:ENUM('Easy', 'Medium', 'Hard'),
     allowNull: false
   },
   prompt:{

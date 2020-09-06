@@ -30,7 +30,7 @@ export const findRandomGame = () => () => {
     .get('/game/gameSession')
       .then(({data}) => {
         const {id} = data
-        axios.put(`/user/session`, {id})
+        axios.put(`/user/session/${id}`)
         // dispatch(newGame(rounds));
       })
     .catch((e) => {

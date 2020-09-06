@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { models:{ GameSession, Prompt } }= require('../../db/index');
+const { models:{ GameSession, Prompt, Session } }= require('../../db/index');
 
 const gameRouter = Router();
 
@@ -23,6 +23,16 @@ gameRouter.get('/prompt:difficulty', async (req, res)=>{
     res.send(gamePrompt)
   } catch(e){
     console.log('failed to get game prompt')
+    console.log(e)
+  }
+})
+
+gameRouter.get('/gameSession', async (req, res)=>{
+  try{
+    const games = await GameSession.findAll({where: {active:true}, include:[Session]})
+    res.send(games[0])
+  } catch(e){
+    console.log('failed to get game')
     console.log(e)
   }
 })

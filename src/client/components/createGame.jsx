@@ -37,7 +37,14 @@ const CreateGame = (props) => {
         </Box>
       </div>
       <div style={{margin:'60px'}}>
-        <Button h='100%' onClick={()=>props.createGameThunk(rounds)}>Play!</Button>
+        <Button
+          h='100%'
+          onClick={()=>{
+          props.createGameThunk(rounds)
+          props.history.push('/loading-game')
+        }}
+        >Play!
+        </Button>
       </div>
     </div>
   )

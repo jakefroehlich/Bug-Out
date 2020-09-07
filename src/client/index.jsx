@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from "@chakra-ui/core";
 import { LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame} from './components'
 import store from './store';
+import CodeEditor from './components/editor'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
             <Route exact path="/account" component={LoggedIn} />
             <Route exact path="/create" component={CreateGame} />
             <Route exact path="/loading-game" component={LoadingGame} />
+            <Route exact path="/editor" component={CodeEditor} />
             <Redirect to='/' />
           </Switch>
         </BrowserRouter>

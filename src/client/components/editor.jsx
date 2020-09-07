@@ -1,30 +1,37 @@
-import React from 'react';
-import AceEditor from 'react-ace';
-
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-monokai";
+import React, {useState, useRef} from 'react';
+import Editor from '@monaco-editor/react';
+import {Button} from "@chakra-ui/core"
 
 const CodeEditor = ()=>{
-  function onChange(newValue) {
-    console.log("change", newValue);
+
+  const [isEditorReady, setIsEditorReady] = useState(false);
+  const valueGetter = useRef();
+
+  function handleEditorDidMount(_valueGetter) {
+    setIsEditorReady(true);
+    valueGetter.current = _valueGetter;
   }
 
-  return(
+  function handleShowValue() {
+    console.log(valueGetter.current());
+    // const code = valueGetter.current();
+  }
+
+  return (
     <div>
-      <AceEditor
-        mode="javascript"
-        theme="monokai"
-        onChange={onChange}
-        name="UNIQUE_ID_OF_DIV"
-        editorProps={{ $blockScrolling: true }}
-        setOptions={{
-          enableBasicAutocompletion: true,
-          enableLiveAutocompletion: true,
-          enableSnippets: true
-        }}
+      <Editor
+        height="50vh"
+        width='50%'
+        theme='dark'
+        language="javascript"
+        value="// write your code here"
+        editorDidMount={handleEditorDidMount}
       />
+      <Button onClick={handleShowValue} disabled={!isEditorReady} type='button'>
+        Run!
+      </Button>
     </div>
-  )
+  );
 }
 
 export default CodeEditor

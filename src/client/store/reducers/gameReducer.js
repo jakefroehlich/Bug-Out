@@ -12,12 +12,7 @@ const initialGameState={
       case types.NEW_GAME:
         return {
           ...state,
-          currentId: action.payload.id,
-          active: true,
-          code: action.payload.code,
-          private: action.payload.private,
-          rounds: action.payload.rounds,
-          difficulty: action.payload.difficulty,
+          action.payload.game,
         };
       case types.GET_CURRENT_GAME:
         return {

@@ -28,7 +28,7 @@ const codeGenerator = () => {
   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   const charactersLength = characters.length;
   for (let i = 0; i < 5; i += 1) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
 }
@@ -63,9 +63,14 @@ app.use(async (req, res, next) => {
 
 // assign games if they don't have
 app.use(async (req, res, next) => {
-  const session = await Session.findOne({ where: {id:req.session_id}})
+  const session = await Session.findOne({ where: { id: req.session_id } })
   // console.log(session.gameSessionId)
-  if(!session.gameSessionId) {
+  if (!session && req.cookies.session_id) {
+    const newSession = await Session.create({ id: req.cookies.session_id });
+    req.session_id = newSession.id;
+    next()
+  }
+  else if (!session.gameSessionId) {
     let newCode = codeGenerator()
     console.log(newCode)
     let check = await GameSession.findOne({ where: { code: newCode } });
@@ -73,8 +78,8 @@ app.use(async (req, res, next) => {
       newCode = codeGenerator();
       check = await GameSession.findOne({ where: { code: newCode } });
     }
-    const newGame = await GameSession.create({code:newCode});
-    await Session.update({ gameSessionId: newGame.id }, { where: { id: session.id }});
+    const newGame = await GameSession.create({ code: newCode });
+    await Session.update({ gameSessionId: newGame.id }, { where: { id: session.id } });
     // console.log(newGame);
     next()
   }

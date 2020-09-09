@@ -3,9 +3,21 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
 import { playAsGuestThunk, findRandomGame } from '../store/thunks/gameThunks';
+import {updateInput} from '../store/actions';
 
-const LandingPage = (props) => {
+const LandingPage = (
+  {
+    user,
+    game,
+    input,
+    history,
+    playAsGuestThunk, 
+    findRandomGame,
+    updatePlayerName
+  }) => {
   const [name, setName] = useState('')
+
+  console.log('input', input)
 
   return (
     <div style={{display:'flex', flexDirection:'column'}}>
@@ -20,21 +32,27 @@ const LandingPage = (props) => {
               onChange={(e) => setName(e.target.value)}
             />
             <Button onClick={async () => {
-              await props.playAsGuestThunk(name)
-              await props.findRandomGame()
-              setName('')
+              await playAsGuestThunk(name);
+              await findRandomGame();
+              updatePlayerName(name);
+              setName('');
             }}
             >Join Random Room
             </Button>
             <Button onClick={() => {
-              props.playAsGuestThunk(name)
-              setName('')
+              playAsGuestThunk(name);
+              updatePlayerName(name);
+              setName('');
             }}
             >Join Private Room
             </Button>
           </FormControl>
-          <Button onClick={() => props.history.push('/create')}>Create Game</Button>
-          <Button onClick={() => props.history.push('/login')}>Login</Button>
+          <Button onClick={() => {
+              updatePlayerName(name)
+              history.push('/create');
+              }}
+              >Create Game</Button>
+          <Button onClick={() => history.push('/login')}>Login</Button>
         </Box>
       </div>
       <Text>How to play:</Text>
@@ -42,6 +60,17 @@ const LandingPage = (props) => {
   )
 }
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, game, input }) => ({ user, game, input });
 
-export default connect(mapStateToProps, {playAsGuestThunk, findRandomGame})(LandingPage); 
+const mapDispatchToProps = (dispatch) => {
+  const updatePlayerName = (value) => {
+    dispatch(updateInput('playerName', value))
+  }
+  return {
+    playAsGuestThunk, 
+    findRandomGame,
+    updatePlayerName,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage); 

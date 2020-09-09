@@ -5,8 +5,16 @@ export const types = {
   LOGIN_FAIL: 'LOGIN_FAIL',
   PLAY_AS_GUEST: 'PLAY_AS_GUEST',
   NEW_GAME: 'NEW_GAME',
-  GET_CURRENT_GAME: 'GET_CURRENT_GAME'
+  GET_CURRENT_GAME: 'GET_CURRENT_GAME',
+  UPDATE_INPUT: 'UPDATE_INPUT',
+  CLEAR_INPUT: 'CLEAR_INPUT',
 }
+
+const updateInput=(name, value) => ({
+  type: types.UPDATE_INPUT,
+  name,
+  value
+});
 
 const changeInitialLoading=()=>({
   type: types.INITIAL_LOADING_COMPLETE,
@@ -50,4 +58,5 @@ export {
   playAsGuest,
   newGame,
   getCurrentGame,
+  updateInput
 }

@@ -15,5 +15,5 @@ export {
   About,
   LandingPage,
   CreateGame,
-  LoadingGame
+  LoadingGame,
 }

@@ -2,7 +2,7 @@ import React, {useState, useRef} from 'react';
 import Editor from '@monaco-editor/react';
 import {Button} from "@chakra-ui/core"
 
-const CodeEditor = ()=>{
+const CodeEditor = ()=> {
 
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();

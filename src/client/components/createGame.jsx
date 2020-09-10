@@ -5,7 +5,7 @@ import React, {useState, useEffect} from 'react';
 import { connect } from 'react-redux';
 import {Text, Box, Select, FormControl, FormLabel, Button } from '@chakra-ui/core';
 import store from '../store/index';
-// import ChatBox from './ChatBox';
+import ChatBox from './ChatBox';
 import Test from './Test';
 import {createGameThunk, getCurrentGameThunk} from '../store/thunks/gameThunks';
 
@@ -73,8 +73,8 @@ const CreateGame = ({
         >Play!
         </Button>
       </div>
-      {/* <ChatBox /> */}
-      <Test />
+      <ChatBox />
+      {/* <Test /> */}
     </div>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
+let socket;
 
 const ChatBox = ({
     game,
@@ -10,15 +11,26 @@ const ChatBox = ({
 
     // const [messages, setMessages] = useState([]);
     const [chatMsg, setChatMsg] = useState('');
-    const [messageCount, setMessageCount] = useState(0);
+    const [messages, setMessages] = useState([]);
 
-    const socket = io();
+    console.log(messages)
 
     useEffect(() => {
+        socket = io();
+        console.log(socket)
         socket.on('message', message => {
-            console.log('message', message)
+            console.log('chatbox messages', messages);
+            // messages.push(message)
+            setMessages([
+                ...messages,
+                message
+            ])
         });
-    }, [messageCount])
+        // socket.on('broadcast', broadcast => {
+        //     console.log('broadcast', broadcast);
+        // })
+        console.log('effect used')
+    }, [])
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -29,7 +41,6 @@ const ChatBox = ({
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(chatMsg)
         socket.emit('chatMsg', chatMsg);
     }
 
@@ -37,6 +48,15 @@ const ChatBox = ({
         <FormControl>
             <div
                 id='messagebox'>
+                    {messages ? messages.map(msg => {
+                        return (
+                            <div
+                                key={msg}>
+                                {/* <p>{msg.name}</p> */}
+                                <p>{msg}</p>
+                            </div>
+                            )
+                    }) : <p>No messages yet :(</p>}
             </div>
             <Input
                 id='msg'

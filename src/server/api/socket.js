@@ -5,7 +5,7 @@ const io = socketio(server);
 
 io.on('connection', (socket) => {
 
-    socket.emit('message', 'whats up my dudex');
+    socket.emit('message', 'Confirmation: You have connected!');
 
         //TODO - Add new user to message
     socket.broadcast.emit('message', 'Talk $h!t with the competition. {user} has joined the fray!');

@@ -1,31 +1,35 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import {Text, Box, Select, FormControl, FormLabel, Button } from '@chakra-ui/core';
+import { Text, Box, Select, FormControl, FormLabel, Button } from '@chakra-ui/core';
 import store from '../store/index';
+import io from 'socket.io-client';
 import ChatBox from './ChatBox';
-import Test from './Test';
-import {createGameThunk, getCurrentGameThunk} from '../store/thunks/gameThunks';
+import { createGameThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const CreateGame = ({
   user,
   game,
-  input, 
+  input,
   getCurrentGame,
   createGame
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
+  // const socket = io();
 
   useEffect(() => {
     getCurrentGame();
-  }, []) 
-  
+    // socket.on('message', message => {
+    //   console.log('createGame message', message)
+    // });
+  }, [])
+
   return (
-    <div style={{ display:'flex', justifyContent:'center'}}>
-      <div style={{display:'flex', flexDirection:'column', padding:'10px'}}>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', padding: '10px' }}>
         <Box borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg" m={2} p={4}>
           <Text>{`Room Code: ${game.code}`}</Text>
         </Box>
@@ -34,22 +38,25 @@ const CreateGame = ({
           {input.playerName}
         </Box>
       </div>
-      <div style={{padding:'10px'}}>
+      <div style={{ padding: '10px' }}>
         <Box w="100%" p={4} borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg" m={2}>
           <Text fontSize="6xl">Settings</Text>
           <FormControl>
             <FormLabel>Difficulty:</FormLabel>
-            <Select placeholder="Select Difficulty" onChange={(e)=> setDifficulty(e.target.value)}>
-              <option value="Beginner" selected>Beginner</option>
+            <Select
+              placeholder="Select Difficulty"
+              defaultValue="Beginner"
+              onChange={(e) => setDifficulty(e.target.value)}>
+              <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Difficult">Difficult</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel>Rounds:</FormLabel>
-            <Select 
-              placeholder="Select No. of Rounds" 
-              onChange={(e)=> setRounds(e.target.value)}
+            <Select
+              placeholder="Select No. of Rounds"
+              onChange={(e) => setRounds(e.target.value)}
               defaultValue="1">
               <option value="1">1</option>
               <option value="2">2</option>
@@ -63,28 +70,28 @@ const CreateGame = ({
           <Text>Invite Link: http://...............</Text>
         </Box>
       </div>
-      <div style={{margin:'60px'}}>
+      <div style={{ margin: '60px' }}>
         <Button
           h='100%'
-          onClick={()=>{
-          createGame(rounds, difficulty)
-          history.push('/loading-game')
-        }}
+          onClick={() => {
+            createGame(rounds, difficulty)
+            history.push('/loading-game')
+          }}
         >Play!
         </Button>
       </div>
       <ChatBox />
-      {/* <Test /> */}
     </div>
   )
 }
 
-const mapStateToProps = ({game, user, input}) => ({game, user, input});
+const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
-  createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
-}};
+    getCurrentGame: () => dispatch(getCurrentGameThunk()),
+    createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  }
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame); 

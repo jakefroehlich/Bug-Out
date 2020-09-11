@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import { ThemeProvider } from "@chakra-ui/core";
 import { LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame} from './components'
 import store from './store';
-import CodeEditor from './components/editor'
+import CodeEditor from './components/editor';
 
 const App = () => {
   return (

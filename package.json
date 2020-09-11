@@ -46,7 +46,8 @@
     "redux-thunk": "^2.3.0",
     "sequelize": "^6.3.3",
     "socket.io": "^2.3.0",
-    "typescript": "^4.0.2"
+    "typescript": "^4.0.2",
+    "v8-sandbox": "^2.1.6"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",

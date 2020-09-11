@@ -1,6 +1,7 @@
 import React, {useState, useRef} from 'react';
 import Editor from '@monaco-editor/react';
-import {Button} from "@chakra-ui/core"
+import {Button} from "@chakra-ui/core";
+import { buildFunction } from '../../server/utils/buildFunction';
 
 const CodeEditor = ()=>{
 
@@ -14,7 +15,8 @@ const CodeEditor = ()=>{
 
   function handleShowValue() {
     console.log(valueGetter.current());
-    // const code = valueGetter.current();
+    const fn = buildFunction(valueGetter.current());
+    console.log(fn)
   }
 
   return (

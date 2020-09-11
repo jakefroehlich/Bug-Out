@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const { join } = require('path');
 const { green } = require('chalk');
-const cors = require('cors');
+// const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const {
@@ -86,10 +86,9 @@ app.use(async (req, res, next) => {
   next()
 });
 
-
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
-app.use(cors())
+// app.use(cors())
 app.use(express.json());
 app.use('/api', apiRouter.router);
 app.use('/user', userRouter.router);

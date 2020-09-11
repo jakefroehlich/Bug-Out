@@ -1,17 +1,20 @@
 const socketio = require('socket.io');
 const {app, server} = require('./server');
+const formatMessage = require('../utils/formatMessage');
 
 const io = socketio(server);
 
+const botName = 'BugOut Bot';
+
 io.on('connection', (socket) => {
 
-    socket.emit('message', 'Confirmation: You have connected!');
+    socket.emit('message', formatMessage(botName, 'Confirmation: You have connected!'));
 
         //TODO - Add new user to message
-    socket.broadcast.emit('message', 'Talk $h!t with the competition. {user} has joined the fray!');
+    socket.broadcast.emit('message', formatMessage(botName, 'Talk $h!t with the competition. {user} has joined the fray!'));
 
     socket.on('chatMsg', (msg) => {
-        io.emit('message', msg)
+        io.emit('message', formatMessage('USER', msg));
     })
 
     socket.on('disconnect', () => {

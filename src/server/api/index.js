@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 const { join } = require('path');
 const { green } = require('chalk');
-const cors = require('cors');
+// const cors = require('cors');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const {

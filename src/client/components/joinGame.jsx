@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {Text, Box, Select, FormControl, Input, FormLabel, Button } from '@chakra-ui/core';
 import axios from 'axios';
 import store from '../store/index'
-import {getCurrentGameThunk, joinGameThunk } from '../store/thunks/gameThunks';
+import {getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const JoinGame = (props) => {
   const [gameCode, setGameCode] = useState('')

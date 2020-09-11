@@ -1,11 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
-import { playAsGuestThunk, findRandomGame } from '../store/thunks/gameThunks';
+import { getCurrentGameThunk, findRandomGameThunk } from '../store/thunks/gameThunks';
 
 const LandingPage = (props) => {
   const [name, setName] = useState('')
+  useEffect(() => {
+    props.getCurrentGame();
+    console.log('process.env is ' , window.location.href);
+  }, []);
+  const { game } = props;
 
   return (
     <div style={{display:'flex', flexDirection:'column'}}>
@@ -19,29 +24,66 @@ const LandingPage = (props) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <Button onClick={async () => {
-              await props.playAsGuestThunk(name)
-              await props.findRandomGame()
+            <Button 
+              width="200px" 
+              variantColor="teal"
+              variant="outline"
+              margin="5px"
+              onClick={async () => {
+              await props.findRandomGame(game.id)
               setName('')
             }}
             >Join Random Room
             </Button>
-            <Button onClick={() => {
-              props.playAsGuestThunk(name)
+            <Button 
+              width="200px" 
+              variantColor="teal"
+              variant="outline"
+              margin="5px"
+              onClick={() => {
+              props.history.push('/join')
               setName('')
             }}
-            >Join Private Room
+            >Join Game
             </Button>
           </FormControl>
-          <Button onClick={() => props.history.push('/create')}>Create Game</Button>
-          <Button onClick={() => props.history.push('/login')}>Login</Button>
+          <Button 
+            width="200px" 
+            variantColor="teal"
+            variant="outline"
+            margin="5px"
+            onClick={() => props.history.push('/create')}
+          >Create Game
+          </Button>
+          <Button 
+            width="200px" 
+            variantColor="teal"
+            variant="outline"
+            margin="5px"
+            onClick={() => props.history.push('/login')}
+          >Login
+          </Button>
+          <Button 
+            width="200px" 
+            variantColor="teal"
+            variant="outline"
+            margin="5px"
+            onClick={() => props.history.push('/howtoplay')}
+          >How To Play
+          </Button>
         </Box>
       </div>
-      <Text>How to play:</Text>
+
     </div>
   )
 }
 
 const mapStateToProps = ({ user }) => ({ user });
 
-export default connect(mapStateToProps, {playAsGuestThunk, findRandomGame})(LandingPage); 
+const mapDispatchToProps = (dispatch) => {
+  return {
+  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
+}};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage); 

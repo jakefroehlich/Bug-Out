@@ -86,10 +86,9 @@ app.use(async (req, res, next) => {
   next()
 });
 
-
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
-app.use(cors())
+// app.use(cors())
 app.use(express.json());
 app.use('/api', apiRouter.router);
 app.use('/user', userRouter.router);

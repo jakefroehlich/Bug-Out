@@ -7,8 +7,11 @@ const Prompt = db.define('prompt',{
     defaultValue: UUIDV4,
     primaryKey:true
   },
+  name:{
+    type:STRING
+  },
   difficulty:{
-    type:ENUM('Easy', 'Medium', 'Hard'),
+    type:STRING,
     allowNull: false
   },
   prompt:{

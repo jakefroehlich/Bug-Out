@@ -22,17 +22,6 @@ const DIST_PATH = join(__dirname, '../../../dist');
 
 app.use(cookieParser());
 
-
-// const codeGenerator = () => {
-//   let result = '';
-//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-//   const charactersLength = characters.length;
-//   for (let i = 0; i < 5; i += 1) {
-//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-//   }
-//   return result;
-// }
-
 // assigns cookies
 app.use(async (req, res, next) => {
   if (!req.cookies.session_id) {
@@ -64,7 +53,6 @@ app.use(async (req, res, next) => {
 // assign games if they don't have
 app.use(async (req, res, next) => {
   const session = await Session.findOne({ where: { id: req.session_id } })
-  // console.log(session.gameSessionId)
   if (!session && req.cookies.session_id) {
     const newSession = await Session.create({ id: req.cookies.session_id });
     req.session_id = newSession.id;
@@ -85,11 +73,6 @@ app.use(async (req, res, next) => {
   }
   next()
 });
-
-// assign names if they don't have one
-
-
-
 
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));

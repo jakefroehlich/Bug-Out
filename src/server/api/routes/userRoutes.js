@@ -14,7 +14,7 @@ userRouter.post("/login", async (req, res) => {
     },
   });
   if (!user) {
-    res.sendStatus(401);
+    res.status(401).send('failure');
   } else {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -22,7 +22,7 @@ userRouter.post("/login", async (req, res) => {
       await usersSession.setUser(user);
       res.status(200).send(user);
     } else {
-      res.sendStatus(401);
+      res.status(401).send('failure');
     }
   }
 });
@@ -50,7 +50,7 @@ userRouter.post("/create", async (req, res) => {
     const createdUser = await User.create({ email, name, password });
     res.status(201).send(createdUser);
   } catch (e) {
-    res.sendStatus(500);
+    res.status(500).send('could not find');
     console.log(e);
   }
 });
@@ -60,9 +60,9 @@ userRouter.put("/guest-session", async (req, res) => {
   try {
     const { name } = req.body;
     await Session.update({ name }, { where: { id: req.session_id } });
-    res.sendStatus(200);
+    res.status(200).send('found');
   } catch (e) {
-    res.sendStatus(500);
+    res.status(500).send('could not find');
     console.log(e);
   }
 });
@@ -73,9 +73,9 @@ userRouter.put("/session", async (req, res) => {
     const sessionId = req.session_id;
     const gameSessionId = req.body.id;
     await Session.update({ gameSessionId }, { where: { id: sessionId } });
-    res.sendStatus(200);
+    res.status(200).send('found');
   } catch (e) {
-    res.sendStatus(500);
+    res.status(500).send('could not find');
     console.log(e);
   }
 });
@@ -105,9 +105,9 @@ userRouter.put("/user/:id", async (req, res) => {
         { where: { id } }
       );
     }
-    res.sendStatus(200);
+    res.status(200).send('found');
   } catch (e) {
-    res.sendStatus(500);
+    res.status(500).send('could not find');
     console.log(e);
   }
 });

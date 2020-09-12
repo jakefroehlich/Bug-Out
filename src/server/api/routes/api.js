@@ -14,7 +14,7 @@ apiRouter.post("/login", async (req, res) => {
     },
   });
   if (!user) {
-    res.sendStatus(401);
+    res.status(401).send('failure');
   } else {
     const match = await bcrypt.compare(password, user.password);
     if (match) {
@@ -22,7 +22,7 @@ apiRouter.post("/login", async (req, res) => {
       await usersSession.setUser(user);
       res.status(200).send(user);
     } else {
-      res.sendStatus(401);
+      res.status(401).send('failure');
     }
   }
 });

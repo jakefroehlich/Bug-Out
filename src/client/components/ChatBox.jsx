@@ -11,36 +11,44 @@ const ChatBox = ({
     input 
   }) => {
 
-    // const [messages, setMessages] = useState([]);
     const [chatMsg, setChatMsg] = useState('');
     const [messages, setMessages] = useState([]);
+    const [messageCount, setMessageCount] = useState(0);
+    
+    console.log('render')
 
-    console.log(messages)
+    // console.log('messages', messages)
 
-    const addMessage = () => {
-      setMessages([...messages, {
-        playerName: 'testPlayerName',
-        text: 'testText',
-        time: 'TODO: momentjs',
-        value: Math.floor(Math.random() * 100) + 1,
-      }]);
-    }
+    // const addMessage = (text) => {
+    //   setMessages([...messages, {
+    //     playerName: 'testPlayerName',
+    //     text: 'testText',
+    //     time: 'TODO: momentjs',
+    //     value: Math.floor(Math.random() * 100) + 1,
+    //   }]);
+    // }
+
+    // socket.on('message', message => {
+    //     console.log('chatbox messages', messages);
+    //     messages.push(message)
+    //     setMessageCount(messageCount + 1)
+    //     // setMessages([
+    //     //     ...messages,
+    //     //     message
+    //     // ])
+    // });
 
     useEffect(() => {
-        // socket = io();
-        console.log(socket)
+        console.log('effect used')
         socket.on('message', message => {
             console.log('chatbox messages', messages);
-            // messages.push(message)
-            setMessages([
-                ...messages,
-                message
-            ])
+            messages.push(message)
+            setMessageCount(messageCount + 1)
+            // setMessages([
+            //     ...messages,
+            //     message
+            // ])
         });
-        // socket.on('broadcast', broadcast => {
-        //     console.log('broadcast', broadcast);
-        // })
-        console.log('effect used')
     }, [])
 
     const handleChange = (e) => {
@@ -51,7 +59,7 @@ const ChatBox = ({
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addMessage();
+        // addMessage();
         socket.emit('chatMsg', chatMsg);
     }
 
@@ -62,7 +70,7 @@ const ChatBox = ({
                     {messages ? messages.map(msg => {
                         return (
                             <div
-                                key={msg.time}
+                                key={msg.id}
                                 >
                                 {/* <p>{msg.name}</p> */}
                                 {/* <p>{msg}</p> */}

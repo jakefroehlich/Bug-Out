@@ -19,7 +19,7 @@ io.on('connection', (socket) => {
 
     socket.on('disconnect', () => {
         //TODO Add username to message
-        io.emit('message', '{user} has left the scuffle.')
+        io.emit('message', formatMessage(botName, '${user} has fled the scene!'))
     })
 })
 

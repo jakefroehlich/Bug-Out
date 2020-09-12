@@ -8,7 +8,7 @@ const gameRouter = Router();
 // getsCurrentGame and players belonging to that game
 gameRouter.get('/current', async (req, res) => {
   try {
-    console.log('current game hit')
+    console.log('current game got hit')
     // console.log(req.session_id)
     const session = await Session.findOne({ where: { id: req.session_id } });
     // console.log(session.gameSessionId)

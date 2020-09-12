@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const {
   apiRouter,
   userRouter,
-  gameRouter
   gameRouter,
   sessionRouter,
 } = require('./routes/index');

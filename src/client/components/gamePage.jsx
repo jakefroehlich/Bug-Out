@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Editor from './editor';
-import { Button, Text, Box } from "@chakra-ui/core";
 
-const GamePage = (props)=>{
+const GamePage = ()=>{
   
   return (
     <div style={{display:'flex'}}>

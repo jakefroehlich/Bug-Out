@@ -1,5 +1,5 @@
 // utils
-const codeGenerator = function () {
+const codeGenerator = () => {
     let result = '';
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     const charactersLength = characters.length;
@@ -9,6 +9,6 @@ const codeGenerator = function () {
     return result;
 }
 
-module.export = {
+module.exports = {
     codeGenerator,
 }

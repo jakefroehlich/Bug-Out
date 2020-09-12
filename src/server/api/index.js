@@ -8,9 +8,12 @@ const {
   apiRouter,
   userRouter,
   gameRouter
+  gameRouter,
+  sessionRouter,
 } = require('./routes/index');
 const db = require('../db/index');
 const { app, server } = require('./socket');
+const {codeGenerator} = require('./utils')
 
 const { models: { Session, User, GameSession } } = db;
 
@@ -19,17 +22,6 @@ const PUBLIC_PATH = join(__dirname, '../../../public');
 const DIST_PATH = join(__dirname, '../../../dist');
 
 app.use(cookieParser());
-
-
-const codeGenerator = () => {
-  let result = '';
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < 5; i += 1) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
 
 // assigns cookies
 app.use(async (req, res, next) => {
@@ -62,7 +54,6 @@ app.use(async (req, res, next) => {
 // assign games if they don't have
 app.use(async (req, res, next) => {
   const session = await Session.findOne({ where: { id: req.session_id } })
-  // console.log(session.gameSessionId)
   if (!session && req.cookies.session_id) {
     const newSession = await Session.create({ id: req.cookies.session_id });
     req.session_id = newSession.id;
@@ -70,7 +61,7 @@ app.use(async (req, res, next) => {
   }
   else if (!session.gameSessionId) {
     let newCode = codeGenerator()
-    console.log(newCode)
+    // console.log(newCode)
     let check = await GameSession.findOne({ where: { code: newCode } });
     while (check) {
       newCode = codeGenerator();
@@ -91,6 +82,7 @@ app.use(express.json());
 app.use('/api', apiRouter.router);
 app.use('/user', userRouter.router);
 app.use('/game', gameRouter.router);
+app.use('/session',sessionRouter.router);
 
 const startServer = () => new Promise((res) => {
   server.listen(PORT, () => {

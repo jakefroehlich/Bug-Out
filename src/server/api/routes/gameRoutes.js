@@ -41,11 +41,12 @@ gameRouter.post('/createNew', async (req, res) => {
 })
 
 // Gets a game prompt based on difficulty
-gameRouter.get('/prompt:difficulty', async (req, res) => {
+gameRouter.get('/prompt/:diff', async (req, res) => {
   try {
-    const { difficulty } = req.query;
-    const gamePrompt = await Prompt.findOne({ where: difficulty });
-    res.send(gamePrompt);
+    const { diff } = req.params;
+    const gamePrompts = await Prompt.findAll({ where: {difficulty: diff} });
+    const randomGameIdx = Math.floor(Math.random() * gamePrompts.length)
+    res.send(gamePrompts[randomGameIdx]);
   } catch (e) {
     console.log('failed to get game prompt');
     console.log(e);

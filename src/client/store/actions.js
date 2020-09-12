@@ -7,6 +7,7 @@ export const types = {
   NEW_GAME: 'NEW_GAME',
   GET_CURRENT_GAME: 'GET_CURRENT_GAME',
   JOIN_GAME: 'JOIN_GAME',
+  SET_PROMPT: 'SET_PROMPT'
 }
 
 const changeInitialLoading=()=>({
@@ -48,6 +49,11 @@ const joinGame = (res) => ({
   payload: res,
 })
 
+const setPrompt = (prompt) => ({
+  type: types.SET_PROMPT,
+  payload: prompt
+})
+
 export {
   changeInitialLoading,
   login,
@@ -57,4 +63,5 @@ export {
   newGame,
   joinGame,
   getCurrentGame,
+  setPrompt
 }

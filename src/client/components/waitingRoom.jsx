@@ -28,7 +28,7 @@ const WaitingRoom = (props) => {
         <Box borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg" h='100%' m={2} p={4}>
           <Text>The Competition</Text>
           {game.players.map((player) => {
-              return(<Text>{player.id}</Text>);
+              return(<Text key={player.id}>{player.name ? (player.name) :'Guest' }</Text>);
           })}
         </Box>
       </div>

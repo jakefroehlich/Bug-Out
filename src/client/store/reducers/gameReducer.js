@@ -1,19 +1,20 @@
 import { types } from "../actions";
 
 const initialGameState = {
-  rounds: "",
-  currentId: "",
+  rounds: '',
+  currentId: '',
   players: [],
   active: false,
-};
+  private: true,
+}
 
 const gameReducer = (state = initialGameState, action) => {
   switch (action.type) {
     case types.NEW_GAME:
       return {
         ...state,
-        currentId: action.payload.id,
-        active: true,
+        id: action.payload.id,
+        active: action.payload.active,
         code: action.payload.code,
         private: action.payload.private,
         rounds: action.payload.rounds,
@@ -22,15 +23,15 @@ const gameReducer = (state = initialGameState, action) => {
     case types.GET_CURRENT_GAME:
       return {
         ...state,
-        currentId: action.payload.id,
+        id: action.payload.game.id,
         active: action.payload.active,
-        code: action.payload.code,
-        private: action.payload.private,
-        rounds: action.payload.rounds,
-        difficulty: action.payload.difficulty,
+        code: action.payload.game.code,
+        private: action.payload.game.private,
+        rounds: action.payload.game.rounds,
+        difficulty: action.payload.game.difficulty,
+        players: action.payload.players,
       };
-    default:
-      return state;
+    default: return state;
   }
 };
 

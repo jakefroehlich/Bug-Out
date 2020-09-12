@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
-import axios from "axios";
-import { playAsGuest, newGame, getCurrentGame } from "../actions";
+import axios from 'axios';
+import { playAsGuest, newGame,getCurrentGame, joinGame } from '../actions'
 
 export const playAsGuestThunk = (name) => (dispatch) => {
   return axios
@@ -29,17 +29,18 @@ export const createGameThunk = (rounds, difficulty) => (dispatch) => {
 
 export const getCurrentGameThunk = () => (dispatch) => {
   return axios
-    .get("/game/current")
-    .then((game) => {
-      console.log("game from server is ", game.data);
-      dispatch(getCurrentGame(game.data));
+    .get('/game/current')
+    .then((res) => {
+      console.log('getcurrentGame response from server is ',res)
+      const {game, players} = res.data;
+      dispatch(getCurrentGame({game, players}));
     })
     .catch((e) => {
       console.log(e);
     });
 };
 
-export const findRandomGame = () => () => {
+export const findRandomGameThunk = (currentGameId) => (dispatch) => {
   return axios
     .get("/game/gameSession")
     .then(({ data }) => {
@@ -51,3 +52,17 @@ export const findRandomGame = () => () => {
       console.log(e);
     });
 };
+
+export const updateNameThunk = (name) => (dispatch) => {
+  console.log('updateNameThunk hit')
+  return axios
+    .put('/session/updateName', {name} )
+      .then((res) => {
+        dispatch(res.data)
+      })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+

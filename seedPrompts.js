@@ -164,9 +164,11 @@ data.map((prompt) => {
 
     try{
       const newPropmt= {
+        id: data.id,
         name: data.name, 
         prompt: data.description, 
-        difficulty
+        difficulty,
+        slug: data.slug
       }
       return models.Prompt.create(newPropmt)
     }

@@ -8,8 +8,6 @@ const {
   apiRouter,
   userRouter,
   gameRouter
-  // TODO: userRouter,
-  // TODO: gameRouter,
 } = require('./routes/index');
 const db = require('../db/index');
 const { app, server } = require('./socket');

@@ -11,13 +11,6 @@ const data = [
     completedAt: '2020-03-11T16:54:52.076Z'
   },
   {
-    id: '5af15a37de4c7f223e00012d',
-    name: 'Sort Out The Men  From Boys ',
-    slug: 'sort-out-the-men-from-boys-1',
-    completedLanguages: [Array],
-    completedAt: '2020-03-02T15:22:02.890Z'
-  },
-  {
     id: '515de9ae9dcfc28eb6000001',
     name: 'Split Strings',
     slug: 'split-strings',
@@ -30,7 +23,7 @@ const data = [
     slug: 'grasshopper-grade-book',
     completedLanguages: [Array],
     completedAt: '2020-02-28T20:28:42.044Z'
-  },
+  },//*
   {
     id: '563b662a59afc2b5120000c6',
     name: 'Growth of a Population',
@@ -44,13 +37,6 @@ const data = [
     slug: 'two-oldest-ages-1',
     completedLanguages: [Array],
     completedAt: '2020-02-28T16:32:35.794Z'
-  },
-  {
-    id: '5d5ee4c35162d9001af7d699',
-    name: 'Sum of Minimums!',
-    slug: 'sum-of-minimums',
-    completedLanguages: [Array],
-    completedAt: '2020-02-28T15:30:24.696Z'
   },
   {
     id: '58f8a3a27a5c28d92e000144',

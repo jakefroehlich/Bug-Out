@@ -42,14 +42,13 @@ const ChatBox = ({
         console.log('effect used')
         socket.on('message', message => {
             console.log('chatbox messages', messages);
-            messages.push(message)
-            setMessageCount(messageCount + 1)
-            // setMessages([
-            //     ...messages,
-            //     message
-            // ])
+            // messages.push(message)
+            setMessages([
+                ...messages,
+                message
+            ])
         });
-    }, [])
+    }, [messageCount])
 
     const handleChange = (e) => {
         e.preventDefault();
@@ -60,7 +59,9 @@ const ChatBox = ({
     const handleSubmit = (e) => {
         e.preventDefault();
         // addMessage();
+        setMessageCount(messageCount + 1)
         socket.emit('chatMsg', chatMsg);
+        
     }
 
     return (

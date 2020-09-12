@@ -1,4 +1,4 @@
-const { UUID, UUIDV4, ENUM, STRING, TEXT } = require('sequelize');
+const { UUID, UUIDV4, STRING, TEXT } = require('sequelize');
 const db = require('../db');
 
 const Prompt = db.define('prompt',{

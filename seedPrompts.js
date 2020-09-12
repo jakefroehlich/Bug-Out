@@ -146,8 +146,10 @@ const data = [
 ]
 
 
+// eslint-disable-next-line array-callback-return
 data.map((prompt) => {
   axios.get(`https://www.codewars.com/api/v1/code-challenges/${prompt.slug}/?access_key=QsVQKDG8_jqTJVwrWFWo`)
+  // eslint-disable-next-line no-shadow
   .then(({data})=> {
     let difficulty=null;
     data.rank.id=Math.abs(data.rank.id);
@@ -171,6 +173,7 @@ data.map((prompt) => {
     catch(e){
       console.log(e);
     }
+    return null
   })
   console.log('Prompts Seeded')
 })

@@ -1,9 +1,8 @@
-import React, {useState, useRef} from 'react';
-import Editor from '@monaco-editor/react';
-import {Button} from "@chakra-ui/core"
+import React, { useState, useRef } from "react";
+import Editor from "@monaco-editor/react";
+import { Button } from "@chakra-ui/core";
 
-const CodeEditor = ()=> {
-
+const CodeEditor = () => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
 
@@ -21,17 +20,17 @@ const CodeEditor = ()=> {
     <div>
       <Editor
         height="50vh"
-        width='50%'
-        theme='dark'
+        width="50%"
+        theme="dark"
         language="javascript"
         value="// write your code here"
         editorDidMount={handleEditorDidMount}
       />
-      <Button onClick={handleShowValue} disabled={!isEditorReady} type='button'>
+      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button">
         Run!
       </Button>
     </div>
   );
-}
+};
 
-export default CodeEditor
+export default CodeEditor;

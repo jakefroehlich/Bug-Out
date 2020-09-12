@@ -1,4 +1,4 @@
-const moment = require('moment');
+const moment = require("moment");
 
 const formatMessage = (playerName, text) => {
   const currentTime = moment();
@@ -6,9 +6,9 @@ const formatMessage = (playerName, text) => {
   return {
     playerName,
     text,
-    time: currentTime.format('h:mm a'),
-    id: currentTime.format()
+    time: currentTime.format("h:mm a"),
+    id: currentTime.format(),
   };
-}
+};
 
 module.exports = formatMessage;

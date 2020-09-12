@@ -1,6 +1,6 @@
-const User = require('./user');
-const Session = require('./session');
-const GameSession = require('./gameSession');
+const User = require("./user");
+const Session = require("./session");
+const GameSession = require("./gameSession");
 
 User.hasMany(Session);
 Session.belongsTo(User);
@@ -11,10 +11,10 @@ Session.belongsTo(GameSession);
 GameSession.hasMany(Session);
 Session.belongsTo(GameSession);
 
-module.exports={
+module.exports = {
   models: {
     User,
     Session,
-    GameSession
-  }
+    GameSession,
+  },
 };

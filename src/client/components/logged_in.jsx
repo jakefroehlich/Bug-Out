@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { whoami } from '../store/thunks/loginThunks';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { whoami } from "../store/thunks/loginThunks";
 
 const LoggedIn = ({ user, whoAmI }) => {
-  useEffect(() => { 
+  useEffect(() => {
     const getData = async () => {
       await whoAmI();
     };
@@ -13,10 +13,10 @@ const LoggedIn = ({ user, whoAmI }) => {
 
   return (
     <div>
-      <h3>{loggedIn ? 'You are logged in.' : 'Failed to login.'}</h3>
+      <h3>{loggedIn ? "You are logged in." : "Failed to login."}</h3>
     </div>
   );
-}
+};
 
 const mapStateToProps = ({ user }) => ({ user });
 const mapDispatchToProps = (dispatch) => ({

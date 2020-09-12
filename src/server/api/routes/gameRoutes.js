@@ -85,18 +85,6 @@ gameRouter.put('/joinGame', async (req, res) => {
   }
 });
 
-gameRouter.post('/prompt', async (req, res)=>{
-  try{
-    console.log(req.body)
-    const { name, prompt, difficulty } = req.body;
-    // const createdPrompt = await Prompt.create({ name, prompt, difficulty });
-    // res.send(createdPrompt)
-  } catch(e){
-    console.log('failed to create game')
-    console.log(e)
-  }
-})
-
 module.exports = {
   path: '/game',
   router: gameRouter,

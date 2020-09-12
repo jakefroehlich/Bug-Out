@@ -1,26 +1,19 @@
 /* eslint-disable no-await-in-loop */
-const { Router } = require("express");
-const {
-  models: { GameSession, Session, Prompt },
-} = require("../../db/index");
-const codeGenerator = require("../utils");
+const { Router } = require('express');
+const { models: { GameSession, Session, Prompt } } = require('../../db/index');
+const codeGenerator = require('../utils');
 
 const gameRouter = Router();
 
-// getsCurrentGame
-gameRouter.get("/current", async (req, res) => {
+// getsCurrentGame and players belonging to that game
+gameRouter.get('/current', async (req, res) => {
   try {
-    // console.log('current game hit')
     const session = await Session.findOne({ where: { id: req.session_id } });
-    const game = await GameSession.findOne({
-      where: {
-        id: session.gameSessionId,
-        active: true,
-      },
-    });
-    res.status(201).send(game);
+    const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
+    const players = await Session.findAll({ where: { gameSessionId: game.id } });
+    res.status(201).send({ game, players })
   } catch (e) {
-    console.log("Error finding current game");
+    console.log('Error finding current game');
     console.log(e);
   }
 });
@@ -55,20 +48,27 @@ gameRouter.get("/prompt:difficulty", async (req, res) => {
   }
 });
 
-gameRouter.get("/gameSession", async (req, res) => {
+// This route destroys the game belonging to the session and updates gameSessionId
+gameRouter.put('/joinGame', async (req, res) => {
   try {
-    const games = await GameSession.findAll({
-      where: { active: true },
-      include: [Session],
-    });
-    res.send(games[0]);
+    const { currentGameId, gameCode } = req.body;
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    const game = await GameSession.findOne({ where: { code: gameCode } });
+    if (!game) {
+      res.send(404)
+    } else {
+      await session.update({ gameSessionId: game.id });
+      const gameToDestroy = await GameSession.findOne({ where: { id: currentGameId } });
+      await gameToDestroy.destroy();
+      res.status(200).send()
+    }
   } catch (e) {
-    console.log("failed to get game");
+    console.log('failed to join game');
     console.log(e);
   }
 });
 
 module.exports = {
-  path: "/game",
+  path: '/game',
   router: gameRouter,
-};
+}

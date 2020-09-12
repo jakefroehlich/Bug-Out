@@ -1,18 +1,23 @@
-const { UUID, UUIDV4, ENUM, STRING } = require("sequelize");
-const db = require("../db");
+const { STRING, TEXT } = require('sequelize');
+const db = require('../db');
 
-const Prompt = db.define("prompt", {
-  id: {
-    type: UUID,
-    defaultValue: UUIDV4,
-    primaryKey: true,
-  },
-  difficulty: {
-    type: ENUM("Easy", "Medium", "Hard"),
-    allowNull: false,
-  },
-  prompt: {
+const Prompt = db.define('prompt',{
+  id:{
     type: STRING,
+    primaryKey:true
+  },
+  name:{
+    type:STRING
+  },
+  difficulty:{
+    type:STRING,
+    allowNull: false
+  },
+  prompt:{
+    type: TEXT
+  },
+  slug:{
+    type:STRING
   },
   specs: {
     type: STRING,

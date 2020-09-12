@@ -17,7 +17,7 @@ import {
   getCurrentGameThunk,
 } from "../store/thunks/gameThunks";
 
-const CreateGame = ({ history, game, input, getCurrentGame, createGame }) => {
+const CreateGame = ({ history, game, getCurrentGame, createGame }) => {
   const [rounds, setRounds] = useState("");
   const [difficulty, setDifficulty] = useState("Beginner");
   // const socket = io();
@@ -56,7 +56,9 @@ const CreateGame = ({ history, game, input, getCurrentGame, createGame }) => {
           p={4}
         >
           <Text>The Competition</Text>
-          {input.playerName}
+          {game.players.map((player) => {
+              return(<Text key={player.id}>{player.name ? (player.name) :'Guest' }</Text>);
+          })}
         </Box>
       </div>
       <div style={{ padding: "10px" }}>
@@ -73,24 +75,16 @@ const CreateGame = ({ history, game, input, getCurrentGame, createGame }) => {
           <Text fontSize="6xl">Settings</Text>
           <FormControl>
             <FormLabel>Difficulty:</FormLabel>
-            <Select
-              placeholder="Select Difficulty"
-              defaultValue="Beginner"
-              onChange={(e) => setDifficulty(e.target.value)}
-            >
-              <option value="Beginner">Beginner</option>
+            <Select placeholder="Select Difficulty" onChange={(e)=> setDifficulty(e.target.value)}>
+              <option value="Beginner" defaultValue>Beginner</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Difficult">Difficult</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel>Rounds:</FormLabel>
-            <Select
-              placeholder="Select No. of Rounds"
-              onChange={(e) => setRounds(e.target.value)}
-              defaultValue="1"
-            >
-              <option value="1">1</option>
+            <Select placeholder="Select No. of Rounds" onChange={(e)=> setRounds(e.target.value)}>
+              <option value="1" defaultValue>1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -98,17 +92,8 @@ const CreateGame = ({ history, game, input, getCurrentGame, createGame }) => {
             </Select>
           </FormControl>
         </Box>
-        <Box
-          w="100%"
-          p={4}
-          borderWidth="1px"
-          borderColor="black"
-          borderStyle="solid"
-          maxW="sm"
-          rounded="lg"
-          m={2}
-        >
-          <Text>Invite Link: http://...............</Text>
+        <Box w="100%" p={4} borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg" m={2}>
+          <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text>
         </Box>
       </div>
       <div style={{ margin: "60px" }}>

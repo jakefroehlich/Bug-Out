@@ -18,7 +18,7 @@ const GameSession = db.define("gameSession", {
   },
   active: {
     type: BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
   private: {
     type: BOOLEAN,
@@ -28,6 +28,6 @@ const GameSession = db.define("gameSession", {
     type: STRING,
     allowNull: true,
   },
-});
+})
 
 module.exports = GameSession;

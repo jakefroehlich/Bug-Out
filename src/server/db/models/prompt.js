@@ -1,4 +1,4 @@
-const { UUID, UUIDV4, ENUM, STRING } = require('sequelize');
+const { UUID, UUIDV4, ENUM, STRING, TEXT } = require('sequelize');
 const db = require('../db');
 
 const Prompt = db.define('prompt',{
@@ -15,7 +15,7 @@ const Prompt = db.define('prompt',{
     allowNull: false
   },
   prompt:{
-    type: STRING
+    type: TEXT
   },
   specs:{
     type: STRING

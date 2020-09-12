@@ -19,16 +19,16 @@ const GameSession = db.define('gameSession',{
   },
   active: {
     type: BOOLEAN,
-    defaultValue: true,
+    defaultValue: false,
   },
   private: {
-    type:BOOLEAN,
+    type: BOOLEAN,
     defaultValue: true,
   },
   code: {
-    type:STRING,
+    type: STRING,
     allowNull: true,
-  }
+  },
 })
 
 module.exports = GameSession;

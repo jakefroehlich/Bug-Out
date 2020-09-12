@@ -6,6 +6,8 @@ import About from './about';
 import LandingPage from './landingPage';
 import CreateGame from './createGame';
 import LoadingGame from './gameLoading';
+import WaitingRoom from './waitingRoom';
+import JoinGame from './joinGame';
 
 export {
   LoginForm,
@@ -15,5 +17,7 @@ export {
   About,
   LandingPage,
   CreateGame,
-  LoadingGame
+  JoinGame,
+  LoadingGame,
+  WaitingRoom,
 }

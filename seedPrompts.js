@@ -149,11 +149,22 @@ const data = [
 data.map((prompt) => {
   axios.get(`https://www.codewars.com/api/v1/code-challenges/${prompt.slug}/?access_key=QsVQKDG8_jqTJVwrWFWo`)
   .then(({data})=> {
+    let difficulty=null;
+    data.rank.id=Math.abs(data.rank.id);
+
+    if(data.rank.id>6){
+      difficulty='easy'
+    } else if(data.rank.id >4 && data.rank.id<7){
+      difficulty='medium'
+    } else {
+      difficulty='hard'
+    }
+
     try{
       const newPropmt= {
         name: data.name, 
         prompt: data.description, 
-        difficulty: data.rank.id
+        difficulty
       }
       return models.Prompt.create(newPropmt)
     }

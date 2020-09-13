@@ -15,8 +15,8 @@ const LandingPage = (props) => {
   return (
     <div style={{display:'flex', flexDirection:'column'}}>
       <div style={{textAlign:'center', display:'flex', justifyContent:'center'}}>
-        <Box w="100%" p={4} borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg">
-          <Text fontSize="6xl">Bug Out!</Text>
+        <Box w="100%" bg='#00c3d9' p={4} borderWidth='3px' borderColor='#3674b5' borderStyle='solid' maxW="sm" rounded="lg">
+          <Text fontSize="6xl" color='white'>Bug Out!</Text>
           <FormControl>
             <Input
               placeholder='Enter your name to play'
@@ -26,8 +26,7 @@ const LandingPage = (props) => {
             />
             <Button 
               width="200px" 
-              variantColor="teal"
-              variant="outline"
+              variantColor="red"
               margin="5px"
               onClick={async () => {
               await props.findRandomGame(game.id)
@@ -37,8 +36,7 @@ const LandingPage = (props) => {
             </Button>
             <Button 
               width="200px" 
-              variantColor="teal"
-              variant="outline"
+              variantColor="orange"
               margin="5px"
               onClick={() => {
               props.history.push('/join')
@@ -49,24 +47,21 @@ const LandingPage = (props) => {
           </FormControl>
           <Button 
             width="200px" 
-            variantColor="teal"
-            variant="outline"
+            variantColor="yellow"
             margin="5px"
             onClick={() => props.history.push('/create')}
           >Create Game
           </Button>
           <Button 
             width="200px" 
-            variantColor="teal"
-            variant="outline"
+            variantColor="green"
             margin="5px"
             onClick={() => props.history.push('/login')}
           >Login
           </Button>
           <Button 
             width="200px" 
-            variantColor="teal"
-            variant="outline"
+            variantColor="blue"
             margin="5px"
             onClick={() => props.history.push('/howtoplay')}
           >How To Play

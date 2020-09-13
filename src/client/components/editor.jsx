@@ -28,28 +28,26 @@ const CodeEditor = (props)=>{
 
   console.log(props)
   return (
-    <div>
-      <div style={{display:'flex', flexDirection:'column', alignItems:'center', width:'50%', margin:'15px'}}>
-        <Box w='100%' bg='#4287f5' color='white' borderWidth='1px' borderColor='darkBlue' borderStyle='solid' rounded="lg" m={2} p={4}>
-          <Text fontSize="lg" w='100%'>{props.game.prompt.name}</Text>
-          <Text fontSize="sm" w='100%'>{props.game.prompt.prompt}</Text>
-        </Box>
-        <div style={{width: '100%'}}>
-          <Editor
-            height="50vh"
-            width='100%'
-            theme='dark'
-            language="javascript"
-            value="function bugout () { 
-            /*  Your code here  */
-            }"
-            editorDidMount={handleEditorDidMount}
-          />
-        </div>
-        <Button onClick={handleShowValue} disabled={!isEditorReady} type='button' m={1}>
-          Check Function
-        </Button>
+    <div style={{display:'flex', flexDirection:'column', alignItems:'center', width:'50%', margin:'15px'}}>
+      <Box w='100%' bg='#00c3d9' color='white' borderWidth='3px' borderColor='#3674b5' borderStyle='solid' rounded="lg" m={2} p={4} maxHeight='150px' overflow='scroll'>
+        <Text fontSize="lg" w='100%'>{props.game.prompt.name}</Text>
+        <Text fontSize="sm" w='100%'>{props.game.prompt.prompt}</Text>
+      </Box>
+      <div style={{width: '100%'}}>
+        <Editor
+          height="50vh"
+          width='100%'
+          theme='dark'
+          language="javascript"
+          value="function bugout () { 
+          /*  Your code here  */
+          }"
+          editorDidMount={handleEditorDidMount}
+        />
       </div>
+      <Button onClick={handleShowValue} disabled={!isEditorReady} type='button' m={1} variantColor="teal" variant="outline">
+        Check Function
+      </Button>
     </div>
   );
 }

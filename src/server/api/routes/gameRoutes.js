@@ -8,13 +8,9 @@ const gameRouter = Router();
 // getsCurrentGame and players belonging to that game
 gameRouter.get('/current', async (req, res) => {
   try {
-    console.log('current game hit')
-    // console.log(req.session_id)
     const session = await Session.findOne({ where: { id: req.session_id } });
-    // console.log(session.gameSessionId)
     const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
     const players = await Session.findAll({ where: { gameSessionId: game.id } });
-    // console.log('game data is ',game.dataValues)
     res.status(201).send({ game, players })
   } catch (e) {
     console.log('Error finding current game');
@@ -53,26 +49,13 @@ gameRouter.get('/prompt/:diff', async (req, res) => {
   }
 });
 
-// gameRouter.get('/gameSession', async (req, res)=>{
-//   try{
-//     const games = await GameSession.findAll({where: {active:true}, include:[Session]});
-//     res.send(games[0]);
-//   } catch(e){
-//     console.log('failed to get game');
-//     console.log(e);
-//   }
-// });
-
-
 // This route destroys the game belonging to the session and updates gameSessionId
 gameRouter.put('/joinGame', async (req, res) => {
   try {
-    console.log('req.body is ', req.body)
     const { currentGameId, gameCode } = req.body;
     const session = await Session.findOne({ where: { id: req.session_id } });
     const game = await GameSession.findOne({ where: { code: gameCode } });
     if (!game) {
-      console.log('game not found being hit')
       res.send(404)
     } else {
       await session.update({ gameSessionId: game.id });

@@ -53,11 +53,24 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => {
     });
 };
 
+
 export const getPromptThunk = (difficulty) => (dispatch) => {
   return axios
     .get(`/game/prompt/${difficulty}`)
       .then(({data}) => {
         dispatch(setPrompt(data));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+export const updateNameThunk = (name) => (dispatch) => {
+  console.log('updateNameThunk hit')
+  return axios
+    .put('/session/updateName', {name} )
+      .then((res) => {
+        dispatch(res.data)
       })
     .catch((e) => {
       console.log(e);

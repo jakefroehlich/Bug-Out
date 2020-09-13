@@ -30,7 +30,7 @@ const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame
               variant="outline"
               margin="5px"
               onClick={async () => {
-                await props.findRandomGame(game.id)
+                await findRandomGame(game.id)
                 setName('')
               }}
             >Join Random Room

@@ -23,7 +23,7 @@ const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? (<Text>Please put in a name</Text>) : null}
+            {noName ? (<Text>Don't forget your name!</Text>) : null}
             <Button
               width="200px"
               variantColor="teal"

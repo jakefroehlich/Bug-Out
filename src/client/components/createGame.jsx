@@ -16,14 +16,18 @@ import {
   createGameThunk,
   getCurrentGameThunk,
 } from "../store/thunks/gameThunks";
+import socket from "../utils/socket";
 
 const CreateGame = ({ history, game, getCurrentGame, createGame }) => {
   const [rounds, setRounds] = useState("");
   const [difficulty, setDifficulty] = useState("Beginner");
-  // const socket = io();
 
   useEffect(() => {
     getCurrentGame();
+    socket.emit("joinRoom", game.code)
+    socket.on("newPlayer", player => {
+
+    })
     // socket.on('message', message => {
     //   console.log('createGame message', message)
     // });

@@ -2,20 +2,25 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
-import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
+import { getCurrentGameThunk, findRandomGameThunk } from '../store/thunks/gameThunks';
 
-const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame }) => {
+const LandingPage = ({
+  game,
+  // updateName,
+  history,
+  getCurrentGame,
+  findRandomGame,
+}) => {
   const [name, setName] = useState('')
-  const [noName, setNoName] = useState(false)
   useEffect(() => {
     getCurrentGame();
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
-        <Box w="100%" p={4} borderWidth='1px' borderColor='black' borderStyle='solid' maxW="sm" rounded="lg">
-          <Text fontSize="6xl">Bug Out!</Text>
+    <div style={{display:'flex', flexDirection:'column'}}>
+      <div style={{textAlign:'center', display:'flex', justifyContent:'center'}}>
+        <Box w="100%" bg='#00c3d9' p={4} borderWidth='3px' borderColor='#3674b5' borderStyle='solid' maxW="sm" rounded="lg">
+          <Text fontSize="6xl" color='white'>Bug Out!</Text>
           <FormControl>
             <Input
               placeholder="Enter your name to play"
@@ -23,11 +28,9 @@ const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? (<Text>Please put in a name</Text>) : null}
-            <Button
-              width="200px"
-              variantColor="teal"
-              variant="outline"
+            <Button 
+              width="200px" 
+              variantColor="red"
               margin="5px"
               onClick={async () => {
                 await findRandomGame(game.id)
@@ -35,51 +38,34 @@ const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame
               }}
             >Join Random Room
             </Button>
-            <Button
-              width="200px"
-              variantColor="teal"
-              variant="outline"
+            <Button 
+              width="200px" 
+              variantColor="orange"
               margin="5px"
               onClick={() => {
-                if (name === '') {
-                  setNoName(true)
-                } else {
-                  updateName(name)
-                  history.push('/join')
-                  setName('')
-                }
-              }}
+              history.push('/join')
+              setName('')
+            }}
             >Join Game
             </Button>
           </FormControl>
-          <Button
-            width="200px"
-            variantColor="teal"
-            variant="outline"
+          <Button 
+            width="200px" 
+            variantColor="yellow"
             margin="5px"
-            onClick={() => {
-              if (name === '') {
-                setNoName(true)
-              } else {
-                updateName(name)
-                history.push('/create')
-                setName('')
-              }
-            }}
+            onClick={() => history.push('/create')}
           >Create Game
           </Button>
-          <Button
-            width="200px"
-            variantColor="teal"
-            variant="outline"
+          <Button 
+            width="200px" 
+            variantColor="green"
             margin="5px"
             onClick={() => history.push('/login')}
           >Login
           </Button>
-          <Button
-            width="200px"
-            variantColor="teal"
-            variant="outline"
+          <Button 
+            width="200px" 
+            variantColor="blue"
             margin="5px"
             onClick={() => history.push('/howtoplay')}
           >How To Play
@@ -95,10 +81,8 @@ const mapStateToProps = ({ user, game, input }) => ({ user, game, input });
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getCurrentGame: () => dispatch(getCurrentGameThunk()),
-    findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
-    updateName: (name) => dispatch(updateNameThunk(name)),
-  }
-};
+  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
+}};
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage); 

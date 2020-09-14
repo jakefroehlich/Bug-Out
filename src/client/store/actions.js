@@ -10,6 +10,7 @@ export const types = {
   UPDATE_INPUT: "UPDATE_INPUT",
   CLEAR_INPUT: "CLEAR_INPUT",
   ADD_MESSAGE: "ADD_MESSAGE",
+  SET_PROMPT: 'SET_PROMPT',
 };
 
 const addMessage = (message) => ({
@@ -62,6 +63,11 @@ const joinGame = (res) => ({
   payload: res,
 })
 
+const setPrompt = (prompt) => ({
+  type: types.SET_PROMPT,
+  payload: prompt
+})
+
 export {
   changeInitialLoading,
   login,
@@ -73,4 +79,5 @@ export {
   getCurrentGame,
   updateInput,
   addMessage,
+  setPrompt,
 };

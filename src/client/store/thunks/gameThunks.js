@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
-import { playAsGuest, newGame,getCurrentGame, joinGame } from '../actions'
+import { playAsGuest, newGame,getCurrentGame, joinGame, setPrompt } from '../actions'
 
 export const playAsGuestThunk = (name) => (dispatch) => {
   return axios
@@ -53,6 +53,18 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => {
     });
 };
 
+
+export const getPromptThunk = (difficulty) => (dispatch) => {
+  return axios
+    .get(`/game/prompt/${difficulty}`)
+      .then(({data}) => {
+        dispatch(setPrompt(data));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
 export const updateNameThunk = (name) => (dispatch) => {
   console.log('updateNameThunk hit')
   return axios
@@ -64,5 +76,3 @@ export const updateNameThunk = (name) => (dispatch) => {
       console.log(e);
     });
 };
-
-

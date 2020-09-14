@@ -1,15 +1,15 @@
 export const types = {
-  INITIAL_LOADING_COMPLETE: "INITIAL_LOADING_COMPLETE",
-  LOGIN: "LOGIN",
-  LOGOUT: "LOGOUT",
-  LOGIN_FAIL: "LOGIN_FAIL",
-  PLAY_AS_GUEST: "PLAY_AS_GUEST",
-  NEW_GAME: "NEW_GAME",
-  GET_CURRENT_GAME: "GET_CURRENT_GAME",
-  JOIN_GAME: "JOIN_GAME",
-  UPDATE_INPUT: "UPDATE_INPUT",
-  CLEAR_INPUT: "CLEAR_INPUT",
-  ADD_MESSAGE: "ADD_MESSAGE",
+  INITIAL_LOADING_COMPLETE: 'INITIAL_LOADING_COMPLETE',
+  LOGIN: 'LOGIN',
+  LOGOUT: 'LOGOUT',
+  LOGIN_FAIL: 'LOGIN_FAIL',
+  PLAY_AS_GUEST: 'PLAY_AS_GUEST',
+  NEW_GAME: 'NEW_GAME',
+  GET_CURRENT_GAME: 'GET_CURRENT_GAME',
+  JOIN_GAME: 'JOIN_GAME',
+  UPDATE_INPUT: 'UPDATE_INPUT',
+  CLEAR_INPUT: 'CLEAR_INPUT',
+  ADD_MESSAGE: 'ADD_MESSAGE',
 };
 
 const addMessage = (message) => ({
@@ -55,12 +55,12 @@ const newGame = (game) => ({
 const getCurrentGame = ({ game, players }) => ({
   type: types.GET_CURRENT_GAME,
   payload: { game, players },
-})
+});
 
 const joinGame = (res) => ({
   type: types.JOIN_GAME,
   payload: res,
-})
+});
 
 export {
   changeInitialLoading,

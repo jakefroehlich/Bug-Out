@@ -1,4 +1,4 @@
-import { types } from "../actions";
+import { types } from '../actions';
 
 const initialGameState = {
   rounds: '',
@@ -6,7 +6,7 @@ const initialGameState = {
   players: [],
   active: false,
   private: true,
-}
+};
 
 const gameReducer = (state = initialGameState, action) => {
   switch (action.type) {

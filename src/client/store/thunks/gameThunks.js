@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest, newGame, getCurrentGame, joinGame,
+  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt,
 } from '../actions';
 
 export const playAsGuestThunk = (name) => (dispatch) => axios
@@ -44,6 +44,15 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
     const { id } = data;
     axios.put('/user/session/', id);
     // dispatch(newGame(rounds));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const getPromptThunk = (difficulty) => (dispatch) => axios
+  .get(`/game/prompt/${difficulty}`)
+  .then(({ data }) => {
+    dispatch(setPrompt(data));
   })
   .catch((e) => {
     console.log(e);

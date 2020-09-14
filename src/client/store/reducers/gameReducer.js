@@ -6,6 +6,7 @@ const initialGameState = {
   players: [],
   active: false,
   private: true,
+  prompt: '',
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -30,6 +31,11 @@ const gameReducer = (state = initialGameState, action) => {
         rounds: action.payload.game.rounds,
         difficulty: action.payload.game.difficulty,
         players: action.payload.players,
+      };
+    case types.SET_PROMPT:
+      return {
+        ...state,
+        prompt: action.payload,
       };
     default: return state;
   }

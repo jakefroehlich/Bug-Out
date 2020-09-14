@@ -9,6 +9,7 @@ import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../st
 
 const LandingPage = (props) => {
   const [name, setName] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
   const { history, getCurrentGame, updateName } = props;
   useEffect(() => {
@@ -18,8 +19,8 @@ const LandingPage = (props) => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
-        <Box w="100%" p={4} borderWidth="1px" borderColor="black" borderStyle="solid" maxW="sm" rounded="lg">
-          <Text fontSize="6xl">Bug Out!</Text>
+        <Box w="100%" bg="#4287f5" p={4} borderWidth="3px" borderColor="#0c2c61" borderStyle="solid" maxW="sm" rounded="lg">
+          <Text fontSize="6xl" color="white">Bug Out!</Text>
           <FormControl>
             <Input
               placeholder="Enter your name to play"
@@ -27,11 +28,9 @@ const LandingPage = (props) => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? (<Text>Please put in a name</Text>) : null}
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="red"
               margin="5px"
               onClick={async () => {
                 await props.findRandomGame(game.id);
@@ -41,8 +40,7 @@ const LandingPage = (props) => {
             </Button>
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="orange"
               margin="5px"
               onClick={() => {
                 if (name === '') {
@@ -58,8 +56,7 @@ const LandingPage = (props) => {
           </FormControl>
           <Button
             width="200px"
-            variantColor="teal"
-            variant="outline"
+            variantColor="yellow"
             margin="5px"
             onClick={() => {
               if (name === '') {
@@ -74,18 +71,16 @@ const LandingPage = (props) => {
           </Button>
           <Button
             width="200px"
-            variantColor="teal"
-            variant="outline"
+            variantColor="green"
             margin="5px"
-            onClick={() => history.push('/login')}
+            onClick={() => props.history.push('/login')}
           >Login
           </Button>
           <Button
             width="200px"
-            variantColor="teal"
-            variant="outline"
+            variantColor="purple"
             margin="5px"
-            onClick={() => history.push('/howtoplay')}
+            onClick={() => props.history.push('/howtoplay')}
           >How To Play
           </Button>
         </Box>

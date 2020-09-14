@@ -10,7 +10,7 @@ import {
   LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame, WaitingRoom, JoinGame,
 } from './components';
 import store from './store';
-import CodeEditor from './components/editor';
+import GamePage from './components/gamePage';
 
 const App = () => (
   <Provider store={store}>
@@ -22,7 +22,7 @@ const App = () => (
           <Route exact path="/account" component={LoggedIn} />
           <Route exact path="/create" component={CreateGame} />
           <Route exact path="/loading-game" component={LoadingGame} />
-          <Route exact path="/editor" component={CodeEditor} />
+          <Route exact path="/game" component={GamePage} />
           <Route exact path="/join" component={JoinGame} />
           <Route exact path="/waiting" component={WaitingRoom} />
           <Route exact path="/" component={LandingPage} />

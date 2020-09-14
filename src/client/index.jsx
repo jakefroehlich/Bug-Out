@@ -1,10 +1,11 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDom from 'react-dom';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from '@chakra-ui/core';
+import { ThemeProvider } from "@chakra-ui/core";
 import {
   LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame, WaitingRoom, JoinGame,
 } from './components';

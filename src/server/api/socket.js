@@ -29,12 +29,12 @@ io.on("connection", (socket) => {
     socket.join(code);
   })
 
-  socket.on("newUser", (user) => {
-    io.emit("usersUpdate", user.name, user.id)
+  socket.on("newPlayer", (name, code) => {
+    io.to(code).emit("playersUpdate", name)
   })
 
-  socket.on("chatMsg", (msg) => {
-    io.emit("message", formatMessage("USER", msg));
+  socket.on("chatMsg", (msg, code) => {
+    io.to(code).emit("message", formatMessage("USER", msg));
   });
 
   socket.on("disconnect", () => {

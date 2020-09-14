@@ -16,17 +16,20 @@ import {
   createGameThunk,
   getCurrentGameThunk,
 } from "../store/thunks/gameThunks";
+import {
+  updatePlayers
+} from "../store/actions"
 import socket from "../utils/socket";
 
-const CreateGame = ({ history, game, getCurrentGame, createGame }) => {
+const CreateGame = ({ history, game, getCurrentGame, createGame, upPlayers }) => {
   const [rounds, setRounds] = useState("");
   const [difficulty, setDifficulty] = useState("Beginner");
 
   useEffect(() => {
     getCurrentGame();
     socket.emit("joinRoom", game.code)
-    socket.on("newPlayer", player => {
-
+    socket.on("playersUpdate", name => {
+      upPlayers(name)
     })
     // socket.on('message', message => {
     //   console.log('createGame message', message)
@@ -120,6 +123,7 @@ const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    upPlayers: (name) => dispatch(updatePlayers(name)),
     getCurrentGame: () => dispatch(getCurrentGameThunk()),
     createGame: (rounds, difficulty) =>
       dispatch(createGameThunk(rounds, difficulty)),

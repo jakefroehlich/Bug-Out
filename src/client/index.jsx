@@ -5,7 +5,7 @@ import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from "@chakra-ui/core";
+import { ThemeProvider } from '@chakra-ui/core';
 import {
   LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame, WaitingRoom, JoinGame,
 } from './components';

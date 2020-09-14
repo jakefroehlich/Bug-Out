@@ -1,28 +1,27 @@
 const { STRING, TEXT } = require('sequelize');
 const db = require('../db');
 
-const Prompt = db.define('prompt',{
-  id:{
+const Prompt = db.define('prompt', {
+  id: {
     type: STRING,
-    primaryKey:true
+    primaryKey: true,
   },
-  name:{
-    type:STRING
+  name: {
+    type: STRING,
   },
-  difficulty:{
-    type:STRING,
-    allowNull: false
+  difficulty: {
+    type: STRING,
+    allowNull: false,
   },
-  prompt:{
-    type: TEXT
+  prompt: {
+    type: TEXT,
   },
-  slug:{
-    type:STRING
+  slug: {
+    type: STRING,
   },
-  specs:{
-    type: STRING
-  }
-
-})
+  specs: {
+    type: STRING,
+  },
+});
 
 module.exports = Prompt;

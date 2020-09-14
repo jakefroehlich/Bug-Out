@@ -9,7 +9,6 @@ module.exports = {
   extends: [
     'plugin:react/recommended',
     'airbnb',
-    'prettier',
     'eslint:recommended',
   ],
   parserOptions: {
@@ -19,15 +18,13 @@ module.exports = {
     ecmaVersion: 11,
     sourceType: 'module',
   },
-  plugins: [
-    'react',
-  ],
+  plugins: ['react'],
   rules: {
     'react/prop-types': 0,
-    'react/jsx-one-expression-per-line': [0, { "allow": "single-child" }],
+    'react/jsx-one-expression-per-line': [0, { allow: 'single-child' }],
     'no-console': 'off',
-    'react/prefer-stateless-function': [0, { "ignoreComponents": true }],
-    'react/destructuring-assignment': [0,"never", { "ignoreClassFields": true }],
+    'react/prefer-stateless-function': [0, { ignoreComponents: true }],
+    'react/destructuring-assignment': [0, 'never', { ignoreClassFields: true }],
     'no-param-reassign': 'off',
   },
   settings: {

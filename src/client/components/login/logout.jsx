@@ -6,13 +6,9 @@ const Logout = ({ user, logout }) => (
   <div>
     <h2>
       Welcome
-      {user.username}
-      !
+      {user.username}!
     </h2>
-    <button
-      type='button'
-      onClick={logout}
-    >
+    <button type="button" onClick={logout}>
       Logout
     </button>
   </div>

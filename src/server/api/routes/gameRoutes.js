@@ -11,14 +11,14 @@ gameRouter.get('/current', async (req, res) => {
     const session = await Session.findOne({ where: { id: req.session_id } });
     const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
     const players = await Session.findAll({ where: { gameSessionId: game.id } });
-    res.status(201).send({ game, players })
+    res.status(201).send({ game, players });
   } catch (e) {
     console.log('Error finding current game');
     console.log(e);
   }
-})
+});
 
-// Create game session and set the number of rounds. 
+// Create game session and set the number of rounds.
 gameRouter.post('/createNew', async (req, res) => {
   try {
     let newCode = codeGenerator();
@@ -34,14 +34,14 @@ gameRouter.post('/createNew', async (req, res) => {
     console.log('Error creating game session');
     console.log(e);
   }
-})
+});
 
 // Gets a game prompt based on difficulty
 gameRouter.get('/prompt/:diff', async (req, res) => {
   try {
     const { diff } = req.params;
-    const gamePrompts = await Prompt.findAll({ where: {difficulty: diff} });
-    const randomGameIdx = Math.floor(Math.random() * gamePrompts.length)
+    const gamePrompts = await Prompt.findAll({ where: { difficulty: diff } });
+    const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
     res.send(gamePrompts[randomGameIdx]);
   } catch (e) {
     console.log('failed to get game prompt');
@@ -56,12 +56,12 @@ gameRouter.put('/joinGame', async (req, res) => {
     const session = await Session.findOne({ where: { id: req.session_id } });
     const game = await GameSession.findOne({ where: { code: gameCode } });
     if (!game) {
-      res.send(404)
+      res.send(404);
     } else {
       await session.update({ gameSessionId: game.id });
       const gameToDestroy = await GameSession.findOne({ where: { id: currentGameId } });
       await gameToDestroy.destroy();
-      res.status(200).send()
+      res.status(200).send();
     }
   } catch (e) {
     console.log('failed to join game');
@@ -72,4 +72,4 @@ gameRouter.put('/joinGame', async (req, res) => {
 module.exports = {
   path: '/game',
   router: gameRouter,
-}
+};

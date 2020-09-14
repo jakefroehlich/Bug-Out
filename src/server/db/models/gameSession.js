@@ -1,18 +1,19 @@
-
-const { UUID, UUIDV4, INTEGER, ENUM, BOOLEAN, STRING } = require('sequelize');
+const {
+  UUID, UUIDV4, INTEGER, ENUM, BOOLEAN, STRING,
+} = require('sequelize');
 const db = require('../db');
 
-const GameSession = db.define('gameSession',{
-  id:{
+const GameSession = db.define('gameSession', {
+  id: {
     type: UUID,
     defaultValue: UUIDV4,
-    primaryKey:true
+    primaryKey: true,
   },
-  rounds:{
+  rounds: {
     type: INTEGER,
     defaultValue: 1,
   },
-  difficulty:{
+  difficulty: {
     type: ENUM('Easy', 'Medium', 'Hard'),
     allowNull: false,
     defaultValue: 'Easy',
@@ -29,6 +30,6 @@ const GameSession = db.define('gameSession',{
     type: STRING,
     allowNull: true,
   },
-})
+});
 
 module.exports = GameSession;

@@ -6,7 +6,6 @@ import { loginThunk, whoami } from '../../store/thunks/loginThunks';
 const Login = ({ login, history }) => {
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,13 +16,24 @@ const Login = ({ login, history }) => {
     <form>
       <label>
         Username:
-        <input value={email} type='username' onChange={(e) => setUsername(e.target.value)} />
+        <input
+          value={email}
+          type="username"
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </label>
       <label>
         Password:
-        <input value={password} type='password' onChange={(e) => setPassword(e.target.value)} />
+        <input
+          value={password}
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </label>
-      <button onClick={handleSubmit} type='submit'> Login </button>
+      <button onClick={handleSubmit} type="submit">
+        {' '}
+        Login{' '}
+      </button>
     </form>
   );
 };

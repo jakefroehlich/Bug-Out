@@ -7,12 +7,26 @@ export const types = {
   NEW_GAME: 'NEW_GAME',
   GET_CURRENT_GAME: 'GET_CURRENT_GAME',
   JOIN_GAME: 'JOIN_GAME',
-  SET_PROMPT: 'SET_PROMPT'
-}
+  SET_PROMPT: 'SET_PROMPT',
+  UPDATE_INPUT: 'UPDATE_INPUT',
+  CLEAR_INPUT: 'CLEAR_INPUT',
+  ADD_MESSAGE: 'ADD_MESSAGE',
+};
 
-const changeInitialLoading=()=>({
+const addMessage = (message) => ({
+  type: types.ADD_MESSAGE,
+  message,
+});
+
+const updateInput = (name, value) => ({
+  type: types.UPDATE_INPUT,
+  name,
+  value,
+});
+
+const changeInitialLoading = () => ({
   type: types.INITIAL_LOADING_COMPLETE,
-})
+});
 
 const login = (email, role) => ({
   type: types.LOGIN,
@@ -29,30 +43,30 @@ const loginFail = (message) => ({
   message,
 });
 
-const playAsGuest = (name) =>({
+const playAsGuest = (name) => ({
   type: types.PLAY_AS_GUEST,
   payload: name,
-})
+});
 
-const newGame = (game)=>({
+const newGame = (game) => ({
   type: types.NEW_GAME,
   payload: game,
-})
+});
 
 const getCurrentGame = ({ game, players }) => ({
   type: types.GET_CURRENT_GAME,
   payload: { game, players },
-})
+});
 
 const joinGame = (res) => ({
   type: types.JOIN_GAME,
   payload: res,
-})
+});
 
 const setPrompt = (prompt) => ({
   type: types.SET_PROMPT,
-  payload: prompt
-})
+  payload: prompt,
+});
 
 export {
   changeInitialLoading,
@@ -63,5 +77,7 @@ export {
   newGame,
   joinGame,
   getCurrentGame,
-  setPrompt
-}
+  setPrompt,
+  updateInput,
+  addMessage,
+};

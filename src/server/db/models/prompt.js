@@ -19,10 +19,9 @@ const Prompt = db.define('prompt',{
   slug:{
     type:STRING
   },
-  specs:{
-    type: STRING
-  }
-
-})
+  specs: {
+    type: STRING,
+  },
+});
 
 module.exports = Prompt;

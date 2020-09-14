@@ -5,7 +5,7 @@ import { playAsGuest, newGame,getCurrentGame, joinGame } from '../actions'
 
 export const playAsGuestThunk = (name) => (dispatch) => {
   return axios
-    .put('/user/guest-session', {name})
+    .put("/user/guest-session", { name })
     .then(() => {
       dispatch(playAsGuest(name));
     })
@@ -15,11 +15,11 @@ export const playAsGuestThunk = (name) => (dispatch) => {
 };
 
 export const createGameThunk = (rounds, difficulty) => (dispatch) => {
-  console.log(rounds)
+  console.log(rounds);
   return axios
-    .post('/game/createNew', {rounds, difficulty})
+    .post("/game/createNew", { rounds, difficulty })
     .then((game) => {
-      console.log('game data from createNew is ',game.data)
+      console.log("game data from createNew is ", game.data);
       dispatch(newGame(game.data));
     })
     .catch((e) => {
@@ -42,12 +42,12 @@ export const getCurrentGameThunk = () => (dispatch) => {
 
 export const findRandomGameThunk = (currentGameId) => (dispatch) => {
   return axios
-    .get('/game/gameSession')
-      .then(({data}) => {
-        const {id} = data
-        axios.put(`/user/session/`, id)
-        // dispatch(newGame(rounds));
-      })
+    .get("/game/gameSession")
+    .then(({ data }) => {
+      const { id } = data;
+      axios.put(`/user/session/`, id);
+      // dispatch(newGame(rounds));
+    })
     .catch((e) => {
       console.log(e);
     });

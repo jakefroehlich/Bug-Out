@@ -4,8 +4,7 @@ import {Button} from "@chakra-ui/core";
 import { buildFunction } from '../../server/utils/buildFunction';
 import { test } from '../../server/utils/tests';
 
-const CodeEditor = ()=>{
-
+const CodeEditor = () => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
 
@@ -23,19 +22,19 @@ const CodeEditor = ()=>{
     <div>
       <Editor
         height="50vh"
-        width='50%'
-        theme='dark'
+        width="50%"
+        theme="dark"
         language="javascript"
         value="function () { 
         /*  Your code here  */
         }"
         editorDidMount={handleEditorDidMount}
       />
-      <Button onClick={handleShowValue} disabled={!isEditorReady} type='button'>
+      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button">
         Run!
       </Button>
     </div>
   );
-}
+};
 
-export default CodeEditor
+export default CodeEditor;

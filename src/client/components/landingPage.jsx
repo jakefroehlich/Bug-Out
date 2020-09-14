@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { Button, Input, FormControl, Text, Box } from '@chakra-ui/core';
 import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
 
-const LandingPage = (props) => {
+const LandingPage = ({ game, updateName, history, getCurrentGame, findRandomGame }) => {
   const [name, setName] = useState('')
   const [noName, setNoName] = useState(false)
   useEffect(() => {
-    props.getCurrentGame();
+    getCurrentGame();
   }, []);
-  const { game, updateName, history } = props;
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -19,8 +18,8 @@ const LandingPage = (props) => {
           <Text fontSize="6xl">Bug Out!</Text>
           <FormControl>
             <Input
-              placeholder='Enter your name to play'
-              type='text'
+              placeholder="Enter your name to play"
+              type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -31,7 +30,7 @@ const LandingPage = (props) => {
               variant="outline"
               margin="5px"
               onClick={async () => {
-                await props.findRandomGame(game.id)
+                await findRandomGame(game.id)
                 setName('')
               }}
             >Join Random Room
@@ -89,10 +88,10 @@ const LandingPage = (props) => {
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-const mapStateToProps = ({ user }) => ({ user });
+const mapStateToProps = ({ user, game, input }) => ({ user, game, input });
 
 const mapDispatchToProps = (dispatch) => {
   return {

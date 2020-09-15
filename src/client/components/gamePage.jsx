@@ -5,7 +5,7 @@ import Editor from './editor';
 import ChatBox from './ChatBox';
 
 const GamePage = () => (
-  <div style={{ display: 'flex', justifyContent:'center' }}>
+  <div style={{ display: 'flex', justifyContent: 'center' }}>
     <div style={{ height: '80vh' }}>
       <Box bg="tomato" h="40%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#c90c0c" borderStyle="solid" rounded="lg">
         Competition

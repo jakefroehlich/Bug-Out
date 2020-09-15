@@ -7,11 +7,16 @@ export const types = {
   NEW_GAME: 'NEW_GAME',
   GET_CURRENT_GAME: 'GET_CURRENT_GAME',
   JOIN_GAME: 'JOIN_GAME',
-  SET_PROMPT: 'SET_PROMPT',
   UPDATE_INPUT: 'UPDATE_INPUT',
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
+  UPDATE_PLAYERS: 'UPDATE_PLAYERS',
 };
+
+const updatePlayers = (player) => ({
+  type: types.UPDATE_PLAYERS,
+  player,
+});
 
 const addMessage = (message) => ({
   type: types.ADD_MESSAGE,
@@ -80,4 +85,5 @@ export {
   setPrompt,
   updateInput,
   addMessage,
+  updatePlayers,
 };

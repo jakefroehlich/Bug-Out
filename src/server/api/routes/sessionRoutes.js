@@ -1,6 +1,8 @@
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
-const { models: { Session } } = require('../../db/index');
+const {
+  models: { Session },
+} = require('../../db/index');
 
 const sessionRouter = Router();
 

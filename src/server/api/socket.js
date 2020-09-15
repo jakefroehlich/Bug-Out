@@ -7,7 +7,9 @@ const io = socketio(server);
 const botName = 'BugOut Bot';
 
 io.on('connection', (socket) => {
-  console.log(socket);
+  //   console.log(socket.handshake.headers.cookie)
+
+  // Confirmation message
   socket.emit(
     'message',
     formatMessage(botName, 'Confirmation: You have connected!'),
@@ -16,14 +18,21 @@ io.on('connection', (socket) => {
   // TODO - Add new user to message
   socket.broadcast.emit(
     'message',
-    formatMessage(
-      botName,
-      'Talk $h!t with the competition. {user} has joined the fray!',
-    ),
+    formatMessage(botName, '{user} has joined the fray!'),
   );
 
-  socket.on('chatMsg', (msg) => {
-    io.emit('message', formatMessage('USER', msg));
+  socket.on('joinRoom', (code) => {
+    socket.join(code, () => {
+      socket.emit('');
+    });
+  });
+
+  socket.on('newPlayer', (name, code) => {
+    io.to(code).emit('playersUpdate', name);
+  });
+
+  socket.on('chatMsg', (msg, code) => {
+    io.to(code).emit('message', formatMessage('USER', msg));
   });
 
   socket.on('disconnect', () => {

@@ -1,6 +1,8 @@
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
-const { models: { GameSession, Session, Prompt } } = require('../../db/index');
+const {
+  models: { GameSession, Session, Prompt },
+} = require('../../db/index');
 const codeGenerator = require('../utils');
 
 const gameRouter = Router();
@@ -9,8 +11,12 @@ const gameRouter = Router();
 gameRouter.get('/current', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
-    const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
-    const players = await Session.findAll({ where: { gameSessionId: game.id } });
+    const game = await GameSession.findOne({
+      where: { id: session.gameSessionId },
+    });
+    const players = await Session.findAll({
+      where: { gameSessionId: game.id },
+    });
     res.status(201).send({ game, players });
   } catch (e) {
     console.log('Error finding current game');
@@ -56,12 +62,14 @@ gameRouter.put('/joinGame', async (req, res) => {
     const session = await Session.findOne({ where: { id: req.session_id } });
     const game = await GameSession.findOne({ where: { code: gameCode } });
     if (!game) {
-      res.send(404);
+      res.status(404).send('Could not find game');
     } else {
       await session.update({ gameSessionId: game.id });
-      const gameToDestroy = await GameSession.findOne({ where: { id: currentGameId } });
+      const gameToDestroy = await GameSession.findOne({
+        where: { id: currentGameId },
+      });
       await gameToDestroy.destroy();
-      res.status(200).send();
+      res.status(200).send('Ok');
     }
   } catch (e) {
     console.log('failed to join game');

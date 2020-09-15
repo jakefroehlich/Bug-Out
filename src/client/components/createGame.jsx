@@ -18,7 +18,10 @@ import {
 } from '../store/thunks/gameThunks';
 
 const CreateGame = ({
-  history, game, getCurrentGame, createGame,
+  history,
+  game,
+  getCurrentGame,
+  createGame,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -26,6 +29,10 @@ const CreateGame = ({
 
   useEffect(() => {
     getCurrentGame();
+    socket.emit('joinRoom', game.code);
+    socket.on('playersUpdate', (name) => {
+      upPlayers(name);
+    });
     // socket.on('message', message => {
     //   console.log('createGame message', message)
     // });
@@ -58,7 +65,9 @@ const CreateGame = ({
           p={4}
         >
           <Text>The Competition</Text>
-          {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest' }</Text>))}
+          {game.players.map((player) => (
+            <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
+          ))}
         </Box>
       </div>
       <div style={{ padding: '10px' }}>
@@ -75,16 +84,26 @@ const CreateGame = ({
           <Text fontSize="6xl">Settings</Text>
           <FormControl>
             <FormLabel>Difficulty:</FormLabel>
-            <Select placeholder="Select Difficulty" onChange={(e) => setDifficulty(e.target.value)}>
-              <option value="Beginner" defaultValue>Beginner</option>
+            <Select
+              placeholder="Select Difficulty"
+              onChange={(e) => setDifficulty(e.target.value)}
+            >
+              <option value="Beginner" defaultValue>
+                Beginner
+              </option>
               <option value="Intermediate">Intermediate</option>
               <option value="Difficult">Difficult</option>
             </Select>
           </FormControl>
           <FormControl>
             <FormLabel>Rounds:</FormLabel>
-            <Select placeholder="Select No. of Rounds" onChange={(e) => setRounds(e.target.value)}>
-              <option value="1" defaultValue>1</option>
+            <Select
+              placeholder="Select No. of Rounds"
+              onChange={(e) => setRounds(e.target.value)}
+            >
+              <option value="1" defaultValue>
+                1
+              </option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
@@ -92,7 +111,16 @@ const CreateGame = ({
             </Select>
           </FormControl>
         </Box>
-        <Box w="100%" p={4} borderWidth="1px" borderColor="black" borderStyle="solid" maxW="sm" rounded="lg" m={2}>
+        <Box
+          w="100%"
+          p={4}
+          borderWidth="1px"
+          borderColor="black"
+          borderStyle="solid"
+          maxW="sm"
+          rounded="lg"
+          m={2}
+        >
           <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text>
         </Box>
       </div>
@@ -115,6 +143,7 @@ const CreateGame = ({
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => ({
+  upPlayers: (name) => dispatch(updatePlayers(name)),
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
 });

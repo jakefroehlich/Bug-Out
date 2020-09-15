@@ -4,7 +4,13 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Text, Box, Select, FormControl, Input, FormLabel, Button,
+  Text,
+  Box,
+  Select,
+  FormControl,
+  Input,
+  FormLabel,
+  Button,
 } from '@chakra-ui/core';
 import axios from 'axios';
 import store from '../store/index';
@@ -25,8 +31,22 @@ const JoinGame = (props) => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}>
-        <Box w="100%" p={10} borderWidth="1px" rounded="lg" variantColor="teal" borderStyle="solid" maxW="sm">
+      <div
+        style={{
+          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <Box
+          w="100%"
+          p={10}
+          borderWidth="1px"
+          rounded="lg"
+          variantColor="teal"
+          borderStyle="solid"
+          maxW="sm"
+        >
           <Text fontSize="4xl">Join Game</Text>
           <FormControl>
             <Input
@@ -37,7 +57,7 @@ const JoinGame = (props) => {
               value={gameCode}
               onChange={(e) => setGameCode(e.target.value)}
             />
-            {!gameFound ? (<Text> Game not found </Text>) : null}
+            {!gameFound ? <Text> Game not found </Text> : null}
             <Button
               width="200px"
               variantColor="teal"
@@ -45,7 +65,8 @@ const JoinGame = (props) => {
               margin="5px"
               onClick={() => {
                 console.log('hitting ', `${host}:${PORT}/api/game/joinGame`);
-                axios.put('/game/joinGame', { currentGameId: game.id, gameCode })
+                axios
+                  .put('/game/joinGame', { currentGameId: game.id, gameCode })
                   .then((res) => {
                     setGameFound(true);
                     props.history.push('/waiting');
@@ -54,7 +75,8 @@ const JoinGame = (props) => {
                     setGameFound(false);
                   });
               }}
-            >Join Game!
+            >
+              Join Game!
             </Button>
           </FormControl>
           <Box w="100%">
@@ -64,7 +86,8 @@ const JoinGame = (props) => {
               variant="outline"
               margin="5px"
               onClick={() => props.history.push('/create')}
-            >Create Game
+            >
+              Create Game
             </Button>
           </Box>
           <Box>
@@ -85,7 +108,8 @@ const JoinGame = (props) => {
               variant="outline"
               margin="5px"
               onClick={() => props.history.push('/')}
-            >Main Page
+            >
+              Main Page
             </Button>
           </Box>
         </Box>

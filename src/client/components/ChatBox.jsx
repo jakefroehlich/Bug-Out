@@ -52,7 +52,10 @@ const ChatBox = ({ msgs, addMsg }) => {
 };
 
 const mapStateToProps = ({
-  game, user, input, messages,
+  game,
+  user,
+  input,
+  messages,
 }) => {
   const msgs = messages;
   return {
@@ -63,6 +66,8 @@ const mapStateToProps = ({
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({ addMsg: (msg) => dispatch(addMessage(msg)) });
+const mapDispatchToProps = (dispatch) => ({
+  addMsg: (msg) => dispatch(addMessage(msg)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBox);

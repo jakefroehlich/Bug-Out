@@ -2,7 +2,11 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt,
+  playAsGuest,
+  newGame,
+  getCurrentGame,
+  joinGame,
+  setPrompt,
 } from '../actions';
 
 export const playAsGuestThunk = (name) => (dispatch) => axios

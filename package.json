@@ -9,7 +9,7 @@
     "build:watch": "webpack --watch --mode=\"development\"",
     "start:watch": "node-dev --respawn src/server/index.js",
     "start:dev": "npm run start:watch & npm run build:watch",
-    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\"",
+    "format": "prettier --write --single-quote \"**/*.+(js|jsx|json|yml|yaml|css|md|vue)\"",
     "lint": "eslint . --ext .jsx,.js",
     "test": "jest",
     "seed": "node seed.js"

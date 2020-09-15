@@ -19,7 +19,10 @@ import {
 } from '../store/thunks/gameThunks';
 
 const WaitingRoom = ({
-  game, getCurrentGame, createGame, history,
+  game,
+  getCurrentGame,
+  createGame,
+  history,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');

@@ -1,5 +1,10 @@
 const {
-  UUID, UUIDV4, INTEGER, ENUM, BOOLEAN, STRING,
+  UUID,
+  UUIDV4,
+  INTEGER,
+  ENUM,
+  BOOLEAN,
+  STRING,
 } = require('sequelize');
 const db = require('../db');
 

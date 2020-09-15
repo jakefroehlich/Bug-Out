@@ -19,10 +19,11 @@ export const logoutThunk = () => (dispatch) => axios
     console.log(e);
   });
 
-export const whoami = () => (dispatch) => axios.get('/api/whoami').then(({ data }) => {
-  if (data.loggedIn) {
-    dispatch(login(data.email, data.role));
-  } else {
-    dispatch(logout());
-  }
-});
+export const whoami = () => (dispatch) => axios
+  .get('/api/whoami').then(({ data }) => {
+    if (data.loggedIn) {
+      dispatch(login(data.email, data.role));
+    } else {
+      dispatch(logout());
+    }
+  });

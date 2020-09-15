@@ -2,7 +2,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {
-  BrowserRouter, Switch, Route, Redirect,
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@chakra-ui/core';

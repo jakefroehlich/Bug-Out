@@ -141,7 +141,6 @@ const CreateGame = ({
 };
 
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
-
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
   getCurrentGame: () => dispatch(getCurrentGameThunk()),

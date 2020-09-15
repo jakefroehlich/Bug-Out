@@ -1,4 +1,4 @@
-import { types } from "../actions";
+import { types } from '../actions';
 
 const initialGameState = {
   code: '',
@@ -7,15 +7,16 @@ const initialGameState = {
   players: [],
   active: false,
   private: true,
-}
+  prompt: '',
+};
 
 const gameReducer = (state = initialGameState, action) => {
   switch (action.type) {
     case types.UPDATE_PLAYERS:
       return {
         ...state,
-        players: [...players, action.player]
-      }
+        players: [...players, action.player],
+      };
     case types.NEW_GAME:
       return {
         ...state,
@@ -37,7 +38,13 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.game.difficulty,
         players: action.payload.players,
       };
-    default: return state;
+    case types.SET_PROMPT:
+      return {
+        ...state,
+        prompt: action.payload,
+      };
+    default:
+      return state;
   }
 };
 

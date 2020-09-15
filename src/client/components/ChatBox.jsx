@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Button, Input, FormControl } from "@chakra-ui/core";
-import socket from "../utils/socket";
-import { addMessage } from "../store/actions";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Button, Input, FormControl } from '@chakra-ui/core';
+import socket from '../utils/socket';
+import { addMessage } from '../store/actions';
 
 const ChatBox = ({ msgs, addMsg }) => {
-  const [chatMsg, setChatMsg] = useState("");
+  const [chatMsg, setChatMsg] = useState('');
 
-  console.log("render", msgs);
+  console.log('render', msgs);
 
   useEffect(() => {
-    socket.on("message", (message) => {
+    socket.on('message', (message) => {
       addMsg(message);
     });
   }, []);
@@ -22,25 +22,23 @@ const ChatBox = ({ msgs, addMsg }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit("chatMsg", chatMsg);
+    socket.emit('chatMsg', chatMsg);
   };
 
   return (
     <FormControl>
       <div id="messagebox">
         {msgs ? (
-          msgs.map((msg) => {
-            return (
-              <div key={msg.id}>
-                <p>
-                  {msg.playerName}: {msg.text} @{msg.time}
-                </p>
-              </div>
-            );
-          })
+          msgs.map((msg) => (
+            <div key={msg.id}>
+              <p>
+                {msg.playerName}: {msg.text} @{msg.time}
+              </p>
+            </div>
+          ))
         ) : (
-          <p>No messages yet :(</p>
-        )}
+            <p>No messages yet :(</p>
+          )}
       </div>
       <Input
         id="msg"
@@ -53,7 +51,12 @@ const ChatBox = ({ msgs, addMsg }) => {
   );
 };
 
-const mapStateToProps = ({ game, user, input, messages }) => {
+const mapStateToProps = ({
+  game,
+  user,
+  input,
+  messages,
+}) => {
   const msgs = messages;
   return {
     game,
@@ -63,8 +66,8 @@ const mapStateToProps = ({ game, user, input, messages }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return { addMsg: (msg) => dispatch(addMessage(msg)) };
-};
+const mapDispatchToProps = (dispatch) => ({
+  addMsg: (msg) => dispatch(addMessage(msg)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBox);

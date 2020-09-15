@@ -1,6 +1,8 @@
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
-const { models: { Session } } = require('../../db/index');
+const {
+  models: { Session },
+} = require('../../db/index');
 
 const sessionRouter = Router();
 
@@ -15,9 +17,9 @@ sessionRouter.put('/updateName', async (req, res) => {
     console.log('Error updating name');
     console.log(e);
   }
-})
+});
 
 module.exports = {
   path: '/session',
   router: sessionRouter,
-}
+};

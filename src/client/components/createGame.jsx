@@ -29,7 +29,7 @@ const CreateGame = ({ history, game, getCurrentGame, createGame, upPlayers }) =>
     getCurrentGame();
     socket.emit("joinRoom", game.code)
     socket.on("playersUpdate", name => {
-      upPlayers(name)
+      upPlayers(name);
     })
     // socket.on('message', message => {
     //   console.log('createGame message', message)

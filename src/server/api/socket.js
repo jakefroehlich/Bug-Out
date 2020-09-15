@@ -26,7 +26,9 @@ io.on("connection", (socket) => {
   );
 
   socket.on("joinRoom", (code) => {
-    socket.join(code);
+    socket.join(code, () => {
+      socket.emit("")
+    });
   })
 
   socket.on("newPlayer", (name, code) => {

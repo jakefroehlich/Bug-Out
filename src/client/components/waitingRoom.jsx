@@ -8,15 +8,15 @@ import path from 'path';
 import store from '../store/index'
 import {createGameThunk, getCurrentGameThunk} from '../store/thunks/gameThunks';
 
-const WaitingRoom = (props) => {
+const WaitingRoom = ({game, getCurrentGame, createGame, history }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   
   useEffect(() => {
-      props.getCurrentGame();
+      getCurrentGame();
+      socket.emit('joinRoom', game.code)
     }, []) 
   
-    const { game } = props;
     console.log('game is ', game)
     
   return (
@@ -50,8 +50,8 @@ const WaitingRoom = (props) => {
         <Button
           h='100%'
           onClick={()=>{
-          props.createGame(rounds, difficulty)
-          props.history.push('/loading-game')
+          createGame(rounds, difficulty)
+          history.push('/loading-game')
         }}
         >Play!
         </Button>

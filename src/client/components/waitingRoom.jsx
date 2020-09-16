@@ -14,6 +14,9 @@ import {
 import path from 'path';
 import store from '../store/index';
 import {
+  updatePlayers
+} from '../store/actions';
+import {
   createGameThunk,
   getCurrentGameThunk,
 } from '../store/thunks/gameThunks';
@@ -23,6 +26,7 @@ const WaitingRoom = ({
   getCurrentGame,
   createGame,
   history,
+  upPlayers
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -30,6 +34,9 @@ const WaitingRoom = ({
   useEffect(() => {
     getCurrentGame();
     socket.emit('joinRoom', game.code);
+    socket.on('playersUpdate', (name) => {
+      upPlayers(name);
+    });
   }, []);
 
   console.log('game is ', game);
@@ -120,6 +127,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
   createGame: () => dispatch(createGameThunk(rounds, difficulty)),
+  upPlayers: (name) => dispatch(updatePlayers(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

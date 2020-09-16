@@ -26,6 +26,7 @@ const CreateGame = ({
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   // const socket = io();
+  console.log('players', game.players)
 
   useEffect(() => {
     getCurrentGame();

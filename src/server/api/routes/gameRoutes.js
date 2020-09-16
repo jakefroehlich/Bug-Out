@@ -1,7 +1,11 @@
 /* eslint-disable no-await-in-loop */
 const { Router } = require('express');
-const { models: { GameSession, Session, Prompt } } = require('../../db/index');
-const codeGenerator = require('../utils');
+const {
+  models: {
+    GameSession, Session, Prompt, Powerup,
+  },
+} = require('../../db/index');
+const { codeGenerator } = require('../utils');
 
 const gameRouter = Router();
 
@@ -65,6 +69,15 @@ gameRouter.put('/joinGame', async (req, res) => {
     }
   } catch (e) {
     console.log('failed to join game');
+    console.log(e);
+  }
+});
+
+gameRouter.get('/powerups', async (req, res) => {
+  try {
+    const powerupList = await Powerup.findAll();
+    res.send(powerupList);
+  } catch (e) {
     console.log(e);
   }
 });

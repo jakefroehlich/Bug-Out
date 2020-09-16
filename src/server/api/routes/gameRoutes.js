@@ -5,7 +5,7 @@ const {
     GameSession, Session, Prompt, Powerup,
   },
 } = require('../../db/index');
-const codeGenerator = require('../utils');
+const { codeGenerator } = require('../utils');
 
 const gameRouter = Router();
 

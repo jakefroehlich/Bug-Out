@@ -694,34 +694,40 @@ const data = [
 // .then(({data})=> console.log(data))
 
 // eslint-disable-next-line array-callback-return
-data.map((prompt) => {
-  axios.get(`https://www.codewars.com/api/v1/code-challenges/${prompt.slug}/?access_key=QsVQKDG8_jqTJVwrWFWo`)
-  // eslint-disable-next-line no-shadow
-    .then(({ data }) => {
-      let difficulty = null;
-      data.rank.id = Math.abs(data.rank.id);
+const seedPrompt = () => {
+  // eslint-disable-next-line array-callback-return
+  data.map((prompt) => {
+    axios.get(`https://www.codewars.com/api/v1/code-challenges/${prompt.slug}/?access_key=QsVQKDG8_jqTJVwrWFWo`)
+    // eslint-disable-next-line no-shadow
+      .then(({ data }) => {
+        let difficulty = null;
+        data.rank.id = Math.abs(data.rank.id);
 
-      if (data.rank.id > 6) {
-        difficulty = 'easy';
-      } else if (data.rank.id > 5 && data.rank.id < 7) {
-        difficulty = 'medium';
-      } else {
-        difficulty = 'hard';
-      }
+        if (data.rank.id > 6) {
+          difficulty = 'easy';
+        } else if (data.rank.id > 5 && data.rank.id < 7) {
+          difficulty = 'medium';
+        } else {
+          difficulty = 'hard';
+        }
 
-      try {
-        const newPropmt = {
-          id: data.id,
-          name: data.name,
-          prompt: data.description,
-          difficulty,
-          slug: data.slug,
-        };
-        return models.Prompt.create(newPropmt);
-      } catch (e) {
-        console.log(e);
-      }
-      return null;
-    });
-  console.log('Prompts Seeded');
-});
+        try {
+          const newPropmt = {
+            id: data.id,
+            name: data.name,
+            prompt: data.description,
+            difficulty,
+            slug: data.slug,
+          };
+          return models.Prompt.create(newPropmt);
+        } catch (e) {
+          console.log(e);
+        }
+        return null;
+      });
+  });
+};
+
+module.exports = {
+  seedPrompt,
+};

@@ -4,6 +4,7 @@ const chalk = require('chalk');
 const { sync } = require('./src/server/db/index');
 // import { models } from './src/server/db/models/index';
 const { models } = require('./src/server/db/models/index');
+const { seedPrompt } = require('./seedPrompts');
 
 const users = [
   {
@@ -89,6 +90,7 @@ const powerups = [
 ];
 const seed = async () => {
   try {
+    seedPrompt();
     users.map((user) => models.User.create(user));
     powerups.map((powerup) => models.Powerup.create(powerup));
     models.GameSession.create();

@@ -58,7 +58,11 @@ const LandingPage = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? <Text>Don't forget your name!</Text> : null}
+            {
+              noName
+                ? <p>Enter name to continue</p>
+                : ''
+            }
             <Button
               width="200px"
               variantColor="red"
@@ -107,17 +111,15 @@ const LandingPage = ({
             width="200px"
             variantColor="green"
             margin="5px"
-            onClick={() => props.history.push('/login')}
-          >
-            Login
+            onClick={() => history.push('/login')}
+          >Login
           </Button>
           <Button
             width="200px"
             variantColor="purple"
             margin="5px"
-            onClick={() => props.history.push('/howtoplay')}
-          >
-            How To Play
+            onClick={() => history.push('/howtoplay')}
+          >How To Play
           </Button>
         </Box>
       </div>

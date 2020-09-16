@@ -11,6 +11,7 @@ export const types = {
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
+  SET_POWERUPS: 'SET_POWERUPS',
 };
 
 const updatePlayers = (player) => ({
@@ -73,6 +74,11 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
+const setPowerups = (powerups) => ({
+  type: types.SET_POWERUPS,
+  payload: powerups,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -86,4 +92,5 @@ export {
   updateInput,
   addMessage,
   updatePlayers,
+  setPowerups,
 };

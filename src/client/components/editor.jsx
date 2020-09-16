@@ -25,7 +25,6 @@ const CodeEditor = (props) => {
     console.log(test[ts](fn));
   }
 
-  console.log(props);
   return (
     <div
       style={{
@@ -68,18 +67,7 @@ const CodeEditor = (props) => {
           editorDidMount={handleEditorDidMount}
         />
       </div>
-<<<<<<< HEAD
-      <Button
-        onClick={handleShowValue}
-        disabled={!isEditorReady}
-        type="button"
-        m={1}
-        variantColor="teal"
-        variant="outline"
-      >
-=======
       <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
->>>>>>> 2de9aa1b282e5a61d2ba95c84560795107b51fc9
         Check Function
       </Button>
     </div>

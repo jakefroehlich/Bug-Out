@@ -7,8 +7,8 @@ const initialState = {
 const sessionReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_NAME:
-      console.log(action)
-        return {
+      console.log(action);
+      return {
         ...state,
         name: action.payload,
       };

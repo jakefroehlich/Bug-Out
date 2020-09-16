@@ -51,7 +51,7 @@ const CreateGame = (props) => {
             p={4}
             bg="#fabc41"
           >
-            {/* <Text>{`Room Code: ${game.code}`}</Text> */}
+            <Text>{`Room Code: ${game.code}`}</Text>
           </Box>
           <Box
             borderWidth="3px"
@@ -65,7 +65,7 @@ const CreateGame = (props) => {
             bg="#15c912"
           >
             <Text>The Competition</Text>
-            {/* {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest' }</Text>))} */}
+            {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest' }</Text>))}
           </Box>
         </div>
         <div style={{ padding: '10px' }}>
@@ -101,7 +101,7 @@ const CreateGame = (props) => {
             </FormControl>
           </Box>
           <Box w="100%" overflowWrap="break-word" p={4} borderWidth="3px" borderColor="#c90c0c" borderStyle="solid" maxW="sm" rounded="lg" m={2} bg="tomato">
-            {/* <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text> */}
+            <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text>
           </Box>
         </div>
         <Box bg="black" color="white" m="15px" w="20%" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">

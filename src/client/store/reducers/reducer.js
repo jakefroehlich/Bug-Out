@@ -7,6 +7,7 @@ import sessionReducer from './sessionReducer';
 
 const reducer = combineReducers({
   user: loginReducer,
+  game: gameReducer,
   input: inputReducer,
   messages: messageReducer,
   session: sessionReducer,

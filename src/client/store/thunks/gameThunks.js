@@ -5,15 +5,6 @@ import {
   playAsGuest, newGame, getCurrentGame, joinGame, setPrompt,
 } from '../actions';
 
-export const playAsGuestThunk = (name) => (dispatch) => axios
-  .put('/user/guest-session', { name })
-  .then(() => {
-    dispatch(playAsGuest(name));
-  })
-  .catch((e) => {
-    console.log(e);
-  });
-
 export const createGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);
   return axios

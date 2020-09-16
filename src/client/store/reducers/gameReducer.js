@@ -36,13 +36,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.SET_PROMPT:
       return {
         ...state,
-        id: action.payload.game.id,
-        active: action.payload.active,
-        code: action.payload.game.code,
-        private: action.payload.game.private,
-        rounds: action.payload.game.rounds,
-        difficulty: action.payload.game.difficulty,
-        players: action.payload.players,
+        prompt: action.payload,
       };
     case types.SET_POWERUPS:
       return {

@@ -7,6 +7,7 @@ const initialGameState = {
   active: false,
   private: true,
   prompt: '',
+  powerUps: [],
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -42,6 +43,11 @@ const gameReducer = (state = initialGameState, action) => {
         rounds: action.payload.game.rounds,
         difficulty: action.payload.game.difficulty,
         players: action.payload.players,
+      };
+    case types.SET_POWERUPS:
+      return {
+        ...state,
+        powerUps: action.payload,
       };
     default: return state;
   }

@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt,
+  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt, setPowerups,
 } from '../actions';
 
 export const playAsGuestThunk = (name) => (dispatch) => axios
@@ -58,14 +58,20 @@ export const getPromptThunk = (difficulty) => (dispatch) => axios
     console.log(e);
   });
 
-export const updateNameThunk = (name) => (dispatch) => {
-  console.log('updateNameThunk hit');
-  return axios
-    .put('/session/updateName', { name })
-    .then((res) => {
-      dispatch(res.data);
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
+export const getPowerUpsThunk = () => (dispatch) => axios
+  .get('/game/powerups')
+  .then(({ data }) => {
+    dispatch(setPowerups(data));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const updateNameThunk = (name) => (dispatch) => axios
+  .put('/session/updateName', { name })
+  .then((res) => {
+    dispatch(res.data);
+  })
+  .catch((e) => {
+    console.log(e);
+  });

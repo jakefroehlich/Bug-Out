@@ -2,6 +2,7 @@ const User = require('./user');
 const Session = require('./session');
 const GameSession = require('./gameSession');
 const Prompt = require('./prompt');
+const Powerup = require('./powerup');
 
 User.hasMany(Session);
 Session.belongsTo(User);
@@ -18,5 +19,6 @@ module.exports = {
     Session,
     GameSession,
     Prompt,
+    Powerup,
   },
 };

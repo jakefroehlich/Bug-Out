@@ -1,6 +1,9 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import {
+  Button, Input, FormControl, FormLabel, Box,
+} from '@chakra-ui/core';
 import { loginThunk, whoami } from '../../store/thunks/loginThunks';
 
 const Login = ({ login, history }) => {
@@ -13,28 +16,34 @@ const Login = ({ login, history }) => {
   };
 
   return (
-    <form>
-      <label>
-        Username:
-        <input
+    <Box w="100%" p={10} borderWidth="1px" rounded="lg" variantColor="teal" borderStyle="solid" maxW="sm">
+      <FormControl>
+        <FormLabel>Username</FormLabel>
+        <Input
+          placeholder="Enter your account name"
+          type="text"
           value={email}
-          type="username"
           onChange={(e) => setUsername(e.target.value)}
         />
-      </label>
-      <label>
-        Password:
-        <input
-          value={password}
+      </FormControl>
+      <FormControl>
+        <FormLabel>Password</FormLabel>
+        <Input
+          placeholder="Enter your account name"
           type="password"
+          value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </label>
-      <button onClick={handleSubmit} type="submit">
+      </FormControl>
+      <Button
+        onClick={handleSubmit}
+        type="submit"
+      >
         {' '}
         Login{' '}
-      </button>
-    </form>
+      </Button>
+
+    </Box>
   );
 };
 

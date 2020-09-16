@@ -11,6 +11,7 @@ export const types = {
   UPDATE_INPUT: 'UPDATE_INPUT',
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
+  GET_NAME: 'GET_NAME',
 };
 
 const addMessage = (message) => ({
@@ -68,6 +69,11 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
+const getName = (name) => ({
+  type: types.GET_NAME,
+  payload: name,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -80,4 +86,5 @@ export {
   setPrompt,
   updateInput,
   addMessage,
+  getName,
 };

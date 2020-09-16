@@ -4,6 +4,16 @@ const { models: { Session } } = require('../../db/index');
 
 const sessionRouter = Router();
 
+sessionRouter.get('/name', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    res.status(201).send(session.name);
+  } catch (e) {
+    console.log('Error updating name');
+    console.log(e);
+  }
+});
+
 // updates name of the session
 sessionRouter.put('/updateName', async (req, res) => {
   try {

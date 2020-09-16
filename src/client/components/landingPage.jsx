@@ -3,18 +3,29 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button, Input, FormControl, Text, Box,
+  Button, FormControl, Text, Box,
 } from '@chakra-ui/core';
 import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
+import { getNameThunk } from '../store/thunks/sessionThunks';
 
 const LandingPage = (props) => {
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
-  const { history, getCurrentGame, updateName } = props;
+  const {
+    history, getCurrentGame, updateName, getName, game, session,
+  } = props;
   useEffect(() => {
     getCurrentGame();
+    getName();
   }, []);
+
+  useEffect(() => {
+    if (session.name) {
+      setName(session.name);
+      setNoName(false);
+    }
+  });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -22,17 +33,16 @@ const LandingPage = (props) => {
         <Box w="100%" bg="#4287f5" p={4} borderWidth="3px" borderColor="#0c2c61" borderStyle="solid" maxW="sm" rounded="lg">
           <Text fontSize="6xl" color="white">Bug Out!</Text>
           <FormControl>
-            <Input
-              placeholder="Enter your name to play"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
+            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
+
+            {noName ? (<Text> Please put in a name! </Text>) : null }
+
             <Button
               width="200px"
               variantColor="red"
               margin="5px"
               onClick={async () => {
+                console.log(props);
                 await props.findRandomGame(game.id);
                 setName('');
               }}
@@ -43,7 +53,10 @@ const LandingPage = (props) => {
               variantColor="orange"
               margin="5px"
               onClick={() => {
-                if (name === '') {
+                if (name === '' || noName === true) {
+                  console.log('name is ', name);
+                  console.log('noName is ', noName);
+                  console.log('session.name is ', session.name);
                   setNoName(true);
                 } else {
                   updateName(name);
@@ -59,7 +72,7 @@ const LandingPage = (props) => {
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '') {
+              if (name === '' || noName === true) {
                 setNoName(true);
               } else {
                 updateName(name);
@@ -90,10 +103,15 @@ const LandingPage = (props) => {
   );
 };
 
-const mapStateToProps = ({ user, game, input }) => ({ user, game, input });
+const mapStateToProps = ({
+  user, game, input, session,
+}) => ({
+  user, game, input, session,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getName: () => dispatch(getNameThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
 });

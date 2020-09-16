@@ -11,8 +11,6 @@ import {
   FormLabel,
   Button,
 } from '@chakra-ui/core';
-import path from 'path';
-import store from '../store/index';
 import {
   updatePlayers
 } from '../store/actions';
@@ -20,6 +18,8 @@ import {
   createGameThunk,
   getCurrentGameThunk,
 } from '../store/thunks/gameThunks';
+import Chatbox from './ChatBox';
+import socket from '../utils/socket';
 
 const WaitingRoom = ({
   game,
@@ -116,6 +116,7 @@ const WaitingRoom = ({
           Play!
         </Button>
       </div>
+      <Chatbox />
     </div>
   );
 };

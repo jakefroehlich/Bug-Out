@@ -21,9 +21,10 @@ io.on('connection', (socket) => {
     formatMessage(botName, '{user} has joined the fray!'),
   );
 
-  socket.on('joinRoom', (code) => {
+  socket.on('joinRoom', (code, user) => {
+    console.log('Joining room: ', code)
     socket.join(code, () => {
-      socket.emit('');
+      socket.emit('playerUpdate', user);
     });
   });
 
@@ -32,6 +33,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chatMsg', (msg, code) => {
+    console.log('chat code', code)
     io.to(code).emit('message', formatMessage('USER', msg));
   });
 

@@ -17,6 +17,7 @@ import {
 } from '../store/thunks/gameThunks';
 
 const LandingPage = ({
+  game,
   history,
   getCurrentGame,
   updateName,
@@ -107,7 +108,7 @@ const LandingPage = ({
             width="200px"
             variantColor="green"
             margin="5px"
-            onClick={() => props.history.push('/login')}
+            onClick={() => history.push('/login')}
           >
             Login
           </Button>
@@ -115,7 +116,7 @@ const LandingPage = ({
             width="200px"
             variantColor="purple"
             margin="5px"
-            onClick={() => props.history.push('/howtoplay')}
+            onClick={() => history.push('/howtoplay')}
           >
             How To Play
           </Button>

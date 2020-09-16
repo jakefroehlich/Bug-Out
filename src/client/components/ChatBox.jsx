@@ -6,16 +6,10 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, addMsg }) => {
+const ChatBox = ({ msgs, addMsg, game }) => {
   const [chatMsg, setChatMsg] = useState('');
 
   console.log('render', msgs);
-
-  useEffect(() => {
-    socket.on('message', (message) => {
-      addMsg(message);
-    });
-  }, []);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -24,7 +18,7 @@ const ChatBox = ({ msgs, addMsg }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg);
+    socket.emit('chatMsg', chatMsg, game.code);
   };
 
   return (

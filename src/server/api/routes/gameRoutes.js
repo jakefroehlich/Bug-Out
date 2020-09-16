@@ -3,7 +3,7 @@ const { Router } = require('express');
 const {
   models: { GameSession, Session, Prompt },
 } = require('../../db/index');
-const codeGenerator = require('../utils');
+const { codeGenerator } = require('../utils');
 
 const gameRouter = Router();
 

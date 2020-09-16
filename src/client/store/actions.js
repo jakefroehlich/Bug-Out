@@ -11,6 +11,7 @@ export const types = {
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
+  SET_PROMT: 'SET_PROMPT',
 };
 
 const updatePlayers = (player) => ({

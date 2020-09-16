@@ -15,7 +15,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.UPDATE_PLAYERS:
       return {
         ...state,
-        players: [...action.players, action.player],
+        players: [...action.players],
       };
     case types.NEW_GAME:
       return {

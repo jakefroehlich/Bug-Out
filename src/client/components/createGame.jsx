@@ -12,32 +12,52 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
+import { addMessage } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
 } from '../store/thunks/gameThunks';
+import socket from '../utils/socket';
 
 const CreateGame = ({
   history,
   game,
   getCurrentGame,
   createGame,
+  addMsg
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   // const socket = io();
-  console.log('players', game.players)
+  console.log('game', game)
+
+  // useEffect(() => {
+  //   getCurrentGame();
+  //   socket.on('playersUpdate', (name) => {
+  //     upPlayers(name);
+  //   });
+  //   // socket.on('message', message => {
+  //   //   console.log('createGame message', message)
+  //   // });
+  // }, []);
+
+
+  useEffect(() => {
+    if (game.code) {
+      socket.emit('joinRoom', game.code);
+    }
+  }, [game.code]);
 
   useEffect(() => {
     getCurrentGame();
-    socket.emit('joinRoom', game.code);
+    socket.on('message', (message) => {
+      addMsg(message);
+    });
     socket.on('playersUpdate', (name) => {
       upPlayers(name);
     });
-    // socket.on('message', message => {
-    //   console.log('createGame message', message)
-    // });
   }, []);
+
 
   return (
     <div>
@@ -45,78 +65,6 @@ const CreateGame = ({
         <div
           style={{ display: 'flex', flexDirection: 'column', padding: '10px' }}
         >
-<<<<<<< HEAD
-          <Text>{`Room Code: ${game.code}`}</Text>
-        </Box>
-        <Box
-          borderWidth="1px"
-          borderColor="black"
-          borderStyle="solid"
-          maxW="sm"
-          rounded="lg"
-          h="100%"
-          m={2}
-          p={4}
-        >
-          <Text>The Competition</Text>
-          {game.players.map((player) => (
-            <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
-          ))}
-        </Box>
-      </div>
-      <div style={{ padding: '10px' }}>
-        <Box
-          w="100%"
-          p={4}
-          borderWidth="1px"
-          borderColor="black"
-          borderStyle="solid"
-          maxW="sm"
-          rounded="lg"
-          m={2}
-        >
-          <Text fontSize="6xl">Settings</Text>
-          <FormControl>
-            <FormLabel>Difficulty:</FormLabel>
-            <Select
-              placeholder="Select Difficulty"
-              onChange={(e) => setDifficulty(e.target.value)}
-            >
-              <option value="Beginner" defaultValue>
-                Beginner
-              </option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Difficult">Difficult</option>
-            </Select>
-          </FormControl>
-          <FormControl>
-            <FormLabel>Rounds:</FormLabel>
-            <Select
-              placeholder="Select No. of Rounds"
-              onChange={(e) => setRounds(e.target.value)}
-            >
-              <option value="1" defaultValue>
-                1
-              </option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </Select>
-          </FormControl>
-        </Box>
-        <Box
-          w="100%"
-          p={4}
-          borderWidth="1px"
-          borderColor="black"
-          borderStyle="solid"
-          maxW="sm"
-          rounded="lg"
-          m={2}
-        >
-          <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text>
-=======
           <Box
             borderWidth="3px"
             borderColor="#d49619"
@@ -141,7 +89,7 @@ const CreateGame = ({
             bg="#15c912"
           >
             <Text>The Competition</Text>
-            {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest' }</Text>))}
+            {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest'}</Text>))}
           </Box>
         </div>
         <div style={{ padding: '10px' }}>
@@ -182,7 +130,6 @@ const CreateGame = ({
         </div>
         <Box bg="black" color="white" m="15px" w="20%" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
->>>>>>> 2de9aa1b282e5a61d2ba95c84560795107b51fc9
         </Box>
       </div>
       <div style={{ textAlign: 'center' }}>
@@ -209,6 +156,7 @@ const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  addMsg: (msg) => dispatch(addMessage(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

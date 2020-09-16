@@ -47,7 +47,7 @@ const CodeEditor = (props) => {
           editorDidMount={handleEditorDidMount}
         />
       </div>
-      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline">
+      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
         Check Function
       </Button>
     </div>

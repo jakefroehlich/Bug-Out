@@ -1,6 +1,4 @@
-const {
-  INTEGER, ENUM, STRING,
-} = require('sequelize');
+const { INTEGER, ENUM, STRING } = require('sequelize');
 const db = require('../db');
 
 const Powerup = db.define('powerup', {

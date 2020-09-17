@@ -22,7 +22,7 @@ io.on('connection', (socket) => {
   );
 
   socket.on('joinRoom', (code, user) => {
-    console.log('Joining room: ', code)
+    console.log('Joining room: ', code);
     socket.join(code, () => {
       socket.emit('playerUpdate', user);
     });
@@ -33,7 +33,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chatMsg', (msg, code) => {
-    console.log('chat code', code)
+    console.log('chat code', code);
     io.to(code).emit('message', formatMessage('USER', msg));
   });
 

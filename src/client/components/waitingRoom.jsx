@@ -11,9 +11,7 @@ import {
   FormLabel,
   Button,
 } from '@chakra-ui/core';
-import {
-  updatePlayers
-} from '../store/actions';
+import { updatePlayers } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
@@ -26,7 +24,7 @@ const WaitingRoom = ({
   getCurrentGame,
   createGame,
   history,
-  upPlayers
+  upPlayers,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');

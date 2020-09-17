@@ -2,7 +2,10 @@
 const { Router } = require('express');
 const {
   models: {
-    GameSession, Session, Prompt, Powerup,
+    GameSession,
+    Session,
+    Prompt,
+    Powerup,
   },
 } = require('../../db/index');
 const { codeGenerator } = require('../utils');

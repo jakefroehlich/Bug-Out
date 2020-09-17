@@ -23,7 +23,6 @@ const JoinGame = (props) => {
   const PORT = process.env.PORT || 3000;
   console.log('port is ', PORT);
 
-
   const { game, joinGame } = props;
 
   return (

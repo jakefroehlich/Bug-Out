@@ -59,11 +59,7 @@ const LandingPage = ({
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {
-              noName
-                ? <p>Enter name to continue</p>
-                : ''
-            }
+            {noName ? <p>Enter name to continue</p> : ''}
             <Button
               width="200px"
               variantColor="red"
@@ -113,14 +109,16 @@ const LandingPage = ({
             variantColor="green"
             margin="5px"
             onClick={() => history.push('/login')}
-          >Login
+          >
+            Login
           </Button>
           <Button
             width="200px"
             variantColor="purple"
             margin="5px"
             onClick={() => history.push('/howtoplay')}
-          >How To Play
+          >
+            How To Play
           </Button>
         </Box>
       </div>

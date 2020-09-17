@@ -79,7 +79,7 @@ const setPrompt = (prompt) => ({
 const updateName = (name) => ({
   type: types.UPDATE_NAME,
   name,
-})
+});
 const setPowerups = (powerups) => ({
   type: types.SET_POWERUPS,
   payload: powerups,

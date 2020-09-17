@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button, Input, FormControl,
+  Button, Input, FormControl, Text,
 } from '@chakra-ui/core';
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
@@ -18,22 +18,23 @@ const ChatBox = ({ msgs, addMsg, game }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg, game.code);
+    socket.emit('chatMsg', chatMsg);
+    setChatMsg('');
   };
 
   return (
     <FormControl display="flex" flexDirection="column" h="100%">
-      <div id="messagebox" style={{ height: '90%' }}>
+      <div id="messagebox" style={{ height: '90%', overflow: 'scroll', maxHeight: '400px' }}>
         {msgs ? (
           msgs.map((msg) => (
             <div key={msg.id}>
-              <p>
+              <Text>
                 {msg.playerName}: {msg.text} @{msg.time}
-              </p>
+              </Text>
             </div>
           ))
         ) : (
-          <p>No messages yet :(</p>
+          <Text>No messages yet :(</Text>
         )}
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -42,6 +43,7 @@ const ChatBox = ({ msgs, addMsg, game }) => {
           type="text"
           placeholder="type something, n00b"
           onChange={handleChange}
+          value={chatMsg}
         />
         <Button type="submit" onClick={handleSubmit} variantColor="purple">Send</Button>
       </div>

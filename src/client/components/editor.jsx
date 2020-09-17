@@ -25,8 +25,6 @@ const CodeEditor = (props) => {
     console.log(test[ts](fn));
   }
 
-  console.log(props);
-  
   return (
     <div
       style={{

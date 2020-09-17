@@ -33,11 +33,19 @@ const WaitingRoom = ({
 
   useEffect(() => {
     getCurrentGame();
-    socket.emit('joinRoom', game.code);
+    socket.on('message', (message) => {
+      addMsg(message);
+    });
     socket.on('playersUpdate', (name) => {
       upPlayers(name);
     });
   }, []);
+
+  useEffect(() => {
+    if (game.code) {
+      socket.emit('joinRoom', game.code);
+    }
+  }, [game.code]);
 
   console.log('game is ', game);
 

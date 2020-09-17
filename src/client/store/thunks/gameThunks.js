@@ -7,6 +7,7 @@ import {
   getCurrentGame,
   joinGame,
   setPrompt,
+  setPowerups,
 } from '../actions';
 
 export const playAsGuestThunk = (name) => (dispatch) => axios
@@ -67,7 +68,6 @@ export const updateNameThunk = (name) => (dispatch) => {
   return axios
     .put('/session/updateName', { name })
     .then((res) => {
-      
     })
     .catch((e) => {
       console.log(e);

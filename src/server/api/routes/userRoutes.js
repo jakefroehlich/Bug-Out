@@ -20,6 +20,7 @@ userRouter.post('/login', async (req, res) => {
     if (match) {
       const usersSession = await Session.findByPk(req.session_id);
       await usersSession.setUser(user);
+      await Session.update({ name: user.name }, { where: { userId: user.id } });
       res.status(200).send(user);
     } else {
       res.status(401).send('failure');
@@ -49,18 +50,6 @@ userRouter.post('/create', async (req, res) => {
     const { email, name, password } = req.body;
     const createdUser = await User.create({ email, name, password });
     res.status(201).send(createdUser);
-  } catch (e) {
-    res.status(500).send('could not find');
-    console.log(e);
-  }
-});
-
-// add name to seesion for guest users
-userRouter.put('/guest-session', async (req, res) => {
-  try {
-    const { name } = req.body;
-    await Session.update({ name }, { where: { id: req.session_id } });
-    res.status(200).send('found');
   } catch (e) {
     res.status(500).send('could not find');
     console.log(e);

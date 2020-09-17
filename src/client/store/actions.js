@@ -11,6 +11,7 @@ export const types = {
   UPDATE_INPUT: 'UPDATE_INPUT',
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
+  GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
 };
 
@@ -69,6 +70,11 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
+const getName = (name) => ({
+  type: types.GET_NAME,
+  payload: name,
+});
+
 const setPowerups = (powerups) => ({
   type: types.SET_POWERUPS,
   payload: powerups,
@@ -86,5 +92,6 @@ export {
   setPrompt,
   updateInput,
   addMessage,
+  getName,
   setPowerups,
 };

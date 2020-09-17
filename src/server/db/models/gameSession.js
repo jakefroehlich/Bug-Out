@@ -30,6 +30,11 @@ const GameSession = db.define('gameSession', {
     type: STRING,
     allowNull: true,
   },
+  host: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 });
 
 module.exports = GameSession;

@@ -8,6 +8,8 @@ import {
   joinGame,
   setPrompt,
   setPowerups,
+  setCorrectAnswer,
+  addScoreAction,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty) => (dispatch) => {
@@ -63,12 +65,19 @@ export const getPowerUpsThunk = () => (dispatch) => axios
     console.log(e);
   });
 
-export const updateNameThunk = (name) => (dispatch) => {
-  console.log('updateNameThunk hit');
-  return axios
-    .put('/session/updateName', { name })
-    .then((res) => { })
-    .catch((e) => {
-      console.log(e);
-    });
+export const updateNameThunk = (name) => (dispatch) => axios
+  .put('/session/updateName', { name })
+  .then((res) => {
+    dispatch(res.data);
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const setCorrect = () => (dispatch) => {
+  dispatch(setCorrectAnswer());
+};
+
+export const addScore = (score) => (dispatch) => {
+  dispatch(addScoreAction(score));
 };

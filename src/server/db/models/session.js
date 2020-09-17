@@ -1,5 +1,5 @@
 const {
-  UUID, UUIDV4, STRING, BOOLEAN,
+  UUID, UUIDV4, STRING, BOOLEAN, INTEGER
 } = require('sequelize');
 const db = require('../db');
 
@@ -16,6 +16,11 @@ const Session = db.define('session', {
     type: BOOLEAN,
     allowNull: false,
     defaultValue: false,
+  },
+  score: {
+    type: INTEGER,
+    defaultValue: 0,
+    allowNull: false,
   },
 });
 

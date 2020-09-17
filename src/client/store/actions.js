@@ -11,12 +11,15 @@ export const types = {
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
-  SET_PROMT: 'SET_PROMPT',
+  SET_PROMPT: 'SET_PROMPT',
   UPDATE_NAME: 'UPDATE_NAME',
   GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
   UPDATE_NAME: 'UPDATE_NAME',
   MAKE_HOST: 'MAKE_HOST',
+  SET_CORRECT: 'SET_CORRECT',
+  SET_WRONG: 'SET_WRONG',
+  ADD_SCORE: 'ADD_SCORE',
 };
 
 const updatePlayers = (player) => ({
@@ -93,6 +96,7 @@ const setPowerups = (powerups) => ({
   payload: powerups,
 });
 
+
 const updateName = (name) => ({
   type: types.UPDATE_NAME,
   payload: name,
@@ -101,6 +105,18 @@ const updateName = (name) => ({
 const makeHost = (hostId) => ({
   type: types.MAKE_HOST,
   payload: hostId,
+  
+const setCorrectAnswer = () => ({
+  type: types.SET_CORRECT,
+});
+
+const setWrongAnswer = () => ({
+  type: types.SET_WRONG,
+});
+
+const addScoreAction = (score) => ({
+  type: types.ADD_SCORE,
+  payload: score,
 });
 
 export {
@@ -121,4 +137,7 @@ export {
   setPowerups,
   updateName,
   makeHost,
+  setCorrectAnswer,
+  setWrongAnswer,
+  addScoreAction,
 };

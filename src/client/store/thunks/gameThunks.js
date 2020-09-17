@@ -2,7 +2,12 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt, setPowerups,
+  playAsGuest,
+  newGame,
+  getCurrentGame,
+  joinGame,
+  setPrompt,
+  setPowerups,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty) => (dispatch) => {
@@ -57,3 +62,13 @@ export const getPowerUpsThunk = () => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
+
+export const updateNameThunk = (name) => (dispatch) => {
+  console.log('updateNameThunk hit');
+  return axios
+    .put('/session/updateName', { name })
+    .then((res) => { })
+    .catch((e) => {
+      console.log(e);
+    });
+};

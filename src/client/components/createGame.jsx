@@ -13,10 +13,12 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
+import { addMessage } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
 } from '../store/thunks/gameThunks';
+import socket from '../utils/socket';
 
 const CreateGame = (props) => {
   const {
@@ -25,12 +27,32 @@ const CreateGame = (props) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   // const socket = io();
+  console.log('game', game);
+
+  // useEffect(() => {
+  //   getCurrentGame();
+  //   socket.on('playersUpdate', (name) => {
+  //     upPlayers(name);
+  //   });
+  //   // socket.on('message', message => {
+  //   //   console.log('createGame message', message)
+  //   // });
+  // }, []);
 
   useEffect(() => {
-    getCurrentGame();
-    // socket.on('message', message => {
-    //   console.log('createGame message', message)
-    // });
+    if (game.code) {
+      socket.emit('joinRoom', game.code);
+    }
+  }, [game.code]);
+
+  useEffect(() => {
+    getCurrentGame(game);
+    socket.on('message', (message) => {
+      addMsg(message);
+    });
+    socket.on('playersUpdate', (name) => {
+      upPlayers(name);
+    });
   }, []);
 
   return (
@@ -63,7 +85,9 @@ const CreateGame = (props) => {
             bg="#15c912"
           >
             <Text>The Competition</Text>
-            {game.players.map((player) => (<Text key={player.id}>{player.name ? (player.name) : 'Guest' }</Text>))}
+            {game.players.map((player) => (
+              <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
+            ))}
           </Box>
         </div>
         <div style={{ padding: '10px' }}>
@@ -81,16 +105,26 @@ const CreateGame = (props) => {
             <Text fontSize="6xl">Settings</Text>
             <FormControl>
               <FormLabel>Difficulty:</FormLabel>
-              <Select placeholder="Select Difficulty" onChange={(e) => setDifficulty(e.target.value)}>
-                <option value="Beginner" defaultValue>Beginner</option>
+              <Select
+                placeholder="Select Difficulty"
+                onChange={(e) => setDifficulty(e.target.value)}
+              >
+                <option value="Beginner" defaultValue>
+                  Beginner
+                </option>
                 <option value="Intermediate">Intermediate</option>
                 <option value="Difficult">Difficult</option>
               </Select>
             </FormControl>
             <FormControl>
               <FormLabel>Rounds:</FormLabel>
-              <Select placeholder="Select No. of Rounds" onChange={(e) => setRounds(e.target.value)}>
-                <option value="1" defaultValue>1</option>
+              <Select
+                placeholder="Select No. of Rounds"
+                onChange={(e) => setRounds(e.target.value)}
+              >
+                <option value="1" defaultValue>
+                  1
+                </option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -98,11 +132,32 @@ const CreateGame = (props) => {
               </Select>
             </FormControl>
           </Box>
-          <Box w="100%" overflowWrap="break-word" p={4} borderWidth="3px" borderColor="#c90c0c" borderStyle="solid" maxW="sm" rounded="lg" m={2} bg="tomato">
+          <Box
+            w="100%"
+            overflowWrap="break-word"
+            p={4}
+            borderWidth="3px"
+            borderColor="#c90c0c"
+            borderStyle="solid"
+            maxW="sm"
+            rounded="lg"
+            m={2}
+            bg="tomato"
+          >
             <Text>{`Invite Link: http://${window.location.href}/api/game/join/${game.id}`}</Text>
           </Box>
         </div>
-        <Box bg="black" color="white" m="15px" w="20%" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
+        <Box
+          bg="black"
+          color="white"
+          m="15px"
+          w="20%"
+          p={3}
+          borderWidth="3px"
+          borderStyle="solid"
+          borderColor="#331566"
+          rounded="lg"
+        >
           <ChatBox />
         </Box>
       </div>
@@ -125,15 +180,12 @@ const CreateGame = (props) => {
   );
 };
 
-const mapStateToProps = ({
-  game, user, input, session,
-}) => ({
-  game, user, input, session,
-});
-
+const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  upPlayers: (name) => dispatch(updatePlayers(name)),
+  getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  addMsg: (msg) => dispatch(addMessage(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

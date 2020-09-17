@@ -26,13 +26,34 @@ const CodeEditor = (props) => {
   }
 
   return (
-    <div style={{
-      display: 'flex', flexDirection: 'column', alignItems: 'center', width: '50%', margin: '15px',
-    }}
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        width: '50%',
+        margin: '15px',
+      }}
     >
-      <Box w="100%" bg="#00c3d9" color="white" borderWidth="3px" borderColor="#3674b5" borderStyle="solid" rounded="lg" m={2} p={4} maxHeight="150px" overflow="scroll">
-        <Text fontSize="lg" w="100%">{props.game.prompt.name}</Text>
-        <Text fontSize="sm" w="100%">{props.game.prompt.prompt}</Text>
+      <Box
+        w="100%"
+        bg="#00c3d9"
+        color="white"
+        borderWidth="3px"
+        borderColor="#3674b5"
+        borderStyle="solid"
+        rounded="lg"
+        m={2}
+        p={4}
+        maxHeight="150px"
+        overflow="scroll"
+      >
+        <Text fontSize="lg" w="100%">
+          {props.game.prompt.name}
+        </Text>
+        <Text fontSize="sm" w="100%">
+          {props.game.prompt.prompt}
+        </Text>
       </Box>
       <div style={{ width: '100%' }}>
         <Editor
@@ -46,12 +67,21 @@ const CodeEditor = (props) => {
           editorDidMount={handleEditorDidMount}
         />
       </div>
-      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
+      <Button
+        onClick={handleShowValue}
+        disabled={!isEditorReady}
+        type="button"
+        m={1}
+        variantColor="teal"
+        variant="outline"
+        w="100%"
+        marginTop={5}
+      >
         Check Function
       </Button>
     </div>
   );
 };
 
-const mapStateToProps = (props) => (props);
+const mapStateToProps = (props) => props;
 export default connect(mapStateToProps, { getPromptThunk })(CodeEditor);

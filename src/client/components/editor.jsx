@@ -25,6 +25,8 @@ const CodeEditor = (props) => {
     const correct = test[ts](fn);
     if (correct) {
       props.setCorrect();
+    } else {
+      alert('Sorry try again :(');
     }
   }
 

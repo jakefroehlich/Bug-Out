@@ -1,5 +1,9 @@
 const {
-  STRING, UUID, UUIDV4, ENUM, INTEGER,
+  STRING,
+  UUID,
+  UUIDV4,
+  ENUM,
+  INTEGER,
 } = require('sequelize');
 const bcrypt = require('bcrypt');
 const db = require('../db');

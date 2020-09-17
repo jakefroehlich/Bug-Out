@@ -11,8 +11,6 @@ const GamePage = (props) => {
     props.getPowerUpsThunk();
   }, []);
 
-  console.log(props);
-
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ height: '80vh' }}>

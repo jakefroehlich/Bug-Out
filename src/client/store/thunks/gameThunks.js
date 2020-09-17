@@ -2,8 +2,14 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  // eslint-disable-next-line max-len
-  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt, setPowerups, setCorrectAnswer, addScoreAction,
+  playAsGuest,
+  newGame,
+  getCurrentGame,
+  joinGame,
+  setPrompt,
+  setPowerups,
+  setCorrectAnswer,
+  addScoreAction,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty) => (dispatch) => {

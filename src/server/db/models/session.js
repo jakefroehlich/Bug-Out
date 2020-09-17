@@ -1,4 +1,6 @@
-const { UUID, UUIDV4, STRING } = require('sequelize');
+const {
+  UUID, UUIDV4, STRING, INTEGER,
+} = require('sequelize');
 const db = require('../db');
 
 const Session = db.define('session', {
@@ -9,6 +11,11 @@ const Session = db.define('session', {
   },
   name: {
     type: STRING,
+  },
+  score: {
+    type: INTEGER,
+    defaultValue: 0,
+    allowNull: false,
   },
 });
 

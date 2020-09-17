@@ -57,12 +57,3 @@ export const getPowerUpsThunk = () => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
-
-export const updateNameThunk = (name) => (dispatch) => axios
-  .put('/session/updateName', { name })
-  .then((res) => {
-    dispatch(res.data);
-  })
-  .catch((e) => {
-    console.log(e);
-  });

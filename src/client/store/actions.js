@@ -13,6 +13,8 @@ export const types = {
   ADD_MESSAGE: 'ADD_MESSAGE',
   GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
+  UPDATE_NAME: 'UPDATE_NAME',
+  MAKE_HOST: 'MAKE_HOST',
 };
 
 const addMessage = (message) => ({
@@ -80,6 +82,16 @@ const setPowerups = (powerups) => ({
   payload: powerups,
 });
 
+const updateName = (name) => ({
+  type: types.UPDATE_NAME,
+  payload: name,
+});
+
+const makeHost = (hostId) => ({
+  type: types.MAKE_HOST,
+  payload: hostId,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -94,4 +106,6 @@ export {
   addMessage,
   getName,
   setPowerups,
+  updateName,
+  makeHost,
 };

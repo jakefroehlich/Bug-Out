@@ -70,7 +70,6 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
-
 const getName = (name) => ({
   type: types.GET_NAME,
   payload: name,

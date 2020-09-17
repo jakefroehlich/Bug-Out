@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button, FormControl, Text, Box,
+  Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
 import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
 import { getNameThunk } from '../store/thunks/sessionThunks';

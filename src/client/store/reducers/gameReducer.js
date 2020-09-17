@@ -21,18 +21,18 @@ const gameReducer = (state = initialGameState, action) => {
     case types.NEW_GAME:
       return {
         ...state,
-        id: action.payload.id,
-        active: action.payload.active,
-        code: action.payload.code,
-        private: action.payload.private,
-        rounds: action.payload.rounds,
-        difficulty: action.payload.difficulty,
+        id: action.payload.game.id,
+        active: action.payload.game.active,
+        code: action.payload.game.code,
+        private: action.payload.game.private,
+        rounds: action.payload.game.rounds,
+        difficulty: action.payload.game.difficulty,
       };
     case types.GET_CURRENT_GAME:
       return {
         ...state,
         id: action.payload.game.id,
-        active: action.payload.active,
+        active: action.payload.game.active,
         code: action.payload.game.code,
         private: action.payload.game.private,
         rounds: action.payload.game.rounds,
@@ -42,13 +42,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.SET_PROMPT:
       return {
         ...state,
-        id: action.payload.game.id,
-        active: action.payload.active,
-        code: action.payload.game.code,
-        private: action.payload.game.private,
-        rounds: action.payload.game.rounds,
-        difficulty: action.payload.game.difficulty,
-        players: action.payload.players,
+        prompt: action.payload,
       };
     case types.SET_POWERUPS:
       return {

@@ -4,17 +4,10 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button,
-  Input,
-  FormControl,
-  Text,
-  Box,
+  Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
-import {
-  getCurrentGameThunk,
-  findRandomGameThunk,
-  updateNameThunk,
-} from '../store/thunks/gameThunks';
+import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
+import { getNameThunk } from '../store/thunks/sessionThunks';
 
 const LandingPage = ({
   game,
@@ -28,7 +21,15 @@ const LandingPage = ({
   const [noName, setNoName] = useState(false);
   useEffect(() => {
     getCurrentGame();
+    getName();
   }, []);
+
+  useEffect(() => {
+    if (session.name) {
+      setName(session.name);
+      setNoName(false);
+    }
+  });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -53,6 +54,8 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
+            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
+            {noName ? (<Text> Please put in a name! </Text>) : null }
             <Input
               placeholder="Enter your name to play"
               type="text"
@@ -76,7 +79,7 @@ const LandingPage = ({
               variantColor="orange"
               margin="5px"
               onClick={() => {
-                if (name === '') {
+                if (name === '' || noName === true) {
                   setNoName(true);
                 } else {
                   updateName(name);
@@ -93,7 +96,7 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '') {
+              if (name === '' || noName === true) {
                 setNoName(true);
               } else {
                 updateName(name);
@@ -126,10 +129,15 @@ const LandingPage = ({
   );
 };
 
-const mapStateToProps = ({ user, game, input }) => ({ user, game, input });
+const mapStateToProps = ({
+  user, game, session,
+}) => ({
+  user, game, session,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getName: () => dispatch(getNameThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
 });

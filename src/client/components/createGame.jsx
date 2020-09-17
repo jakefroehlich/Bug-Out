@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -19,13 +20,10 @@ import {
 } from '../store/thunks/gameThunks';
 import socket from '../utils/socket';
 
-const CreateGame = ({
-  history,
-  game,
-  getCurrentGame,
-  createGame,
-  addMsg,
-}) => {
+const CreateGame = (props) => {
+  const {
+    history, getCurrentGame, game,
+  } = props;
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   // const socket = io();

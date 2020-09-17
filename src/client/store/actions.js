@@ -13,6 +13,7 @@ export const types = {
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
   SET_PROMT: 'SET_PROMPT',
   UPDATE_NAME: 'UPDATE_NAME',
+  GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
 };
 
@@ -80,6 +81,11 @@ const updateName = (name) => ({
   type: types.UPDATE_NAME,
   name,
 });
+const getName = (name) => ({
+  type: types.GET_NAME,
+  payload: name,
+});
+
 const setPowerups = (powerups) => ({
   type: types.SET_POWERUPS,
   payload: powerups,
@@ -99,5 +105,6 @@ export {
   addMessage,
   updatePlayers,
   updateName,
+  getName,
   setPowerups,
 };

@@ -10,6 +10,7 @@ io.on('connection', (socket) => {
   //   console.log(socket.handshake.headers.cookie)
 
   // Confirmation message
+  // console.log(socket);
   socket.emit(
     'message',
     formatMessage(botName, 'Confirmation: You have connected!'),

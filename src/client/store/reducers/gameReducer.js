@@ -1,6 +1,7 @@
 import { types } from '../actions';
 
 const initialGameState = {
+  code: '',
   rounds: '',
   currentId: '',
   players: [],
@@ -12,6 +13,11 @@ const initialGameState = {
 
 const gameReducer = (state = initialGameState, action) => {
   switch (action.type) {
+    case types.UPDATE_PLAYERS:
+      return {
+        ...state,
+        players: [...action.players],
+      };
     case types.NEW_GAME:
       return {
         ...state,
@@ -43,7 +49,8 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         powerUps: action.payload,
       };
-    default: return state;
+    default:
+      return state;
   }
 };
 

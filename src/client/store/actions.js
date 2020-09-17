@@ -7,13 +7,20 @@ export const types = {
   NEW_GAME: 'NEW_GAME',
   GET_CURRENT_GAME: 'GET_CURRENT_GAME',
   JOIN_GAME: 'JOIN_GAME',
-  SET_PROMPT: 'SET_PROMPT',
   UPDATE_INPUT: 'UPDATE_INPUT',
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
+  UPDATE_PLAYERS: 'UPDATE_PLAYERS',
+  SET_PROMT: 'SET_PROMPT',
+  UPDATE_NAME: 'UPDATE_NAME',
   GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
 };
+
+const updatePlayers = (player) => ({
+  type: types.UPDATE_PLAYERS,
+  player,
+});
 
 const addMessage = (message) => ({
   type: types.ADD_MESSAGE,
@@ -70,6 +77,10 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
+const updateName = (name) => ({
+  type: types.UPDATE_NAME,
+  name,
+});
 const getName = (name) => ({
   type: types.GET_NAME,
   payload: name,
@@ -92,6 +103,8 @@ export {
   setPrompt,
   updateInput,
   addMessage,
+  updatePlayers,
+  updateName,
   getName,
   setPowerups,
 };

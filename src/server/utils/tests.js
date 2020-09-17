@@ -1,6 +1,8 @@
 function test59cfc000aeb2844d16000075(func) {
   if (func('abcdef') !== ['AbCdEf', 'aBcDeF']) return false;
-  if (func('capitalize me') !== ['CaPiTaLiZe mE', 'cApItAlIzE Me']) return false;
+  if (func('capitalize me') !== ['CaPiTaLiZe mE', 'cApItAlIzE Me']) {
+    return false;
+  }
   return true;
 }
 
@@ -21,7 +23,12 @@ function test55cbd4ba903825f7970000f5(func) {
 
 function test511f11d355fe575d2c000001(func) {
   // eslint-disable-next-line max-len
-  if (func([35, 2, 80, 75, 44]) !== [80, 75] || func([35, 2, 80, 75, 44]) !== [75, 80]) return false;
+  if (
+    func([35, 2, 80, 75, 44]) !== [80, 75]
+    || func([35, 2, 80, 75, 44]) !== [75, 80]
+  ) {
+    return false;
+  }
   return true;
 }
 
@@ -45,8 +52,17 @@ function test5264d2b162488dc400000001(func) {
 }
 
 function test5b39e3772ae7545f650000fc(func) {
-  if (func('alpha beta beta gamma gamma delta alpha beta beta gamma gamma gamma delta' !== 'alpha beta gamma delta')) return false;
-  if (func('a b c c c d e f g g h h') !== 'a b c d e f g h') return false;
+  if (
+    func(
+      'alpha beta beta gamma gamma delta alpha beta beta gamma gamma gamma delta'
+      !== 'alpha beta gamma delta',
+    )
+  ) {
+    return false;
+  }
+  if (func('a b c c c d e f g g h h') !== 'a b c d e f g h') {
+    return false;
+  }
   return true;
 }
 

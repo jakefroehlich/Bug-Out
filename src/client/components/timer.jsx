@@ -41,11 +41,28 @@ export default class Timer extends Component {
   render() {
     const { minutes, seconds } = this.state;
     return (
-
-      <Box bg="#15c912" h="10vh" display="flex" justifyContent="center" alignItems="center" w="90%" m={3} p={4} color="white" borderWidth="3px" borderColor="#1d7a1b" borderStyle="solid" rounded="lg">
-        { minutes === 0 && seconds === 0
-          ? <Text>Times Up!</Text>
-          : <Text fontSize={70}>{minutes}:{seconds < 10 ? `0${seconds}` : seconds}</Text>}
+      <Box
+        bg="#15c912"
+        h="10vh"
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        w="90%"
+        m={3}
+        p={4}
+        color="white"
+        borderWidth="3px"
+        borderColor="#1d7a1b"
+        borderStyle="solid"
+        rounded="lg"
+      >
+        {minutes === 0 && seconds === 0 ? (
+          <Text>Times Up!</Text>
+        ) : (
+          <Text fontSize={70}>
+            {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
+          </Text>
+        )}
       </Box>
     );
   }

@@ -2,12 +2,22 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {
-  BrowserRouter, Switch, Route, Redirect,
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@chakra-ui/core';
 import {
-  LoginForm, LoggedIn, About, LandingPage, CreateGame, LoadingGame, WaitingRoom, JoinGame,
+  LoginForm,
+  LoggedIn,
+  About,
+  LandingPage,
+  CreateGame,
+  LoadingGame,
+  WaitingRoom,
+  JoinGame,
 } from './components';
 import store from './store';
 import GamePage from './components/gamePage';
@@ -35,7 +45,4 @@ const App = () => (
 
 const app = document.querySelector('#app');
 
-ReactDom.render(
-  <App />,
-  app,
-);
+ReactDom.render(<App />, app);

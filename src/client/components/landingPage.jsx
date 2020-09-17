@@ -51,7 +51,6 @@ const LandingPage = (props) => {
               variantColor="red"
               margin="5px"
               onClick={async () => {
-                console.log(props);
                 await findRandomGame(game.id);
                 setName('');
               }}
@@ -63,9 +62,6 @@ const LandingPage = (props) => {
               margin="5px"
               onClick={() => {
                 if (name === '' || noName === true) {
-                  console.log('name is ', name);
-                  console.log('noName is ', noName);
-                  console.log('session.name is ', session.name);
                   setNoName(true);
                 } else {
                   updateName(name);

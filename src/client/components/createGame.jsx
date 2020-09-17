@@ -24,12 +24,10 @@ const CreateGame = (props) => {
   } = props;
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
-  console.log(props);
   // const socket = io();
 
   useEffect(() => {
     getCurrentGame();
-    console.log(props);
     // socket.on('message', message => {
     //   console.log('createGame message', message)
     // });

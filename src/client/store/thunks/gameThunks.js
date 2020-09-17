@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt, setPowerups,
+  playAsGuest, newGame, getCurrentGame, joinGame, setPrompt, setPowerups, setCorrectAnswer, addScoreAction,
 } from '../actions';
 
 export const playAsGuestThunk = (name) => (dispatch) => axios
@@ -75,3 +75,11 @@ export const updateNameThunk = (name) => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
+
+export const setCorrect = () => (dispatch) => {
+  dispatch(setCorrectAnswer());
+};
+
+export const addScore = (score) => (dispatch) => {
+  dispatch(addScoreAction(score));
+};

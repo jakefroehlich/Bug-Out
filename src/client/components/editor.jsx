@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 import { Button, Text, Box } from '@chakra-ui/core';
 import { buildFunction } from '../../server/utils/buildFunction';
 import { test } from '../../server/utils/tests';
-import { getPromptThunk } from '../store/thunks/gameThunks';
+import { getPromptThunk, setCorrect } from '../store/thunks/gameThunks';
 
 const CodeEditor = (props) => {
   useEffect(() => {
@@ -22,7 +22,10 @@ const CodeEditor = (props) => {
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
     const ts = `test${props.game.prompt.id}`;
-    console.log(test[ts](fn));
+    const correct = test[ts](fn);
+    if (correct) {
+      props.setCorrect();
+    }
   }
 
   return (
@@ -46,12 +49,26 @@ const CodeEditor = (props) => {
           editorDidMount={handleEditorDidMount}
         />
       </div>
-      <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
-        Check Function
-      </Button>
+      {props.input.correctAnswer
+      && (
+      <div style={{ textAlign: 'center' }}>
+        <Text color="#2df50a" fontSize="3rem" marginTop="1rem" marginBottom="0">Correct!!!</Text>
+        {props.input.score === 0
+          && <Text color="#2df50a" marginTop="0">Calculating Score...</Text>}
+        {props.input.score > 0
+          && <Text color="#2df50a" marginTop="0">You earned {props.input.score} points!</Text>}
+        <Text color="#2df50a" marginTop="0">Feel free to keep bugging the competition while you wait.</Text>
+      </div>
+      )}
+      {!props.input.correctAnswer
+        && (
+        <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
+          Check Function
+        </Button>
+        )}
     </div>
   );
 };
 
 const mapStateToProps = (props) => (props);
-export default connect(mapStateToProps, { getPromptThunk })(CodeEditor);
+export default connect(mapStateToProps, { getPromptThunk, setCorrect })(CodeEditor);

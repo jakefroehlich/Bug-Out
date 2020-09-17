@@ -12,6 +12,9 @@ export const types = {
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
   SET_POWERUPS: 'SET_POWERUPS',
+  SET_CORRECT: 'SET_CORRECT',
+  SET_WRONG: 'SET_WRONG',
+  ADD_SCORE: 'ADD_SCORE',
 };
 
 const addMessage = (message) => ({
@@ -74,6 +77,19 @@ const setPowerups = (powerups) => ({
   payload: powerups,
 });
 
+const setCorrectAnswer = () => ({
+  type: types.SET_CORRECT,
+});
+
+const setWrongAnswer = () => ({
+  type: types.SET_WRONG,
+});
+
+const addScoreAction = (score) => ({
+  type: types.ADD_SCORE,
+  payload: score,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -87,4 +103,7 @@ export {
   updateInput,
   addMessage,
   setPowerups,
+  setCorrectAnswer,
+  setWrongAnswer,
+  addScoreAction,
 };

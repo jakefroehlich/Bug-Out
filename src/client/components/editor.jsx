@@ -25,7 +25,6 @@ const CodeEditor = (props) => {
     console.log(test[ts](fn));
   }
 
-  console.log(props);
   return (
     <div style={{
       display: 'flex', flexDirection: 'column', alignItems: 'center', width: '50%', margin: '15px',

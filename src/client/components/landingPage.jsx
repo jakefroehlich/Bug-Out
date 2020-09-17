@@ -13,7 +13,7 @@ const LandingPage = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
   const {
-    history, getCurrentGame, updateName, getName, game, session,
+    history, getCurrentGame, updateName, getName, findRandomGame, game, session,
   } = props;
   useEffect(() => {
     getCurrentGame();
@@ -34,9 +34,18 @@ const LandingPage = (props) => {
           <Text fontSize="6xl" color="white">Bug Out!</Text>
           <FormControl>
             {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
-
             {noName ? (<Text> Please put in a name! </Text>) : null }
-
+            <Input
+              placeholder="Enter your name to play"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            {
+              noName
+                ? <p>Enter name to continue</p>
+                : ''
+            }
             <Button
               width="200px"
               variantColor="red"
@@ -86,14 +95,14 @@ const LandingPage = (props) => {
             width="200px"
             variantColor="green"
             margin="5px"
-            onClick={() => props.history.push('/login')}
+            onClick={() => history.push('/login')}
           >Login
           </Button>
           <Button
             width="200px"
             variantColor="purple"
             margin="5px"
-            onClick={() => props.history.push('/howtoplay')}
+            onClick={() => history.push('/howtoplay')}
           >How To Play
           </Button>
         </Box>

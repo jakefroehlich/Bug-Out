@@ -13,7 +13,7 @@ const LandingPage = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
   const {
-    history, getCurrentGame, updateName, getName, findRandomGame, input, game, session,
+    history, getCurrentGame, updateName, getName, findRandomGame, game, session,
   } = props;
   useEffect(() => {
     getCurrentGame();
@@ -113,9 +113,9 @@ const LandingPage = (props) => {
 };
 
 const mapStateToProps = ({
-  user, game, input, session,
+  user, game, session,
 }) => ({
-  user, game, input, session,
+  user, game, session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

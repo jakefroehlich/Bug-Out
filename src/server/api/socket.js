@@ -7,7 +7,7 @@ const io = socketio(server);
 const botName = 'BugOut Bot';
 
 io.on('connection', (socket) => {
-  console.log(socket);
+  // console.log(socket);
   socket.emit(
     'message',
     formatMessage(botName, 'Confirmation: You have connected!'),

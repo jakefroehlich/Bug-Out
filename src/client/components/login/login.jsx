@@ -29,7 +29,7 @@ const Login = ({ login, history }) => {
       <FormControl>
         <FormLabel>Password</FormLabel>
         <Input
-          placeholder="Enter your account name"
+          placeholder="Enter your password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

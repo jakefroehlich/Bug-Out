@@ -12,6 +12,7 @@ export const types = {
   ADD_MESSAGE: 'ADD_MESSAGE',
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
   SET_PROMT: 'SET_PROMPT',
+  UPDATE_NAME: 'UPDATE_NAME',
 };
 
 const updatePlayers = (player) => ({
@@ -74,6 +75,11 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
+const updateName = (name) => ({
+  type: types.UPDATE_NAME,
+  name,
+})
+
 export {
   changeInitialLoading,
   login,
@@ -87,4 +93,5 @@ export {
   updateInput,
   addMessage,
   updatePlayers,
+  updateName,
 };

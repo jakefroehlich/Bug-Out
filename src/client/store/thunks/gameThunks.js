@@ -31,7 +31,7 @@ export const createGameThunk = (rounds, difficulty) => (dispatch) => {
     });
 };
 
-export const getCurrentGameThunk = () => (dispatch) => axios
+export const getCurrentGameThunk = (game) => (dispatch) => axios
   .get('/game/current')
   .then((res) => {
     console.log('getcurrentGame response from server is ', res);
@@ -67,7 +67,7 @@ export const updateNameThunk = (name) => (dispatch) => {
   return axios
     .put('/session/updateName', { name })
     .then((res) => {
-      dispatch(res.data);
+      
     })
     .catch((e) => {
       console.log(e);

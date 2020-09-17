@@ -49,7 +49,7 @@ const CreateGame = ({
   }, [game.code]);
 
   useEffect(() => {
-    getCurrentGame();
+    getCurrentGame(game);
     socket.on('message', (message) => {
       addMsg(message);
     });
@@ -154,7 +154,7 @@ const CreateGame = ({
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
 });

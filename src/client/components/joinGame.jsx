@@ -23,9 +23,6 @@ const JoinGame = (props) => {
   const PORT = process.env.PORT || 3000;
   console.log('port is ', PORT);
 
-  useEffect(() => {
-    props.getCurrentGame();
-  }, []);
 
   const { game, joinGame } = props;
 

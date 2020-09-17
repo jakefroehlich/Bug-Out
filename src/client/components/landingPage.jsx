@@ -13,7 +13,7 @@ const LandingPage = (props) => {
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
   const {
-    history, getCurrentGame, updateName, getName, findRandomGame, game, session,
+    history, getCurrentGame, updateName, getName, findRandomGame, input, game, session,
   } = props;
   useEffect(() => {
     getCurrentGame();
@@ -52,7 +52,7 @@ const LandingPage = (props) => {
               margin="5px"
               onClick={async () => {
                 console.log(props);
-                await props.findRandomGame(game.id);
+                await findRandomGame(game.id);
                 setName('');
               }}
             >Join Random Room

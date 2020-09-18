@@ -15,6 +15,8 @@ const LandingPage = ({
   getCurrentGame,
   updateName,
   findRandomGame,
+  session,
+  getName,
 }) => {
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars
@@ -29,7 +31,7 @@ const LandingPage = ({
       setName(session.name);
       setNoName(false);
     }
-  });
+  }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>

@@ -13,7 +13,7 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
-import { addMessage } from '../store/actions';
+import { addMessage, addPlayer } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
@@ -22,7 +22,7 @@ import socket from '../utils/socket';
 
 const CreateGame = (props) => {
   const {
-    history, getCurrentGame, game,
+    history, getCurrentGame, game, addMsg, newPlayer,
   } = props;
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -46,12 +46,13 @@ const CreateGame = (props) => {
   }, [game.code]);
 
   useEffect(() => {
-    getCurrentGame(game);
+    getCurrentGame();
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (name) => {
-      upPlayers(name);
+    socket.on('playersUpdate', (player) => {
+      console.log('new player!');
+      newPlayer(player);
     });
   }, []);
 
@@ -182,7 +183,7 @@ const CreateGame = (props) => {
 
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 const mapDispatchToProps = (dispatch) => ({
-  upPlayers: (name) => dispatch(updatePlayers(name)),
+  newPlayer: (player) => dispatch(addPlayer(player)),
   getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),

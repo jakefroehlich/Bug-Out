@@ -11,7 +11,7 @@ import {
   FormLabel,
   Button,
 } from '@chakra-ui/core';
-import { updatePlayers } from '../store/actions';
+import { addPlayer, addMessage } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
@@ -24,7 +24,8 @@ const WaitingRoom = ({
   getCurrentGame,
   createGame,
   history,
-  upPlayers,
+  newPlayer,
+  addMsg,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -34,8 +35,8 @@ const WaitingRoom = ({
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (name) => {
-      upPlayers(name);
+    socket.on('playersUpdate', (player) => {
+      newPlayer(player);
     });
   }, []);
 
@@ -134,7 +135,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
   createGame: () => dispatch(createGameThunk(rounds, difficulty)),
-  upPlayers: (name) => dispatch(updatePlayers(name)),
+  newPlayer: (player) => dispatch(addPlayer(player)),
+  addMsg: (msg) => dispatch(addMessage(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

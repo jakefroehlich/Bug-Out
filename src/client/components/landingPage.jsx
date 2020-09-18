@@ -17,13 +17,11 @@ const LandingPage = ({
   findRandomGame,
   session,
   getName,
+  makeHost,
 }) => {
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
-  const {
-    history, getCurrentGame, updateName, getName, findRandomGame, game, session, makeHost,
-  } = props;
 
   useEffect(() => {
     getCurrentGame();

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import React, { useState, useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Editor from '@monaco-editor/react';

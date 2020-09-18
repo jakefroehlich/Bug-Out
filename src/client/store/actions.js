@@ -15,7 +15,6 @@ export const types = {
   UPDATE_NAME: 'UPDATE_NAME',
   GET_NAME: 'GET_NAME',
   SET_POWERUPS: 'SET_POWERUPS',
-  UPDATE_NAME: 'UPDATE_NAME',
   MAKE_HOST: 'MAKE_HOST',
   SET_CORRECT: 'SET_CORRECT',
   SET_WRONG: 'SET_WRONG',
@@ -82,10 +81,6 @@ const setPrompt = (prompt) => ({
   payload: prompt,
 });
 
-const updateName = (name) => ({
-  type: types.UPDATE_NAME,
-  name,
-});
 const getName = (name) => ({
   type: types.GET_NAME,
   payload: name,
@@ -96,7 +91,6 @@ const setPowerups = (powerups) => ({
   payload: powerups,
 });
 
-
 const updateName = (name) => ({
   type: types.UPDATE_NAME,
   payload: name,
@@ -105,7 +99,8 @@ const updateName = (name) => ({
 const makeHost = (hostId) => ({
   type: types.MAKE_HOST,
   payload: hostId,
-  
+});
+
 const setCorrectAnswer = () => ({
   type: types.SET_CORRECT,
 });
@@ -135,7 +130,6 @@ export {
   updateName,
   getName,
   setPowerups,
-  updateName,
   makeHost,
   setCorrectAnswer,
   setWrongAnswer,

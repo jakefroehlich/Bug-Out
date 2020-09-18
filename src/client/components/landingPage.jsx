@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import {
   Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
-import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
-import { getNameThunk } from '../store/thunks/sessionThunks';
+import { getCurrentGameThunk, findRandomGameThunk } from '../store/thunks/gameThunks';
+import { getNameThunk, updateNameThunk, makeHostThunk } from '../store/thunks/sessionThunks';
 
 const LandingPage = ({
   game,
@@ -17,10 +17,12 @@ const LandingPage = ({
   findRandomGame,
   session,
   getName,
+  makeHost,
 }) => {
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
+
   useEffect(() => {
     getCurrentGame();
     getName();
@@ -102,6 +104,7 @@ const LandingPage = ({
                 setNoName(true);
               } else {
                 updateName(name);
+                makeHost();
                 history.push('/create');
                 setName('');
               }
@@ -142,6 +145,7 @@ const mapDispatchToProps = (dispatch) => ({
   getName: () => dispatch(getNameThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
+  makeHost: () => dispatch(makeHostThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

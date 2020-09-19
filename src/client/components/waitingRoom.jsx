@@ -6,15 +6,20 @@ import { connect } from 'react-redux';
 import {
   Text, Box, Select, FormControl, FormLabel, Button,
 } from '@chakra-ui/core';
-import { updatePlayers } from '../store/actions';
+import { addPlayer, addMessage } from '../store/actions';
 import {
   getCurrentGameThunk,
-} from '../store/thunks/gameThunks';
+} from '../store/thunks';
 import Chatbox from './ChatBox';
 import socket from '../utils/socket';
 
 const WaitingRoom = ({
-  game, getCurrentGame, createGame, history, upPlayers,
+  game,
+  getCurrentGame,
+  createGame,
+  history,
+  newPlayer,
+  addMsg,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -24,8 +29,8 @@ const WaitingRoom = ({
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (name) => {
-      upPlayers(name);
+    socket.on('playersUpdate', (player) => {
+      newPlayer(player);
     });
   }, []);
 
@@ -147,7 +152,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
   createGame: () => dispatch(createGameThunk(rounds, difficulty)),
-  upPlayers: (name) => dispatch(updatePlayers(name)),
+  newPlayer: (player) => dispatch(addPlayer(player)),
+  addMsg: (msg) => dispatch(addMessage(msg)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

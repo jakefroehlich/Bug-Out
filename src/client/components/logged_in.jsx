@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { whoami } from '../store/thunks/loginThunks';
+import { whoami } from '../store/thunks';
 
 const LoggedIn = ({ user, whoAmI }) => {
   useEffect(() => {

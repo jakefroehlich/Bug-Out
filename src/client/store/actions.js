@@ -10,6 +10,8 @@ export const types = {
   UPDATE_INPUT: 'UPDATE_INPUT',
   CLEAR_INPUT: 'CLEAR_INPUT',
   ADD_MESSAGE: 'ADD_MESSAGE',
+  ADD_PLAYER: 'ADD_PLAYER',
+  RM_PLAYER: 'RM_PLAYER',
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
   GET_PROMPT: 'GET_PROMPT',
   UPDATE_NAME: 'UPDATE_NAME',
@@ -23,8 +25,13 @@ export const types = {
   UPDATE_GAME: 'UPDATE_GAME',
 };
 
-const updatePlayers = (player) => ({
-  type: types.UPDATE_PLAYERS,
+const addPlayer = (player) => ({
+  type: types.ADD_PLAYER,
+  player,
+});
+
+const rmPlayer = (player) => ({
+  type: types.RM_PLAYER,
   player,
 });
 
@@ -138,7 +145,8 @@ export {
   getPrompt,
   updateInput,
   addMessage,
-  updatePlayers,
+  addPlayer,
+  rmPlayer,
   updateName,
   getName,
   setPowerups,

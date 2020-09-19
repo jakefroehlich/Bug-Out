@@ -13,37 +13,66 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
-import { addMessage } from '../store/actions';
+import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
   updateGameThunk,
   getCurrentGameThunk,
   startGameThunk,
-} from '../store/thunks/gameThunks';
+  getNameThunk,
+} from '../store/thunks';
 import socket from '../utils/socket';
 
-const CreateGame = (props) => {
-  const {
-    history, getCurrentGame, game, updateGame, startGame, addMsg,
-  } = props;
+const CreateGame = ({
+  history,
+  getCurrentGame,
+  game,
+  addMsg,
+  newPlayer,
+  getName,
+  removePlayer,
+  updateGame,
+  startGame,
+}) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
+  // const socket = io();
+  console.log('game', game);
+
+  // useEffect(() => {
+  //   getCurrentGame();
+  //   socket.on('playersUpdate', (name) => {
+  //     upPlayers(name);
+  //   });
+  //   // socket.on('message', message => {
+  //   //   console.log('createGame message', message)
+  //   // });
+  // }, []);
 
   useEffect(() => {
     if (game.code) {
       socket.emit('joinRoom', game.code);
+      console.log('effect 1 used');
     }
   }, [game.code]);
 
   useEffect(() => {
-    getCurrentGame(game);
+    getCurrentGame();
+    getName();
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (name) => {
-      upPlayers(name);
+    socket.on('playerUpdate', () => {
+      console.log('new player!');
+      getCurrentGame();
+      // newPlayer(player);
     });
+    socket.on('playerLeave', (player) => {
+      console.log('player left :(');
+      removePlayer(player);
+    });
+
+    console.log('effect 2 used!');
   }, []);
-  console.log('props is ', props);
 
   return (
     <div>
@@ -175,10 +204,13 @@ const CreateGame = (props) => {
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => ({
-  upPlayers: (name) => dispatch(updatePlayers(name)),
-  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  newPlayer: (player) => dispatch(addPlayer(player)),
+  removePlayer: (player) => dispatch(rmPlayer(player)),
+  getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
+  createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
+  getName: () => dispatch(getNameThunk()),
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 

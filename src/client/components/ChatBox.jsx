@@ -9,10 +9,10 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs }) => {
+const ChatBox = ({ msgs, game, session }) => {
   const [chatMsg, setChatMsg] = useState('');
 
-  // console.log('render', msgs);
+  console.log('render', session);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const ChatBox = ({ msgs }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg);
+    socket.emit('chatMsg', chatMsg, game.code, session.name);
     setChatMsg('');
   };
 
@@ -70,6 +70,7 @@ const mapStateToProps = ({
   user,
   input,
   messages,
+  session,
 }) => {
   const msgs = messages;
   return {
@@ -77,6 +78,7 @@ const mapStateToProps = ({
     user,
     input,
     msgs,
+    session,
   };
 };
 

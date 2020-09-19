@@ -13,10 +13,15 @@ const initialGameState = {
 
 const gameReducer = (state = initialGameState, action) => {
   switch (action.type) {
-    case types.UPDATE_PLAYERS:
+    case types.ADD_PLAYER:
       return {
         ...state,
-        players: [...action.players],
+        players: state.players.push(action.player),
+      };
+    case types.RM_PLAYER:
+      return {
+        ...state,
+        players: state.players.filter((p) => p.id !== action.player.id),
       };
     case types.UPDATE_GAME:
       return {

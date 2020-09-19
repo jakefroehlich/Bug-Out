@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { whoami } from '../store/thunks/loginThunks';
+import { whoami } from '../store/thunks';
 import Login from './login/login';
 import Logout from './login/logout';
 

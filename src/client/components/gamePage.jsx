@@ -4,7 +4,7 @@ import { Box, Text } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer';
-import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks/gameThunks';
+import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
 const GamePage = (props) => {
   const {

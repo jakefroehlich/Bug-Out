@@ -35,9 +35,9 @@ io.on('connection', (socket) => {
         console.log('leaving room', code);
         socket.to(code).emit('playerLeave', user);
       });
-    }
+    };
     leaveRoom();
-  })
+  });
 
   socket.on('newPlayer', (name, code) => {
     io.to(code).emit('playersUpdate', name);

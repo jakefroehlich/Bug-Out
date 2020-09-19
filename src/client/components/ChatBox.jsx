@@ -9,7 +9,7 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, game, session, }) => {
+const ChatBox = ({ msgs, game, session }) => {
   const [chatMsg, setChatMsg] = useState('');
 
   console.log('render', session);

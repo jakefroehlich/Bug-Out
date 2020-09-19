@@ -48,7 +48,7 @@ const CreateGame = ({
   useEffect(() => {
     if (game.code) {
       socket.emit('joinRoom', game.code);
-      console.log('effect 1 used')
+      console.log('effect 1 used');
     }
   }, [game.code]);
 
@@ -65,9 +65,9 @@ const CreateGame = ({
     socket.on('playerLeave', (player) => {
       console.log('player left :(');
       removePlayer(player);
-    })
+    });
 
-    console.log('effect 2 used!')
+    console.log('effect 2 used!');
   }, []);
 
   return (

@@ -1,27 +1,35 @@
 import {
-    updateNameThunk,
-    getPromptThunk,
-    findRandomGameThunk,
-    getCurrentGameThunk,
-    createGameThunk,
+  getPromptThunk,
+  findRandomGameThunk,
+  getCurrentGameThunk,
+  createGameThunk,
+  setCorrect,
+  addScore,
+  getPowerUpsThunk,
 } from './gameThunks';
 import {
-    loginThunk,
-    logoutThunk,
-    whoami,
+  loginThunk,
+  logoutThunk,
+  whoami,
 } from './loginThunks';
 import {
-    getNameThunk,
+  getNameThunk,
+  updateNameThunk,
+  makeHostThunk,
 } from './sessionThunks';
 
 export {
-    updateNameThunk,
-    getPromptThunk,
-    findRandomGameThunk,
-    getCurrentGameThunk,
-    createGameThunk,
-    loginThunk,
-    logoutThunk,
-    whoami,
-    getNameThunk,
-}
+  updateNameThunk,
+  getPromptThunk,
+  findRandomGameThunk,
+  getCurrentGameThunk,
+  createGameThunk,
+  loginThunk,
+  logoutThunk,
+  whoami,
+  getNameThunk,
+  setCorrect,
+  addScore,
+  getPowerUpsThunk,
+  makeHostThunk,
+};

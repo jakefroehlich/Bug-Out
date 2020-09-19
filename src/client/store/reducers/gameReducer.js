@@ -21,8 +21,8 @@ const gameReducer = (state = initialGameState, action) => {
     case types.RM_PLAYER:
       return {
         ...state,
-        players: state.players.filter((p) => p.id !== action.player.id )
-      }
+        players: state.players.filter((p) => p.id !== action.player.id),
+      };
     case types.NEW_GAME:
       return {
         ...state,

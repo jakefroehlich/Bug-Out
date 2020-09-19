@@ -6,7 +6,13 @@ import { connect } from 'react-redux';
 import {
   Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
-import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk, getNameThunk, makeHostThunk } from '../store/thunks';
+import {
+  getCurrentGameThunk,
+  findRandomGameThunk,
+  updateNameThunk,
+  getNameThunk,
+  makeHostThunk,
+} from '../store/thunks';
 import { rmPlayer } from '../store/actions';
 import socket from '../utils/socket';
 
@@ -25,8 +31,7 @@ const LandingPage = ({
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
 
-
-  console.log('game', game)
+  console.log('game', game);
   // const thisPlayer = game.players.filter()
   useEffect(() => {
     getCurrentGame();
@@ -34,7 +39,7 @@ const LandingPage = ({
     socket.on('playerLeave', (player) => {
       console.log('player left :(');
       removePlayer(player);
-    })
+    });
     socket.emit('leaveRoom', game.code, game.players[0]);
   }, []);
 

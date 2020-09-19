@@ -31,7 +31,7 @@ const addPlayer = (player) => ({
 const rmPlayer = (player) => ({
   type: types.RM_PLAYER,
   player,
-})
+});
 
 const addMessage = (message) => ({
   type: types.ADD_MESSAGE,

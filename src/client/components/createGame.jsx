@@ -58,9 +58,10 @@ const CreateGame = ({
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (player) => {
+    socket.on('playerUpdate', () => {
       console.log('new player!');
-      newPlayer(player);
+      getCurrentGame();
+      // newPlayer(player);
     });
     socket.on('playerLeave', (player) => {
       console.log('player left :(');

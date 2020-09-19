@@ -22,21 +22,18 @@ io.on('connection', (socket) => {
     formatMessage(botName, '{user} has joined the fray!'),
   );
 
-  socket.on('joinRoom', (code, user) => {
+  socket.on('joinRoom', (code) => {
     console.log('Joining room: ', code);
     socket.join(code, () => {
-      socket.emit('playerUpdate', user);
+      socket.emit('playerUpdate');
     });
   });
 
-  socket.on('leaveRoom', (code, user) => {
-    const leaveRoom = async () => {
+  socket.on('leaveRoom', (code, player) => {
       socket.leave(code, () => {
         console.log('leaving room', code);
-        socket.to(code).emit('playerLeave', user);
+        socket.to(code).emit('playerLeave', player);
       });
-    };
-    leaveRoom();
   });
 
   socket.on('newPlayer', (name, code) => {

@@ -15,8 +15,9 @@ import {
 import ChatBox from './ChatBox';
 import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
-  createGameThunk,
+  updateGameThunk,
   getCurrentGameThunk,
+  startGameThunk,
   getNameThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
@@ -69,6 +70,7 @@ const CreateGame = ({
 
     console.log('effect 2 used!');
   }, []);
+  console.log('props is ', props);
 
   return (
     <div>
@@ -124,11 +126,11 @@ const CreateGame = ({
                 placeholder="Select Difficulty"
                 onChange={(e) => setDifficulty(e.target.value)}
               >
-                <option value="Beginner" defaultValue>
-                  Beginner
+                <option value="Easy" defaultValue>
+                  Easy
                 </option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Difficult">Difficult</option>
+                <option value="Medium"> Medium </option>
+                <option value="Hard"> Hard </option>
               </Select>
             </FormControl>
             <FormControl>
@@ -183,9 +185,11 @@ const CreateGame = ({
           m="auto"
           variantColor="teal"
           variant="outline"
-          onClick={() => {
-            createGame(rounds, difficulty);
-            history.push('/loading-game');
+          onClick={async () => {
+            console.log('game is ', game);
+            await updateGame(rounds, difficulty);
+            await startGame(game.id);
+            history.push('/game');
           }}
         >
           Play!
@@ -196,13 +200,16 @@ const CreateGame = ({
 };
 
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
+
 const mapDispatchToProps = (dispatch) => ({
   newPlayer: (player) => dispatch(addPlayer(player)),
   removePlayer: (player) => dispatch(rmPlayer(player)),
   getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
   getName: () => dispatch(getNameThunk()),
+  startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

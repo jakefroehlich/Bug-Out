@@ -5,6 +5,7 @@ const {
   ENUM,
   BOOLEAN,
   STRING,
+  JSON,
 } = require('sequelize');
 const db = require('../db');
 
@@ -35,10 +36,8 @@ const GameSession = db.define('gameSession', {
     type: STRING,
     allowNull: true,
   },
-  host: {
-    type: BOOLEAN,
-    allowNull: false,
-    defaultValue: false,
+  prompt: {
+    type: JSON,
   },
 });
 

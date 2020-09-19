@@ -1,24 +1,22 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  playAsGuest,
-  newGame,
   getCurrentGame,
-  joinGame,
-  setPrompt,
+  getPrompt,
   setPowerups,
   setCorrectAnswer,
   addScoreAction,
+  startGame,
+  updateName,
+  updateGame,
 } from '../actions';
 
-export const createGameThunk = (rounds, difficulty) => (dispatch) => {
+export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);
   return axios
-    .post('/game/createNew', { rounds, difficulty })
+    .post('/game/updateGame', { rounds, difficulty })
     .then((game) => {
-      console.log('game data from createNew is ', game.data);
-      dispatch(newGame(game.data));
+      dispatch(updateGame(game.data));
     })
     .catch((e) => {
       console.log(e);
@@ -28,7 +26,7 @@ export const createGameThunk = (rounds, difficulty) => (dispatch) => {
 export const getCurrentGameThunk = () => (dispatch) => axios
   .get('/game/current')
   .then((res) => {
-    console.log('getcurrentGame response from server is ', res);
+    // console.log('getcurrentGame response from server is ', res);
     const { game, players } = res.data;
     dispatch(getCurrentGame({ game, players }));
   })
@@ -37,11 +35,9 @@ export const getCurrentGameThunk = () => (dispatch) => axios
   });
 
 export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
-  .get('/game/gameSession')
+  .post('/game/findRandomGame', { currentGameId })
   .then(({ data }) => {
-    const { id } = data;
-    axios.put('/user/session/', id);
-    // dispatch(newGame(rounds));
+    dispatch(data);
   })
   .catch((e) => {
     console.log(e);
@@ -50,7 +46,7 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
 export const getPromptThunk = (difficulty) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)
   .then(({ data }) => {
-    dispatch(setPrompt(data));
+    dispatch(getPrompt(data));
   })
   .catch((e) => {
     console.log(e);
@@ -68,7 +64,7 @@ export const getPowerUpsThunk = () => (dispatch) => axios
 export const updateNameThunk = (name) => (dispatch) => axios
   .put('/session/updateName', { name })
   .then((res) => {
-    dispatch(res.data);
+    dispatch(updateName(res.data));
   })
   .catch((e) => {
     console.log(e);
@@ -81,3 +77,18 @@ export const setCorrect = () => (dispatch) => {
 export const addScore = (score) => (dispatch) => {
   dispatch(addScoreAction(score));
 };
+
+export const startGameThunk = (currentGameId) => (dispatch) => axios
+  .put('/game/startGame', { currentGameId })
+  .then((res) => {
+    console.log('start');
+    console.log('response from server on StartGameThunk is ', res);
+    dispatch(startGame(res.data));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+// export const startGameThunk = (currentGameId) => (dispatch) => {
+//   return null;
+// }

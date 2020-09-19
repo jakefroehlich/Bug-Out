@@ -6,6 +6,8 @@ import {
   setCorrect,
   addScore,
   getPowerUpsThunk,
+  startGameThunk,
+  updateGameThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -32,4 +34,6 @@ export {
   addScore,
   getPowerUpsThunk,
   makeHostThunk,
+  startGameThunk,
+  updateGameThunk,
 };

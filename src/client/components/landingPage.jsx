@@ -50,6 +50,13 @@ const LandingPage = ({
     }
   }, [session.name]);
 
+  useEffect(() => {
+    if (session.name) {
+      setName(session.name);
+      setNoName(false);
+    }
+  }, [game.players]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div

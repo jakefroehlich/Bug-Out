@@ -10,7 +10,6 @@ import { getPromptThunk, setCorrect } from '../store/thunks/gameThunks';
 const CodeEditor = (props) => {
   useEffect(() => {
     props.getPromptThunk('easy');
-    console.log(props);
   }, []);
 
   const [isEditorReady, setIsEditorReady] = useState(false);
@@ -20,10 +19,9 @@ const CodeEditor = (props) => {
     setIsEditorReady(true);
     valueGetter.current = _valueGetter;
   }
-
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
-    const ts = `test${props.game.prompt.id}z`;
+    const ts = `test${props.game.prompt.id}`;
     const correct = test[ts](fn);
     if (correct) {
       props.setCorrect();

@@ -4,7 +4,7 @@ import Editor from '@monaco-editor/react';
 import { Button, Text, Box } from '@chakra-ui/core';
 import { buildFunction } from '../../server/utils/buildFunction';
 import { test } from '../../server/utils/tests';
-import { getPromptThunk } from '../store/thunks/gameThunks';
+import { getPromptThunk } from '../store/thunks';
 
 const CodeEditor = (props) => {
   useEffect(() => {

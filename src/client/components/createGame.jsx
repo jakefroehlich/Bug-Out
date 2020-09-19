@@ -13,17 +13,23 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
-import { addMessage, addPlayer } from '../store/actions';
+import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
-} from '../store/thunks/gameThunks';
+  getNameThunk,
+} from '../store/thunks';
 import socket from '../utils/socket';
 
-const CreateGame = (props) => {
-  const {
-    history, getCurrentGame, game, addMsg, newPlayer,
-  } = props;
+const CreateGame = ({
+  history,
+  getCurrentGame,
+  game,
+  addMsg,
+  newPlayer,
+  getName,
+  removePlayer,
+}) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
   // const socket = io();
@@ -42,11 +48,13 @@ const CreateGame = (props) => {
   useEffect(() => {
     if (game.code) {
       socket.emit('joinRoom', game.code);
+      console.log('effect 1 used')
     }
   }, [game.code]);
 
   useEffect(() => {
     getCurrentGame();
+    getName();
     socket.on('message', (message) => {
       addMsg(message);
     });
@@ -54,6 +62,12 @@ const CreateGame = (props) => {
       console.log('new player!');
       newPlayer(player);
     });
+    socket.on('playerLeave', (player) => {
+      console.log('player left :(');
+      removePlayer(player);
+    })
+
+    console.log('effect 2 used!')
   }, []);
 
   return (
@@ -184,9 +198,11 @@ const CreateGame = (props) => {
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 const mapDispatchToProps = (dispatch) => ({
   newPlayer: (player) => dispatch(addPlayer(player)),
+  removePlayer: (player) => dispatch(rmPlayer(player)),
   getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
+  getName: () => dispatch(getNameThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

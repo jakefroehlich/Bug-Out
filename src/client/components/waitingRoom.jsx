@@ -15,7 +15,7 @@ import { addPlayer, addMessage } from '../store/actions';
 import {
   createGameThunk,
   getCurrentGameThunk,
-} from '../store/thunks/gameThunks';
+} from '../store/thunks';
 import Chatbox from './ChatBox';
 import socket from '../utils/socket';
 

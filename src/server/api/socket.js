@@ -29,13 +29,23 @@ io.on('connection', (socket) => {
     });
   });
 
+  socket.on('leaveRoom', (code, user) => {
+    const leaveRoom = async () => {
+      socket.leave(code, () => {
+        console.log('leaving room', code);
+        socket.to(code).emit('playerLeave', user);
+      });
+    }
+    leaveRoom();
+  })
+
   socket.on('newPlayer', (name, code) => {
     io.to(code).emit('playersUpdate', name);
   });
 
-  socket.on('chatMsg', (msg, code) => {
+  socket.on('chatMsg', (msg, code, name) => {
     console.log('chat code', code);
-    io.to(code).emit('message', formatMessage('USER', msg));
+    io.to(code).emit('message', formatMessage(name, msg));
   });
 
   socket.on('disconnect', () => {

@@ -6,14 +6,16 @@ import { connect } from 'react-redux';
 import {
   Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
-import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk } from '../store/thunks/gameThunks';
-import { getNameThunk } from '../store/thunks/sessionThunks';
+import { getCurrentGameThunk, findRandomGameThunk, updateNameThunk, getNameThunk, } from '../store/thunks';
+import { rmPlayer } from '../store/actions';
+import socket from '../utils/socket';
 
 const LandingPage = ({
   game,
   history,
   getCurrentGame,
   updateName,
+  removePlayer,
   findRandomGame,
   session,
   getName,
@@ -21,9 +23,18 @@ const LandingPage = ({
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [noName, setNoName] = useState(false);
+
+
+  console.log('game', game)
+  // const thisPlayer = game.players.filter()
   useEffect(() => {
     getCurrentGame();
     getName();
+    socket.on('playerLeave', (player) => {
+      console.log('player left :(');
+      removePlayer(player);
+    })
+    socket.emit('leaveRoom', game.code, game.players[0]);
   }, []);
 
   useEffect(() => {
@@ -31,7 +42,7 @@ const LandingPage = ({
       setName(session.name);
       setNoName(false);
     }
-  }, []);
+  }, [session.name]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -142,6 +153,7 @@ const mapDispatchToProps = (dispatch) => ({
   getName: () => dispatch(getNameThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
+  removePlayer: (player) => dispatch(rmPlayer(player)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

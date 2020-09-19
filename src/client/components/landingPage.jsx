@@ -46,10 +46,10 @@ const LandingPage = ({
       >
         <Box
           w="100%"
-          bg="#4287f5"
-          p={4}
+          bg="#14122b"
+          p={5}
           borderWidth="3px"
-          borderColor="#0c2c61"
+          borderColor="#6b60eb"
           borderStyle="solid"
           maxW="sm"
           rounded="lg"
@@ -86,9 +86,11 @@ const LandingPage = ({
                 if (name === '' || noName === true) {
                   setNoName(true);
                 } else {
-                  updateName(name);
-                  history.push('/join');
-                  setName('');
+                  updateName(name)
+                    .then(() => {
+                      history.push('/join');
+                      setName('');
+                    });
                 }
               }}
             >
@@ -100,13 +102,15 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '' || noName === true) {
+              if (name === '' && noName === true) {
                 setNoName(true);
               } else {
-                updateName(name);
-                makeHost();
-                history.push('/create');
-                setName('');
+                updateName(name)
+                  .then(() => {
+                    makeHost();
+                    history.push('/create');
+                    setName('');
+                  });
               }
             }}
           >

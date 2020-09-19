@@ -7,7 +7,7 @@ const io = socketio(server);
 const botName = 'BugOut Bot';
 
 io.on('connection', (socket) => {
-  //   console.log(socket.handshake.headers.cookie)
+  console.log('socket connected with session:', socket.handshake.headers.cookie);
 
   // Confirmation message
   // console.log(socket);
@@ -45,8 +45,15 @@ io.on('connection', (socket) => {
     io.to(code).emit('message', formatMessage(name, msg));
   });
 
+  socket.on('disconnecting', () => {
+    const rooms = Object.keys(socket.rooms);
+    // the rooms array contains at least the socket ID
+    console.log('rooms', rooms);
+  });
+
   socket.on('disconnect', () => {
     // TODO Add username to message
+    console.log('disconnected from socket!');
     io.emit('message', formatMessage(botName, '{user} has fled the scene!'));
   });
 });

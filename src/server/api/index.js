@@ -58,8 +58,14 @@ app.use(async (req, res, next) => {
   if (!session && req.cookies.session_id) {
     const newSession = await Session.create({ id: req.cookies.session_id });
     req.session_id = newSession.id;
-    next();
-  } else if (!session.gameSessionId) {
+    // next();
+  }
+  next();
+});
+
+app.use(async (req, res, next) => {
+  const session = await Session.findOne({ where: { id: req.session_id } });
+  if (!session.gameSessionId) {
     let newCode = codeGenerator();
     // console.log(newCode)
     let check = await GameSession.findOne({ where: { code: newCode } });
@@ -73,7 +79,6 @@ app.use(async (req, res, next) => {
       { where: { id: session.id } },
     );
     // console.log(newGame);
-    next();
   }
   next();
 });

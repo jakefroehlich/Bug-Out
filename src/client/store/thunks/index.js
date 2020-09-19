@@ -2,10 +2,11 @@ import {
   getPromptThunk,
   findRandomGameThunk,
   getCurrentGameThunk,
-  createGameThunk,
   setCorrect,
   addScore,
   getPowerUpsThunk,
+  startGameThunk,
+  updateGameThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -23,7 +24,6 @@ export {
   getPromptThunk,
   findRandomGameThunk,
   getCurrentGameThunk,
-  createGameThunk,
   loginThunk,
   logoutThunk,
   whoami,
@@ -32,4 +32,6 @@ export {
   addScore,
   getPowerUpsThunk,
   makeHostThunk,
+  startGameThunk,
+  updateGameThunk,
 };

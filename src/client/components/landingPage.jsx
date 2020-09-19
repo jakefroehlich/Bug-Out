@@ -50,12 +50,12 @@ const LandingPage = ({
     }
   }, [session.name]);
 
-  useEffect(() => {
-    if (session.name) {
-      setName(session.name);
-      setNoName(false);
-    }
-  }, [game.players]);
+  // useEffect(() => {
+  //   if (session.name) {
+  //     setName(session.name);
+  //     setNoName(false);
+  //   }
+  // }, [game.players]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -68,10 +68,10 @@ const LandingPage = ({
       >
         <Box
           w="100%"
-          bg="#4287f5"
-          p={4}
+          bg="#14122b"
+          p={5}
           borderWidth="3px"
-          borderColor="#0c2c61"
+          borderColor="#6b60eb"
           borderStyle="solid"
           maxW="sm"
           rounded="lg"
@@ -81,14 +81,14 @@ const LandingPage = ({
           </Text>
           <FormControl>
             {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
-            {noName ? (<Text> Please put in a name! </Text>) : null }
+            {noName ? (<Text> Please put in a name! </Text>) : null}
+            {noName ? <p>Enter name to continue</p> : ''}
             <Input
               placeholder="Enter your name to play"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? <p>Enter name to continue</p> : ''}
             <Button
               width="200px"
               variantColor="red"
@@ -108,9 +108,11 @@ const LandingPage = ({
                 if (name === '' || noName === true) {
                   setNoName(true);
                 } else {
-                  updateName(name);
-                  history.push('/join');
-                  setName('');
+                  updateName(name)
+                    .then(() => {
+                      history.push('/join');
+                      setName('');
+                    });
                 }
               }}
             >
@@ -122,13 +124,15 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '' || noName === true) {
+              if (name === '' && noName === true) {
                 setNoName(true);
               } else {
-                updateName(name);
-                makeHost();
-                history.push('/create');
-                setName('');
+                updateName(name)
+                  .then(() => {
+                    makeHost();
+                    history.push('/create');
+                    setName('');
+                  });
               }
             }}
           >

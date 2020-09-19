@@ -19,7 +19,6 @@ const CodeEditor = (props) => {
     setIsEditorReady(true);
     valueGetter.current = _valueGetter;
   }
-
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
     const ts = `test${props.game.prompt.id}`;

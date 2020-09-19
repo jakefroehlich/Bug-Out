@@ -11,6 +11,7 @@ const Session = db.define('session', {
   },
   name: {
     type: STRING,
+    defaultValue: null,
   },
   host: {
     type: BOOLEAN,

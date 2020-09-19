@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode=\"production\"",
+    "build": "webpack --mode=\"development\"",
     "start": "node src/server",
     "build:watch": "webpack --watch --mode=\"development\"",
     "start:watch": "node-dev --respawn src/server/index.js",

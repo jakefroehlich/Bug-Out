@@ -58,15 +58,14 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
-            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : (
-              <Input
-                placeholder="Enter your name to play"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            )}
-            {noName ? (<Text> Please put in a name! </Text>) : null }
+            {session.name ? (<Text color="white"> {`Welcome ${session.name}!`} </Text>) : null}
+            {noName ? (<Text color="white"> Please put in a name! </Text>) : null }
+            <Input
+              placeholder="Enter your name to play"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             {noName ? <p>Enter name to continue</p> : ''}
             <Button
               width="200px"

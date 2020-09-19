@@ -10,13 +10,17 @@ const GamePage = (props) => {
   const {
     game, getPowerUps, getCurrentGame, getPrompt,
   } = props;
+
   useEffect(() => {
     getPowerUps();
     getCurrentGame();
-    if (!game.prompt) {
-      getPrompt(game.difficulty);
+  }, []);
+
+  useEffect(() => {
+    if (game.prompt == null) {
+      console.log('getting prompt');
+      getPrompt('easy');
     }
-    console.log('props on gamePage are ', props);
   }, []);
 
   return (
@@ -32,7 +36,7 @@ const GamePage = (props) => {
           Power Ups
         </Box>
       </div>
-      <Editor props={game} />
+      <Editor gamePageProps={game} />
       <div>
         <Timer />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
@@ -47,7 +51,7 @@ const mapStateToProps = (props) => (props);
 const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
-  getPrompt: () => dispatch(getPromptThunk()),
+  getPrompt: (diff) => dispatch(getPromptThunk(diff)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

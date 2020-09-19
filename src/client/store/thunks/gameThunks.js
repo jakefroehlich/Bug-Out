@@ -45,7 +45,8 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
 
 export const getPromptThunk = (difficulty) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)
-  .then(({ data }) => {
+  .then(({data}) => {
+    console.log('prompt:', data)
     dispatch(getPrompt(data));
   })
   .catch((e) => {
@@ -81,7 +82,6 @@ export const addScore = (score) => (dispatch) => {
 export const startGameThunk = (currentGameId) => (dispatch) => axios
   .put('/game/startGame', { currentGameId })
   .then((res) => {
-    console.log('start');
     console.log('response from server on StartGameThunk is ', res);
     dispatch(startGame(res.data));
   })

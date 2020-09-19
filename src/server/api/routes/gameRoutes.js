@@ -50,6 +50,7 @@ gameRouter.get('/prompt/:diff', async (req, res) => {
     const gamePrompts = await Prompt.findAll({ where: { difficulty: diff } });
     const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
     const prompt = gamePrompts[randomGameIdx];
+
     const session = await Session.findOne({ where: { id: req.session_id } });
     const currentGame = await GameSession.findOne({ where: { id: session.gameSessionId } });
     currentGame.update({ prompt });

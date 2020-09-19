@@ -1,27 +1,26 @@
 /* eslint-disable no-alert */
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef} from 'react';
 import { connect } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import { Button, Text, Box } from '@chakra-ui/core';
 import { buildFunction } from '../../server/utils/buildFunction';
 import { test } from '../../server/utils/tests';
-import { getPromptThunk, setCorrect } from '../store/thunks/gameThunks';
+import { setCorrect } from '../store/thunks/gameThunks';
 
 const CodeEditor = (props) => {
-  useEffect(() => {
-    props.getPromptThunk('easy');
-  }, []);
-
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
+
+  const { prompt } = props.gamePageProps;
 
   function handleEditorDidMount(_valueGetter) {
     setIsEditorReady(true);
     valueGetter.current = _valueGetter;
   }
+
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
-    const ts = `test${props.game.prompt.id}`;
+    const ts = `test${prompt.id}`;
     const correct = test[ts](fn);
     if (correct) {
       props.setCorrect();
@@ -54,10 +53,10 @@ const CodeEditor = (props) => {
         overflow="scroll"
       >
         <Text fontSize="lg" w="100%">
-          {props.game.prompt.name}
+          {prompt.name}
         </Text>
         <Text fontSize="sm" w="100%">
-          {props.game.prompt.prompt}
+          {prompt.prompt}
         </Text>
       </Box>
       <div style={{ width: '100%' }}>
@@ -94,4 +93,4 @@ const CodeEditor = (props) => {
 };
 
 const mapStateToProps = (props) => (props);
-export default connect(mapStateToProps, { getPromptThunk, setCorrect })(CodeEditor);
+export default connect(mapStateToProps, { setCorrect })(CodeEditor);

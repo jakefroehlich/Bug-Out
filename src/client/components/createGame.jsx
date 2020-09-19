@@ -159,7 +159,6 @@ const CreateGame = (props) => {
           variantColor="teal"
           variant="outline"
           onClick={async () => {
-            console.log('game is ', game);
             await updateGame(rounds, difficulty);
             await startGame(game.id);
             history.push('/game');

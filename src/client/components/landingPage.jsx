@@ -34,8 +34,7 @@ const LandingPage = ({
       setNoName(false);
     }
   });
-  console.log('name is ', name);
-  console.log('session.name is ', session.name);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div
@@ -47,10 +46,10 @@ const LandingPage = ({
       >
         <Box
           w="100%"
-          bg="#4287f5"
-          p={4}
+          bg="#14122b"
+          p={5}
           borderWidth="3px"
-          borderColor="#0c2c61"
+          borderColor="#6b60eb"
           borderStyle="solid"
           maxW="sm"
           rounded="lg"

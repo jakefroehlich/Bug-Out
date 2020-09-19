@@ -68,9 +68,9 @@ const newGame = (game) => ({
   payload: game,
 });
 
-const getCurrentGame = ({ game, players }) => ({
+const getCurrentGame = (game) => ({
   type: types.GET_CURRENT_GAME,
-  payload: { game, players },
+  payload: game,
 });
 
 const joinGame = (res) => ({

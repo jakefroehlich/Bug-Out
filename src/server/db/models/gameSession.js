@@ -7,7 +7,9 @@ const {
   STRING,
   JSON,
 } = require('sequelize');
+const randomWords = require('random-words');
 const db = require('../db');
+const Prompt = require('./prompt');
 
 const GameSession = db.define('gameSession', {
   id: {
@@ -20,9 +22,9 @@ const GameSession = db.define('gameSession', {
     defaultValue: 1,
   },
   difficulty: {
-    type: ENUM('Easy', 'Medium', 'Hard'),
+    type: ENUM('easy', 'medium', 'hard'),
     allowNull: false,
-    defaultValue: 'Easy',
+    defaultValue: 'easy',
   },
   active: {
     type: BOOLEAN,
@@ -39,6 +41,14 @@ const GameSession = db.define('gameSession', {
   prompt: {
     type: JSON,
   },
+});
+
+GameSession.beforeCreate(async (instance) => {
+  const gamePrompts = await Prompt.findAll({ where: { difficulty: instance.difficulty } });
+  const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
+  const prompt = gamePrompts[randomGameIdx];
+  instance.prompt = prompt;
+  instance.code = randomWords();
 });
 
 module.exports = GameSession;

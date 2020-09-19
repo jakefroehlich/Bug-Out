@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
@@ -11,24 +12,34 @@ import {
   updateGame,
 } from '../actions';
 
-export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
-  console.log(rounds);
-  return axios
-    .post('/game/updateGame', { rounds, difficulty })
-    .then((game) => {
-      dispatch(updateGame(game.data));
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
+export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
+  .post('/game/createGame', { rounds, difficulty })
+  .then(({ data }) => {
+    const gameSessionId = data.id;
+    axios.put(`/game/player/${gameSessionId}`)
+      .then(({ data }) => {
+        dispatch(updateGame(data));
+        history.push(`/game/${data.id}`);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
-export const getCurrentGameThunk = () => (dispatch) => axios
-  .get('/game/current')
-  .then((res) => {
-    // console.log('getcurrentGame response from server is ', res);
-    const { game, players } = res.data;
-    dispatch(getCurrentGame({ game, players }));
+export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/${code}`, { code })
+  .then(({ data }) => {
+    dispatch(updateGame(data));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const getCurrentGameThunk = (id) => (dispatch) => axios.get(`/game/current/${id}`)
+  .then(({ data }) => {
+    dispatch(getCurrentGame(data));
   })
   .catch((e) => {
     console.log(e);
@@ -88,7 +99,3 @@ export const startGameThunk = (currentGameId) => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
-
-// export const startGameThunk = (currentGameId) => (dispatch) => {
-//   return null;
-// }

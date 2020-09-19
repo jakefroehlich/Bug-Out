@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {
-  BrowserRouter,
+  HashRouter,
   Switch,
   Route,
   Redirect,
@@ -25,20 +25,20 @@ import GamePage from './components/gamePage';
 const App = () => (
   <Provider store={store}>
     <ThemeProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Switch>
           <Route exact path="/About" component={About} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/account" component={LoggedIn} />
           <Route exact path="/create" component={CreateGame} />
           <Route exact path="/loading-game" component={LoadingGame} />
-          <Route exact path="/game" component={GamePage} />
+          <Route exact path="/game/:id" component={GamePage} />
           <Route exact path="/join" component={JoinGame} />
           <Route exact path="/waiting" component={WaitingRoom} />
           <Route exact path="/" component={LandingPage} />
           <Redirect to="/" />
         </Switch>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   </Provider>
 );

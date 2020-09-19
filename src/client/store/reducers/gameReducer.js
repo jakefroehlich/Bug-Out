@@ -27,14 +27,14 @@ const gameReducer = (state = initialGameState, action) => {
     case types.GET_CURRENT_GAME:
       return {
         ...state,
-        id: action.payload.game.id,
-        active: action.payload.game.active,
-        prompt: action.payload.game.prompt,
-        code: action.payload.game.code,
-        private: action.payload.game.private,
-        rounds: action.payload.game.rounds,
-        difficulty: action.payload.game.difficulty,
-        players: action.payload.players,
+        id: action.payload.id,
+        active: action.payload.active,
+        prompt: action.payload.prompt,
+        code: action.payload.code,
+        private: action.payload.private,
+        rounds: action.payload.rounds,
+        difficulty: action.payload.difficulty,
+        players: action.payload.sessions,
       };
     case types.SET_PROMPT:
       return {

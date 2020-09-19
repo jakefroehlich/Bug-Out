@@ -6,16 +6,13 @@ import { connect } from 'react-redux';
 import {
   Text, Box, Select, FormControl, Input, FormLabel, Button,
 } from '@chakra-ui/core';
-import axios from 'axios';
-import store from '../store/index';
-import { getCurrentGameThunk } from '../store/thunks/gameThunks';
+import { getCurrentGameThunk, joinGameThunk } from '../store/thunks/gameThunks';
 
 const JoinGame = (props) => {
   const [gameCode, setGameCode] = useState('');
   const [gameFound, setGameFound] = useState(true);
   const host = window.location.hostname;
   const PORT = process.env.PORT || 3000;
-  console.log('port is ', PORT);
 
   const { game, joinGame } = props;
 
@@ -52,41 +49,12 @@ const JoinGame = (props) => {
               variantColor="red"
               margin="5px"
               onClick={() => {
-                console.log('hitting ', `${host}:${PORT}/api/game/joinGame`);
-                axios
-                  .put('/game/joinGame', { currentGameId: game.id, gameCode })
-                  .then((res) => {
-                    setGameFound(true);
-                    props.history.push('/waiting');
-                  })
-                  .catch((e) => {
-                    setGameFound(false);
-                  });
+                joinGame(gameCode);
               }}
             >
               Join Game!
             </Button>
           </FormControl>
-          <Box w="100%">
-            <Button
-              width="200px"
-              variantColor="orange"
-              margin="5px"
-              onClick={() => props.history.push('/create')}
-            >
-              Create Game
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              width="200px"
-              variantColor="yellow"
-              margin="5px"
-              onClick={() => props.history.push('/login')}
-            >
-              Login
-            </Button>
-          </Box>
           <Box>
             <Button
               width="200px"
@@ -118,6 +86,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  joinGame: (code) => dispatch(joinGameThunk(code)),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(JoinGame);

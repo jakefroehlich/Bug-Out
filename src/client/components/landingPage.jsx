@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Button, FormControl, Text, Box, Input,
@@ -12,28 +12,10 @@ import { getNameThunk, updateNameThunk, makeHostThunk } from '../store/thunks/se
 const LandingPage = ({
   game,
   history,
-  getCurrentGame,
   updateName,
   findRandomGame,
-  session,
-  getName,
-  makeHost,
 }) => {
   const [name, setName] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [noName, setNoName] = useState(false);
-
-  useEffect(() => {
-    getCurrentGame();
-    getName();
-  }, []);
-
-  useEffect(() => {
-    if (session.name) {
-      setName(session.name);
-      setNoName(false);
-    }
-  });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -58,23 +40,20 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
-            {session.name ? (<Text color="white"> {`Welcome ${session.name}!`} </Text>) : null}
-            {noName ? (<Text color="white"> Please put in a name! </Text>) : null }
             <Input
               placeholder="Enter your name to play"
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            {noName ? <p>Enter name to continue</p> : ''}
             <Button
               width="200px"
               variantColor="red"
               margin="5px"
               onClick={async () => {
                 await findRandomGame(game.id);
-                setName('');
               }}
+              isDisabled={name === ''}
             >
               Join Random Room
             </Button>
@@ -83,16 +62,10 @@ const LandingPage = ({
               variantColor="orange"
               margin="5px"
               onClick={() => {
-                if (name === '' || noName === true) {
-                  setNoName(true);
-                } else {
-                  updateName(name)
-                    .then(() => {
-                      history.push('/join');
-                      setName('');
-                    });
-                }
+                history.push('/join');
+                setName('');
               }}
+              isDisabled={name === ''}
             >
               Join Game
             </Button>
@@ -102,17 +75,10 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '' && noName === true) {
-                setNoName(true);
-              } else {
-                updateName(name)
-                  .then(() => {
-                    makeHost();
-                    history.push('/create');
-                    setName('');
-                  });
-              }
+              updateName(name);
+              history.push('/create');
             }}
+            isDisabled={name === ''}
           >
             Create Game
           </Button>
@@ -121,6 +87,7 @@ const LandingPage = ({
             variantColor="green"
             margin="5px"
             onClick={() => history.push('/login')}
+            isDisabled={name === ''}
           >
             Login
           </Button>

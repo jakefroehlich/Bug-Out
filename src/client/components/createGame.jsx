@@ -15,16 +15,16 @@ import {
 import ChatBox from './ChatBox';
 import { addMessage } from '../store/actions';
 import {
-  updateGameThunk,
-  getCurrentGameThunk,
+  createGameThunk,
   startGameThunk,
 } from '../store/thunks/gameThunks';
 import socket from '../utils/socket';
 
 const CreateGame = (props) => {
   const {
-    history, getCurrentGame, game, updateGame, startGame, addMsg,
+    history, game, createGame, startGame, addMsg,
   } = props;
+
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
 
@@ -35,7 +35,6 @@ const CreateGame = (props) => {
   }, [game.code]);
 
   useEffect(() => {
-    getCurrentGame(game);
     socket.on('message', (message) => {
       addMsg(message);
     });
@@ -43,7 +42,6 @@ const CreateGame = (props) => {
       upPlayers(name);
     });
   }, []);
-  console.log('props is ', props);
 
   return (
     <div>
@@ -99,11 +97,11 @@ const CreateGame = (props) => {
                 placeholder="Select Difficulty"
                 onChange={(e) => setDifficulty(e.target.value)}
               >
-                <option value="Easy" defaultValue>
+                <option value="easy" defaultValue>
                   Easy
                 </option>
-                <option value="Medium"> Medium </option>
-                <option value="Hard"> Hard </option>
+                <option value="medium"> Medium </option>
+                <option value="hard"> Hard </option>
               </Select>
             </FormControl>
             <FormControl>
@@ -159,12 +157,10 @@ const CreateGame = (props) => {
           variantColor="teal"
           variant="outline"
           onClick={async () => {
-            await updateGame(rounds, difficulty);
-            await startGame(game.id);
-            history.push('/game');
+            await createGame(rounds, difficulty, history);
           }}
         >
-          Play!
+          Create
         </Button>
       </div>
     </div>
@@ -176,7 +172,7 @@ const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
-  updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
+  createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
   addMsg: (msg) => dispatch(addMessage(msg)),
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });

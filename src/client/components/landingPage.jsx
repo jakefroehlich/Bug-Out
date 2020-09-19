@@ -50,12 +50,12 @@ const LandingPage = ({
     }
   }, [session.name]);
 
-  useEffect(() => {
-    if (session.name) {
-      setName(session.name);
-      setNoName(false);
-    }
-  }, [game.players]);
+  // useEffect(() => {
+  //   if (session.name) {
+  //     setName(session.name);
+  //     setNoName(false);
+  //   }
+  // }, [game.players]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -80,16 +80,15 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
-            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : (
-              <Input
-                placeholder="Enter your name to play"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-            )}
-            {noName ? (<Text> Please put in a name! </Text>) : null }
+            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
+            {noName ? (<Text> Please put in a name! </Text>) : null}
             {noName ? <p>Enter name to continue</p> : ''}
+            <Input
+              placeholder="Enter your name to play"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
             <Button
               width="200px"
               variantColor="red"

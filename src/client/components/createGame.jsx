@@ -30,9 +30,11 @@ const CreateGame = ({
   newPlayer,
   getName,
   removePlayer,
+  updateGame,
+  startGame,
 }) => {
-  const [rounds, setRounds] = useState('');
-  const [difficulty, setDifficulty] = useState('Beginner');
+  const [rounds, setRounds] = useState(3);
+  const [difficulty, setDifficulty] = useState('Easy');
   // const socket = io();
   console.log('game', game);
 
@@ -70,7 +72,6 @@ const CreateGame = ({
 
     console.log('effect 2 used!');
   }, []);
-  console.log('props is ', props);
 
   return (
     <div>

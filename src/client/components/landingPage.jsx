@@ -34,7 +34,8 @@ const LandingPage = ({
       setNoName(false);
     }
   });
-
+  console.log('name is ', name);
+  console.log('session.name is ', session.name);
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
       <div
@@ -58,14 +59,15 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
-            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : null}
+            {session.name ? (<Text> {`Welcome ${session.name}!`} </Text>) : (
+              <Input
+                placeholder="Enter your name to play"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            )}
             {noName ? (<Text> Please put in a name! </Text>) : null }
-            <Input
-              placeholder="Enter your name to play"
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
             {noName ? <p>Enter name to continue</p> : ''}
             <Button
               width="200px"
@@ -86,9 +88,11 @@ const LandingPage = ({
                 if (name === '' || noName === true) {
                   setNoName(true);
                 } else {
-                  updateName(name);
-                  history.push('/join');
-                  setName('');
+                  updateName(name)
+                    .then(() => {
+                      history.push('/join');
+                      setName('');
+                    });
                 }
               }}
             >
@@ -100,13 +104,15 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '' || noName === true) {
+              if (name === '' && noName === true) {
                 setNoName(true);
               } else {
-                updateName(name);
-                makeHost();
-                history.push('/create');
-                setName('');
+                updateName(name)
+                  .then(() => {
+                    makeHost();
+                    history.push('/create');
+                    setName('');
+                  });
               }
             }}
           >

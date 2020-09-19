@@ -15,29 +15,18 @@ import {
 import ChatBox from './ChatBox';
 import { addMessage } from '../store/actions';
 import {
-  createGameThunk,
+  updateGameThunk,
   getCurrentGameThunk,
+  startGameThunk,
 } from '../store/thunks/gameThunks';
 import socket from '../utils/socket';
 
 const CreateGame = (props) => {
   const {
-    history, getCurrentGame, game,
+    history, getCurrentGame, game, updateGame, startGame, addMsg,
   } = props;
-  const [rounds, setRounds] = useState('');
-  const [difficulty, setDifficulty] = useState('Beginner');
-  // const socket = io();
-  console.log('game', game);
-
-  // useEffect(() => {
-  //   getCurrentGame();
-  //   socket.on('playersUpdate', (name) => {
-  //     upPlayers(name);
-  //   });
-  //   // socket.on('message', message => {
-  //   //   console.log('createGame message', message)
-  //   // });
-  // }, []);
+  const [rounds, setRounds] = useState(3);
+  const [difficulty, setDifficulty] = useState('Easy');
 
   useEffect(() => {
     if (game.code) {
@@ -54,6 +43,7 @@ const CreateGame = (props) => {
       upPlayers(name);
     });
   }, []);
+  console.log('props is ', props);
 
   return (
     <div>
@@ -109,11 +99,11 @@ const CreateGame = (props) => {
                 placeholder="Select Difficulty"
                 onChange={(e) => setDifficulty(e.target.value)}
               >
-                <option value="Beginner" defaultValue>
-                  Beginner
+                <option value="Easy" defaultValue>
+                  Easy
                 </option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Difficult">Difficult</option>
+                <option value="Medium"> Medium </option>
+                <option value="Hard"> Hard </option>
               </Select>
             </FormControl>
             <FormControl>
@@ -168,9 +158,11 @@ const CreateGame = (props) => {
           m="auto"
           variantColor="teal"
           variant="outline"
-          onClick={() => {
-            createGame(rounds, difficulty);
-            history.push('/loading-game');
+          onClick={async () => {
+            console.log('game is ', game);
+            await updateGame(rounds, difficulty);
+            await startGame(game.id);
+            history.push('/game');
           }}
         >
           Play!
@@ -181,11 +173,13 @@ const CreateGame = (props) => {
 };
 
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
+
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
-  getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
-  createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
+  startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

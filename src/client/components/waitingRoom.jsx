@@ -8,7 +8,6 @@ import {
 } from '@chakra-ui/core';
 import { updatePlayers } from '../store/actions';
 import {
-  createGameThunk,
   getCurrentGameThunk,
 } from '../store/thunks/gameThunks';
 import Chatbox from './ChatBox';
@@ -122,7 +121,7 @@ const WaitingRoom = ({
           <Chatbox />
         </Box>
       </div>
-      <div style={{ textAlign: 'center' }}>
+      {/* <div style={{ textAlign: 'center' }}>
         <Button
           h="10%"
           w="50%"
@@ -136,7 +135,7 @@ const WaitingRoom = ({
         >
           Play!
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

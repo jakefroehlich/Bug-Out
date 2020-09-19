@@ -12,7 +12,7 @@ import { addMessage } from '../store/actions';
 const ChatBox = ({ msgs }) => {
   const [chatMsg, setChatMsg] = useState('');
 
-  console.log('render', msgs);
+  // console.log('render', msgs);
 
   const handleChange = (e) => {
     e.preventDefault();

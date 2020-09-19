@@ -45,8 +45,8 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
 
 export const getPromptThunk = (difficulty) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)
-  .then(({data}) => {
-    console.log('prompt:', data)
+  .then(({ data }) => {
+    console.log('prompt:', data);
     dispatch(getPrompt(data));
   })
   .catch((e) => {

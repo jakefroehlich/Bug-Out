@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import React, { useState, useRef} from 'react';
+import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import { Button, Text, Box } from '@chakra-ui/core';

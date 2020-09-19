@@ -1,21 +1,38 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Button, FormControl, Text, Box, Input,
 } from '@chakra-ui/core';
-import { getCurrentGameThunk, findRandomGameThunk } from '../store/thunks/gameThunks';
-import { getNameThunk, updateNameThunk, makeHostThunk } from '../store/thunks/sessionThunks';
+import {
+  getCurrentGameThunk,
+  findRandomGameThunk,
+  updateNameThunk,
+  getNameThunk,
+  makeHostThunk,
+} from '../store/thunks';
+import { rmPlayer } from '../store/actions';
+import socket from '../utils/socket';
 
 const LandingPage = ({
   game,
   history,
   updateName,
+  removePlayer,
   findRandomGame,
 }) => {
   const [name, setName] = useState('');
+
+  console.log('game', game);
+  useEffect(() => {
+    socket.on('playerLeave', (player) => {
+      console.log('player left :(');
+      removePlayer(player);
+    });
+    socket.emit('leaveRoom', game.code, game.players[0]);
+  }, []);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -62,6 +79,7 @@ const LandingPage = ({
               variantColor="orange"
               margin="5px"
               onClick={() => {
+                updateName(name);
                 history.push('/join');
                 setName('');
               }}
@@ -116,6 +134,7 @@ const mapDispatchToProps = (dispatch) => ({
   getName: () => dispatch(getNameThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
+  removePlayer: (player) => dispatch(rmPlayer(player)),
   makeHost: () => dispatch(makeHostThunk()),
 });
 

@@ -13,24 +13,41 @@ import {
   Button,
 } from '@chakra-ui/core';
 import ChatBox from './ChatBox';
-import { addMessage } from '../store/actions';
+import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
   createGameThunk,
   startGameThunk,
-} from '../store/thunks/gameThunks';
+  getNameThunk,
+} from '../store/thunks';
 import socket from '../utils/socket';
 
-const CreateGame = (props) => {
-  const {
-    history, game, createGame, startGame, addMsg,
-  } = props;
-
+const CreateGame = ({
+  history,
+  getCurrentGame,
+  game,
+  addMsg,
+  createGame,
+  removePlayer,
+}) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
+  // const socket = io();
+  console.log('game', game);
+
+  // useEffect(() => {
+  //   getCurrentGame();
+  //   socket.on('playersUpdate', (name) => {
+  //     upPlayers(name);
+  //   });
+  //   // socket.on('message', message => {
+  //   //   console.log('createGame message', message)
+  //   // });
+  // }, []);
 
   useEffect(() => {
     if (game.code) {
       socket.emit('joinRoom', game.code);
+      console.log('effect 1 used');
     }
   }, [game.code]);
 
@@ -38,9 +55,17 @@ const CreateGame = (props) => {
     socket.on('message', (message) => {
       addMsg(message);
     });
-    socket.on('playersUpdate', (name) => {
-      upPlayers(name);
+    socket.on('playerUpdate', () => {
+      console.log('new player!');
+      getCurrentGame();
+      // newPlayer(player);
     });
+    socket.on('playerLeave', (player) => {
+      console.log('player left :(');
+      removePlayer(player);
+    });
+
+    console.log('effect 2 used!');
   }, []);
 
   return (
@@ -173,7 +198,11 @@ const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
   createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
+  newPlayer: (player) => dispatch(addPlayer(player)),
+  removePlayer: (player) => dispatch(rmPlayer(player)),
+  updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
+  getName: () => dispatch(getNameThunk()),
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 

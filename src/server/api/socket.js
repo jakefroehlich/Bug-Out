@@ -30,10 +30,10 @@ io.on('connection', (socket) => {
   });
 
   socket.on('leaveRoom', (code, player) => {
-      socket.leave(code, () => {
-        console.log('leaving room', code);
-        socket.to(code).emit('playerLeave', player);
-      });
+    socket.leave(code, () => {
+      console.log('leaving room', code);
+      socket.to(code).emit('playerLeave', player);
+    });
   });
 
   socket.on('newPlayer', (name, code) => {

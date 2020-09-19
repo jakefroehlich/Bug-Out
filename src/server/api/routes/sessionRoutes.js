@@ -29,6 +29,17 @@ sessionRouter.put('/updateName', async (req, res) => {
   }
 });
 
+sessionRouter.post('/makeHost', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    session.update({ host: true });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error making host');
+    console.log(e);
+  }
+});
+
 module.exports = {
   path: '/session',
   router: sessionRouter,

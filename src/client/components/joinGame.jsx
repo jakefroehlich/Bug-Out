@@ -4,13 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Text,
-  Box,
-  Select,
-  FormControl,
-  Input,
-  FormLabel,
-  Button,
+  Text, Box, Select, FormControl, Input, FormLabel, Button,
 } from '@chakra-ui/core';
 import axios from 'axios';
 import { getCurrentGameThunk } from '../store/thunks';
@@ -35,28 +29,26 @@ const JoinGame = (props) => {
       >
         <Box
           w="100%"
-          p={10}
-          borderWidth="1px"
-          rounded="lg"
-          variantColor="teal"
+          bg="#4287f5"
+          p={4}
+          borderWidth="3px"
           borderStyle="solid"
           maxW="sm"
+          rounded="lg"
         >
-          <Text fontSize="4xl">Join Game</Text>
+          <Text fontSize="6xl" color="white">Join Game</Text>
           <FormControl>
             <Input
               placeholder="Enter Game Code"
               type="text"
               focusBorderColor="teal"
-              size="lg"
               value={gameCode}
               onChange={(e) => setGameCode(e.target.value)}
             />
             {!gameFound ? <Text> Game not found </Text> : null}
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="red"
               margin="5px"
               onClick={() => {
                 console.log('hitting ', `${host}:${PORT}/api/game/joinGame`);
@@ -77,8 +69,7 @@ const JoinGame = (props) => {
           <Box w="100%">
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="orange"
               margin="5px"
               onClick={() => props.history.push('/create')}
             >
@@ -88,8 +79,7 @@ const JoinGame = (props) => {
           <Box>
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="yellow"
               margin="5px"
               onClick={() => props.history.push('/login')}
             >
@@ -99,17 +89,23 @@ const JoinGame = (props) => {
           <Box>
             <Button
               width="200px"
-              variantColor="teal"
-              variant="outline"
+              variantColor="green"
               margin="5px"
               onClick={() => props.history.push('/')}
             >
               Main Page
             </Button>
           </Box>
+          <Box>
+            <Button
+              width="200px"
+              variantColor="purple"
+              margin="5px"
+            >How to Play
+            </Button>
+          </Box>
         </Box>
       </div>
-      <Text>How to play:</Text>
     </div>
   );
 };

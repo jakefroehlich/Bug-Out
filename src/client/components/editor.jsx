@@ -24,8 +24,7 @@ const CodeEditor = (props) => {
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
     const ts = `test${prompt.id}`;
-    // const correct = test[ts](fn);
-    const correct = true;
+    const correct = test[ts](fn);
     if (correct) {
       props.setCorrect();
 

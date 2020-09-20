@@ -19,7 +19,6 @@ import socket from '../utils/socket';
 
 const LandingPage = ({
   game,
-  session,
   history,
   updateName,
   removePlayer,
@@ -28,6 +27,7 @@ const LandingPage = ({
   setSession,
   makeHost,
   generateCode,
+  getCurrentGame,
 }) => {
   const [name, setName] = useState('');
   // eslint-disable-next-line no-unused-vars

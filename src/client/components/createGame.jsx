@@ -18,6 +18,7 @@ import {
   createGameThunk,
   startGameThunk,
   setSessionThunk,
+  getCurrentGameThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
 

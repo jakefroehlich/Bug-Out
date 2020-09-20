@@ -16,7 +16,6 @@ import {
 } from '../store/thunks';
 import { updateAlias } from '../store/actions';
 
-
 const LandingPage = ({
   session,
   setSession,
@@ -25,38 +24,38 @@ const LandingPage = ({
 }) => {
   const [alias, setAlias] = useState('');
 
-  console.log('session', session)
-  console.log('alias', alias)
-
+  console.log('session', session);
+  console.log('alias', alias);
 
   useEffect(() => {
     setSession();
-    //I think that's a good one to have as our first useeffect right - since it's gonna be needed anyways
+    // I think that's a good one to have as our first useeffect right - since it's gonna be needed anyways
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit handled', alias)
+    console.log('submit handled', alias);
     updateUserAlias(alias);
-    history.push('/')
+    history.push('/');
   };
 
   return (
-    <div className='landing'>
-      <img className='landingimg' />
+    <div className="landing">
+      <img className="landingimg" />
       <form
-        onSubmit={handleSubmit}>
+        onSubmit={handleSubmit}
+      >
         <input
-          className='landingInput'
+          className="landingInput"
           type="text"
           value={alias}
           placeholder="Enter Preferred Alias"
-          onChange={(e) => setAlias(e.target.value)}>
-          </input>
+          onChange={(e) => setAlias(e.target.value)}
+        />
       </form>
 
     </div>
-  )
+  );
 
   // return (
   //   <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -175,5 +174,4 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
 
-
-//I made this one tonight
+// I made this one tonight

@@ -7,6 +7,7 @@ import {
   getPowerUpsThunk,
   startGameThunk,
   createGameThunk,
+  setRoundTimes,
 } from './gameThunks';
 import {
   loginThunk,
@@ -34,4 +35,5 @@ export {
   makeHostThunk,
   startGameThunk,
   createGameThunk,
+  setRoundTimes,
 };

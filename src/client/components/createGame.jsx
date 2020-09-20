@@ -23,7 +23,6 @@ import socket from '../utils/socket';
 
 const CreateGame = ({
   history,
-  getCurrentGame,
   game,
   addMsg,
   createGame,
@@ -32,7 +31,6 @@ const CreateGame = ({
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
   // const socket = io();
-  console.log('game', game);
 
   // useEffect(() => {
   //   getCurrentGame();
@@ -57,7 +55,6 @@ const CreateGame = ({
     });
     socket.on('playerUpdate', () => {
       console.log('new player!');
-      getCurrentGame();
       // newPlayer(player);
     });
     socket.on('playerLeave', (player) => {
@@ -196,7 +193,6 @@ const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
-  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
   createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
   newPlayer: (player) => dispatch(addPlayer(player)),
   removePlayer: (player) => dispatch(rmPlayer(player)),

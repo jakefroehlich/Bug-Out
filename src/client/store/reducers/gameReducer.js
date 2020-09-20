@@ -9,6 +9,8 @@ const initialGameState = {
   private: true,
   prompt: '',
   powerUps: [],
+  roundStart: '',
+  roundEnd: '',
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -40,6 +42,8 @@ const gameReducer = (state = initialGameState, action) => {
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
         players: action.payload.sessions,
+        roundStart: action.payload.roundStart,
+        roundEnd: action.payload.roundEnd,
       };
     case types.SET_PROMPT:
       return {
@@ -55,6 +59,12 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         active: action.payload.active,
+      };
+    case types.SET_ROUND_TIMES:
+      return {
+        ...state,
+        roundEnd: action.payload.end,
+        roundStart: action.payload.start,
       };
     default:
       return state;

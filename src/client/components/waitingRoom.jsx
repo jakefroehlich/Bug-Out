@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -8,7 +9,7 @@ import {
 } from '@chakra-ui/core';
 import { addPlayer, addMessage } from '../store/actions';
 import {
-  getCurrentGameThunk,
+  getCurrentGameThunk, setRoundTimes,
 } from '../store/thunks';
 import Chatbox from './ChatBox';
 import socket from '../utils/socket';
@@ -16,16 +17,17 @@ import socket from '../utils/socket';
 const WaitingRoom = ({
   game,
   getCurrentGame,
-  createGame,
   history,
   newPlayer,
   addMsg,
+  match,
+  setRoundTimes,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
 
   useEffect(() => {
-    getCurrentGame();
+    getCurrentGame(match.params.id);
     socket.on('message', (message) => {
       addMsg(message);
     });
@@ -39,8 +41,6 @@ const WaitingRoom = ({
       socket.emit('joinRoom', game.code);
     }
   }, [game.code]);
-
-  console.log('game is ', game);
 
   return (
     <div>
@@ -126,7 +126,7 @@ const WaitingRoom = ({
           <Chatbox />
         </Box>
       </div>
-      {/* <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <Button
           h="10%"
           w="50%"
@@ -134,13 +134,13 @@ const WaitingRoom = ({
           variantColor="teal"
           variant="outline"
           onClick={() => {
-            createGame(rounds, difficulty);
-            history.push('/loading-game');
+            setRoundTimes(game.id);
+            history.push(`/game/${game.id}`);
           }}
         >
           Play!
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 };
@@ -150,10 +150,11 @@ const mapStateToProps = (state) => ({
   user: state.user,
 });
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
   createGame: () => dispatch(createGameThunk(rounds, difficulty)),
   newPlayer: (player) => dispatch(addPlayer(player)),
   addMsg: (msg) => dispatch(addMessage(msg)),
+  setRoundTimes: (id) => dispatch(setRoundTimes(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

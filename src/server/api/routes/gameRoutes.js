@@ -65,6 +65,22 @@ gameRouter.put('/addplayer/:code', async (req, res) => {
   }
 });
 
+//  update timing on the game session
+gameRouter.put('/game-times/:id', async (req, res) => {
+  try {
+    const { roundEnd, roundStart } = req.body;
+    const { id } = req.params;
+    const gameSession = await GameSession.findOne({ where: { id } });
+    await gameSession.update({ roundEnd, roundStart });
+
+    const updatedGameSession = await GameSession.findOne({ where: { id }, include: [Session] });
+    res.send(updatedGameSession);
+  } catch (e) {
+    console.log('Error updating game session with player');
+    console.log(e);
+  }
+});
+
 // Gets a game prompt based on difficulty
 gameRouter.get('/prompt/:diff', async (req, res) => {
   try {

@@ -25,7 +25,6 @@ const LandingPage = ({
 }) => {
   const [name, setName] = useState('');
 
-  console.log('game', game);
   useEffect(() => {
     socket.on('playerLeave', (player) => {
       console.log('player left :(');

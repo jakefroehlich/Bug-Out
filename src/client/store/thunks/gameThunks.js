@@ -90,7 +90,10 @@ export const setCorrect = () => (dispatch) => {
 };
 
 export const addScore = (score) => (dispatch) => {
-  dispatch(addScoreAction(score));
+  axios.put('/session/score', { score })
+    .then(() => {
+      dispatch(addScoreAction(score));
+    });
 };
 
 export const setRoundTimes = (id) => (dispatch) => {

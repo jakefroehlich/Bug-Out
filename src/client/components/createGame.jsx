@@ -55,7 +55,6 @@ const CreateGame = ({
     });
     socket.on('playerUpdate', () => {
       console.log('new player!');
-      getCurrentGame();
       // newPlayer(player);
     });
     socket.on('playerLeave', (player) => {

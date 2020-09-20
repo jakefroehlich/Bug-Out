@@ -30,9 +30,7 @@ const CreateGame = ({
   removePlayer,
 }) => {
   const [rounds, setRounds] = useState(3);
-  const [difficulty, setDifficulty] = useState('Easy');
-  // const socket = io();
-  console.log('game', game);
+  const [difficulty, setDifficulty] = useState('easy');
 
   // useEffect(() => {
   //   getCurrentGame();

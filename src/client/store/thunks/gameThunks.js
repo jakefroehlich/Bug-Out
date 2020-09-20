@@ -40,6 +40,7 @@ export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/
 
 export const getCurrentGameThunk = (id) => (dispatch) => axios.get(`/game/current/${id}`)
   .then(({ data }) => {
+    console.log('gcgt', data)
     dispatch(getCurrentGame(data));
   })
   .catch((e) => {
@@ -55,15 +56,18 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
     console.log(e);
   });
 
-export const getPromptThunk = (difficulty) => (dispatch) => axios
-  .get(`/game/prompt/${difficulty}`)
-  .then(({ data }) => {
-    console.log('prompt:', data);
-    dispatch(getPrompt(data));
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+export const getPromptThunk = (difficulty) => (dispatch) => {
+  console.log('getPromptsThunk difficulty:', difficulty)
+  return axios
+    .get(`/game/prompt/${difficulty}`)
+    .then(({ data }) => {
+      console.log('prompt:', data);
+      dispatch(getPrompt(data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+}
 
 export const getPowerUpsThunk = () => (dispatch) => axios
   .get('/game/powerups')
@@ -94,7 +98,6 @@ export const addScore = (score) => (dispatch) => {
 export const startGameThunk = (currentGameId) => (dispatch) => axios
   .put('/game/startGame', { currentGameId })
   .then((res) => {
-    console.log('response from server on StartGameThunk is ', res);
     dispatch(startGame(res.data));
   })
   .catch((e) => {

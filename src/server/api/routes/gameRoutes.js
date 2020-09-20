@@ -16,7 +16,9 @@ const gameRouter = Router();
 gameRouter.get('/current/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    console.log('id', id)
     const game = await GameSession.findOne({ where: { id }, include: [Session] });
+    console.log('game', game)
     res.send(game);
   } catch (e) {
     console.log('Error finding current game');
@@ -39,7 +41,6 @@ gameRouter.post('/createGame', async (req, res) => {
 gameRouter.put('/player/:gameSessionId', async (req, res) => {
   try {
     const { gameSessionId } = req.params;
-    console.log(req.params)
     const session = await Session.findOne({ where: { id: req.cookies.session_id } });
     await session.update({ gameSessionId });
     const gameSession = await GameSession.findOne({ where: { id: gameSessionId }, include: [Session] });
@@ -70,9 +71,12 @@ gameRouter.put('/addplayer/:code', async (req, res) => {
 gameRouter.get('/prompt/:diff', async (req, res) => {
   try {
     const { diff } = req.params;
-    const gamePrompts = await Prompt.findAll({ where: { difficulty: diff } });
+    console.log('difficulty', diff)
+    const gamePrompts = await Prompt.findAll({ where: { difficulty : diff } });
     const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
     const prompt = gamePrompts[randomGameIdx];
+
+    console.log('prompt', prompt)
 
     const session = await Session.findOne({ where: { id: req.session_id } });
     const currentGame = await GameSession.findOne({ where: { id: session.gameSessionId } });

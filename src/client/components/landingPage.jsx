@@ -28,7 +28,6 @@ const LandingPage = ({
 
 
   console.log('game', game);
-  console.log('session', session);
   useEffect(() => {
     socket.on('playerLeave', (player) => {
       console.log('player left :(');

@@ -10,8 +10,9 @@ import { setCorrect } from '../store/thunks/gameThunks';
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
+  console.log('editor props', props)
 
-  const { prompt } = props.gamePageProps;
+  const { prompt } = props.game;
 
   function handleEditorDidMount(_valueGetter) {
     setIsEditorReady(true);

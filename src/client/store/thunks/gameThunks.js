@@ -59,6 +59,7 @@ export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/
     dispatch(updateGame(data));
   })
   .catch((e) => {
+    dispatch(updateGame('failed'));
     console.log(e);
   });
 

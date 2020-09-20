@@ -42,6 +42,8 @@ const LandingPage = ({
   return (
     <div className="landing">
       <img className="landingimg" />
+      <div
+        className="landingform">
       <form
         onSubmit={handleSubmit}
       >
@@ -53,6 +55,7 @@ const LandingPage = ({
           onChange={(e) => setAlias(e.target.value)}
         />
       </form>
+      </div>
     </div>
   );
 
@@ -168,7 +171,7 @@ const mapDispatchToProps = (dispatch) => ({
   // removePlayer: (player) => dispatch(rmPlayer(player)),
   // makeHost: () => dispatch(makeHostThunk()),
   // generateCode: (code) => dispatch(updateGameCodeThunk(code)),
-  updateUserAlias: (alias) => dispatch(updateAlias(alias)),
+  updateUserAlias: (alias) => dispatch(updateNameThunk(alias)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

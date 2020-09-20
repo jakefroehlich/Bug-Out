@@ -81,6 +81,7 @@ gameRouter.put('/addplayer/:code', async (req, res) => {
     const updatedGameSession = await GameSession.findOne({ where: { id: gameSessionId }, include: [Session] });
     res.send(updatedGameSession);
   } catch (e) {
+    res.status(404).send('failure');
     console.log('Error updating game session with player');
     console.log(e);
   }

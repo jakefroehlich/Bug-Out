@@ -8,7 +8,6 @@ const CreateGame = ({
 }) => {
     const [rounds, setRounds] = useState(3);
     const [difficulty, setDifficulty] = useState('easy');
-    console.log(history)
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,11 +15,11 @@ const CreateGame = ({
     }
 
     return (
-        <div>
+        <div className="creategame">
             <span>Create A Game</span>
             <form
-                className="createGameForm"
                 onSubmit={handleSubmit}>
+                <div className="diff">
                 <label>Difficulty: </label>
                 <select
                     placeholder="Select Difficulty"
@@ -30,6 +29,8 @@ const CreateGame = ({
                     <option value="medium"> Medium </option>
                     <option value="hard"> Hard </option>
                 </select>
+                </div>
+                <div className="rounds">
                 <label># of Rounds: </label>
                 <select
                     placeholder="Select # of Rounds"
@@ -41,7 +42,8 @@ const CreateGame = ({
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <button />
+                </div>
+                <button className="creategamebutton"/>
             </form>
         </div>
     )

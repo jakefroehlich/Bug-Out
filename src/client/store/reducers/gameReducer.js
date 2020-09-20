@@ -63,7 +63,6 @@ const gameReducer = (state = initialGameState, action) => {
         code: action.code,
       }
     case types.UPDATE_ALIAS:
-      
       return {
         ...state,
         alias: action.alias,

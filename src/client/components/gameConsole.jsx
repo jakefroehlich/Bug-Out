@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
@@ -25,26 +25,33 @@ import {
 const GameConsole = ({
   history,
   game,
+  input,
   session,
   updateGame,
   getCurrentGame,
   startGame,
   createGame,
+  updateUserAlias,
+  setSession,
 }) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('easy');
-  const thisPlayer = game.players.filter((p) => p.id === session.id)[0];
-  console.log('history', history);
+  console.log('input', input)
+  console.log('session', session);
+
+  useEffect(() => {
+    setSession();
+  }, [])
 
   return (
-    <div className='outerConsole'>
+    <div className='outerconsole'>
       {/* <Nav className='Nav'/> */}
-      <div className='consoleContainer'>
-        <div className='createGame'>
-          <CreateGame />
+      <div className='consolecontainer'>
+        <div className='creategamecontainer'>
+          <CreateGame history={history} />
         </div>
-        <div className='joinGame'>
-          <JoinGame />
+        <div className='joingamecontainer'>
+          <JoinGame history={history} />
         </div>
       </div>
     </div>
@@ -185,6 +192,7 @@ const mapDispatchToProps = (dispatch) => ({
   addMsg: (msg) => dispatch(addMessage(msg)),
   setSession: () => dispatch(setSessionThunk()),
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
+  updateUserAlias: (alias) => dispatch(updateAlias(alias)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);

@@ -141,8 +141,9 @@ const updateCode = (code) => ({
 });
 
 const updateAlias = (alias) => ({
-  type: types.UPDATE_ALIAS,
-  alias,
+  type: types.UPDATE_INPUT,
+  name: 'playerName',
+  value: alias,
 })
 
 export {

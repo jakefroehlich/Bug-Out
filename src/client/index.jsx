@@ -6,7 +6,6 @@ import {
   Switch,
   Route,
   Redirect,
-  BrowserRouter
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@chakra-ui/core';

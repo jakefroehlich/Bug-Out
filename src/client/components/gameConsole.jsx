@@ -13,6 +13,7 @@ import {
   Button,
 } from '@chakra-ui/core';
 import CreateGame from './createGame';
+import JoinGame from './joinGame';
 import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
   createGameThunk,
@@ -43,7 +44,7 @@ const GameConsole = ({
           <CreateGame />
         </div>
         <div className='joinGame'>
-          {/* <JoinGame /> */}
+          <JoinGame />
         </div>
       </div>
     </div>

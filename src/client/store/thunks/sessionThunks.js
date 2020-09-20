@@ -31,3 +31,6 @@ export const makeHostThunk = () => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
+
+// export const getRoomPlayersThunk = (gameSeshId) => (dispatch) => axios
+//   .get('/session/roomPlayers/:gameSeshId')

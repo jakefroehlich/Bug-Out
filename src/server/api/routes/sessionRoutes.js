@@ -40,6 +40,13 @@ sessionRouter.post('/makeHost', async (req, res) => {
   }
 });
 
+// sessionRouter.get('/roomPlayers', async (req, res) => {
+//   try {
+//     const session = await Session.findOne({ where: { gameSessionId: req.session_id }});
+
+//   }
+// })
+
 module.exports = {
   path: '/session',
   router: sessionRouter,

@@ -25,6 +25,7 @@ export const types = {
   UPDATE_GAME: 'UPDATE_GAME',
   UPDATE_CODE: 'UPDATE_CODE',
   UPDATE_ALIAS: 'UPDATE_ALIAS',
+  // GET_ROOM_PLAYERS: 'GET_ROOM_PLAYERS',
 };
 
 const addPlayer = (player) => ({
@@ -144,7 +145,12 @@ const updateAlias = (alias) => ({
   type: types.UPDATE_INPUT,
   name: 'playerName',
   value: alias,
-})
+});
+
+// const getRoomPlayers = () => ({
+//   type: types.GET_ROOM_PLAYERS,
+
+// });
 
 export {
   changeInitialLoading,

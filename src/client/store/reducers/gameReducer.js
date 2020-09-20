@@ -31,6 +31,7 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
       };
     case types.GET_CURRENT_GAME:
+      console.log('reducer', action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -40,7 +41,8 @@ const gameReducer = (state = initialGameState, action) => {
         private: action.payload.private,
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
-        players: action.payload.sessions,
+        players: action.payload.players,
+        host: action.payload.hostStatus,
       };
     case types.SET_PROMPT:
       return {

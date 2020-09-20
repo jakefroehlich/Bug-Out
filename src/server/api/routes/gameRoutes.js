@@ -14,13 +14,16 @@ const {codeGenerator} = require('../utils');
 const gameRouter = Router();
 
 // getsCurrentGame and players belonging to that game
-gameRouter.get('/current/:id', async (req, res) => {
+gameRouter.get('/current', async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log('id', id)
-    const game = await GameSession.findOne({ where: { id }, include: [Session] });
-    console.log('game', game)
-    res.send(game);
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
+    const players = await Session.findAll({ where: { gameSessionId: game.id } });
+    const hostStatus = session.dataValues.host;
+    console.log('session', session);
+    // console.log('game', game);
+    // console.log('players', players);
+    res.send({ game, players, hostStatus });
   } catch (e) {
     console.log('Error finding current game');
     console.log(e);

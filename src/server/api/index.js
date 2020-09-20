@@ -12,10 +12,9 @@ const {
 } = require('./routes/index');
 const db = require('../db/index');
 const { app, server } = require('./socket');
-const { codeGenerator } = require('./utils');
 
 const {
-  models: { Session, User, GameSession },
+  models: { Session, User },
 } = db;
 
 const PORT = process.env.PORT || 3000;
@@ -50,37 +49,6 @@ app.use(async (req, res, next) => {
     }
     next();
   }
-});
-
-// assign games if they don't have
-app.use(async (req, res, next) => {
-  const session = await Session.findOne({ where: { id: req.session_id } });
-  if (!session && req.cookies.session_id) {
-    const newSession = await Session.create({ id: req.cookies.session_id });
-    req.session_id = newSession.id;
-    // next();
-  }
-  next();
-});
-
-app.use(async (req, res, next) => {
-  const session = await Session.findOne({ where: { id: req.session_id } });
-  if (!session.gameSessionId) {
-    let newCode = codeGenerator();
-    // console.log(newCode)
-    let check = await GameSession.findOne({ where: { code: newCode } });
-    while (check) {
-      newCode = codeGenerator();
-      check = await GameSession.findOne({ where: { code: newCode } });
-    }
-    const newGame = await GameSession.create({ code: newCode });
-    await Session.update(
-      { gameSessionId: newGame.id },
-      { where: { id: session.id } },
-    );
-    // console.log(newGame);
-  }
-  next();
 });
 
 app.use(express.static(PUBLIC_PATH));

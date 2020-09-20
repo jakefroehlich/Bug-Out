@@ -15,8 +15,7 @@ import {
 import ChatBox from './ChatBox';
 import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
-  updateGameThunk,
-  getCurrentGameThunk,
+  createGameThunk,
   startGameThunk,
   getNameThunk,
 } from '../store/thunks';
@@ -27,11 +26,8 @@ const CreateGame = ({
   getCurrentGame,
   game,
   addMsg,
-  newPlayer,
-  getName,
+  createGame,
   removePlayer,
-  updateGame,
-  startGame,
 }) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
@@ -56,8 +52,6 @@ const CreateGame = ({
   }, [game.code]);
 
   useEffect(() => {
-    getCurrentGame();
-    getName();
     socket.on('message', (message) => {
       addMsg(message);
     });
@@ -128,11 +122,11 @@ const CreateGame = ({
                 placeholder="Select Difficulty"
                 onChange={(e) => setDifficulty(e.target.value)}
               >
-                <option value="Easy" defaultValue>
+                <option value="easy" defaultValue>
                   Easy
                 </option>
-                <option value="Medium"> Medium </option>
-                <option value="Hard"> Hard </option>
+                <option value="medium"> Medium </option>
+                <option value="hard"> Hard </option>
               </Select>
             </FormControl>
             <FormControl>
@@ -188,13 +182,10 @@ const CreateGame = ({
           variantColor="teal"
           variant="outline"
           onClick={async () => {
-            console.log('game is ', game);
-            await updateGame(rounds, difficulty);
-            await startGame(game.id);
-            history.push('/game');
+            await createGame(rounds, difficulty, history);
           }}
         >
-          Play!
+          Create
         </Button>
       </div>
     </div>
@@ -204,10 +195,11 @@ const CreateGame = ({
 const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
 
 const mapDispatchToProps = (dispatch) => ({
+  upPlayers: (name) => dispatch(updatePlayers(name)),
+  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
   newPlayer: (player) => dispatch(addPlayer(player)),
   removePlayer: (player) => dispatch(rmPlayer(player)),
-  getCurrentGame: (game) => dispatch(getCurrentGameThunk(game)),
-  createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
   getName: () => dispatch(getNameThunk()),

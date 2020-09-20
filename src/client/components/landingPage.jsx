@@ -19,43 +19,20 @@ import socket from '../utils/socket';
 const LandingPage = ({
   game,
   history,
-  getCurrentGame,
   updateName,
   removePlayer,
   findRandomGame,
-  session,
-  getName,
-  makeHost,
 }) => {
   const [name, setName] = useState('');
-  // eslint-disable-next-line no-unused-vars
-  const [noName, setNoName] = useState(false);
 
   console.log('game', game);
-  // const thisPlayer = game.players.filter()
   useEffect(() => {
-    getCurrentGame();
-    getName();
     socket.on('playerLeave', (player) => {
       console.log('player left :(');
       removePlayer(player);
     });
     socket.emit('leaveRoom', game.code, game.players[0]);
   }, []);
-
-  useEffect(() => {
-    if (session.name) {
-      setName(session.name);
-      setNoName(false);
-    }
-  }, [session.name]);
-
-  // useEffect(() => {
-  //   if (session.name) {
-  //     setName(session.name);
-  //     setNoName(false);
-  //   }
-  // }, [game.players]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -80,8 +57,6 @@ const LandingPage = ({
             Bug Out!
           </Text>
           <FormControl>
-            {session.name ? (<Text color="white"> {`Welcome ${session.name}!`} </Text>) : null}
-            {noName ? (<Text color="white"> Please put in a name! </Text>) : null }
             <Input
               placeholder="Enter your name to play"
               type="text"
@@ -94,8 +69,8 @@ const LandingPage = ({
               margin="5px"
               onClick={async () => {
                 await findRandomGame(game.id);
-                setName('');
               }}
+              isDisabled={name === ''}
             >
               Join Random Room
             </Button>
@@ -104,16 +79,11 @@ const LandingPage = ({
               variantColor="orange"
               margin="5px"
               onClick={() => {
-                if (name === '' || noName === true) {
-                  setNoName(true);
-                } else {
-                  updateName(name)
-                    .then(() => {
-                      history.push('/join');
-                      setName('');
-                    });
-                }
+                updateName(name);
+                history.push('/join');
+                setName('');
               }}
+              isDisabled={name === ''}
             >
               Join Game
             </Button>
@@ -123,17 +93,10 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              if (name === '' && noName === true) {
-                setNoName(true);
-              } else {
-                updateName(name)
-                  .then(() => {
-                    makeHost();
-                    history.push('/create');
-                    setName('');
-                  });
-              }
+              updateName(name);
+              history.push('/create');
             }}
+            isDisabled={name === ''}
           >
             Create Game
           </Button>
@@ -142,6 +105,7 @@ const LandingPage = ({
             variantColor="green"
             margin="5px"
             onClick={() => history.push('/login')}
+            isDisabled={name === ''}
           >
             Login
           </Button>

@@ -3,20 +3,17 @@ import { connect } from 'react-redux';
 import { Box, Text } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
-import Timer from './timer';
-import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
+import Timer from './timer2';
+import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const GamePage = (props) => {
   const {
-    game, getPowerUps, getCurrentGame, getPrompt,
+    game, getPowerUps, getCurrentGame,
   } = props;
+
   useEffect(() => {
     getPowerUps();
-    getCurrentGame();
-    if (!game.prompt) {
-      getPrompt(game.difficulty);
-    }
-    console.log('props on gamePage are ', props);
+    getCurrentGame(props.match.params.id);
   }, []);
 
   return (
@@ -32,7 +29,7 @@ const GamePage = (props) => {
           Power Ups
         </Box>
       </div>
-      <Editor props={game} />
+      <Editor gamePageProps={game} />
       <div>
         <Timer />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
@@ -46,8 +43,7 @@ const mapStateToProps = (props) => (props);
 
 const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
-  getPrompt: () => dispatch(getPromptThunk()),
+  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

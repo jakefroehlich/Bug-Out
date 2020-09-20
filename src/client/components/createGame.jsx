@@ -15,37 +15,38 @@ const CreateGame = ({
     }
 
     return (
-        <div className="creategame">
-            <span>Create A Game</span>
-            <form
-                onSubmit={handleSubmit}>
+        <form
+            onSubmit={handleSubmit}
+            className="form">
+            <div className="creategame">
+                <span>Create Game</span>
                 <div className="diff">
-                <label>Difficulty: </label>
-                <select
-                    placeholder="Select Difficulty"
-                    onChange={(e) => setDifficulty(e.target.value)}
-                >
-                    <option value="easy" defaultValue> Easy </option>
-                    <option value="medium"> Medium </option>
-                    <option value="hard"> Hard </option>
-                </select>
+                    <label>Difficulty: </label>
+                    <select
+                        placeholder="Select Difficulty"
+                        onChange={(e) => setDifficulty(e.target.value)}
+                    >
+                        <option value="easy" defaultValue> Easy </option>
+                        <option value="medium"> Medium </option>
+                        <option value="hard"> Hard </option>
+                    </select>
                 </div>
                 <div className="rounds">
-                <label># of Rounds: </label>
-                <select
-                    placeholder="Select # of Rounds"
-                    onChange={(e) => setRounds(e.target.value)}
-                >
-                    <option value="1" defaultValue> 1 </option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
+                    <label># of Rounds: </label>
+                    <select
+                        placeholder="Select # of Rounds"
+                        onChange={(e) => setRounds(e.target.value)}
+                    >
+                        <option value="1" defaultValue> 1 </option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
                 </div>
-                <button className="creategamebutton"/>
-            </form>
-        </div>
+                <button className="creategamebutton">Create</ button>
+            </div>
+        </form>
     )
 }
 

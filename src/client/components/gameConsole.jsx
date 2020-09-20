@@ -47,12 +47,8 @@ const GameConsole = ({
     <div className='outerconsole'>
       {/* <Nav className='Nav'/> */}
       <div className='consolecontainer'>
-        <div className='creategamecontainer'>
           <CreateGame history={history} />
-        </div>
-        <div className='joingamecontainer'>
           <JoinGame history={history} />
-        </div>
       </div>
     </div>
   )

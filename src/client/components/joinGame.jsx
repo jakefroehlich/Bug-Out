@@ -11,20 +11,24 @@ const JoinGame = ({ joinGame }) => {
   };
 
   return (
-    <div>
-      <p>Join A Game</p>
-      <form
-        onSubmit={handleSubmit}
-      >
-        <input
-          className="joiningInput"
-          type="text"
-          value={gameCode}
-          placeholder="Enter Game Code"
-          onChange={(e) => setGameCode(e.target.value)}
-        />
-      </form>
-    </div>
+    <form
+      onSubmit={handleSubmit}
+      className="form"
+    >
+      <div className="joingame">
+        <span>Join Game</span>
+        {/* <div className="codeinput"> */}
+          <input
+            className="joiningInput"
+            type="text"
+            value={gameCode}
+            placeholder="Enter Game Code"
+            onChange={(e) => setGameCode(e.target.value)}
+          />
+        {/* </div> */}
+        <button className="joingamebutton">Join</ button>
+      </div>
+    </form>
   );
 };
 

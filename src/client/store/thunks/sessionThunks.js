@@ -2,13 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  getName, updateName, makeHost,
+  setSession, updateName, makeHost,
 } from '../actions';
 
-export const getNameThunk = () => (dispatch) => axios
-  .get('/session/name')
+export const setSessionThunk = () => (dispatch) => axios
+  .get('/session/current')
   .then((res) => {
-    dispatch(getName(res.data));
+    dispatch(setSession(res.data));
   })
   .catch((e) => {
     console.log(e);

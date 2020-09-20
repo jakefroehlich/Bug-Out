@@ -10,6 +10,7 @@ import {
   startGame,
   updateName,
   updateGame,
+  updateCode,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
@@ -29,6 +30,29 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
   .catch((e) => {
     console.log(e);
   });
+  
+export const updateGameCodeThunk = (code) => (dispatch) => axios
+  .put('/game/newGameCode', { code })
+  .then(({data}) => {
+    console.log('this code', data)
+    dispatch(updateCode(data))
+  })
+  .catch((e) => {
+    console.log('failed to update code', e);
+  })
+
+
+export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
+  console.log(rounds);
+  return axios
+    .post('/game/updateGame', { rounds, difficulty })
+    .then((game) => {
+      dispatch(updateGame(game.data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
 
 export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/${code}`, { code })
   .then(({ data }) => {

@@ -16,45 +16,52 @@ io.on('connection', (socket) => {
     formatMessage(botName, 'Confirmation: You have connected!'),
   );
 
-  // TODO - Add new user to message
-  socket.broadcast.emit(
-    'message',
-    formatMessage(botName, '{user} has joined the fray!'),
-  );
-
   socket.on('joinRoom', (code) => {
-    console.log('Joining room: ', code);
-    socket.join(code, () => {
-      socket.emit('playerUpdate');
+    socket.join(code);
+
+    socket.on('announce', (player) => {
+      io.to(code).emit('playerJoin', player)
+    })
+
+    socket.on('chatMsg', (msg, code, name) => {
+      console.log('chat code', code);
+      io.to(code).emit('message', formatMessage(name, msg));
     });
-  });
 
-  socket.on('leaveRoom', (code, player) => {
-    socket.leave(code, () => {
-      console.log('leaving room', code);
-      socket.to(code).emit('playerLeave', player);
-    });
-  });
+    // TODO - Add new user to message
+    // socket.broadcast.emit(
+    //   'message',
+    //   formatMessage(botName, '{user} has joined the fray!'),
+    // );
 
-  socket.on('newPlayer', (name, code) => {
-    io.to(code).emit('playersUpdate', name);
-  });
+    //   socket.on('newPlayer', (player, players) => {
+    //     players.push(player);
+    //     io.to(code).broadcast.emit('playerUpdate', players);
+    //   });
+    // });
 
-  socket.on('chatMsg', (msg, code, name) => {
-    console.log('chat code', code);
-    io.to(code).emit('message', formatMessage(name, msg));
-  });
+    // socket.on('leaveRoom', (code, player) => {
+    //   socket.leave(code, () => {
+    //     console.log('leaving room', code);
+    //     socket.to(code).emit('playerLeave', player);
+    //   });
+    // });
 
-  socket.on('disconnecting', () => {
-    const rooms = Object.keys(socket.rooms);
-    // the rooms array contains at least the socket ID
-    console.log('rooms', rooms);
-  });
+    // socket.on('newPlayer', (player, players, code) => {
+    //   players.push(player);
+    //   io.to(code).broadcast.emit('playerUpdate', players);
+    // });
 
-  socket.on('disconnect', () => {
-    // TODO Add username to message
-    console.log('disconnected from socket!');
-    io.emit('message', formatMessage(botName, '{user} has fled the scene!'));
+    // socket.on('disconnecting', () => {
+    //   const rooms = Object.keys(socket.rooms);
+    //   // the rooms array contains at least the socket ID
+    //   console.log('rooms', rooms);
+    // });
+
+    // socket.on('disconnect', () => {
+    //   // TODO Add username to message
+    //   console.log('disconnected from socket!');
+    //   io.emit('message', formatMessage(botName, '{user} has fled the scene!'));
   });
 });
 

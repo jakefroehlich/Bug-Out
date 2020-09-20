@@ -10,8 +10,9 @@ import {
   getCurrentGameThunk,
   findRandomGameThunk,
   updateNameThunk,
-  getNameThunk,
+  setSessionThunk,
   makeHostThunk,
+  updateGameCodeThunk,
 } from '../store/thunks';
 import { rmPlayer } from '../store/actions';
 import socket from '../utils/socket';
@@ -23,18 +24,48 @@ const LandingPage = ({
   updateName,
   removePlayer,
   findRandomGame,
+  session,
+  setSession,
+  makeHost,
+  generateCode,
 }) => {
   const [name, setName] = useState('');
-
-
+  // eslint-disable-next-line no-unused-vars
+  const [noName, setNoName] = useState(false);
+  console.log('session', session)
   console.log('game', game);
+  const thisPlayer = game.players.filter((p) => p.id === session.id)[0];
+
+  console.log(thisPlayer)
+
   useEffect(() => {
-    socket.on('playerLeave', (player) => {
-      console.log('player left :(');
-      removePlayer(player);
-    });
-    socket.emit('leaveRoom', game.code, game.players[0]);
+    getCurrentGame();
+    setSession();
+
+    // TODO: Figure out how to update player array - mutate first then send? Mutate in socket? Call API? We got options.
+    // socket.on('playerLeave', (player) => {
+    //   console.log('player left :(');
+    //   removePlayer(player);
+    // });
   }, []);
+
+  useEffect(() => {
+    if (session.name) {
+      setName(session.name);
+      setNoName(false);
+    }
+  }, [session.name]);
+
+  useEffect(() => {
+    if (game.code) {
+      generateCode(game.code);
+    }
+  }, [game.code]);
+
+  useEffect(() => {
+    console.log('ping')
+    socket.emit('announce', thisPlayer);
+  }, [thisPlayer]);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -95,8 +126,17 @@ const LandingPage = ({
             variantColor="yellow"
             margin="5px"
             onClick={() => {
-              updateName(name);
-              history.push('/create');
+              socket.emit('joinGame', game.code);
+              if (name === '' && noName === true) {
+                setNoName(true);
+              } else {
+                updateName(name)
+                  .then(() => {
+                    makeHost();
+                    setName('');
+                    history.push('/create');
+                  });
+              }
             }}
             isDisabled={name === ''}
           >
@@ -133,11 +173,12 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: () => dispatch(getCurrentGameThunk()),
-  getName: () => dispatch(getNameThunk()),
+  setSession: () => dispatch(setSessionThunk()),
   findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
   updateName: (name) => dispatch(updateNameThunk(name)),
   removePlayer: (player) => dispatch(rmPlayer(player)),
   makeHost: () => dispatch(makeHostThunk()),
+  generateCode: (code) => dispatch(updateGameCodeThunk(code)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

@@ -23,7 +23,6 @@ import socket from '../utils/socket';
 
 const CreateGame = ({
   history,
-  getCurrentGame,
   game,
   addMsg,
   createGame,

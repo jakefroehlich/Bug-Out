@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Box, Text } from '@chakra-ui/core';
-import Editor from './editor';
-import ChatBox from './ChatBox';
-import Timer from './timer2';
+import {
+  Editor, ChatBox, Timer, LeaveGameButton,
+} from './index';
 import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const GamePage = (props) => {
@@ -35,6 +35,7 @@ const GamePage = (props) => {
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
+        <LeaveGameButton passedProps={props} />
       </div>
     </div>
   );

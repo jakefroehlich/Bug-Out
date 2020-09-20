@@ -24,6 +24,7 @@ export const types = {
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
   SET_ROUND_TIMES: 'SET_ROUND_TIMES',
+  LEAVE_GAME: 'LEAVE_GAME',
 };
 
 const addPlayer = (player) => ({
@@ -139,6 +140,11 @@ const updateGame = (game) => ({
   payload: game,
 });
 
+const leaveGame = (session) => ({
+  type: types.LEAVE_GAME,
+  payload: session,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -163,4 +169,5 @@ export {
   startGame,
   updateGame,
   setGameTimes,
+  leaveGame,
 };

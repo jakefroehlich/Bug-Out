@@ -11,6 +11,11 @@ const sessionReducer = (state = initialState, action) => {
         ...state,
         name: action.payload,
       };
+    case types.LEAVE_GAME:
+      return {
+        ...state,
+        session: action.payload,
+      };
     default:
       return state;
   }

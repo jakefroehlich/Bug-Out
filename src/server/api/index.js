@@ -33,7 +33,7 @@ app.use(async (req, res, next) => {
       expires: new Date(Date.now() + oneWeek),
     });
     req.session_id = session.id;
-    next();
+    // next();
   } else {
     req.session_id = req.cookies.session_id;
     const user = await User.findOne({

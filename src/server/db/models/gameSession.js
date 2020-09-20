@@ -22,9 +22,9 @@ const GameSession = db.define('gameSession', {
     defaultValue: 1,
   },
   difficulty: {
-    type: ENUM('easy', 'medium', 'hard'),
+    type: ENUM('Easy', 'Medium', 'Hard'),
     allowNull: false,
-    defaultValue: 'easy',
+    defaultValue: 'Easy',
   },
   active: {
     type: BOOLEAN,

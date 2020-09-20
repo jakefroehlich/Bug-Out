@@ -39,6 +39,7 @@ gameRouter.post('/createGame', async (req, res) => {
 gameRouter.put('/player/:gameSessionId', async (req, res) => {
   try {
     const { gameSessionId } = req.params;
+    console.log(req.params)
     const session = await Session.findOne({ where: { id: req.cookies.session_id } });
     await session.update({ gameSessionId });
     const gameSession = await GameSession.findOne({ where: { id: gameSessionId }, include: [Session] });

@@ -18,6 +18,7 @@ import socket from '../utils/socket';
 
 const LandingPage = ({
   game,
+  session,
   history,
   updateName,
   removePlayer,
@@ -25,7 +26,9 @@ const LandingPage = ({
 }) => {
   const [name, setName] = useState('');
 
+
   console.log('game', game);
+  console.log('session', session);
   useEffect(() => {
     socket.on('playerLeave', (player) => {
       console.log('player left :(');

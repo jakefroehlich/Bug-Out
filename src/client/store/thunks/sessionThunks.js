@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  getName, updateName, makeHost,
+  getName, updateName, makeHost, leaveGame,
 } from '../actions';
 
 export const getNameThunk = () => (dispatch) => axios
@@ -29,5 +29,15 @@ export const makeHostThunk = () => (dispatch) => axios
     dispatch(makeHost(res.data));
   })
   .catch((e) => {
+    console.log(e);
+  });
+
+export const leaveGameThunk = () => (dispatch) => axios
+  .put('/session/leaveGame')
+  .then((res) => {
+    dispatch(leaveGame(res.data));
+  })
+  .catch((e) => {
+    console.log('error leaving game');
     console.log(e);
   });

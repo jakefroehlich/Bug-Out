@@ -52,6 +52,17 @@ sessionRouter.put('/score', async (req, res) => {
   }
 });
 
+sessionRouter.put('/leaveGame', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    session.update({ score: 0, gameSessionId: null });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error updating score');
+    console.log(e);
+  }
+});
+
 module.exports = {
   path: '/session',
   router: sessionRouter,

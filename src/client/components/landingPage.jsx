@@ -40,23 +40,23 @@ const LandingPage = ({
   };
 
   return (
-    <div className="landing">
-      <img className="landingimg" />
-      <div
-        className="landingform">
-      <form
-        onSubmit={handleSubmit}
-      >
-        <input
-          className="landingInput"
-          type="text"
-          value={alias}
-          placeholder="Enter Preferred Alias"
-          onChange={(e) => setAlias(e.target.value)}
-        />
-      </form>
+    <form
+      onSubmit={handleSubmit}
+    >
+      <div className="landing">
+        <div
+          className="landingform">
+          <img className="landingimg" src="https://i.ibb.co/MDgDr1N/Bug-Out-Logo.png" />
+          <input
+            className="landingInput"
+            type="text"
+            value={alias}
+            placeholder="Enter Preferred Alias"
+            onChange={(e) => setAlias(e.target.value)}
+          />
+        </div>
       </div>
-    </div>
+    </form>
   );
 
   // return (

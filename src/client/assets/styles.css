@@ -1,8 +1,6 @@
-#app {
-    width: 100%;
-    height: 100%;
+#body {
     background-image: url(https://i.ibb.co/b70VqB4/Artboard-1.png);
-    background-size: contain;
+    background-size: cover;
 }
 
 .landing {
@@ -14,14 +12,31 @@
     width: 100%;
 }
 
+.landingimg {
+    height: 80%;
+    width: 80%;
+}
+
 .landingform {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: plum;
-    width: 100%;
-    height: 100px;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border-radius: 3%;
+    width: 40%;
+    height: 60%;
+    border: 2px solid red;
+    box-shadow:
+        0 0 60px 30px #fff,
+        0 0 100px 60px red
+        0 0 140px 90px #fff;
+}
+
+.landingform input {
+    width: 40%;
+    border: 2px solid red;
+    border-radius: 4px;
 }
 
 .consoleContainer {

@@ -57,6 +57,7 @@ gameRouter.post('/createGame', async (req, res) => {
     console.log(e);
   }
 });
+
 // Add player to a game upon creating the game.
 gameRouter.put('/player/:gameSessionId', async (req, res) => {
   try {

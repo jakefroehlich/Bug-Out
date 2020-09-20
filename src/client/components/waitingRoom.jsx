@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
@@ -14,19 +15,19 @@ import {
 import Chatbox from './ChatBox';
 import { addPlayer, addMessage } from '../store/actions';
 import {
-  getCurrentGameThunk,
-  setSessionThunk,
+  getCurrentGameThunk, setRoundTimes, setSessionThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
 
 const WaitingRoom = ({
   game,
   getCurrentGame,
-  createGame,
   history,
   newPlayer,
   addMsg,
   setSession,
+  match,
+  setRoundTimes,
 }) => {
   const [rounds, setRounds] = useState('');
   const [difficulty, setDifficulty] = useState('Beginner');
@@ -34,22 +35,9 @@ const WaitingRoom = ({
   useEffect(() => {
     getCurrentGame();
     setSession();
-    socket.on('message', (message) => {
-      addMsg(message);
-    });
-    socket.on('playerJoin', (player) => {
-      console.log('new player!');
-      getCurrentGame();
-    });
   }, []);
 
-  useEffect(() => {
-    if (game.code) {
-      socket.emit('joinRoom', game.code);
-    }
-  }, [game.code]);
-
-  console.log('game is ', game);
+  console.log('game', game)
 
   return (
     <div>
@@ -80,10 +68,10 @@ const WaitingRoom = ({
             p={4}
             bg="15c912"
           >
-            <Text>The Competition</Text>
+            {/* <Text>The Competition</Text>
             {game.players.map((player) => (
               <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
-            ))}
+            ))} */}
           </Box>
         </div>
         <div style={{ padding: '10px' }}>
@@ -135,7 +123,7 @@ const WaitingRoom = ({
           <Chatbox />
         </Box>
       </div>
-      {/* <div style={{ textAlign: 'center' }}>
+      <div style={{ textAlign: 'center' }}>
         <Button
           h="10%"
           w="50%"
@@ -143,13 +131,13 @@ const WaitingRoom = ({
           variantColor="teal"
           variant="outline"
           onClick={() => {
-            createGame(rounds, difficulty);
-            history.push('/loading-game');
+            setRoundTimes(game.id);
+            history.push(`/game/${game.id}`);
           }}
         >
           Play!
         </Button>
-      </div> */}
+      </div>
     </div>
   );
 };
@@ -157,11 +145,12 @@ const WaitingRoom = ({
 const mapStateToProps = ({game, user}) => ({ game, user });
 
 const mapDispatchToProps = (dispatch) => ({
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
   createGame: () => dispatch(createGameThunk(rounds, difficulty)),
   newPlayer: (player) => dispatch(addPlayer(player)),
   addMsg: (msg) => dispatch(addMessage(msg)),
   setSession: () => dispatch(setSessionThunk()),
+  setRoundTimes: (id) => dispatch(setRoundTimes(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

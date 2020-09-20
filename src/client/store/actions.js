@@ -25,6 +25,7 @@ export const types = {
   UPDATE_GAME: 'UPDATE_GAME',
   UPDATE_CODE: 'UPDATE_CODE',
   UPDATE_ALIAS: 'UPDATE_ALIAS',
+  SET_ROUND_TIMES: 'SET_ROUND_TIMES',
 };
 
 const addPlayer = (player) => ({
@@ -125,6 +126,11 @@ const addScoreAction = (score) => ({
   payload: score,
 });
 
+const setGameTimes = (roundStart, roundEnd) => ({
+  type: types.SET_ROUND_TIMES,
+  payload: { start: roundStart, end: roundEnd },
+});
+
 const startGame = (game) => ({
   type: types.START_GAME,
   payload: game,
@@ -171,6 +177,7 @@ export {
   updateGame,
   updateCode,
   updateAlias,
+  setGameTimes,
 };
 
 

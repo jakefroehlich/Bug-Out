@@ -12,7 +12,7 @@ const CreateGame = ({
     const handleSubmit = (e) => {
         e.preventDefault();
         createGame(rounds, difficulty, history);
-    }
+    };
 
     return (
         <form
@@ -44,7 +44,7 @@ const CreateGame = ({
                         <option value="5">5</option>
                     </select>
                 </div>
-                <button className="creategamebutton">Create</ button>
+                <button className="creategamebutton" type="submit">Create</ button>
             </div>
         </form>
     )

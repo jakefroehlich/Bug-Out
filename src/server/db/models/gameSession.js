@@ -40,6 +40,15 @@ const GameSession = db.define('gameSession', {
   },
   prompt: {
     type: JSON,
+    allowNull: true,
+  },
+  roundEnd: {
+    type: STRING,
+    allowNull: true,
+  },
+  roundStart: {
+    type: STRING,
+    allowNull: true,
   },
 });
 

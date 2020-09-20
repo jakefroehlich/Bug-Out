@@ -14,13 +14,16 @@ const {codeGenerator} = require('../utils');
 const gameRouter = Router();
 
 // getsCurrentGame and players belonging to that game
-gameRouter.get('/current/:id', async (req, res) => {
+gameRouter.get('/current', async (req, res) => {
   try {
-    const { id } = req.params;
-    console.log('id', id)
-    const game = await GameSession.findOne({ where: { id }, include: [Session] });
-    console.log('game', game)
-    res.send(game);
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
+    const players = await Session.findAll({ where: { gameSessionId: game.id } });
+    const hostStatus = session.dataValues.host;
+    console.log('session', session);
+    // console.log('game', game);
+    // console.log('players', players);
+    res.send({ game, players, hostStatus });
   } catch (e) {
     console.log('Error finding current game');
     console.log(e);
@@ -83,6 +86,22 @@ gameRouter.put('/addplayer/:code', async (req, res) => {
     res.send(updatedGameSession);
   } catch (e) {
     res.status(404).send('failure');
+    console.log('Error updating game session with player');
+    console.log(e);
+  }
+});
+
+//  update timing on the game session
+gameRouter.put('/game-times/:id', async (req, res) => {
+  try {
+    const { roundEnd, roundStart } = req.body;
+    const { id } = req.params;
+    const gameSession = await GameSession.findOne({ where: { id } });
+    await gameSession.update({ roundEnd, roundStart });
+
+    const updatedGameSession = await GameSession.findOne({ where: { id }, include: [Session] });
+    res.send(updatedGameSession);
+  } catch (e) {
     console.log('Error updating game session with player');
     console.log(e);
   }

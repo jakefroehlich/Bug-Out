@@ -33,7 +33,7 @@ app.use(async (req, res, next) => {
       expires: new Date(Date.now() + oneWeek),
     });
     req.session_id = session.id;
-    // next();
+    next();
   } else {
     req.session_id = req.cookies.session_id;
     const user = await User.findOne({
@@ -51,15 +51,15 @@ app.use(async (req, res, next) => {
   }
 });
 
-app.use(async (req, res, next) => {
-  const session = await Session.findOne({ where: { id: req.session_id } });
-  if (!session && req.cookies.session_id) {
-    const newSession = await Session.create({ id: req.cookies.session_id });
-    req.session_id = newSession.id;
-    // next();
-  }
-  next();
-});
+// app.use(async (req, res, next) => {
+//   const session = await Session.findOne({ where: { id: req.session_id } });
+//   if (!session && req.cookies.session_id) {
+//     const newSession = await Session.create({ id: req.cookies.session_id });
+//     req.session_id = newSession.id;
+//     // next();
+//   }
+//   next();
+// });
 
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));

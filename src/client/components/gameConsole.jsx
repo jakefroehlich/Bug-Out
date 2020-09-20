@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Text,
@@ -12,7 +12,8 @@ import {
   FormLabel,
   Button,
 } from '@chakra-ui/core';
-import ChatBox from './ChatBox';
+import CreateGame from './createGame';
+import JoinGame from './joinGame';
 import { addMessage, addPlayer, rmPlayer } from '../store/actions';
 import {
   createGameThunk,
@@ -20,9 +21,8 @@ import {
   setSessionThunk,
   getCurrentGameThunk,
 } from '../store/thunks';
-import socket from '../utils/socket';
 
-const CreateGame = ({
+const GameConsole = ({
   history,
   game,
   session,
@@ -38,7 +38,7 @@ const CreateGame = ({
 
   return (
     <div className='outerConsole'>
-      <Nav className='Nav'/>
+      {/* <Nav className='Nav'/> */}
       <div className='consoleContainer'>
         <div className='createGame'>
           <CreateGame />
@@ -103,11 +103,11 @@ const CreateGame = ({
   //               placeholder="Select Difficulty"
   //               onChange={(e) => setDifficulty(e.target.value)}
   //             >
-  //               <option value="easy" defaultValue>
-  //                 Easy
-  //               </option>
-  //               <option value="medium"> Medium </option>
-  //               <option value="hard"> Hard </option>
+                // <option value="easy" defaultValue>
+                //   Easy
+                // </option>
+                // <option value="medium"> Medium </option>
+                // <option value="hard"> Hard </option>
   //             </Select>
   //           </FormControl>
   //           <FormControl>
@@ -116,13 +116,13 @@ const CreateGame = ({
   //               placeholder="Select No. of Rounds"
   //               onChange={(e) => setRounds(e.target.value)}
   //             >
-  //               <option value="1" defaultValue>
-  //                 1
-  //               </option>
-  //               <option value="2">2</option>
-  //               <option value="3">3</option>
-  //               <option value="4">4</option>
-  //               <option value="5">5</option>
+                // <option value="1" defaultValue>
+                //   1
+                // </option>
+                // <option value="2">2</option>
+                // <option value="3">3</option>
+                // <option value="4">4</option>
+                // <option value="5">5</option>
   //             </Select>
   //           </FormControl>
   //         </Box>
@@ -187,7 +187,7 @@ const mapDispatchToProps = (dispatch) => ({
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);
+export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);
 
 
 //This is partly because i've been fucking with it so.

@@ -4,6 +4,7 @@ const initialState = {
   playerName: null,
   score: 0,
   correctAnswer: false,
+  playerPowerUps: [],
 };
 
 const inputReducer = (state = initialState, action) => {

@@ -23,6 +23,7 @@ export const types = {
   ADD_SCORE: 'ADD_SCORE',
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
+  SET_ROUND_TIMES: 'SET_ROUND_TIMES',
 };
 
 const addPlayer = (player) => ({
@@ -123,6 +124,11 @@ const addScoreAction = (score) => ({
   payload: score,
 });
 
+const setGameTimes = (roundStart, roundEnd) => ({
+  type: types.SET_ROUND_TIMES,
+  payload: { start: roundStart, end: roundEnd },
+});
+
 const startGame = (game) => ({
   type: types.START_GAME,
   payload: game,
@@ -156,4 +162,5 @@ export {
   addScoreAction,
   startGame,
   updateGame,
+  setGameTimes,
 };

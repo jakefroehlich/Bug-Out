@@ -93,7 +93,6 @@ const seed = async () => {
     seedPrompt();
     users.map((user) => models.User.create(user));
     powerups.map((powerup) => models.Powerup.create(powerup));
-    models.GameSession.create();
     console.log(chalk.green('DB SEEDED'));
   } catch (e) {
     console.log(chalk.red('ERROR SEEDING DB'), e);

@@ -1,6 +1,8 @@
 /* eslint-disable no-shadow */
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+import moment from 'moment';
+
 import {
   getCurrentGame,
   getPrompt,
@@ -10,6 +12,7 @@ import {
   startGame,
   updateName,
   updateGame,
+  setGameTimes,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
@@ -19,7 +22,7 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
     axios.put(`/game/player/${gameSessionId}`)
       .then(({ data }) => {
         dispatch(updateGame(data));
-        history.push(`/game/${data.id}`);
+        history.push(`/waiting/${data.id}`);
       })
       .catch((e) => {
         console.log(e);
@@ -88,6 +91,29 @@ export const setCorrect = () => (dispatch) => {
 
 export const addScore = (score) => (dispatch) => {
   dispatch(addScoreAction(score));
+};
+
+export const setRoundTimes = (id) => (dispatch) => {
+  const year = moment().year();
+  const month = moment().month();
+  const day = moment().date();
+  let hour = moment().hour();
+  const minute = moment().minute();
+  const seconds = moment().seconds();
+
+  let newMin = minute + 10;
+  if (newMin > 59) {
+    hour += 1;
+    newMin -= 60;
+  }
+
+  const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
+  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds}`;
+  console.log(roundStart, roundEnd);
+  axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
+    .then(() => {
+      dispatch(setGameTimes(roundStart, roundEnd));
+    });
 };
 
 export const startGameThunk = (currentGameId) => (dispatch) => axios

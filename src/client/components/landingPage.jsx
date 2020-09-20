@@ -38,7 +38,7 @@ const LandingPage = ({
     e.preventDefault();
     console.log('submit handled', alias)
     updateUserAlias(alias);
-    history.push('/')
+    history.push('/console')
   };
 
   return (

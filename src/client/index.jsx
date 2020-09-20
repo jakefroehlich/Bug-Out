@@ -30,7 +30,7 @@ const App = () => (
           <Route exact path="/About" component={About} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/account" component={LoggedIn} />
-          <Route exact path="/create" component={CreateGame} />
+          <Route exact path="/console" component={GameConsole} />
           <Route exact path="/loading-game" component={LoadingGame} />
           <Route exact path="/game/:id" component={GamePage} />
           <Route exact path="/join" component={JoinGame} />

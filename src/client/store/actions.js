@@ -24,6 +24,7 @@ export const types = {
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
   UPDATE_CODE: 'UPDATE_CODE',
+  UPDATE_ALIAS: 'UPDATE_ALIAS',
 };
 
 const addPlayer = (player) => ({
@@ -137,6 +138,11 @@ const updateGame = (game) => ({
 const updateCode = (code) => ({
   type: types.UPDATE_CODE,
   code,
+});
+
+const updateAlias = (alias) => ({
+  type: types.UPDATE_ALIAS,
+  alias,
 })
 
 export {
@@ -163,4 +169,8 @@ export {
   startGame,
   updateGame,
   updateCode,
+  updateAlias,
 };
+
+
+//AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

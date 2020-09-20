@@ -11,7 +11,7 @@ sessionRouter.get('/current', async (req, res) => {
     const session = await Session.findOne({ where: { id: req.session_id } });
     res.status(201).send(session);
   } catch (e) {
-    console.log('Error updating name');
+    console.log('Error getting session');
     console.log(e);
   }
 });

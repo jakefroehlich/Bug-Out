@@ -2,6 +2,7 @@ import { types } from '../actions';
 
 const initialGameState = {
   id: '',
+  alias: '',
   code: '',
   rounds: '',
   players: [],
@@ -59,7 +60,13 @@ const gameReducer = (state = initialGameState, action) => {
     case types.UPDATE_CODE:
       return {
         ...state,
-        code,
+        code: action.code,
+      }
+    case types.UPDATE_ALIAS:
+      
+      return {
+        ...state,
+        alias: action.alias,
       }
     default:
       return state;

@@ -14,7 +14,7 @@ import {
   LoggedIn,
   About,
   LandingPage,
-  CreateGame,
+  GameConsole,
   LoadingGame,
   WaitingRoom,
   JoinGame,

@@ -8,6 +8,7 @@ const CreateGame = ({
 }) => {
     const [rounds, setRounds] = useState(3);
     const [difficulty, setDifficulty] = useState('easy');
+    console.log(history)
 
     const handleSubmit = (e) => {
         e.preventDefault();

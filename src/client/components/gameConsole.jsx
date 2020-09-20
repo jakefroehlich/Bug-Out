@@ -33,7 +33,7 @@ const GameConsole = ({
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('easy');
   const thisPlayer = game.players.filter((p) => p.id === session.id)[0];
-  console.log('game', game);
+  console.log('history', history);
 
   return (
     <div className='outerConsole'>

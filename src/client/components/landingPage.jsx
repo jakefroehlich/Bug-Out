@@ -36,9 +36,9 @@ const LandingPage = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit handled', alias)
+    console.log('submit handled', alias);
     updateUserAlias(alias);
-    history.push('/console')
+    history.push('/console');
   };
 
   return (
@@ -54,7 +54,6 @@ const LandingPage = ({
           onChange={(e) => setAlias(e.target.value)}>
           </input>
       </form>
-
     </div>
   )
 

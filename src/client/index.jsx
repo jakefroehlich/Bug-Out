@@ -6,6 +6,7 @@ import {
   Switch,
   Route,
   Redirect,
+  BrowserRouter
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@chakra-ui/core';
@@ -25,7 +26,7 @@ import GamePage from './components/gamePage';
 const App = () => (
   <Provider store={store}>
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/About" component={About} />
           <Route exact path="/login" component={LoginForm} />
@@ -38,7 +39,7 @@ const App = () => (
           <Route exact path="/" component={LandingPage} />
           <Redirect to="/" />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
 );

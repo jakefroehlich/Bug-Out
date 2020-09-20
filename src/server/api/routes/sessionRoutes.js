@@ -6,10 +6,10 @@ const {
 
 const sessionRouter = Router();
 
-sessionRouter.get('/name', async (req, res) => {
+sessionRouter.get('/current', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
-    res.status(201).send(session.name);
+    res.status(201).send(session);
   } catch (e) {
     console.log('Error updating name');
     console.log(e);

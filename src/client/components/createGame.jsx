@@ -18,24 +18,26 @@ import {
   updateGameThunk,
   getCurrentGameThunk,
   startGameThunk,
-  getNameThunk,
+  setSessionThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
 
 const CreateGame = ({
   history,
-  getCurrentGame,
+  messages,
   game,
+  session,
   addMsg,
   newPlayer,
-  getName,
+  setSession,
   removePlayer,
   updateGame,
+  getCurrentGame,
   startGame,
 }) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('Easy');
-  // const socket = io();
+  const thisPlayer = game.players.filter((p) => p.id === session.id)[0];
   console.log('game', game);
 
   // useEffect(() => {
@@ -48,31 +50,38 @@ const CreateGame = ({
   //   // });
   // }, []);
 
-  useEffect(() => {
-    if (game.code) {
-      socket.emit('joinRoom', game.code);
-      console.log('effect 1 used');
-    }
-  }, [game.code]);
+  // useEffect(() => {
+  //   if (game.code) {
+  //     socket.emit('joinRoom', game.code);
+  //     console.log('effect 1 used');
+  //   }
+  // }, [game.code]);
 
   useEffect(() => {
     getCurrentGame();
-    getName();
+    setSession();
     socket.on('message', (message) => {
+      console.log('message baby')
       addMsg(message);
     });
-    socket.on('playerUpdate', () => {
-      console.log('new player!');
-      getCurrentGame();
-      // newPlayer(player);
-    });
-    socket.on('playerLeave', (player) => {
-      console.log('player left :(');
-      removePlayer(player);
-    });
+    // socket.on('playerLeave', (player) => {
+    //   console.log('player left :(');
+    //   removePlayer(player);
+    // });
 
     console.log('effect 2 used!');
   }, []);
+
+  useEffect(() => {
+    console.log('ping')
+    socket.emit('announce', thisPlayer);
+  }, [thisPlayer]);
+
+  // useEffect(() => {
+  //   if (game.code) {
+  //     socket.emit('joinRoom', game.code);
+  //   }
+  // }, [game.code]);
 
   return (
     <div>
@@ -201,7 +210,7 @@ const CreateGame = ({
   );
 };
 
-const mapStateToProps = ({ game, user, input }) => ({ game, user, input });
+const mapStateToProps = ({ game, user, input, session, messages }) => ({ game, user, input, session, messages });
 
 const mapDispatchToProps = (dispatch) => ({
   newPlayer: (player) => dispatch(addPlayer(player)),
@@ -210,7 +219,7 @@ const mapDispatchToProps = (dispatch) => ({
   createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
   updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
   addMsg: (msg) => dispatch(addMessage(msg)),
-  getName: () => dispatch(getNameThunk()),
+  setSession: () => dispatch(setSessionThunk()),
   startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 

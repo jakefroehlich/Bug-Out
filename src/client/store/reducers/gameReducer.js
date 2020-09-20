@@ -56,6 +56,11 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         active: action.payload.active,
       };
+    case types.UPDATE_CODE:
+      return {
+        ...state,
+        code,
+      }
     default:
       return state;
   }

@@ -8,6 +8,7 @@ const {
     Powerup,
   },
 } = require('../../db/index');
+const {codeGenerator} = require('../utils');
 
 const gameRouter = Router();
 
@@ -28,6 +29,25 @@ gameRouter.get('/current', async (req, res) => {
   }
 });
 
+gameRouter.put('/newGameCode', async(req, res) => {
+  const { code } = req.body;
+  console.log(req.body)
+  try {
+    const gameSession = await GameSession.findOne({ where: { code: code } });
+    const newCode = codeGenerator();
+    let check = await GameSession.findOne({ where: { code: newCode } });
+    while (check) {
+      newCode = codeGenerator();
+      check = await GameSession.findOne({ where: { code: newCode } });
+    }
+    await gameSession.update({ code: newCode });
+    res.send(newCode);
+  }
+  catch (e) {
+    console.log('Could not update code', e);
+  }
+})
+
 // Create game session and set the number of rounds.
 gameRouter.post('/updateGame', async (req, res) => {
   try {
@@ -38,8 +58,7 @@ gameRouter.post('/updateGame', async (req, res) => {
     await currentGame.update({ rounds, difficulty });
     res.send(currentGame);
   } catch (e) {
-    console.log('Error updating game session');
-    console.log(e);
+    console.log('Error updating game session', e);
   }
 });
 

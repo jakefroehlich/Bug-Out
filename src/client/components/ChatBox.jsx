@@ -12,8 +12,6 @@ import { addMessage } from '../store/actions';
 const ChatBox = ({ msgs, game, session }) => {
   const [chatMsg, setChatMsg] = useState('');
 
-  console.log('render', session);
-
   const handleChange = (e) => {
     e.preventDefault();
     setChatMsg(e.target.value);

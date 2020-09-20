@@ -7,6 +7,7 @@ import {
   getPowerUpsThunk,
   startGameThunk,
   updateGameThunk,
+  updateGameCodeThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -14,7 +15,7 @@ import {
   whoami,
 } from './loginThunks';
 import {
-  getNameThunk,
+  setSessionThunk,
   updateNameThunk,
   makeHostThunk,
 } from './sessionThunks';
@@ -27,11 +28,12 @@ export {
   loginThunk,
   logoutThunk,
   whoami,
-  getNameThunk,
+  setSessionThunk,
   setCorrect,
   addScore,
   getPowerUpsThunk,
   makeHostThunk,
   startGameThunk,
   updateGameThunk,
+  updateGameCodeThunk,
 };

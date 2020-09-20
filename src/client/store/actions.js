@@ -15,7 +15,7 @@ export const types = {
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
   GET_PROMPT: 'GET_PROMPT',
   UPDATE_NAME: 'UPDATE_NAME',
-  GET_NAME: 'GET_NAME',
+  SET_SESSION: 'SET_SESSION',
   SET_POWERUPS: 'SET_POWERUPS',
   MAKE_HOST: 'MAKE_HOST',
   SET_CORRECT: 'SET_CORRECT',
@@ -23,6 +23,7 @@ export const types = {
   ADD_SCORE: 'ADD_SCORE',
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
+  UPDATE_CODE: 'UPDATE_CODE',
 };
 
 const addPlayer = (player) => ({
@@ -90,9 +91,9 @@ const getPrompt = (prompt) => ({
   payload: prompt,
 });
 
-const getName = (name) => ({
-  type: types.GET_NAME,
-  payload: name,
+const setSession = (session) => ({
+  type: types.SET_SESSION,
+  session,
 });
 
 const setPowerups = (powerups) => ({
@@ -133,6 +134,11 @@ const updateGame = (game) => ({
   payload: game,
 });
 
+const updateCode = (code) => ({
+  type: types.UPDATE_CODE,
+  code,
+})
+
 export {
   changeInitialLoading,
   login,
@@ -148,7 +154,7 @@ export {
   addPlayer,
   rmPlayer,
   updateName,
-  getName,
+  setSession,
   setPowerups,
   makeHost,
   setCorrectAnswer,
@@ -156,4 +162,5 @@ export {
   addScoreAction,
   startGame,
   updateGame,
+  updateCode,
 };

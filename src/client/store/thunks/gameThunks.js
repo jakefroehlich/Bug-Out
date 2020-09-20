@@ -9,7 +9,19 @@ import {
   startGame,
   updateName,
   updateGame,
+  updateCode,
 } from '../actions';
+
+export const updateGameCodeThunk = (code) => (dispatch) => axios
+  .put('/game/newGameCode', { code })
+  .then(({data}) => {
+    console.log('this code', data)
+    dispatch(updateCode(data))
+  })
+  .catch((e) => {
+    console.log('failed to update code', e);
+  })
+
 
 export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);

@@ -13,7 +13,7 @@ import { addScore } from '../store/thunks';
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
-  console.log('editor props', props)
+  console.log('editor props', props);
 
   const { prompt } = props.game;
 

@@ -19,7 +19,7 @@ import {
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
   .post('/game/createGame', { rounds, difficulty })
   .then(({ data }) => {
-    console.log('data', data)
+    console.log('data', data);
     const gameSessionId = data.id;
     axios.put(`/game/player/${gameSessionId}`)
       .then(({ data }) => {
@@ -33,17 +33,16 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
   .catch((e) => {
     console.log(e);
   });
-  
+
 export const updateGameCodeThunk = (code) => (dispatch) => axios
   .put('/game/newGameCode', { code })
-  .then(({data}) => {
-    console.log('this code', data)
-    dispatch(updateCode(data))
+  .then(({ data }) => {
+    console.log('this code', data);
+    dispatch(updateCode(data));
   })
   .catch((e) => {
     console.log('failed to update code', e);
-  })
-
+  });
 
 export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);
@@ -85,7 +84,7 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
   });
 
 export const getPromptThunk = (difficulty) => (dispatch) => {
-  console.log('getPromptsThunk difficulty:', difficulty)
+  console.log('getPromptsThunk difficulty:', difficulty);
   return axios
     .get(`/game/prompt/${difficulty}`)
     .then(({ data }) => {
@@ -95,7 +94,7 @@ export const getPromptThunk = (difficulty) => (dispatch) => {
     .catch((e) => {
       console.log(e);
     });
-}
+};
 
 export const getPowerUpsThunk = () => (dispatch) => axios
   .get('/game/powerups')

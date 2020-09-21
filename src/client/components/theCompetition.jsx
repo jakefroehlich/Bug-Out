@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getCurrentGameThunk } from '../store/thunks';
 
 //  Displays all the players in a given room
-const TheCompetition = ({ getCurrentGame, game, session }) => {
+const TheCompetition = ({ getCurrentGame, game }) => {
   const [roomPlayers, setRoomPlayers] = useState([]);
 
   useEffect(() => {
@@ -29,9 +29,8 @@ const TheCompetition = ({ getCurrentGame, game, session }) => {
   );
 };
 
-const mapStateToProps = ({ game, session }) => ({
+const mapStateToProps = ({ game }) => ({
   game,
-  session,
 });
 
 const mapDispatchToProps = (dispatch) => ({

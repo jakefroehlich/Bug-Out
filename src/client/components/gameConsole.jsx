@@ -36,22 +36,22 @@ const GameConsole = ({
 }) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('easy');
-  console.log('input', input)
+  console.log('input', input);
   console.log('session', session);
 
   useEffect(() => {
     setSession();
-  }, [])
+  }, []);
 
   return (
-    <div className='outerconsole'>
+    <div className="outerconsole">
       {/* <Nav className='Nav'/> */}
-      <div className='consolecontainer'>
-          <CreateGame history={history} />
-          <JoinGame history={history} />
+      <div className="consolecontainer">
+        <CreateGame history={history} />
+        <JoinGame history={history} />
       </div>
     </div>
-  )
+  );
   // return (
   //   <div>
   //     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -106,11 +106,11 @@ const GameConsole = ({
   //               placeholder="Select Difficulty"
   //               onChange={(e) => setDifficulty(e.target.value)}
   //             >
-                // <option value="easy" defaultValue>
-                //   Easy
-                // </option>
-                // <option value="medium"> Medium </option>
-                // <option value="hard"> Hard </option>
+  // <option value="easy" defaultValue>
+  //   Easy
+  // </option>
+  // <option value="medium"> Medium </option>
+  // <option value="hard"> Hard </option>
   //             </Select>
   //           </FormControl>
   //           <FormControl>
@@ -119,13 +119,13 @@ const GameConsole = ({
   //               placeholder="Select No. of Rounds"
   //               onChange={(e) => setRounds(e.target.value)}
   //             >
-                // <option value="1" defaultValue>
-                //   1
-                // </option>
-                // <option value="2">2</option>
-                // <option value="3">3</option>
-                // <option value="4">4</option>
-                // <option value="5">5</option>
+  // <option value="1" defaultValue>
+  //   1
+  // </option>
+  // <option value="2">2</option>
+  // <option value="3">3</option>
+  // <option value="4">4</option>
+  // <option value="5">5</option>
   //             </Select>
   //           </FormControl>
   //         </Box>
@@ -176,7 +176,11 @@ const GameConsole = ({
   // );
 };
 
-const mapStateToProps = ({ game, user, input, session, messages }) => ({ game, user, input, session, messages });
+const mapStateToProps = ({
+  game, user, input, session, messages,
+}) => ({
+  game, user, input, session, messages,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   upPlayers: (name) => dispatch(updatePlayers(name)),
@@ -193,9 +197,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);
 
+// This is partly because i've been fucking with it so.
 
-//This is partly because i've been fucking with it so.
+// I think we need to revert to the last commit
 
-//I think we need to revert to the last commit
-
-//YOu can just share your screen for a sec if you want
+// YOu can just share your screen for a sec if you want

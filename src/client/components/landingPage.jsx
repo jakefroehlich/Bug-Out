@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 //   Button, FormControl, Text, Box, Input,
 // } from '@chakra-ui/core';
 import {
-  getCurrentGameThunk,
-  findRandomGameThunk,
+  // getCurrentGaeThunk,
+  // findRandomGameThunk,
   updateNameThunk,
   setSessionThunk,
-  makeHostThunk,
-  updateGameCodeThunk,
+  // makeHostThunk,
+  // updateGameCodeThunk,
 } from '../store/thunks';
-import { updateAlias } from '../store/actions';
+// import { updateAlias } from '../store/actions';
 
 const LandingPage = ({
   session,
@@ -29,7 +29,8 @@ const LandingPage = ({
 
   useEffect(() => {
     setSession();
-    // I think that's a good one to have as our first useeffect right - since it's gonna be needed anyways
+    // I think that's a good one to have as our first useeffect right -
+    // since it's gonna be needed anyways
   }, []);
 
   const handleSubmit = (e) => {
@@ -45,8 +46,9 @@ const LandingPage = ({
     >
       <div className="landing">
         <div
-          className="landingform">
-          <img className="landingimg" src="https://i.ibb.co/MDgDr1N/Bug-Out-Logo.png" />
+          className="landingform"
+        >
+          <img className="landingimg" src="https://i.ibb.co/MDgDr1N/Bug-Out-Logo.png" alt="BugOut" />
           <input
             className="landingInput"
             type="text"

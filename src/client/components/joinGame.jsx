@@ -18,15 +18,15 @@ const JoinGame = ({ joinGame }) => {
       <div className="joingame">
         <span>Join Game</span>
         {/* <div className="codeinput"> */}
-          <input
-            className="joiningInput"
-            type="text"
-            value={gameCode}
-            placeholder="Enter Game Code"
-            onChange={(e) => setGameCode(e.target.value)}
-          />
+        <input
+          className="joiningInput"
+          type="text"
+          value={gameCode}
+          placeholder="Enter Game Code"
+          onChange={(e) => setGameCode(e.target.value)}
+        />
         {/* </div> */}
-        <button className="joingamebutton">Join</ button>
+        <button className="joingamebutton" type="submit">Join</button>
       </div>
     </form>
   );

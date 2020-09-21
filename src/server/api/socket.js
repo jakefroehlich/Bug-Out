@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const socketio = require('socket.io');
 const { app, server } = require('./server');
 const formatMessage = require('../utils/formatMessage');
@@ -20,8 +21,8 @@ io.on('connection', (socket) => {
     socket.join(code);
 
     socket.on('announce', (player) => {
-      io.to(code).emit('playerJoin', player)
-    })
+      io.to(code).emit('playerJoin', player);
+    });
 
     socket.on('chatMsg', (msg, code, name) => {
       console.log('chat code', code);

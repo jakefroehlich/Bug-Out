@@ -78,7 +78,7 @@ const newGame = (game) => ({
   payload: game,
 });
 
-const getCurrentGame = ({game, hostStatus, players}) => ({
+const getCurrentGame = ({ game, hostStatus, players }) => ({
   type: types.GET_CURRENT_GAME,
   payload: game,
   hostStatus,
@@ -186,5 +186,4 @@ export {
   setGameTimes,
 };
 
-
-//AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER
+// AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

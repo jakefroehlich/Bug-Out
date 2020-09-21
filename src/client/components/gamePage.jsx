@@ -7,21 +7,21 @@ import Timer from './timer2';
 import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
 const GamePage = ({
-  game, getPowerUps, getCurrentGame, fetchPrompt, match
+  game, getPowerUps, getCurrentGame, fetchPrompt, match,
 }) => {
   useEffect(() => {
-    console.log('gamepage effect used', match)
+    console.log('gamepage effect used', match);
     getPowerUps();
     getCurrentGame(match.params.id);
     // fetchPrompt(game.difficulty);
   }, []);
 
   useEffect(() => {
-    if(game.difficulty) {
-      console.log(game.difficulty)
+    if (game.difficulty) {
+      console.log(game.difficulty);
       fetchPrompt(game.difficulty);
     }
-  }, [game.difficulty])
+  }, [game.difficulty]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -30,7 +30,7 @@ const GamePage = ({
           Competition
           {game.players ? game.players.map((player) => (
             <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
-          )): null}
+          )) : null}
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
           Power Ups

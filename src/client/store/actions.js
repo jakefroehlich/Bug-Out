@@ -24,6 +24,7 @@ export const types = {
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
   UPDATE_CODE: 'UPDATE_CODE',
+  UPDATE_HOST: 'UPDATE_HOST',
   UPDATE_ALIAS: 'UPDATE_ALIAS',
   SET_ROUND_TIMES: 'SET_ROUND_TIMES',
 };
@@ -78,7 +79,7 @@ const newGame = (game) => ({
   payload: game,
 });
 
-const getCurrentGame = ({game, hostStatus, players}) => ({
+const getCurrentGame = ({ game, hostStatus, players }) => ({
   type: types.GET_CURRENT_GAME,
   payload: game,
   hostStatus,
@@ -110,8 +111,8 @@ const updateName = (name) => ({
   payload: name,
 });
 
-const makeHost = (hostId) => ({
-  type: types.MAKE_HOST,
+const updateHost = (hostId) => ({
+  type: types.UPDATE_HOST,
   payload: hostId,
 });
 
@@ -170,7 +171,7 @@ export {
   updateName,
   setSession,
   setPowerups,
-  makeHost,
+  updateHost,
   setCorrectAnswer,
   setWrongAnswer,
   addScoreAction,
@@ -180,5 +181,4 @@ export {
   setGameTimes,
 };
 
-
-//AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER
+// AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { joinGameThunk } from '../store/thunks/gameThunks';
 
-const JoinGame = ({ joinGame }) => {
+const JoinGame = ({ joinGame, history }) => {
   const [gameCode, setGameCode] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     joinGame(gameCode);
+    history.push('/waiting');
   };
 
   return (
@@ -18,15 +19,15 @@ const JoinGame = ({ joinGame }) => {
       <div className="joingame">
         <span>Join Game</span>
         {/* <div className="codeinput"> */}
-          <input
-            className="joiningInput"
-            type="text"
-            value={gameCode}
-            placeholder="Enter Game Code"
-            onChange={(e) => setGameCode(e.target.value)}
-          />
+        <input
+          className="joiningInput"
+          type="text"
+          value={gameCode}
+          placeholder="Enter Game Code"
+          onChange={(e) => setGameCode(e.target.value)}
+        />
         {/* </div> */}
-        <button className="joingamebutton" type="submit">Join</ button>
+        <button className="joingamebutton" type="submit">Join</button>
       </div>
     </form>
   );

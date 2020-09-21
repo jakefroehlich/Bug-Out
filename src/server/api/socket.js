@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 const socketio = require('socket.io');
 const { app, server } = require('./server');
 const formatMessage = require('../utils/formatMessage');

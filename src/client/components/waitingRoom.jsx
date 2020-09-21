@@ -8,7 +8,10 @@ import { setSessionThunk, getCurrentGameThunk, setRoundTimes } from '../store/th
 //  bring in TheCompetition
 //  bring in Chat
 
-const WaitingRoom = ({ setSession, getCurrentGame, game, session, setRoundTimes }) => {
+const WaitingRoom = ({
+  setSession, getCurrentGame, game, session,
+  // setRoundTimes,
+}) => {
   useEffect(() => {
     setSession(); // I wanna know who you are, where you're from, what you did
     getCurrentGame();
@@ -24,8 +27,8 @@ const WaitingRoom = ({ setSession, getCurrentGame, game, session, setRoundTimes 
         <Chatbox />
       </div>
       <div>
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           className={game.host ? 'visible' : 'hidden'}
           onClick={() => {}}
         >Start Game

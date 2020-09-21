@@ -20,7 +20,7 @@ gameRouter.get('/current', async (req, res) => {
     const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
     const players = await Session.findAll({ where: { gameSessionId: game.id } });
     const hostStatus = session.dataValues.host;
-    console.log('session', session);
+    // console.log('session', session);
     // console.log('game', game);
     // console.log('players', players);
     res.send({ game, players, hostStatus });
@@ -61,7 +61,7 @@ gameRouter.post('/createGame', async (req, res) => {
 });
 
 // Add player to a game upon creating the game.
-gameRouter.put('/player/', async (req, res) => {
+gameRouter.put('/player', async (req, res) => {
   try {
     const { gameSessionId } = req.body;
     const session = await Session.findOne({ where: { id: req.cookies.session_id } });
@@ -74,7 +74,7 @@ gameRouter.put('/player/', async (req, res) => {
 });
 
 // Add player to a game with game code.
-gameRouter.put('/addplayer/:code', async (req, res) => {
+gameRouter.put('/addplayer', async (req, res) => {
   try {
     const { code } = req.body;
     const gameSession = await GameSession.findOne({ where: { code } });

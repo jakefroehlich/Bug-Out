@@ -40,6 +40,17 @@ sessionRouter.post('/makeHost', async (req, res) => {
   }
 });
 
+sessionRouter.post('/removeHost', async (req, res) => {
+  try {
+    const session = await Session.findOne({ wehre: { id: req.session_id } });
+    session.update({ host: false });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error removing host');
+    console.log(e);
+  }
+});
+
 sessionRouter.put('/score', async (req, res) => {
   try {
     const { score } = req.body;

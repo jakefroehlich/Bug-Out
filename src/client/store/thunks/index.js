@@ -20,6 +20,7 @@ import {
   setSessionThunk,
   updateNameThunk,
   makeHostThunk,
+  removeHostThunk,
 } from './sessionThunks';
 
 export {
@@ -40,4 +41,5 @@ export {
   updateGameThunk,
   updateGameCodeThunk,
   setRoundTimes,
+  removeHostThunk,
 };

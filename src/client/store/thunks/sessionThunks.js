@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  setSession, updateName, makeHost,
+  setSession, updateName, updateHost,
 } from '../actions';
 
 export const setSessionThunk = () => (dispatch) => axios
@@ -26,11 +26,20 @@ export const updateNameThunk = (name) => (dispatch) => axios
 export const makeHostThunk = () => (dispatch) => axios
   .post('/session/makeHost')
   .then((res) => {
-    dispatch(makeHost(res.data));
+    dispatch(updateHost(res.data));
   })
   .catch((e) => {
     console.log(e);
   });
+
+export const removeHostThunk = () => (dispatch) => axios
+  .post('session/removeHost')
+  .then ((res) => {
+    dispatch(updateHost(res.data));
+  })
+  .catch((e) => {
+    console.log(e);
+  })
 
 // export const getRoomPlayersThunk = (gameSeshId) => (dispatch) => axios
 //   .get('/session/roomPlayers/:gameSeshId')

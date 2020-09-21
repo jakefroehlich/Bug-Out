@@ -14,42 +14,36 @@ import {
 } from '@chakra-ui/core';
 import CreateGame from './createGame';
 import JoinGame from './joinGame';
-import { addMessage, addPlayer, rmPlayer } from '../store/actions';
+import Nav from './Nav';
+
 import {
-  createGameThunk,
-  startGameThunk,
+  removeHostThunk,
   setSessionThunk,
   getCurrentGameThunk,
 } from '../store/thunks';
 
 const GameConsole = ({
   history,
-  input,
   session,
-  updateGame,
-  getCurrentGame,
-  startGame,
-  createGame,
-  updateUserAlias,
   setSession,
+  rmHost,
 }) => {
-  const [rounds, setRounds] = useState(3);
-  const [difficulty, setDifficulty] = useState('easy');
   console.log('session', session);
 
   useEffect(() => {
     setSession();
-  }, [])
+    rmHost();
+  }, []);
 
   return (
-    <div className='outerconsole'>
-      {/* <Nav className='Nav'/> */}
-      <div className='consolecontainer'>
-          <CreateGame history={history} />
-          <JoinGame history={history} />
+    <div className="outerconsole">
+      <Nav session={session}/>
+      <div className="consolecontainer">
+        <CreateGame history={history} />
+        <JoinGame history={history} />
       </div>
     </div>
-  )
+  );
   // return (
   //   <div>
   //     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -104,11 +98,11 @@ const GameConsole = ({
   //               placeholder="Select Difficulty"
   //               onChange={(e) => setDifficulty(e.target.value)}
   //             >
-                // <option value="easy" defaultValue>
-                //   Easy
-                // </option>
-                // <option value="medium"> Medium </option>
-                // <option value="hard"> Hard </option>
+  // <option value="easy" defaultValue>
+  //   Easy
+  // </option>
+  // <option value="medium"> Medium </option>
+  // <option value="hard"> Hard </option>
   //             </Select>
   //           </FormControl>
   //           <FormControl>
@@ -117,13 +111,13 @@ const GameConsole = ({
   //               placeholder="Select No. of Rounds"
   //               onChange={(e) => setRounds(e.target.value)}
   //             >
-                // <option value="1" defaultValue>
-                //   1
-                // </option>
-                // <option value="2">2</option>
-                // <option value="3">3</option>
-                // <option value="4">4</option>
-                // <option value="5">5</option>
+  // <option value="1" defaultValue>
+  //   1
+  // </option>
+  // <option value="2">2</option>
+  // <option value="3">3</option>
+  // <option value="4">4</option>
+  // <option value="5">5</option>
   //             </Select>
   //           </FormControl>
   //         </Box>
@@ -174,26 +168,24 @@ const GameConsole = ({
   // );
 };
 
-const mapStateToProps = ({ game, user, input, session, messages }) => ({ game, user, input, session, messages });
+const mapStateToProps = ({
+  game, user, input, session, messages,
+}) => ({
+  game, user, input, session, messages,
+});
 
 const mapDispatchToProps = (dispatch) => ({
-  upPlayers: (name) => dispatch(updatePlayers(name)),
-  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
-  createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
-  newPlayer: (player) => dispatch(addPlayer(player)),
-  removePlayer: (player) => dispatch(rmPlayer(player)),
-  updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
-  addMsg: (msg) => dispatch(addMessage(msg)),
   setSession: () => dispatch(setSessionThunk()),
-  startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
-  updateUserAlias: (alias) => dispatch(updateAlias(alias)),
+  getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  rmHost: () => dispatch(removeHostThunk()),
+  // createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
+  // newPlayer: (player) => dispatch(addPlayer(player)),
+  // removePlayer: (player) => dispatch(rmPlayer(player)),
+  // updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
+  // addMsg: (msg) => dispatch(addMessage(msg)),
+  // startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
+  // updateUserAlias: (alias) => dispatch(updateAlias(alias)),
+  // upPlayers: (name) => dispatch(updatePlayers(name)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);
-
-
-//This is partly because i've been fucking with it so.
-
-//I think we need to revert to the last commit
-
-//YOu can just share your screen for a sec if you want

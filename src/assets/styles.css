@@ -13,8 +13,9 @@
 }
 
 .landingimg {
-    height: 80%;
-    width: 80%;
+    height: 20rem;
+    width: 27rem;
+    
 }
 
 .landingform {
@@ -25,12 +26,10 @@
     background-image: linear-gradient(slategrey, darkslategrey);
     border-radius: 3%;
     width: 40%;
+    min-width: 30rem;
     height: 60%;
-    border: 2px solid red;
-    box-shadow:
-        0 0 60px 30px #fff,
-        0 0 100px 60px red
-        0 0 140px 90px #fff;
+    /* border: 2px solid red; */
+    box-shadow: 0px 0px 40px 10px red;
 }
 
 .landingform input {

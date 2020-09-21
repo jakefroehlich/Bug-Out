@@ -21,6 +21,7 @@ import {
 } from './components';
 import store from './store';
 import GamePage from './components/gamePage';
+import '../assets/styles.css';
 
 const App = () => (
   <Provider store={store}>

@@ -51,6 +51,12 @@ sessionRouter.put('/score', async (req, res) => {
     console.log(e);
   }
 });
+// sessionRouter.get('/roomPlayers', async (req, res) => {
+//   try {
+//     const session = await Session.findOne({ where: { gameSessionId: req.session_id }});
+
+//   }
+// })
 
 module.exports = {
   path: '/session',

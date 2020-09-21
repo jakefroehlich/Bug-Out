@@ -78,9 +78,11 @@ const newGame = (game) => ({
   payload: game,
 });
 
-const getCurrentGame = (game) => ({
+const getCurrentGame = ({game, hostStatus, players}) => ({
   type: types.GET_CURRENT_GAME,
   payload: game,
+  hostStatus,
+  players,
 });
 
 const joinGame = (res) => ({
@@ -147,10 +149,14 @@ const updateCode = (code) => ({
 });
 
 const updateAlias = (alias) => ({
-  type: types.UPDATE_INPUT,
-  name: 'playerName',
-  value: alias,
-})
+  type: types.UPDATE_ALIAS,
+  alias,
+});
+
+// const getRoomPlayers = () => ({
+//   type: types.GET_ROOM_PLAYERS,
+
+// });
 
 export {
   changeInitialLoading,

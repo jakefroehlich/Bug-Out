@@ -5,6 +5,7 @@ const initialState = {
   score: 0,
   correctAnswer: false,
   playerPowerUps: [],
+  alias: '',
 };
 
 const inputReducer = (state = initialState, action) => {
@@ -28,6 +29,11 @@ const inputReducer = (state = initialState, action) => {
       return {
         ...state,
         score: state.score + action.payload,
+      };
+    case types.UPDATE_ALIAS:
+      return {
+        ...state,
+        alias: action.alias,
       };
     default:
       return state;

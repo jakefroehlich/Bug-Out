@@ -66,9 +66,9 @@ export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/
     console.log(e);
   });
 
-export const getCurrentGameThunk = () => (dispatch) => axios.get(`/game/current`)
+export const getCurrentGameThunk = () => (dispatch) => axios.get('/game/current')
   .then(({ data }) => {
-    console.log('gcgt', data)
+    console.log('gcgt', data);
     dispatch(getCurrentGame(data));
   })
   .catch((e) => {

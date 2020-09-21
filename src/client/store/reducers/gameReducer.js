@@ -2,7 +2,6 @@ import { types } from '../actions';
 
 const initialGameState = {
   id: '',
-  alias: '',
   code: '',
   rounds: '',
   players: [],
@@ -33,6 +32,7 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
       };
     case types.GET_CURRENT_GAME:
+      console.log('reducer', action.payload);
       return {
         ...state,
         id: action.payload.id,
@@ -42,9 +42,11 @@ const gameReducer = (state = initialGameState, action) => {
         private: action.payload.private,
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
-        players: action.payload.sessions,
+        // players: action.payload.sessions,
         roundStart: action.payload.roundStart,
         roundEnd: action.payload.roundEnd,
+        players: action.players,
+        host: action.hostStatus,
       };
     case types.SET_PROMPT:
       return {
@@ -65,12 +67,7 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         code: action.code,
-      }
-    case types.UPDATE_ALIAS:
-      return {
-        ...state,
-        alias: action.alias,
-      }
+      };
     case types.SET_ROUND_TIMES:
       return {
         ...state,

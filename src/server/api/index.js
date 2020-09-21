@@ -63,7 +63,6 @@ app.use(async (req, res, next) => {
 
 app.use(express.static(PUBLIC_PATH));
 app.use(express.static(DIST_PATH));
-app.use(express.static(join(__dirname, '../../client/assets')));
 app.use(cors());
 app.use(express.json());
 app.use('/api', apiRouter.router);
@@ -80,6 +79,14 @@ const startServer = () => new Promise((res) => {
 
 app.get('*', (req, res) => {
   res.sendFile(join(PUBLIC_PATH, './index.html'));
+});
+
+app.get("/*", (req, res) => {
+  res.sendFile(join(DIST_PATH, "/main.js"), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
 });
 
 module.exports = {

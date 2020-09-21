@@ -27,6 +27,7 @@ export const types = {
   UPDATE_HOST: 'UPDATE_HOST',
   UPDATE_ALIAS: 'UPDATE_ALIAS',
   SET_ROUND_TIMES: 'SET_ROUND_TIMES',
+  LEAVE_GAME: 'LEAVE_GAME',
 };
 
 const addPlayer = (player) => ({
@@ -154,6 +155,11 @@ const updateCode = (code) => ({
 
 // });
 
+const leaveGame = (session) => ({
+  type: types.LEAVE_GAME,
+  payload: session,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -179,6 +185,7 @@ export {
   updateGame,
   updateCode,
   setGameTimes,
+  leaveGame,
 };
 
 // AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

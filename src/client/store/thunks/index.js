@@ -16,11 +16,13 @@ import {
   logoutThunk,
   whoami,
 } from './loginThunks';
+
 import {
   setSessionThunk,
   updateNameThunk,
   makeHostThunk,
   removeHostThunk,
+  leaveGameThunk,
 } from './sessionThunks';
 
 export {
@@ -42,4 +44,5 @@ export {
   updateGameCodeThunk,
   setRoundTimes,
   removeHostThunk,
+  leaveGameThunk,
 };

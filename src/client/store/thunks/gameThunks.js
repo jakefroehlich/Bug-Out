@@ -16,7 +16,7 @@ import {
   setGameTimes,
 } from '../actions';
 
-export const createGameThunk = (rounds, difficulty ) => (dispatch) => axios
+export const createGameThunk = (rounds, difficulty) => (dispatch) => axios
   .post('/game/createGame', { rounds, difficulty })
   .then(({ data }) => {
     // console.log('data', data);

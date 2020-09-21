@@ -4,6 +4,7 @@ import { Box, Text } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
+import LeaveGameButton from './leaveGameButton';
 import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
 const GamePage = ({
@@ -42,6 +43,7 @@ const GamePage = ({
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
+        <LeaveGameButton passedProps={{ game }} />
       </div>
     </div>
   );

@@ -37,7 +37,7 @@ const GameConsole = ({
 
   return (
     <div className="outerconsole">
-      <Nav session={session}/>
+      <Nav session={session} />
       <div className="consolecontainer">
         <CreateGame history={history} />
         <JoinGame history={history} />

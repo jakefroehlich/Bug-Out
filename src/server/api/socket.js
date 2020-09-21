@@ -20,10 +20,10 @@ io.on('connection', (socket) => {
     socket.join(code);
 
     socket.on('announce', (player) => {
-      io.to(code).emit('playerJoin', player)
-    })
+      io.to(code).emit('playerJoin', player);
+    });
 
-    socket.on('chatMsg', (msg, code, name) => {
+    socket.on('chatMsg', (msg, name) => {
       console.log('chat code', code);
       io.to(code).emit('message', formatMessage(name, msg));
     });

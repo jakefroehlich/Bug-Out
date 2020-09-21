@@ -148,11 +148,6 @@ const updateCode = (code) => ({
   code,
 });
 
-const updateAlias = (alias) => ({
-  type: types.UPDATE_ALIAS,
-  alias,
-});
-
 // const getRoomPlayers = () => ({
 //   type: types.GET_ROOM_PLAYERS,
 
@@ -182,7 +177,6 @@ export {
   startGame,
   updateGame,
   updateCode,
-  updateAlias,
   setGameTimes,
 };
 

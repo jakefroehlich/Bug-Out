@@ -4,7 +4,7 @@ import { createGameThunk } from '../store/thunks';
 
 const CreateGame = ({
     createGame,
-    history
+    history,
 }) => {
     const [rounds, setRounds] = useState(3);
     const [difficulty, setDifficulty] = useState('easy');
@@ -37,9 +37,9 @@ const CreateGame = ({
                         placeholder="Select # of Rounds"
                         onChange={(e) => setRounds(e.target.value)}
                     >
-                        <option value="1" defaultValue> 1 </option>
+                        <option value="1"> 1 </option>
                         <option value="2">2</option>
-                        <option value="3">3</option>
+                        <option value="3" defaultValue>3</option>
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>

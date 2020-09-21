@@ -32,7 +32,6 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
       };
     case types.GET_CURRENT_GAME:
-      console.log('reducer', action.payload);
       return {
         ...state,
         id: action.payload.id,

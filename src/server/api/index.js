@@ -81,14 +81,6 @@ app.get('*', (req, res) => {
   res.sendFile(join(PUBLIC_PATH, './index.html'));
 });
 
-app.get("/*", (req, res) => {
-  res.sendFile(join(DIST_PATH, "/main.js"), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
-
 module.exports = {
   startServer,
   app,

@@ -21,6 +21,7 @@ import {
 } from './components';
 import store from './store';
 import GamePage from './components/gamePage';
+// Importing Styles
 import '../assets/styles.css';
 
 const App = () => (

@@ -9,7 +9,7 @@ const {
     Powerup,
   },
 } = require('../../db/index');
-const {codeGenerator} = require('../utils');
+const { codeGenerator } = require('../utils');
 
 const gameRouter = Router();
 
@@ -30,12 +30,12 @@ gameRouter.get('/current', async (req, res) => {
   }
 });
 
-gameRouter.put('/newGameCode', async(req, res) => {
+gameRouter.put('/newGameCode', async (req, res) => {
   const { code } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   try {
-    const gameSession = await GameSession.findOne({ where: { code: code } });
-    const newCode = codeGenerator();
+    const gameSession = await GameSession.findOne({ where: { code } });
+    let newCode = codeGenerator();
     let check = await GameSession.findOne({ where: { code: newCode } });
     while (check) {
       newCode = codeGenerator();
@@ -43,11 +43,10 @@ gameRouter.put('/newGameCode', async(req, res) => {
     }
     await gameSession.update({ code: newCode });
     res.send(newCode);
-  }
-  catch (e) {
+  } catch (e) {
     console.log('Could not update code', e);
   }
-})
+});
 
 // Create game session and set the number of rounds.
 gameRouter.post('/createGame', async (req, res) => {
@@ -62,9 +61,9 @@ gameRouter.post('/createGame', async (req, res) => {
 });
 
 // Add player to a game upon creating the game.
-gameRouter.put('/player/:gameSessionId', async (req, res) => {
+gameRouter.put('/player/', async (req, res) => {
   try {
-    const { gameSessionId } = req.params;
+    const { gameSessionId } = req.body;
     const session = await Session.findOne({ where: { id: req.cookies.session_id } });
     await session.update({ gameSessionId });
     const gameSession = await GameSession.findOne({ where: { id: gameSessionId }, include: [Session] });
@@ -111,13 +110,9 @@ gameRouter.put('/game-times/:id', async (req, res) => {
 gameRouter.get('/prompt/:diff', async (req, res) => {
   try {
     const { diff } = req.params;
-    console.log('difficulty', diff)
-    const gamePrompts = await Prompt.findAll({ where: { difficulty : diff } });
+    const gamePrompts = await Prompt.findAll({ where: { difficulty: diff } });
     const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
     const prompt = gamePrompts[randomGameIdx];
-
-    console.log('prompt', prompt)
-
     const session = await Session.findOne({ where: { id: req.session_id } });
     const currentGame = await GameSession.findOne({ where: { id: session.gameSessionId } });
     currentGame.update({ prompt });

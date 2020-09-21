@@ -21,7 +21,7 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
   .then(({ data }) => {
     console.log('data', data)
     const gameSessionId = data.id;
-    axios.put(`/game/player/${gameSessionId}`)
+    axios.put('/game/player', { gameSessionId })
       .then(({ data }) => {
         dispatch(updateGame(data));
         history.push(`/waiting/${data.id}`);
@@ -37,7 +37,6 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
 export const updateGameCodeThunk = (code) => (dispatch) => axios
   .put('/game/newGameCode', { code })
   .then(({data}) => {
-    console.log('this code', data)
     dispatch(updateCode(data))
   })
   .catch((e) => {
@@ -68,7 +67,6 @@ export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/
 
 export const getCurrentGameThunk = () => (dispatch) => axios.get('/game/current')
   .then(({ data }) => {
-    console.log('gcgt', data);
     dispatch(getCurrentGame(data));
   })
   .catch((e) => {

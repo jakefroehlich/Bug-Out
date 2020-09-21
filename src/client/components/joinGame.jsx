@@ -26,7 +26,7 @@ const JoinGame = ({ joinGame }) => {
             onChange={(e) => setGameCode(e.target.value)}
           />
         {/* </div> */}
-        <button className="joingamebutton">Join</ button>
+        <button className="joingamebutton" type="submit">Join</ button>
       </div>
     </form>
   );

@@ -24,7 +24,6 @@ import {
 
 const GameConsole = ({
   history,
-  game,
   input,
   session,
   updateGame,
@@ -36,7 +35,6 @@ const GameConsole = ({
 }) => {
   const [rounds, setRounds] = useState(3);
   const [difficulty, setDifficulty] = useState('easy');
-  console.log('input', input)
   console.log('session', session);
 
   useEffect(() => {

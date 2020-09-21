@@ -25,7 +25,6 @@ const LandingPage = ({
   const [alias, setAlias] = useState('');
 
   console.log('session', session);
-  console.log('alias', alias);
 
   useEffect(() => {
     setSession();

@@ -18,7 +18,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.ADD_PLAYER:
       return {
         ...state,
-        players: state.players.push(action.player),
+        players: [...state.players, action.player],
       };
     case types.RM_PLAYER:
       return {

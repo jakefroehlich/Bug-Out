@@ -9,7 +9,7 @@ import { setSessionThunk, getCurrentGameThunk, setRoundTimes } from '../store/th
 //  bring in Chat
 
 const WaitingRoom = ({
-  setSession, getCurrentGame, game, session,
+  setSession, getCurrentGame, game, session, history,
   // setRoundTimes,
 }) => {
   useEffect(() => {
@@ -20,20 +20,25 @@ const WaitingRoom = ({
   console.log('game', game);
   console.log('session', session);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push('/game');
+  }
+
   return (
-    <div>
-      <div>
+    <div
+      className='waitingroom'>
+      <div
+        className='waitingcomps'>
         <TheCompetition />
         <Chatbox />
       </div>
-      <div>
-        <button
-          type="submit"
-          className={game.host ? 'visible' : 'hidden'}
-          onClick={() => {}}
-        >Start Game
+      <button
+        type="submit"
+        className={game.host ? 'visible' : 'hidden'}
+        onClick={handleSubmit}
+      >Start Game
         </button>
-      </div>
     </div>
   );
 };

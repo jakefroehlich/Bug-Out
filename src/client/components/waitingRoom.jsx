@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import Chatbox from './ChatBox';
 import TheCompetition from './theCompetition';
 import { setSessionThunk, getCurrentGameThunk, setRoundTimes } from '../store/thunks';
-
-//  Determine if user is host (if so, show the start game button)
-//  bring in TheCompetition
-//  bring in Chat
+import socket from '../utils/socket';
+import LeaveGameButton from './leaveGameButton';
 
 const WaitingRoom = ({
   setSession, getCurrentGame, game, session, history,
-  // setRoundTimes,
+  setRoundTimes,
 }) => {
   useEffect(() => {
     setSession(); // I wanna know who you are, where you're from, what you did
@@ -23,6 +21,7 @@ const WaitingRoom = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     history.push('/game');
+    setRoundTimes(game.id);
   }
 
   return (
@@ -39,6 +38,7 @@ const WaitingRoom = ({
         onClick={handleSubmit}
       >Start Game
         </button>
+      <LeaveGameButton history={history} />
     </div>
   );
 };

@@ -4,14 +4,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Text,
-  Box,
-  Select,
-  FormControl,
-  FormLabel,
-  Button,
-} from '@chakra-ui/core';
 import CreateGame from './createGame';
 import JoinGame from './joinGame';
 import Nav from './Nav';

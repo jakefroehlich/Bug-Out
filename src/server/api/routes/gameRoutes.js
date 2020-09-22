@@ -9,7 +9,7 @@ const {
     Powerup,
   },
 } = require('../../db/index');
-const { codeGenerator } = require('../utils');
+// const { codeGenerator } = require('../utils');
 
 const gameRouter = Router();
 
@@ -17,6 +17,7 @@ const gameRouter = Router();
 gameRouter.get('/current', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
+    // console.log('found session', session)
     const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
     const players = await Session.findAll({ where: { gameSessionId: game.id } });
     const hostStatus = session.dataValues.host;
@@ -32,7 +33,7 @@ gameRouter.get('/current', async (req, res) => {
 
 gameRouter.put('/newGameCode', async (req, res) => {
   const { code } = req.body;
-  console.log(req.body);
+  // console.log(req.body);
   try {
     const gameSession = await GameSession.findOne({ where: { code } });
     let newCode = codeGenerator();
@@ -99,6 +100,7 @@ gameRouter.put('/game-times/:id', async (req, res) => {
     await gameSession.update({ roundEnd, roundStart });
 
     const updatedGameSession = await GameSession.findOne({ where: { id }, include: [Session] });
+    console.log('updateGameSession', updatedGameSession);
     res.send(updatedGameSession);
   } catch (e) {
     console.log('Error updating game session with player');
@@ -161,7 +163,6 @@ gameRouter.put('/prompt/:id', async (req, res) => {
   try {
     const { prompt } = req.body;
     const { id } = req.params;
-    console.log(prompt);
     const game = await GameSession.update({ prompt }, { where: { id } });
     res.send(game);
   } catch (e) {

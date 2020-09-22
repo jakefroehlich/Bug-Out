@@ -25,16 +25,17 @@ const LandingPage = ({
   const [alias, setAlias] = useState('');
 
   console.log('session', session);
+  console.log('alias', alias);
 
   useEffect(() => {
     setSession();
-    // I think that's a good one to have as our first useeffect right -
-    // since it's gonna be needed anyways
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('submit handled', alias);
+    if (!alias || alias == '') {
+      updateUserAlias('Guest');
+    }
     updateUserAlias(alias);
     history.push('/console');
   };

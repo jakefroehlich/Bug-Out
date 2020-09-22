@@ -1,28 +1,35 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Box, Text } from '@chakra-ui/core';
-import Editor from './editor';
-import ChatBox from './ChatBox';
-import Timer from './timer2';
-import LeaveGameButton from './leaveGameButton';
-import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
+import { Box, Text, Button } from '@chakra-ui/core';
+import {
+  Editor, ChatBox, Timer, LeaveGameButton,
+} from './index';
+import { setPowerUp } from '../utils';
+import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const GamePage = ({
-  game, getPowerUps, getCurrentGame, fetchPrompt, match,
+  game, getPowerUps, getCurrentGame, history,
 }) => {
+  const [givenPowerUps, setGivenPowerUps] = useState([]);
+
   useEffect(() => {
-    console.log('gamepage effect used', match);
+    console.log('gamepage effect used');
     getPowerUps();
-    getCurrentGame(match.params.id);
+    getCurrentGame();
     // fetchPrompt(game.difficulty);
   }, []);
 
-  useEffect(() => {
-    if (game.difficulty) {
-      console.log(game.difficulty);
-      fetchPrompt(game.difficulty);
+  console.log('game', game)
+
+  const timerId = setInterval(() => {
+    // console.log('timer run!');
+    const powerUp = setPowerUp(game.powerUps);
+    if (powerUp) {
+      setGivenPowerUps([...givenPowerUps, powerUp]);
+      // console.log('powerup given and givenPowerUps is ', givenPowerUps);
     }
-  }, [game.difficulty]);
+  }, 1000); // runs every 10 seconds;
+  setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -35,15 +42,27 @@ const GamePage = ({
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
           Power Ups
+          <ul>
+            {givenPowerUps.map((el) => (
+              <li>
+                <Button
+                  id={el.id}
+                  onClick={() => null}
+                >
+                  {el.name}
+                </Button>
+              </li>
+            ))}
+          </ul>
         </Box>
       </div>
       <Editor />
       <div>
-        <Timer />
+        <Timer props={game}/>
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
-        <LeaveGameButton passedProps={{ game }} />
+        <LeaveGameButton history={history} />
       </div>
     </div>
   );
@@ -52,7 +71,7 @@ const mapStateToProps = (props) => (props);
 
 const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
-  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
+  getCurrentGame: () => dispatch(getCurrentGameThunk()),
   fetchPrompt: (difficulty) => dispatch(getPromptThunk(difficulty)),
 });
 

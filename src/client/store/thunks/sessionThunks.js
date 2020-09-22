@@ -33,7 +33,7 @@ export const makeHostThunk = () => (dispatch) => axios
   });
 
 export const removeHostThunk = () => (dispatch) => axios
-  .post('session/removeHost')
+  .post('/session/removeHost')
   .then((res) => {
     dispatch(updateHost(res.data));
   })
@@ -41,8 +41,6 @@ export const removeHostThunk = () => (dispatch) => axios
     console.log(e);
   });
 
-// export const getRoomPlayersThunk = (gameSeshId) => (dispatch) => axios
-//   .get('/session/roomPlayers/:gameSeshId')
 export const leaveGameThunk = () => (dispatch) => axios
   .put('/session/leaveGame')
   .then((res) => {

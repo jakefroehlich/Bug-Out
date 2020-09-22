@@ -5,7 +5,7 @@ import { leaveGameThunk } from '../store/thunks/index';
 
 const LeaveGameButton = (props) => {
   const { game, leaveGame } = props;
-  const { history } = props.passedProps;
+  const { history } = props;
   console.log(props);
   return (
     <Button

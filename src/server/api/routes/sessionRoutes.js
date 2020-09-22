@@ -90,6 +90,16 @@ sessionRouter.put('/reset-correct/:id', async (req, res) => {
     res.send(game);
   } catch (e) {
     console.log('Error updating players correct values');
+  }
+});
+
+sessionRouter.put('/leaveGame', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    session.update({ score: 0, gameSessionId: null });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error updating score');
     console.log(e);
   }
 });

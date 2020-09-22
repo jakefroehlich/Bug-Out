@@ -8,6 +8,10 @@ import CreateGame from './createGame';
 import LoadingGame from './gameLoading';
 import WaitingRoom from './waitingRoom';
 import JoinGame from './joinGame';
+import Editor from './editor';
+import ChatBox from './ChatBox';
+import Timer from './timer2';
+import LeaveGameButton from './leaveGameButton';
 
 export {
   LoginForm,
@@ -20,4 +24,8 @@ export {
   JoinGame,
   LoadingGame,
   WaitingRoom,
+  Editor,
+  ChatBox,
+  Timer,
+  LeaveGameButton,
 };

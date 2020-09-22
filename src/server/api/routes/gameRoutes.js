@@ -133,11 +133,15 @@ gameRouter.put('/startGame', async (req, res) => {
   }
 });
 
+// Set a new prompt and subtract the round
 gameRouter.put('/prompt/:id', async (req, res) => {
   try {
     const { prompt } = req.body;
     const { id } = req.params;
-    const game = await GameSession.update({ prompt }, { where: { id } });
+    const game = await GameSession.findOne({ where: { id } });
+    const rounds = game.rounds - 1;
+    game.update({ prompt });
+    game.update({ rounds });
     res.send(game);
   } catch (e) {
     console.log(e);

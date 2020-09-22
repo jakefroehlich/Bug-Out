@@ -47,6 +47,7 @@ const gameReducer = (state = initialGameState, action) => {
         roundEnd: action.payload.roundEnd,
       };
     case types.SET_PROMPT:
+      console.log(action.payload);
       return {
         ...state,
         prompt: action.payload,
@@ -71,6 +72,14 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         roundOver: action.payload,
+      };
+    case types.NEW_ROUND:
+      return {
+        ...state,
+        rounds: action.payload.rounds,
+        prompt: action.payload.prompt,
+        roundEnd: action.payload.roundEnd,
+        roundStart: action.payload.roundStart,
       };
     default:
       return state;

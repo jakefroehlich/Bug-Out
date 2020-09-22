@@ -6,6 +6,7 @@ import {
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
+import RoundStartTimer from './RoundStartTimer';
 import {
   LeaveGameButton,
 } from './index';
@@ -82,7 +83,7 @@ const GamePage = (props) => {
             <ModalBody>
               <div>
                 <p>The current scores are:</p>
-
+                <RoundStartTimer match={match} history={history} />
               </div>
             </ModalBody>
           </ModalContent>

@@ -13,6 +13,7 @@ import {
 } from '../store/thunks';
 import Chatbox from './ChatBox';
 import socket from '../utils/socket';
+import LeaveGameButton from './leaveGameButton';
 
 const WaitingRoom = ({
   game,
@@ -141,6 +142,7 @@ const WaitingRoom = ({
           Play!
         </Button>
       </div>
+      <LeaveGameButton history={history} />
     </div>
   );
 };

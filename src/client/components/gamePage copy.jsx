@@ -9,7 +9,7 @@ import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunk
 
 const GamePage = (props) => {
   const {
-    game, getPowerUps, getCurrentGame, history,
+    game, getPowerUps, getCurrentGame,
   } = props;
 
   const [givenPowerUps, setGivenPowerUps] = useState([]);
@@ -26,7 +26,7 @@ const GamePage = (props) => {
       setGivenPowerUps([...givenPowerUps, powerUp]);
       // console.log('powerup given and givenPowerUps is ', givenPowerUps);
     }
-  }, 1000); // runs every 10 seconds;
+  }, 3000); // runs every 10 seconds;
   setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
 
   return (
@@ -60,7 +60,7 @@ const GamePage = (props) => {
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
-        <LeaveGameButton history={history} />
+        <LeaveGameButton passedProps={props} />
       </div>
     </div>
   );

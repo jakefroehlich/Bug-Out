@@ -61,7 +61,6 @@ const CreateGame = ({
       console.log('player left :(');
       removePlayer(player);
     });
-
     console.log('effect 2 used!');
   }, []);
 

@@ -26,7 +26,7 @@ const CodeEditor = (props) => {
     const ts = `test${prompt.id}`;
     const correct = test[ts](fn);
     if (correct) {
-      props.setCorrect();
+      props.setCorrect(props.match.params.id);
 
       const hour = moment().hour();
       const minute = moment().minute();
@@ -53,8 +53,6 @@ const CodeEditor = (props) => {
       alert('Sorry try again :(');
     }
   }
-
-  console.log(props);
 
   return (
     <div

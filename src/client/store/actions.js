@@ -24,6 +24,7 @@ export const types = {
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
   SET_ROUND_TIMES: 'SET_ROUND_TIMES',
+  SET_ROUND_OVER: 'SET_ROUND_OVER',
 };
 
 const addPlayer = (player) => ({
@@ -139,6 +140,11 @@ const updateGame = (game) => ({
   payload: game,
 });
 
+const roundOver = (bool) => ({
+  type: types.SET_ROUND_OVER,
+  payload: bool,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -163,4 +169,5 @@ export {
   startGame,
   updateGame,
   setGameTimes,
+  roundOver,
 };

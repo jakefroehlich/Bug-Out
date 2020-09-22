@@ -13,6 +13,7 @@ import {
   updateName,
   updateGame,
   setGameTimes,
+  roundOver,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
@@ -85,8 +86,15 @@ export const updateNameThunk = (name) => (dispatch) => axios
     console.log(e);
   });
 
-export const setCorrect = () => (dispatch) => {
-  dispatch(setCorrectAnswer());
+export const setCorrect = (id) => (dispatch) => {
+  axios.put(`/session/correct/${id}`)
+    .then(({ data }) => {
+      dispatch(setCorrectAnswer());
+      dispatch(roundOver(data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 export const addScore = (score) => (dispatch) => {

@@ -1,6 +1,9 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Box, Text } from '@chakra-ui/core';
+import {
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
+} from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
@@ -8,13 +11,21 @@ import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunk
 
 const GamePage = (props) => {
   const {
-    game, getPowerUps, getCurrentGame,
+    game, getPowerUps, getCurrentGame, match,
   } = props;
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     getPowerUps();
     getCurrentGame(props.match.params.id);
   }, []);
+
+  useEffect(() => {
+    if (game.roundOver) {
+      onOpen();
+    }
+  }, [game.roundOver]);
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -29,12 +40,26 @@ const GamePage = (props) => {
           Power Ups
         </Box>
       </div>
-      <Editor gamePageProps={game} />
+      <Editor match={match} gamePageProps={game} />
       <div>
         <Timer />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
+      </div>
+      <div>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Round Over!</ModalHeader>
+            <ModalBody>
+              <div>
+                <p>The current scores are:</p>
+
+              </div>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
       </div>
     </div>
   );

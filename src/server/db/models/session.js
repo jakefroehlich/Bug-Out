@@ -23,6 +23,11 @@ const Session = db.define('session', {
     defaultValue: 0,
     allowNull: false,
   },
+  correctAnswer: {
+    type: BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+  },
 });
 
 module.exports = Session;

@@ -137,7 +137,6 @@ gameRouter.put('/prompt/:id', async (req, res) => {
   try {
     const { prompt } = req.body;
     const { id } = req.params;
-    console.log(prompt);
     const game = await GameSession.update({ prompt }, { where: { id } });
     res.send(game);
   } catch (e) {
@@ -151,6 +150,23 @@ gameRouter.get('/powerups', async (req, res) => {
     res.send(powerupList);
   } catch (e) {
     console.log(e);
+  }
+});
+
+// update the game prompt for the next round
+gameRouter.put('/update-prompt/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const game = GameSession.findOne({ where: { id } });
+
+    const gamePrompts = await Prompt.findAll({ where: { difficulty: game.difficulty } });
+    const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
+    const prompt = gamePrompts[randomGameIdx];
+    game.update({ prompt });
+    res.send(prompt);
+  } catch (e) {
+    console.log(e);
+    console.log('error resetting round');
   }
 });
 

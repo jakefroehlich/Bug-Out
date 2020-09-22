@@ -1,8 +1,7 @@
-/* eslint-disable max-len */
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button
 } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
@@ -10,14 +9,16 @@ import Timer from './timer2';
 import {
   LeaveGameButton,
 } from './index';
+import { setPowerUp } from '../utils';
 import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
 
 const GamePage = (props) => {
   const {
-    game, getPowerUps, getCurrentGame, match,
+    game, getPowerUps, getCurrentGame, history, match
   } = props;
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [givenPowerUps, setGivenPowerUps] = useState([]);
 
   useEffect(() => {
     getPowerUps();
@@ -30,6 +31,16 @@ const GamePage = (props) => {
     }
   }, [game.roundOver]);
 
+  const timerId = setInterval(() => {
+    // console.log('timer run!');
+    const powerUp = setPowerUp(game.powerUps);
+    if (powerUp) {
+      setGivenPowerUps([...givenPowerUps, powerUp]);
+      // console.log('powerup given and givenPowerUps is ', givenPowerUps);
+    }
+  }, 1000); // runs every 10 seconds;
+  setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
+
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <div style={{ height: '80vh' }}>
@@ -41,6 +52,18 @@ const GamePage = (props) => {
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
           Power Ups
+          <ul>
+            {givenPowerUps.map((el) => (
+              <li>
+                <Button
+                  id={el.id}
+                  onClick={() => null}
+                >
+                  {el.name}
+                </Button>
+              </li>
+            ))}
+          </ul>
         </Box>
       </div>
       <Editor match={match} gamePageProps={game} />
@@ -49,7 +72,7 @@ const GamePage = (props) => {
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
-        <LeaveGameButton passedProps={props} />
+        <LeaveGameButton history={history} />
       </div>
       <div>
         <Modal isOpen={isOpen} onClose={onClose}>

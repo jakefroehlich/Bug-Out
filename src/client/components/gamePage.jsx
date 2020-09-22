@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
 } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
@@ -14,7 +14,7 @@ import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunk
 
 const GamePage = (props) => {
   const {
-    game, getPowerUps, getCurrentGame, history, match
+    game, getPowerUps, getCurrentGame, history, match,
   } = props;
 
   const { isOpen, onOpen, onClose } = useDisclosure();

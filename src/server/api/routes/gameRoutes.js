@@ -30,23 +30,23 @@ gameRouter.get('/current', async (req, res) => {
   }
 });
 
-gameRouter.put('/newGameCode', async (req, res) => {
-  const { code } = req.body;
-  // console.log(req.body);
-  try {
-    const gameSession = await GameSession.findOne({ where: { code } });
-    let newCode = codeGenerator();
-    let check = await GameSession.findOne({ where: { code: newCode } });
-    while (check) {
-      newCode = codeGenerator();
-      check = await GameSession.findOne({ where: { code: newCode } });
-    }
-    await gameSession.update({ code: newCode });
-    res.send(newCode);
-  } catch (e) {
-    console.log('Could not update code', e);
-  }
-});
+// gameRouter.put('/newGameCode', async (req, res) => {
+//   const { code } = req.body;
+//   // console.log(req.body);
+//   try {
+//     const gameSession = await GameSession.findOne({ where: { code } });
+//     let newCode = codeGenerator();
+//     let check = await GameSession.findOne({ where: { code: newCode } });
+//     while (check) {
+//       newCode = codeGenerator();
+//       check = await GameSession.findOne({ where: { code: newCode } });
+//     }
+//     await gameSession.update({ code: newCode });
+//     res.send(newCode);
+//   } catch (e) {
+//     console.log('Could not update code', e);
+//   }
+// });
 
 // Create game session and set the number of rounds.
 gameRouter.post('/createGame', async (req, res) => {

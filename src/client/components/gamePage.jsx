@@ -11,7 +11,7 @@ import {
   LeaveGameButton,
 } from './index';
 import { setPowerUp } from '../utils';
-import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
+import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
 const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match,
@@ -26,7 +26,6 @@ const GamePage = ({
     // fetchPrompt(game.difficulty);
   }, []);
 
-  console.log('game', game)
   useEffect(() => {
     if (game.roundOver) {
       onOpen();
@@ -70,7 +69,7 @@ const GamePage = ({
       </div>
       <Editor match={match} gamePageProps={game} />
       <div>
-        <Timer props={game}/>
+        <Timer props={game} />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>

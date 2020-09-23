@@ -58,8 +58,7 @@ export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
 export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer', { code })
   .then(({ data }) => {
     dispatch(updateGame(data));
-    console.log('joingame data', data)
-    axios.put('/game/joinGame')
+    axios.put('/game/joinGame');
   })
   .catch((e) => {
     dispatch(updateGame('failed'));
@@ -134,7 +133,7 @@ export const addScore = (score) => (dispatch) => {
     });
 };
 
-export const setRoundTimes = (id) => (dispatch) => {
+export const setRoundTimesThunk = (id) => (dispatch) => {
   console.log('setting time');
   const year = moment().year();
   const month = moment().month();

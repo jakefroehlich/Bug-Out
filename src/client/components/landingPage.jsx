@@ -33,7 +33,7 @@ const LandingPage = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!alias || alias == '') {
+    if (!alias || alias === '') {
       updateUserAlias('Guest');
     }
     updateUserAlias(alias);

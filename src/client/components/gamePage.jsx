@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Box, Text, Button } from '@chakra-ui/core';
+import { Box, Text } from '@chakra-ui/core';
 import {
-  Editor, ChatBox, Timer, LeaveGameButton,
+  Editor, ChatBox, Timer, LeaveGameButton, powerUpButton,
 } from './index';
 import { setPowerUp } from '../utils';
 import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
@@ -24,6 +24,7 @@ const GamePage = (props) => {
     const powerUp = setPowerUp(game.powerUps);
     if (powerUp) {
       setGivenPowerUps([...givenPowerUps, powerUp]);
+      console.log('givenPowerUps is ', givenPowerUps);
       // console.log('powerup given and givenPowerUps is ', givenPowerUps);
     }
   }, 1000); // runs every 10 seconds;
@@ -42,13 +43,8 @@ const GamePage = (props) => {
           Power Ups
           <ul>
             {givenPowerUps.map((el) => (
-              <li>
-                <Button
-                  id={el.id}
-                  onClick={() => null}
-                >
-                  {el.name}
-                </Button>
+              <li id>
+                {powerUpButton(el)}
               </li>
             ))}
           </ul>

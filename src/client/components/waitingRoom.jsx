@@ -20,8 +20,12 @@ const WaitingRoom = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (game) {
     history.push('/game');
     setRoundTimes(game.id);
+    } else {
+      console.log('no game!')
+    }
   }
 
   return (

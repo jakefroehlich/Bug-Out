@@ -18,6 +18,7 @@ import {
   LoadingGame,
   WaitingRoom,
   JoinGame,
+  GameOver,
 } from './components';
 import store from './store';
 import GamePage from './components/gamePage';
@@ -38,6 +39,7 @@ const App = () => (
           <Route exact path="/join" component={JoinGame} />
           <Route exact path="/waiting" component={WaitingRoom} />
           <Route exact path="/" component={LandingPage} />
+          <Route exact path="/game-over" component={GameOver} />
           <Redirect to="/" />
         </Switch>
       </BrowserRouter>

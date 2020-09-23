@@ -5,7 +5,6 @@ import moment from 'moment';
 
 import {
   getCurrentGame,
-  getPrompt,
   setPowerups,
   setCorrectAnswer,
   addScoreAction,
@@ -14,6 +13,8 @@ import {
   updateGame,
   updateCode,
   setGameTimes,
+  roundOver,
+  newRound,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty) => (dispatch) => axios
@@ -82,18 +83,20 @@ export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
     console.log(e);
   });
 
-export const getPromptThunk = (difficulty) => (dispatch) => {
-  console.log('getPromptsThunk difficulty:', difficulty);
-  return axios
-    .get(`/game/prompt/${difficulty}`)
-    .then(({ data }) => {
-      console.log('prompt:', data);
-      dispatch(getPrompt(data));
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-};
+export const getPromptThunk = (difficulty, id) => (dispatch) => axios
+  .get(`/game/prompt/${difficulty}`)
+  .then(({ data }) => {
+    axios.put(`/game/prompt/${id}`, { data })
+      .then(({ data }) => {
+        dispatch(newRound(data));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
 export const getPowerUpsThunk = () => (dispatch) => axios
   .get('/game/powerups')
@@ -113,8 +116,15 @@ export const updateNameThunk = (name) => (dispatch) => axios
     console.log(e);
   });
 
-export const setCorrect = () => (dispatch) => {
-  dispatch(setCorrectAnswer());
+export const setCorrect = (id) => (dispatch) => {
+  axios.put(`/session/correct/${id}`)
+    .then(({ data }) => {
+      dispatch(setCorrectAnswer());
+      dispatch(roundOver(data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
 };
 
 export const addScore = (score) => (dispatch) => {
@@ -125,6 +135,7 @@ export const addScore = (score) => (dispatch) => {
 };
 
 export const setRoundTimes = (id) => (dispatch) => {
+  console.log('setting time');
   const year = moment().year();
   const month = moment().month();
   const day = moment().date();

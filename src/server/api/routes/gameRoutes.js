@@ -17,7 +17,6 @@ const gameRouter = Router();
 gameRouter.get('/current', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
-    // console.log('found session', session)
     const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
     const players = await Session.findAll({ where: { gameSessionId: game.id } });
     const hostStatus = session.dataValues.host;
@@ -159,11 +158,15 @@ gameRouter.put('/startGame', async (req, res) => {
   }
 });
 
+// Set a new prompt and subtract the round
 gameRouter.put('/prompt/:id', async (req, res) => {
   try {
     const { prompt } = req.body;
     const { id } = req.params;
-    const game = await GameSession.update({ prompt }, { where: { id } });
+    const game = await GameSession.findOne({ where: { id } });
+    const rounds = game.rounds - 1;
+    game.update({ prompt });
+    game.update({ rounds });
     res.send(game);
   } catch (e) {
     console.log(e);
@@ -176,6 +179,23 @@ gameRouter.get('/powerups', async (req, res) => {
     res.send(powerupList);
   } catch (e) {
     console.log(e);
+  }
+});
+
+// update the game prompt for the next round
+gameRouter.put('/update-prompt/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const game = GameSession.findOne({ where: { id } });
+
+    const gamePrompts = await Prompt.findAll({ where: { difficulty: game.difficulty } });
+    const randomGameIdx = Math.floor(Math.random() * gamePrompts.length);
+    const prompt = gamePrompts[randomGameIdx];
+    game.update({ prompt });
+    res.send(prompt);
+  } catch (e) {
+    console.log(e);
+    console.log('error resetting round');
   }
 });
 

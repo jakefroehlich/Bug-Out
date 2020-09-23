@@ -3,7 +3,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import FlipCountdown from '@rumess/react-flip-countdown';
-import { addScore } from '../store/thunks/gameThunks';
+// import { addScore } from '../store/thunks/gameThunks';
 
 const Timer = (props) => {
 
@@ -28,4 +28,4 @@ const Timer = (props) => {
 }
 
 const mapStateToProps = (props) => (props);
-export default connect(mapStateToProps, { addScore })(Timer);
+export default connect(mapStateToProps)(Timer);

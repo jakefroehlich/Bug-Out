@@ -8,7 +8,7 @@ const io = socketio(server);
 const botName = 'BugOut Bot';
 
 io.on('connection', (socket) => {
-  console.log('socket connected with session:', socket.handshake.headers.cookie);
+  console.log('socket connected with session: ', socket.handshake.headers.cookie);
 
   // Confirmation message
   // console.log(socket);

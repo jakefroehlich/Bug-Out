@@ -13,6 +13,7 @@ import ChatBox from './ChatBox';
 import Timer from './timer2';
 import LeaveGameButton from './leaveGameButton';
 import powerUpButton from './powerUpButton';
+import GameOver from './gameOver';
 
 export {
   LoginForm,
@@ -30,4 +31,5 @@ export {
   Timer,
   LeaveGameButton,
   powerUpButton,
+  GameOver,
 };

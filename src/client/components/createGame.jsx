@@ -14,9 +14,8 @@ const CreateGame = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createGame(rounds, difficulty);
+    createGame(rounds, difficulty, history);
     makeHost();
-    history.push('/waiting');
   };
 
   return (
@@ -63,7 +62,7 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createGame: (rounds, difficulty) => dispatch(createGameThunk(rounds, difficulty)),
+  createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
   makeHost: () => dispatch(makeHostThunk()),
   // upPlayers: (name) => dispatch(updatePlayers(name)),
   // getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),

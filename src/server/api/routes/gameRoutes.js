@@ -14,39 +14,21 @@ const {
 const gameRouter = Router();
 
 // getsCurrentGame and players belonging to that game
-gameRouter.get('/current', async (req, res) => {
+gameRouter.get('/current/:id', async (req, res) => {
   try {
+    const { id } = req.params;
+    console.log('ID:', id);
     const session = await Session.findOne({ where: { id: req.session_id } });
-    const game = await GameSession.findOne({ where: { id: session.gameSessionId } });
-    const players = await Session.findAll({ where: { gameSessionId: game.id } });
+    const game = await GameSession.findOne({ where: { id }, include: [Session] });
+
     const hostStatus = session.dataValues.host;
-    // console.log('session', session);
-    // console.log('game', game);
-    // console.log('players', players);
+    const players = game.sessions;
     res.send({ game, players, hostStatus });
   } catch (e) {
     console.log('Error finding current game');
     console.log(e);
   }
 });
-
-// gameRouter.put('/newGameCode', async (req, res) => {
-//   const { code } = req.body;
-//   // console.log(req.body);
-//   try {
-//     const gameSession = await GameSession.findOne({ where: { code } });
-//     let newCode = codeGenerator();
-//     let check = await GameSession.findOne({ where: { code: newCode } });
-//     while (check) {
-//       newCode = codeGenerator();
-//       check = await GameSession.findOne({ where: { code: newCode } });
-//     }
-//     await gameSession.update({ code: newCode });
-//     res.send(newCode);
-//   } catch (e) {
-//     console.log('Could not update code', e);
-//   }
-// });
 
 // Create game session and set the number of rounds.
 gameRouter.post('/createGame', async (req, res) => {
@@ -99,7 +81,7 @@ gameRouter.put('/game-times/:id', async (req, res) => {
     await gameSession.update({ roundEnd, roundStart });
 
     const updatedGameSession = await GameSession.findOne({ where: { id }, include: [Session] });
-    console.log('updateGameSession', updatedGameSession);
+
     res.send(updatedGameSession);
   } catch (e) {
     console.log('Error updating game session with player');

@@ -1,6 +1,5 @@
 import {
   getPromptThunk,
-  findRandomGameThunk,
   getCurrentGameThunk,
   setCorrect,
   addScore,
@@ -28,7 +27,6 @@ import {
 export {
   updateNameThunk,
   getPromptThunk,
-  findRandomGameThunk,
   getCurrentGameThunk,
   loginThunk,
   logoutThunk,

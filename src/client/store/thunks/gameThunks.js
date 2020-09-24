@@ -73,14 +73,14 @@ export const getCurrentGameThunk = () => (dispatch) => axios.get('/game/current'
     console.log(e);
   });
 
-export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
-  .post('/game/findRandomGame', { currentGameId })
-  .then(({ data }) => {
-    dispatch(data);
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+// export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
+//   .post('/game/findRandomGame', { currentGameId })
+//   .then(({ data }) => {
+//     dispatch(data);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
 
 export const getPromptThunk = (difficulty, id) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)

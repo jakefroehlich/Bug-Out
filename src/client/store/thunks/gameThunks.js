@@ -17,7 +17,7 @@ import {
   newRound,
 } from '../actions';
 
-export const createGameThunk = (rounds, difficulty) => (dispatch) => axios
+export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
   .post('/game/createGame', { rounds, difficulty })
   .then(({ data }) => {
     // console.log('data', data);
@@ -25,6 +25,7 @@ export const createGameThunk = (rounds, difficulty) => (dispatch) => axios
     axios.put('/game/player', { gameSessionId })
       .then(({ data }) => {
         dispatch(updateGame(data));
+        history.push(`/waiting/${gameSessionId}`);
       })
       .catch((e) => {
         console.log(e);
@@ -65,13 +66,18 @@ export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer'
     console.log(e);
   });
 
-export const getCurrentGameThunk = () => (dispatch) => axios.get('/game/current')
-  .then(({ data }) => {
-    dispatch(getCurrentGame(data));
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+export const getCurrentGameThunk = (id) => (dispatch) => {
+  console.log(id);
+  if (id) {
+    axios.get(`/game/current/${id}`)
+      .then(({ data }) => {
+        dispatch(getCurrentGame(data));
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+};
 
 export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
   .post('/game/findRandomGame', { currentGameId })
@@ -134,7 +140,6 @@ export const addScore = (score) => (dispatch) => {
 };
 
 export const setRoundTimesThunk = (id) => (dispatch) => {
-  console.log('setting time');
   const year = moment().year();
   const month = moment().month();
   const day = moment().date();
@@ -150,7 +155,7 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
 
   const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
   const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds}`;
-  console.log(roundStart, roundEnd);
+
   axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
     .then(() => {
       dispatch(setGameTimes(roundStart, roundEnd));

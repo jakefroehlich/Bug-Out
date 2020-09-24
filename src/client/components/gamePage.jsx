@@ -22,7 +22,7 @@ const GamePage = ({
   useEffect(() => {
     console.log('gamepage effect used');
     getPowerUps();
-    getCurrentGame();
+    getCurrentGame(match.params.id);
     // fetchPrompt(game.difficulty);
   }, []);
 
@@ -92,7 +92,7 @@ const mapStateToProps = (props) => (props);
 
 const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
-  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
   fetchPrompt: (difficulty) => dispatch(getPromptThunk(difficulty)),
 });
 

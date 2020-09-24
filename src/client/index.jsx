@@ -35,9 +35,9 @@ const App = () => (
           <Route exact path="/account" component={LoggedIn} />
           <Route exact path="/console" component={GameConsole} />
           <Route exact path="/loading-game" component={LoadingGame} />
-          <Route exact path="/game" component={GamePage} />
+          <Route exact path="/game/:id" component={GamePage} />
           <Route exact path="/join" component={JoinGame} />
-          <Route exact path="/waiting" component={WaitingRoom} />
+          <Route exact path="/waiting/:id" component={WaitingRoom} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/game-over" component={GameOver} />
           <Redirect to="/" />

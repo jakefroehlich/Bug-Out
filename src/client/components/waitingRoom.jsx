@@ -2,8 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chatbox from './ChatBox';
 import TheCompetition from './theCompetition';
-import { setSessionThunk, getCurrentGameThunk, setRoundTimes } from '../store/thunks';
-import socket from '../utils/socket';
+import { setSessionThunk, getCurrentGameThunk, setRoundTimesThunk } from '../store/thunks';
 import LeaveGameButton from './leaveGameButton';
 
 const WaitingRoom = ({
@@ -21,18 +20,20 @@ const WaitingRoom = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (game) {
-    history.push('/game');
-    setRoundTimes(game.id);
+      history.push('/game');
+      setRoundTimes(game.id);
     } else {
-      console.log('no game!')
+      console.log('no game!');
     }
-  }
+  };
 
   return (
     <div
-      className='waitingroom'>
+      className="waitingroom"
+    >
       <div
-        className='waitingcomps'>
+        className="waitingcomps"
+      >
         <TheCompetition />
         <Chatbox />
       </div>
@@ -41,7 +42,7 @@ const WaitingRoom = ({
         className={game.host ? 'visible' : 'hidden'}
         onClick={handleSubmit}
       >Start Game
-        </button>
+      </button>
       <LeaveGameButton history={history} />
     </div>
   );
@@ -211,7 +212,7 @@ const mapDispatchToProps = (dispatch) => ({
   // newPlayer: (player) => dispatch(addPlayer(player)),
   // addMsg: (msg) => dispatch(addMessage(msg)),
   setSession: () => dispatch(setSessionThunk()),
-  setRoundTimes: (id) => dispatch(setRoundTimes(id)),
+  setRoundTimes: (id) => dispatch(setRoundTimesThunk(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
 import {
-  LeaveGameButton,
+  LeaveGameButton, powerUpButton,
 } from './index';
 import { setPowerUp } from '../utils';
-import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
+import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
 const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match,
@@ -26,7 +26,6 @@ const GamePage = ({
     // fetchPrompt(game.difficulty);
   }, []);
 
-  console.log('game', game)
   useEffect(() => {
     if (game.roundOver) {
       onOpen();
@@ -38,6 +37,7 @@ const GamePage = ({
     const powerUp = setPowerUp(game.powerUps);
     if (powerUp) {
       setGivenPowerUps([...givenPowerUps, powerUp]);
+      console.log('givenPowerUps is ', givenPowerUps);
       // console.log('powerup given and givenPowerUps is ', givenPowerUps);
     }
   }, 1000); // runs every 10 seconds;
@@ -56,13 +56,8 @@ const GamePage = ({
           Power Ups
           <ul>
             {givenPowerUps.map((el) => (
-              <li>
-                <Button
-                  id={el.id}
-                  onClick={() => null}
-                >
-                  {el.name}
-                </Button>
+              <li id>
+                {powerUpButton(el)}
               </li>
             ))}
           </ul>
@@ -70,7 +65,7 @@ const GamePage = ({
       </div>
       <Editor match={match} gamePageProps={game} />
       <div>
-        <Timer props={game}/>
+        <Timer props={game} />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>

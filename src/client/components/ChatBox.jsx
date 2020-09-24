@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button,
-  Input,
-  FormControl,
   Text,
 } from '@chakra-ui/core';
 import socket from '../utils/socket';
@@ -28,7 +25,8 @@ const ChatBox = ({ msgs, game, session }) => {
       className="messagebox"
     >
       <form
-        className="messageform">
+        className="messageform"
+      >
         <div
           className="messages"
         >
@@ -41,8 +39,8 @@ const ChatBox = ({ msgs, game, session }) => {
               </div>
             ))
           ) : (
-              <Text>No messages yet :(</Text>
-            )}
+            <Text>No messages yet :(</Text>
+          )}
         </div>
         <div
           className="messageinput"
@@ -56,7 +54,7 @@ const ChatBox = ({ msgs, game, session }) => {
           />
           <button type="submit" onClick={handleSubmit}>
             Send
-        </button>
+          </button>
         </div>
       </form>
     </div>

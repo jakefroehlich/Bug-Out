@@ -4,7 +4,7 @@ import Login from './login/login';
 import Logout from './login/logout';
 import About from './about';
 import LandingPage from './landingPage';
-import CreateGame from './createGame';
+import GameConsole from './gameConsole';
 import LoadingGame from './gameLoading';
 import WaitingRoom from './waitingRoom';
 import JoinGame from './joinGame';
@@ -22,10 +22,10 @@ export {
   Logout,
   About,
   LandingPage,
-  CreateGame,
   JoinGame,
   LoadingGame,
   WaitingRoom,
+  GameConsole,
   Editor,
   ChatBox,
   Timer,

@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Button,
-  Input,
-  FormControl,
   Text,
 } from '@chakra-ui/core';
 import socket from '../utils/socket';
@@ -24,42 +21,43 @@ const ChatBox = ({ msgs, game, session }) => {
   };
 
   return (
-    <FormControl display="flex" flexDirection="column" h="100%">
-      <div
-        id="messagebox"
-        style={{ height: '90%', overflow: 'scroll', maxHeight: '400px' }}
+    <div
+      className="messagebox"
+    >
+      <form
+        className="messageform"
       >
-        {msgs ? (
-          msgs.map((msg) => (
-            <div key={msg.id}>
-              <Text>
-                {msg.playerName}: {msg.text} @{msg.time}
-              </Text>
-            </div>
-          ))
-        ) : (
-          <Text>No messages yet :(</Text>
-        )}
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-        }}
-      >
-        <Input
-          id="msg"
-          type="text"
-          placeholder="type something, n00b"
-          onChange={handleChange}
-          value={chatMsg}
-        />
-        <Button type="submit" onClick={handleSubmit} variantColor="purple">
-          Send
-        </Button>
-      </div>
-    </FormControl>
+        <div
+          className="messages"
+        >
+          {msgs ? (
+            msgs.map((msg) => (
+              <div key={msg.id}>
+                <span>
+                  {msg.playerName}: {msg.text} @{msg.time}
+                </span>
+              </div>
+            ))
+          ) : (
+            <Text>No messages yet :(</Text>
+          )}
+        </div>
+        <div
+          className="messageinput"
+        >
+          <input
+            id="msg"
+            type="text"
+            placeholder="type something, n00b"
+            onChange={handleChange}
+            value={chatMsg}
+          />
+          <button type="submit" onClick={handleSubmit}>
+            Send
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 

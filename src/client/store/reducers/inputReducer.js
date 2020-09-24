@@ -1,7 +1,6 @@
 import { types } from '../actions';
 
 const initialState = {
-  playerName: null,
   score: 0,
   correctAnswer: false,
   playerPowerUps: [],

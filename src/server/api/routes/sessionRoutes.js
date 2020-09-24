@@ -9,12 +9,12 @@ const GameSession = require('../../db/models/gameSession');
 
 const sessionRouter = Router();
 
-sessionRouter.get('/name', async (req, res) => {
+sessionRouter.get('/current', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
-    res.status(201).send(session.name);
+    res.status(201).send(session);
   } catch (e) {
-    console.log('Error updating name');
+    console.log('Error getting session');
     console.log(e);
   }
 });
@@ -43,6 +43,17 @@ sessionRouter.post('/makeHost', async (req, res) => {
   }
 });
 
+sessionRouter.post('/removeHost', async (req, res) => {
+  try {
+    const session = await Session.findOne({ wehre: { id: req.session_id } });
+    session.update({ host: false });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error removing host');
+    console.log(e);
+  }
+});
+
 sessionRouter.put('/score', async (req, res) => {
   try {
     const { score } = req.body;
@@ -54,6 +65,12 @@ sessionRouter.put('/score', async (req, res) => {
     console.log(e);
   }
 });
+// sessionRouter.get('/roomPlayers', async (req, res) => {
+//   try {
+//     const session = await Session.findOne({ where: { gameSessionId: req.session_id }});
+
+//   }
+// })
 
 sessionRouter.put('/correct/:id', async (req, res) => {
   try {

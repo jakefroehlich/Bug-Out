@@ -8,7 +8,7 @@ import FlipCountdown from '@rumess/react-flip-countdown';
 const Timer = (props) => (
   <div>
     { props.game.roundEnd
-        && (
+      && (
         <div>
           <FlipCountdown
             hideYear
@@ -18,9 +18,8 @@ const Timer = (props) => (
             endAt={`${props.game.roundEnd}`}
           />
         </div>
-        )}
+      )}
   </div>
-
 );
 
 const mapStateToProps = (props) => (props);

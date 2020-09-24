@@ -11,19 +11,20 @@ import {
   startGame,
   updateName,
   updateGame,
+  updateCode,
   setGameTimes,
   roundOver,
   newRound,
 } from '../actions';
 
-export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
+export const createGameThunk = (rounds, difficulty) => (dispatch) => axios
   .post('/game/createGame', { rounds, difficulty })
   .then(({ data }) => {
+    // console.log('data', data);
     const gameSessionId = data.id;
-    axios.put(`/game/player/${gameSessionId}`)
+    axios.put('/game/player', { gameSessionId })
       .then(({ data }) => {
         dispatch(updateGame(data));
-        history.push(`/waiting/${data.id}`);
       })
       .catch((e) => {
         console.log(e);
@@ -33,15 +34,38 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
     console.log(e);
   });
 
-export const joinGameThunk = (code) => (dispatch) => axios.put(`/game/addplayer/${code}`, { code })
+export const updateGameCodeThunk = (code) => (dispatch) => axios
+  .put('/game/newGameCode', { code })
   .then(({ data }) => {
-    dispatch(updateGame(data));
+    dispatch(updateCode(data));
   })
   .catch((e) => {
+    console.log('failed to update code', e);
+  });
+
+export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
+  console.log(rounds);
+  return axios
+    .post('/game/updateGame', { rounds, difficulty })
+    .then((game) => {
+      dispatch(updateGame(game.data));
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+};
+
+export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer', { code })
+  .then(({ data }) => {
+    dispatch(updateGame(data));
+    axios.put('/game/joinGame');
+  })
+  .catch((e) => {
+    dispatch(updateGame('failed'));
     console.log(e);
   });
 
-export const getCurrentGameThunk = (id) => (dispatch) => axios.get(`/game/current/${id}`)
+export const getCurrentGameThunk = () => (dispatch) => axios.get('/game/current')
   .then(({ data }) => {
     dispatch(getCurrentGame(data));
   })
@@ -109,7 +133,7 @@ export const addScore = (score) => (dispatch) => {
     });
 };
 
-export const setRoundTimes = (id) => (dispatch) => {
+export const setRoundTimesThunk = (id) => (dispatch) => {
   console.log('setting time');
   const year = moment().year();
   const month = moment().month();
@@ -136,7 +160,6 @@ export const setRoundTimes = (id) => (dispatch) => {
 export const startGameThunk = (currentGameId) => (dispatch) => axios
   .put('/game/startGame', { currentGameId })
   .then((res) => {
-    console.log('response from server on StartGameThunk is ', res);
     dispatch(startGame(res.data));
   })
   .catch((e) => {

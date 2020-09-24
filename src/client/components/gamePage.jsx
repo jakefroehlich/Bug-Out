@@ -11,19 +11,19 @@ import {
   LeaveGameButton, powerUpButton,
 } from './index';
 import { setPowerUp } from '../utils';
-import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';
+import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
 
-const GamePage = (props) => {
-  const {
-    game, getPowerUps, getCurrentGame, history, match,
-  } = props;
-
+const GamePage = ({
+  game, getPowerUps, getCurrentGame, history, match,
+}) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [givenPowerUps, setGivenPowerUps] = useState([]);
 
   useEffect(() => {
+    console.log('gamepage effect used');
     getPowerUps();
-    getCurrentGame(props.match.params.id);
+    getCurrentGame();
+    // fetchPrompt(game.difficulty);
   }, []);
 
   useEffect(() => {
@@ -48,9 +48,9 @@ const GamePage = (props) => {
       <div style={{ height: '80vh' }}>
         <Box bg="tomato" h="40%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#c90c0c" borderStyle="solid" rounded="lg">
           Competition
-          {game.players.map((player) => (
+          {game.players ? game.players.map((player) => (
             <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
-          ))}
+          )) : null}
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
           Power Ups
@@ -65,7 +65,7 @@ const GamePage = (props) => {
       </div>
       <Editor match={match} gamePageProps={game} />
       <div>
-        <Timer />
+        <Timer props={game} />
         <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
         </Box>
@@ -92,7 +92,8 @@ const mapStateToProps = (props) => (props);
 
 const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
-  getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
+  getCurrentGame: () => dispatch(getCurrentGameThunk()),
+  fetchPrompt: (difficulty) => dispatch(getPromptThunk(difficulty)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

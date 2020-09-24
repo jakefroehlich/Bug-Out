@@ -2,7 +2,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 import {
-  HashRouter,
+  BrowserRouter,
   Switch,
   Route,
   Redirect,
@@ -14,7 +14,7 @@ import {
   LoggedIn,
   About,
   LandingPage,
-  CreateGame,
+  GameConsole,
   LoadingGame,
   WaitingRoom,
   JoinGame,
@@ -22,25 +22,27 @@ import {
 } from './components';
 import store from './store';
 import GamePage from './components/gamePage';
+// Importing Styles
+import '../assets/styles.css';
 
 const App = () => (
   <Provider store={store}>
     <ThemeProvider>
-      <HashRouter>
+      <BrowserRouter>
         <Switch>
           <Route exact path="/About" component={About} />
           <Route exact path="/login" component={LoginForm} />
           <Route exact path="/account" component={LoggedIn} />
-          <Route exact path="/create" component={CreateGame} />
+          <Route exact path="/console" component={GameConsole} />
           <Route exact path="/loading-game" component={LoadingGame} />
-          <Route exact path="/game/:id" component={GamePage} />
+          <Route exact path="/game" component={GamePage} />
           <Route exact path="/join" component={JoinGame} />
-          <Route exact path="/waiting/:id" component={WaitingRoom} />
+          <Route exact path="/waiting" component={WaitingRoom} />
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/game-over" component={GameOver} />
           <Redirect to="/" />
         </Switch>
-      </HashRouter>
+      </BrowserRouter>
     </ThemeProvider>
   </Provider>
 );

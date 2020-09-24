@@ -19,7 +19,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.ADD_PLAYER:
       return {
         ...state,
-        players: state.players.push(action.player),
+        players: [...state.players, action.player],
       };
     case types.RM_PLAYER:
       return {
@@ -42,9 +42,11 @@ const gameReducer = (state = initialGameState, action) => {
         private: action.payload.private,
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
-        players: action.payload.sessions,
+        // players: action.payload.sessions,
         roundStart: action.payload.roundStart,
         roundEnd: action.payload.roundEnd,
+        players: action.players,
+        host: action.hostStatus,
       };
     case types.SET_PROMPT:
       console.log(action.payload);
@@ -61,6 +63,11 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         active: action.payload.active,
+      };
+    case types.UPDATE_CODE:
+      return {
+        ...state,
+        code: action.code,
       };
     case types.SET_ROUND_TIMES:
       return {

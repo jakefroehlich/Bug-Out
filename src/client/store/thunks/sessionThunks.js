@@ -2,13 +2,13 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  getName, updateName, makeHost, leaveGame,
+  setSession, updateName, updateHost, leaveGame,
 } from '../actions';
 
-export const getNameThunk = () => (dispatch) => axios
-  .get('/session/name')
+export const setSessionThunk = () => (dispatch) => axios
+  .get('/session/current')
   .then((res) => {
-    dispatch(getName(res.data));
+    dispatch(setSession(res.data));
   })
   .catch((e) => {
     console.log(e);
@@ -26,7 +26,16 @@ export const updateNameThunk = (name) => (dispatch) => axios
 export const makeHostThunk = () => (dispatch) => axios
   .post('/session/makeHost')
   .then((res) => {
-    dispatch(makeHost(res.data));
+    dispatch(updateHost(res.data));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const removeHostThunk = () => (dispatch) => axios
+  .post('/session/removeHost')
+  .then((res) => {
+    dispatch(updateHost(res.data));
   })
   .catch((e) => {
     console.log(e);

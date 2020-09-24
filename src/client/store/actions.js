@@ -15,7 +15,7 @@ export const types = {
   UPDATE_PLAYERS: 'UPDATE_PLAYERS',
   GET_PROMPT: 'GET_PROMPT',
   UPDATE_NAME: 'UPDATE_NAME',
-  GET_NAME: 'GET_NAME',
+  SET_SESSION: 'SET_SESSION',
   SET_POWERUPS: 'SET_POWERUPS',
   MAKE_HOST: 'MAKE_HOST',
   SET_CORRECT: 'SET_CORRECT',
@@ -23,6 +23,9 @@ export const types = {
   ADD_SCORE: 'ADD_SCORE',
   START_GAME: 'START_GAME',
   UPDATE_GAME: 'UPDATE_GAME',
+  UPDATE_CODE: 'UPDATE_CODE',
+  UPDATE_HOST: 'UPDATE_HOST',
+  UPDATE_ALIAS: 'UPDATE_ALIAS',
   SET_ROUND_TIMES: 'SET_ROUND_TIMES',
   SET_ROUND_OVER: 'SET_ROUND_OVER',
   LEAVE_GAME: 'LEAVE_GAME',
@@ -79,9 +82,11 @@ const newGame = (game) => ({
   payload: game,
 });
 
-const getCurrentGame = (game) => ({
+const getCurrentGame = ({ game, hostStatus, players }) => ({
   type: types.GET_CURRENT_GAME,
   payload: game,
+  hostStatus,
+  players,
 });
 
 const joinGame = (res) => ({
@@ -94,9 +99,9 @@ const getPrompt = (prompt) => ({
   payload: prompt,
 });
 
-const getName = (name) => ({
-  type: types.GET_NAME,
-  payload: name,
+const setSession = (session) => ({
+  type: types.SET_SESSION,
+  session,
 });
 
 const setPowerups = (powerups) => ({
@@ -109,8 +114,8 @@ const updateName = (name) => ({
   payload: name,
 });
 
-const makeHost = (hostId) => ({
-  type: types.MAKE_HOST,
+const updateHost = (hostId) => ({
+  type: types.UPDATE_HOST,
   payload: hostId,
 });
 
@@ -142,6 +147,16 @@ const updateGame = (game) => ({
   payload: game,
 });
 
+const updateCode = (code) => ({
+  type: types.UPDATE_CODE,
+  code,
+});
+
+// const getRoomPlayers = () => ({
+//   type: types.GET_ROOM_PLAYERS,
+
+// });
+
 const roundOver = (bool) => ({
   type: types.SET_ROUND_OVER,
   payload: bool,
@@ -172,16 +187,19 @@ export {
   addPlayer,
   rmPlayer,
   updateName,
-  getName,
+  setSession,
   setPowerups,
-  makeHost,
+  updateHost,
   setCorrectAnswer,
   setWrongAnswer,
   addScoreAction,
   startGame,
   updateGame,
+  updateCode,
   setGameTimes,
   roundOver,
   leaveGame,
   newRound,
 };
+
+// AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

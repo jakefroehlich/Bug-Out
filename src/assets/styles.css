@@ -1,0 +1,196 @@
+#body {
+    background-image: url(https://i.ibb.co/b70VqB4/Artboard-1.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+}
+
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.landingimg {
+    height: 20rem;
+    width: 27rem;
+}
+
+.landingform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border-radius: 3%;
+    width: 40%;
+    min-width: 30rem;
+    height: 60%;
+    border: 2px solid red;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.landingform input {
+    width: 40%;
+    border: 2px solid red;
+    border-radius: 4px;
+}
+
+.consoleContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.outerConsole {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+}
+
+.creategame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border-radius: 3%;
+    width: 40%;
+    min-width: 30rem;
+    height: 60%;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.creategame span {
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.creategamebutton {
+    width: 30%;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.joingame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 40%;
+    min-width: 30rem;
+    height: 60%;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border-radius: 3%;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.joingame span {
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.joingame input {
+    width: 30%;
+}
+
+.joingamebutton {
+    width: 30%;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    height: 12rem;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border: solid 2px red;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.navimg {
+    height: 9rem;
+    width: 11rem;
+}
+
+.messagebox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+}
+
+.messageform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+    width: 60%;
+    background-image: linear-gradient(slategrey, darkslategrey);
+    border-radius: 3%;
+    border: 2px solid red;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.messageinput {
+    display: flex;
+}
+
+.messages {
+    height: 80%;
+    width: 90%;
+    border-radius: 3%;
+    background-color: black;
+    box-shadow: 0px 0px -5px -10px white;
+    overflow-y: scroll;
+}
+
+.waitingcomps {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.waitingroom {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+@keyframes mymove {
+    50% {box-shadow: 0px 0px 35px 5px red;}
+  }

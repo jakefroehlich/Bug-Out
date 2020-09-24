@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure
 } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';

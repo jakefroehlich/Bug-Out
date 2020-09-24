@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
 import {
-  LeaveGameButton, powerUpButton
+  LeaveGameButton, powerUpButton,
 } from './index';
 import { setPowerUp } from '../utils';
 import { getPowerUpsThunk, getCurrentGameThunk } from '../store/thunks/gameThunks';

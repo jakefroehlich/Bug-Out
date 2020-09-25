@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { joinGameThunk, removeHostThunk } from '../store/thunks';
 
-const JoinGame = ({ joinGame, rmHost, history, }) => {
+const JoinGame = ({ joinGame, rmHost, history }) => {
   const [gameCode, setGameCode] = useState('');
 
   const handleSubmit = (e) => {
@@ -34,8 +34,7 @@ const JoinGame = ({ joinGame, rmHost, history, }) => {
 };
 
 const mapStateToProps = (state) => ({
-  // game: state.game,
-  // user: state.user,
+  state,
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -15,12 +15,11 @@ const clientListeners = (socket) => {
 
   socket.on('roundOver', () => {
     store.dispatch(roundOver());
-  })
+  });
 
   socket.on('startGame', () => {
     store.dispatch(setRoundTimesThunk(store.game.id));
-
-  })
+  });
 };
 
 export default clientListeners;

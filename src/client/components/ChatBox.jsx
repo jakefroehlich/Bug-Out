@@ -6,10 +6,8 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, game, session }) => {
+const ChatBox = ({ msgs, session }) => {
   const [chatMsg, setChatMsg] = useState('');
-
-  console.log('messages', msgs)
 
   const handleChange = (e) => {
     e.preventDefault();

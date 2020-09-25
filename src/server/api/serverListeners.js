@@ -21,7 +21,7 @@ const serverListeners = (io, socket) => {
 
   socket.on('chatMsg', (msg, name) => {
     io.emit('message', formatMessage(name, msg));
-  })
+  });
 
   //  Runs when client disconnects
   socket.on('disconnect', () => {

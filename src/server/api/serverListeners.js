@@ -19,8 +19,8 @@ const serverListeners = (io, socket) => {
     io.emit('startGame');
   })
 
-  socket.on('chatMsg', () => {
-    io.emit('message')
+  socket.on('chatMsg', (msg, name) => {
+    io.emit('message', formatMessage(name, msg));
   })
 
   //  Runs when client disconnects

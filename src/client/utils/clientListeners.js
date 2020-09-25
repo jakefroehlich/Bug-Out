@@ -5,6 +5,7 @@ import { setRoundTimesThunk } from '../store/thunks';
 const clientListeners = (socket) => {
   socket.on('message', (message) => {
     console.log(message);
+    store.dispatch(addMessage(message));
   });
 
   socket.on('message_sent', (message) => {
@@ -18,7 +19,7 @@ const clientListeners = (socket) => {
 
   socket.on('startGame', () => {
     store.dispatch(setRoundTimesThunk(store.game.id));
-    
+
   })
 };
 

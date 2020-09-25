@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {
   Text,
 } from '@chakra-ui/core';
-import socket from '../utils/socket';
+// import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
 const ChatBox = ({ msgs, game, session }) => {
@@ -16,7 +16,7 @@ const ChatBox = ({ msgs, game, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg, game.code, session.name);
+    // socket.emit('chatMsg', chatMsg, game.code, session.name);
     setChatMsg('');
   };
 

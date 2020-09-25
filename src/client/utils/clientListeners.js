@@ -6,10 +6,10 @@ const clientListeners = (socket) => {
     console.log(message);
   });
 
-  // socket.on('message_sent', (message) => {
-  //   console.log('socketListeners: ', message);
-  //   store.dispatch(addMessage(message));
-  // });
+  socket.on('message_sent', (message) => {
+    console.log('socketListeners: ', message);
+    store.dispatch(addMessage(message));
+  });
 };
 
 export default clientListeners;

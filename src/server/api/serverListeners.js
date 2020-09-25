@@ -13,15 +13,15 @@ const serverListeners = (io, socket) => {
 
   socket.on('roundOver', () => {
     io.emit('roundOver');
-  })
+  });
 
   socket.on('startGame', () => {
     io.emit('startGame');
-  })
+  });
 
   socket.on('chatMsg', () => {
-    io.emit('message')
-  })
+    io.emit('message');
+  });
 
   //  Runs when client disconnects
   socket.on('disconnect', () => {

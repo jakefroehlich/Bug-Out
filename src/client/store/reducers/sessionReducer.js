@@ -24,7 +24,7 @@ const sessionReducer = (state = initialState, action) => {
       return {
         ...state,
         host: action.payload,
-      }
+      };
     default:
       return state;
   }

@@ -60,7 +60,7 @@ export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/a
   .then(({ data }) => {
     dispatch(updateGame(data));
     const { id } = data;
-    history.push(`/waiting/${id}`)
+    history.push(`/waiting/${id}`);
   })
   .catch((e) => {
     dispatch(updateGame('failed'));

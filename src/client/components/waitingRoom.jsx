@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
-import thunk from 'redux-thunk';
 import Chatbox from './ChatBox';
 import TheCompetition from './theCompetition';
 import { setSessionThunk, getCurrentGameThunk, setRoundTimesThunk } from '../store/thunks';

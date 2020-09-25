@@ -155,7 +155,7 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   }
 
   const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds}`;
+  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds + 6}`;
 
   axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
     .then(() => {

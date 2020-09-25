@@ -14,12 +14,12 @@ class RoundStartTimer extends Component {
     this.startNewRound = this.startNewRound.bind(this);
   }
 
- componentDidMount() {
+  componentDidMount() {
     if (this.props.session.host) {
-      console.log('Entered if statement')
+      console.log('Entered if statement');
       this.props.setRoundTimesThunk(this.props.match.params.id);
       this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
-    };
+    }
 
     if (this.props.game.rounds > 1) {
       this.myInterval = setInterval(() => {

@@ -14,6 +14,7 @@ import Timer from './timer2';
 import LeaveGameButton from './leaveGameButton';
 import powerUpButton from './powerUpButton';
 import GameOver from './gameOver';
+import GameStartTimer from './gameStartTimer';
 
 export {
   LoginForm,
@@ -32,4 +33,5 @@ export {
   LeaveGameButton,
   powerUpButton,
   GameOver,
+  GameStartTimer,
 };

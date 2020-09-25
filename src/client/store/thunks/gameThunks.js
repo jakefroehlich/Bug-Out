@@ -56,10 +56,11 @@ export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
     });
 };
 
-export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer', { code })
+export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/addplayer', { code })
   .then(({ data }) => {
     dispatch(updateGame(data));
-    axios.put('/game/joinGame');
+    const { id } = data;
+    history.push(`/waiting/${id}`)
   })
   .catch((e) => {
     dispatch(updateGame('failed'));

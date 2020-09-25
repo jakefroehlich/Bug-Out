@@ -114,9 +114,9 @@ const updateName = (name) => ({
   payload: name,
 });
 
-const updateHost = (hostId) => ({
+const updateHostStatus = (status) => ({
   type: types.UPDATE_HOST,
-  payload: hostId,
+  payload: status,
 });
 
 const setCorrectAnswer = () => ({
@@ -157,9 +157,8 @@ const updateCode = (code) => ({
 
 // });
 
-const roundOver = (bool) => ({
+const roundOver = () => ({
   type: types.SET_ROUND_OVER,
-  payload: bool,
 });
 
 const leaveGame = (session) => ({
@@ -189,7 +188,7 @@ export {
   updateName,
   setSession,
   setPowerups,
-  updateHost,
+  updateHostStatus,
   setCorrectAnswer,
   setWrongAnswer,
   addScoreAction,

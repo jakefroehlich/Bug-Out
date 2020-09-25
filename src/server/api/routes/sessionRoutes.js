@@ -36,7 +36,7 @@ sessionRouter.post('/makeHost', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
     session.update({ host: true });
-    res.status(201).send(session);
+    res.status(201).send(true);
   } catch (e) {
     console.log('Error making host');
     console.log(e);
@@ -45,9 +45,9 @@ sessionRouter.post('/makeHost', async (req, res) => {
 
 sessionRouter.post('/removeHost', async (req, res) => {
   try {
-    const session = await Session.findOne({ wehre: { id: req.session_id } });
+    const session = await Session.findOne({ where: { id: req.session_id } });
     session.update({ host: false });
-    res.status(201).send(session);
+    res.status(201).send(false);
   } catch (e) {
     console.log('Error removing host');
     console.log(e);

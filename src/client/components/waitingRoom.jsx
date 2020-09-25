@@ -4,9 +4,11 @@ import Chatbox from './ChatBox';
 import TheCompetition from './theCompetition';
 import { setSessionThunk, getCurrentGameThunk, setRoundTimesThunk } from '../store/thunks';
 import LeaveGameButton from './leaveGameButton';
+import socket from '../utils/socket';
+import thunk from 'redux-thunk';
 
 const WaitingRoom = ({
-  setSession, getCurrentGame, game, history,
+  setSession, getCurrentGame, game, history, session,
   setRoundTimes, match,
 }) => {
   useEffect(() => {
@@ -15,9 +17,11 @@ const WaitingRoom = ({
   }, []);
 
   console.log('game', game);
+  console.log('session', session);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    socket.emit('gameStart');
     if (game) {
       history.push(`/game/${match.params.id}`);
       setRoundTimes(game.id);
@@ -38,7 +42,7 @@ const WaitingRoom = ({
       </div>
       <button
         type="submit"
-        className={game.host ? 'visible' : 'hidden'}
+        className={session.host ? 'visible' : 'hidden'}
         onClick={handleSubmit}
       >Start Game
       </button>

@@ -191,6 +191,14 @@
     justify-content: flex-start;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}
+
 @keyframes mymove {
     50% {box-shadow: 0px 0px 35px 5px red;}
   }

@@ -78,7 +78,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.SET_ROUND_OVER:
       return {
         ...state,
-        roundOver: action.payload,
+        roundOver: true,
       };
     case types.NEW_ROUND:
       return {

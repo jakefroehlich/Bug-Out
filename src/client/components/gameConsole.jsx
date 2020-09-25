@@ -24,7 +24,7 @@ const GameConsole = ({
 
   useEffect(() => {
     setSession();
-    rmHost();
+    // rmHost();
   }, []);
 
   return (

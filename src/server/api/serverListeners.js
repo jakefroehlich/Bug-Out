@@ -11,6 +11,18 @@ const serverListeners = (io, socket) => {
   //  Broadcast when a user connects (to everyone except current user)
   socket.broadcast.emit('message', 'A user has joined the fray');
 
+  socket.on('roundOver', () => {
+    io.emit('roundOver');
+  })
+
+  socket.on('startGame', () => {
+    io.emit('startGame');
+  })
+
+  socket.on('chatMsg', () => {
+    io.emit('message')
+  })
+
   //  Runs when client disconnects
   socket.on('disconnect', () => {
     io.emit('message', 'A user has left the fray');

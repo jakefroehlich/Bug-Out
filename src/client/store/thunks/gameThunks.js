@@ -60,7 +60,7 @@ export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/a
   .then(({ data }) => {
     dispatch(updateGame(data));
     const { id } = data;
-    history.push(`/waiting/${id}`)
+    history.push(`/waiting/${id}`);
   })
   .catch((e) => {
     dispatch(updateGame('failed'));
@@ -155,7 +155,7 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   }
 
   const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds}`;
+  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds + 6}`;
 
   axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
     .then(() => {

@@ -13,11 +13,11 @@ const serverListeners = (io, socket) => {
 
   socket.on('roundOver', () => {
     io.emit('roundOver');
-  })
+  });
 
   socket.on('startGame', () => {
     io.emit('startGame');
-  })
+  });
 
   socket.on('chatMsg', (msg, name) => {
     io.emit('message', formatMessage(name, msg));

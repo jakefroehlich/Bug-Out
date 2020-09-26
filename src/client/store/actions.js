@@ -146,11 +146,6 @@ const updateCode = (code) => ({
   code,
 });
 
-// const getRoomPlayers = () => ({
-//   type: types.GET_ROOM_PLAYERS,
-
-// });
-
 const roundOver = (bool) => ({
   type: types.SET_ROUND_OVER,
   payload: bool,
@@ -200,5 +195,3 @@ export {
   newRound,
   updateHostStatus,
 };
-
-// AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

@@ -6,10 +6,8 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, game, session }) => {
+const ChatBox = ({ msgs, session }) => {
   const [chatMsg, setChatMsg] = useState('');
-
-  console.log('messages', msgs)
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -36,7 +34,7 @@ const ChatBox = ({ msgs, game, session }) => {
             msgs.map((msg) => (
               <div key={msg.id}>
                 <span>
-                  {msg.playerName}: {msg.text} @{msg.time}
+                  {msg.playerName}: {msg.text} @{msg.time} from {msg.socketId}
                 </span>
               </div>
             ))

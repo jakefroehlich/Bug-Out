@@ -137,9 +137,8 @@ const setGameTimes = (roundStart, roundEnd) => ({
   payload: { start: roundStart, end: roundEnd },
 });
 
-const startGame = (game) => ({
+const startGame = () => ({
   type: types.START_GAME,
-  payload: game,
 });
 
 const updateGame = (game) => ({

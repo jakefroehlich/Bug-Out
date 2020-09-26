@@ -8,7 +8,6 @@ import {
 export const setSessionThunk = () => (dispatch) => axios
   .get('/session/current')
   .then((res) => {
-    console.log('session data', res.data);
     dispatch(setSession(res.data));
   })
   .catch((e) => {

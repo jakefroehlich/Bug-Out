@@ -68,7 +68,7 @@ export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/a
   });
 
 export const getCurrentGameThunk = (id) => (dispatch) => {
-  console.log(id);
+  console.log('id', id);
   if (id) {
     axios.get(`/game/current/${id}`)
       .then(({ data }) => {
@@ -172,11 +172,8 @@ export const startGameThunk = (currentGameId) => (dispatch) => axios
     console.log(e);
   });
 
-export const roundReset = (id) => (dispatch) => axios
+export const roundReset = (id) => () => axios
   .put(`/game/reset-correct/${id}`)
-  // .then(({data})=>{
-  //   // dispatch()
-  // })
   .catch((e) => {
     console.log(e);
   });

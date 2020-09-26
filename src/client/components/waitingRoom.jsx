@@ -12,29 +12,49 @@ import GameStartTimer from './gameStartTimer';
 
 const WaitingRoom = ({
   setSession, getCurrentGame, game, history, session,
-  setRoundTimes, match,
+  // setRoundTimes,
+  match,
 }) => {
-  useEffect(() => {
-    setSession(); // I wanna know who you are, where you're from, what you did
-    getCurrentGame(match.params.id);
-  }, []);
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  useEffect(() => {
+    setSession();
+  }, []);
+
+  useEffect(() => {
+    if (match.params.id) {
+      console.log('match', match);
+      getCurrentGame(match.params.id);
+    }
+  }, [match.params.id]);
+
+  useEffect(() => {
+    if (game.id) {
+      socket.emit('joinRoom', game.id);
+    }
+    return () => {
+      socket.emit('leaveRoom', game.id);
+    };
+  }, [game.id]);
+
+  useEffect(() => {
+    if (game.active) {
+      onOpen();
+    }
+  }, [game.active]);
+
   console.log('game', game);
-  console.log('session', session);
+  // console.log('session', session);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onOpen();
-
-    socket.emit('gameStart');
-    if (game) {
-      // history.push(`/game/${match.params.id}`);
-      setRoundTimes(game.id);
-    } else {
-      console.log('no game!');
-    }
+    socket.emit('startGame');
+    // if (game) {
+    //   // history.push(`/game/${match.params.id}`);
+    //   setRoundTimes(game.id);
+    // } else {
+    //   console.log('no game!');
+    // }
   };
 
   return (

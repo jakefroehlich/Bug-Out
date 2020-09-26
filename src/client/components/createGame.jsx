@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { createGameThunk, makeHostThunk } from '../store/thunks';
+// import socket from '../utils/socket';
 
 const CreateGame = ({
   createGame,

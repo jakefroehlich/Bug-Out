@@ -68,7 +68,7 @@ export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/a
   });
 
 export const getCurrentGameThunk = (id) => (dispatch) => {
-  console.log(id);
+  console.log('id', id)
   if (id) {
     axios.get(`/game/current/${id}`)
       .then(({ data }) => {

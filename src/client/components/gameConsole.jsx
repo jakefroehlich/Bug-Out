@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import CreateGame from './createGame';
 import JoinGame from './joinGame';
 import Nav from './Nav';
-
+import socket from '../utils/socket';
 import {
   removeHostThunk,
   setSessionThunk,
@@ -20,11 +20,9 @@ const GameConsole = ({
   setSession,
   rmHost,
 }) => {
-  console.log('session', session);
-
   useEffect(() => {
     setSession();
-    // rmHost();
+    socket.emit('discon');
   }, []);
 
   return (

@@ -15,14 +15,29 @@ const WaitingRoom = ({
   setRoundTimes, match,
 }) => {
   useEffect(() => {
-    setSession(); // I wanna know who you are, where you're from, what you did
-    getCurrentGame(match.params.id);
+    setSession();
   }, []);
+
+  useEffect(() => {
+    if (match.params.id) {
+      console.log('match', match)
+      getCurrentGame(match.params.id);
+    }
+  }, [match.params.id])
+
+  useEffect(() => {
+    if (game.id) {
+      socket.emit('joinRoom', game.id);
+    };
+    return () => {
+      socket.emit('leaveRoom', game.id);
+    };
+  }, [game.id]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  console.log('game', game);
-  console.log('session', session);
+  // console.log('game', game);
+  // console.log('session', session);
 
   const handleSubmit = (e) => {
     e.preventDefault();

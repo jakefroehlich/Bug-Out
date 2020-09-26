@@ -34,7 +34,7 @@ const ChatBox = ({ msgs, session }) => {
             msgs.map((msg) => (
               <div key={msg.id}>
                 <span>
-                  {msg.playerName}: {msg.text} @{msg.time}
+                  {msg.playerName}: {msg.text} @{msg.time} from {msg.socketId}
                 </span>
               </div>
             ))

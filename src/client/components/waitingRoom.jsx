@@ -44,17 +44,10 @@ const WaitingRoom = ({
   }, [game.active]);
 
   console.log('game', game);
-  // console.log('session', session);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit('startGame');
-    // if (game) {
-    //   // history.push(`/game/${match.params.id}`);
-    //   setRoundTimes(game.id);
-    // } else {
-    //   console.log('no game!');
-    // }
   };
 
   return (
@@ -64,7 +57,11 @@ const WaitingRoom = ({
       <div
         className="waitingcomps"
       >
-        <TheCompetition />
+        <div
+          className="waitingheader"
+        >
+          <TheCompetition />
+        </div>
         <Chatbox />
         <div>
           <Modal isOpen={isOpen} onClose={onClose}>

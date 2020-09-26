@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { Text } from '@chakra-ui/core';

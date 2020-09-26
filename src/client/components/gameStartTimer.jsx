@@ -33,7 +33,6 @@ class GameStartTimer extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { seconds } = this.state;
     return (
       <div>

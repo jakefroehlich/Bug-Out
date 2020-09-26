@@ -1,29 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
   Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
+import moment from 'moment';
 import Editor from './editor';
 import ChatBox from './ChatBox';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
+import { LeaveGameButton } from './index';
+// import { setPowerUp } from '../utils';
 import {
-  LeaveGameButton, powerUpButton,
-} from './index';
-import { setPowerUp } from '../utils';
-import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
+  getPowerUpsThunk, getCurrentGameThunk, getPromptThunk, setSessionThunk,
+} from '../store/thunks';
 import socket from '../utils/socket';
 
 const GamePage = ({
-  game, getPowerUps, getCurrentGame, history, match,
+  game, getPowerUps, getCurrentGame, history, match, setSession,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [givenPowerUps, setGivenPowerUps] = useState([]);
+  // const [givenPowerUps, setGivenPowerUps] = useState([]);
 
   useEffect(() => {
-    console.log('gamepage effect used');
     getPowerUps();
     getCurrentGame(match.params.id);
+    setSession();
     // fetchPrompt(game.difficulty);
   }, []);
 
@@ -33,17 +34,31 @@ const GamePage = ({
       socket.emit('roundOver');
     }
   }, [game.roundOver]);
+  // const timerId = setInterval(() => {
+  //   // console.log('timer run!');
+  //   const powerUp = setPowerUp(game.powerUps);
+  //   if (powerUp) {
+  //     setGivenPowerUps([...givenPowerUps, powerUp]);
+  //     console.log('givenPowerUps is ', givenPowerUps);
+  //     // console.log('powerup given and givenPowerUps is ', givenPowerUps);
+  //   }
+  // }, 1000); // runs every 10 seconds;
 
-  const timerId = setInterval(() => {
-    // console.log('timer run!');
-    const powerUp = setPowerUp(game.powerUps);
-    if (powerUp) {
-      setGivenPowerUps([...givenPowerUps, powerUp]);
-      console.log('givenPowerUps is ', givenPowerUps);
-      // console.log('powerup given and givenPowerUps is ', givenPowerUps);
-    }
-  }, 1000); // runs every 10 seconds;
-  setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
+  // setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
+  useEffect(() => {
+    const current = moment().unix();
+    let secondsLeft = game.roundEndUnix - current;
+    const timeLeft = setInterval(() => {
+      if (secondsLeft) {
+        console.log('secondsleft:', secondsLeft);
+        secondsLeft -= 1;
+      } else {
+        console.log('game over');
+        clearInterval(timeLeft);
+      }
+    }, 1000);
+    return clearInterval(timeLeft);
+  });
 
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
@@ -56,13 +71,13 @@ const GamePage = ({
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
           Power Ups
-          <ul>
+          {/* <ul>
             {givenPowerUps.map((el) => (
               <li id>
                 {powerUpButton(el)}
               </li>
             ))}
-          </ul>
+          </ul> */}
         </Box>
       </div>
       <Editor match={match} gamePageProps={game} />
@@ -96,6 +111,7 @@ const mapDispatchToProps = (dispatch) => ({
   getPowerUps: () => dispatch(getPowerUpsThunk()),
   getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
   fetchPrompt: (difficulty) => dispatch(getPromptThunk(difficulty)),
+  setSession: () => dispatch(setSessionThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GamePage);

@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Text } from '@chakra-ui/core';
 import { connect } from 'react-redux';
-import { setRoundTimesThunk, getPromptThunk } from '../store/thunks';
+import { setRoundTimesThunk, getPromptThunk, setSessionThunk } from '../store/thunks';
 
 class RoundStartTimer extends Component {
   constructor() {
@@ -15,8 +15,8 @@ class RoundStartTimer extends Component {
   }
 
   componentDidMount() {
+    setSessionThunk();
     if (this.props.session.host) {
-      console.log('Entered if statement');
       this.props.setRoundTimesThunk(this.props.match.params.id);
       this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
     }
@@ -62,4 +62,4 @@ class RoundStartTimer extends Component {
 }
 
 const mapStateToProps = (props) => (props);
-export default connect(mapStateToProps, { setRoundTimesThunk, getPromptThunk })(RoundStartTimer);
+export default connect(mapStateToProps, { setRoundTimesThunk, getPromptThunk, setSessionThunk })(RoundStartTimer);

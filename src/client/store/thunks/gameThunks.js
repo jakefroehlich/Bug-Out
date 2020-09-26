@@ -68,7 +68,6 @@ export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/a
   });
 
 export const getCurrentGameThunk = (id) => (dispatch) => {
-  console.log('id', id);
   if (id) {
     axios.get(`/game/current/${id}`)
       .then(({ data }) => {
@@ -147,6 +146,8 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   let hour = moment().hour();
   const minute = moment().minute();
   const seconds = moment().seconds();
+  const roundEndUnix = moment().unix() + 605;
+  const roundStartUnix = moment().unix();
 
   let newMin = minute + 10;
   if (newMin > 59) {
@@ -154,12 +155,11 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
     newMin -= 60;
   }
 
-  const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
   const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds + 6}`;
 
-  axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
+  axios.put(`/game/game-times/${id}`, { roundStartUnix, roundEnd, roundEndUnix })
     .then(() => {
-      dispatch(setGameTimes(roundStart, roundEnd));
+      dispatch(setGameTimes(roundStartUnix, roundEnd, roundEndUnix));
     });
 };
 

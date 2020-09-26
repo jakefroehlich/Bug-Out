@@ -12,7 +12,8 @@ import GameStartTimer from './gameStartTimer';
 
 const WaitingRoom = ({
   setSession, getCurrentGame, game, history, session,
-  setRoundTimes, match,
+  // setRoundTimes,
+  match,
 }) => {
   useEffect(() => {
     setSession();
@@ -20,15 +21,15 @@ const WaitingRoom = ({
 
   useEffect(() => {
     if (match.params.id) {
-      console.log('match', match)
+      console.log('match', match);
       getCurrentGame(match.params.id);
     }
-  }, [match.params.id])
+  }, [match.params.id]);
 
   useEffect(() => {
     if (game.id) {
       socket.emit('joinRoom', game.id);
-    };
+    }
     return () => {
       socket.emit('leaveRoom', game.id);
     };
@@ -38,7 +39,7 @@ const WaitingRoom = ({
     if (game.active) {
       onOpen();
     }
-  }, [game.active])
+  }, [game.active]);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 

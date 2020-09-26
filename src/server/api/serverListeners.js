@@ -8,20 +8,20 @@ const serverListeners = (io, socket) => {
   let socketRoomId;
 
   socket.on('joinRoom', (gameSessionId) => {
-    for (let room in socket.rooms) {
+    for (const room in socket.rooms) {
       if (room !== gameSessionId) {
         socket.leave(room);
-      };
-    };
+      }
+    }
 
     if (!socket.rooms.length) {
       socket.join(gameSessionId);
       socketRoomId = gameSessionId;
-    };
+    }
   });
 
   socket.on('chatMsg', (msg, name) => {
-    console.log('chatMsg!', socket.rooms)
+    console.log('chatMsg!', socket.rooms);
     io.to(socketRoomId).emit('message', formatMessage(name, msg, socketRoomId));
   });
 
@@ -35,11 +35,10 @@ const serverListeners = (io, socket) => {
 
   socket.on('discon', () => {
     socket.off('joinGame', () => {
-      console.log('removed all listeners')
-    })
-    console.log('disconnected')
+      console.log('removed all listeners');
+    });
+    console.log('disconnected');
   });
-
 
   // socket.on('chatMsg', (msg, name) => {
   //   console.log('serverListeners: ', msg);

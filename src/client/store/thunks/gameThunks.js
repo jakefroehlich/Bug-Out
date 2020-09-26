@@ -171,3 +171,12 @@ export const startGameThunk = (currentGameId) => (dispatch) => axios
   .catch((e) => {
     console.log(e);
   });
+
+export const roundReset = (id) => (dispatch) => axios
+  .put(`/game/reset-correct/${id}`)
+  // .then(({data})=>{
+  //   // dispatch()
+  // })
+  .catch((e) => {
+    console.log(e);
+  });

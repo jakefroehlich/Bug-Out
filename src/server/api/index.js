@@ -3,6 +3,7 @@ const { join } = require('path');
 const { green } = require('chalk');
 const cors = require('cors');
 const express = require('express');
+const socketio = require('socket.io');
 const cookieParser = require('cookie-parser');
 const {
   apiRouter,
@@ -11,7 +12,16 @@ const {
   sessionRouter,
 } = require('./routes/index');
 const db = require('../db/index');
-const { app, server } = require('./socket');
+const { app, server } = require('./server');
+const serverListeners = require('./serverListeners');
+
+//  Sockets
+const io = socketio(server);
+io.on('connection', (socket) => {
+  console.log('New socket connection...');
+  serverListeners(io, socket);
+});
+//  TODO: send to game engine? Could be handled in socket itself
 
 const {
   models: { Session, User },

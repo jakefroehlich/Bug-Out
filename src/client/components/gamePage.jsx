@@ -12,6 +12,7 @@ import {
 } from './index';
 import { setPowerUp } from '../utils';
 import { getPowerUpsThunk, getCurrentGameThunk, getPromptThunk } from '../store/thunks';
+import socket from '../utils/socket';
 
 const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match,
@@ -29,6 +30,7 @@ const GamePage = ({
   useEffect(() => {
     if (game.roundOver) {
       onOpen();
+      socket.emit('roundOver');
     }
   }, [game.roundOver]);
 

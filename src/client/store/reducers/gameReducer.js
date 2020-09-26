@@ -62,7 +62,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.START_GAME:
       return {
         ...state,
-        active: action.payload.active,
+        active: true,
       };
     case types.UPDATE_CODE:
       return {
@@ -78,7 +78,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.SET_ROUND_OVER:
       return {
         ...state,
-        roundOver: action.payload,
+        roundOver: true,
       };
     case types.NEW_ROUND:
       return {

@@ -6,7 +6,7 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, game, session }) => {
+const ChatBox = ({ msgs, session }) => {
   const [chatMsg, setChatMsg] = useState('');
 
   const handleChange = (e) => {
@@ -16,7 +16,7 @@ const ChatBox = ({ msgs, game, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg, game.code, session.name);
+    socket.emit('chatMsg', chatMsg, session.name);
     setChatMsg('');
   };
 
@@ -34,7 +34,7 @@ const ChatBox = ({ msgs, game, session }) => {
             msgs.map((msg) => (
               <div key={msg.id}>
                 <span>
-                  {msg.playerName}: {msg.text} @{msg.time}
+                  {msg.playerName}: {msg.text} @{msg.time} from {msg.socketId}
                 </span>
               </div>
             ))

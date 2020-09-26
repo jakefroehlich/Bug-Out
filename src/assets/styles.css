@@ -151,6 +151,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: white;
     height: 70%;
     width: 60%;
     background-image: linear-gradient(slategrey, darkslategrey);
@@ -189,6 +190,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }
 
 @keyframes mymove {

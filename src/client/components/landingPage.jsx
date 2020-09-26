@@ -22,7 +22,7 @@ const LandingPage = ({
   updateUserAlias,
   history,
 }) => {
-  const [alias, setAlias] = useState('');
+  const [alias, setAlias] = useState('Guest');
 
   console.log('session', session);
   console.log('alias', alias);
@@ -33,9 +33,6 @@ const LandingPage = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!alias || alias === '') {
-      updateUserAlias('Guest');
-    }
     updateUserAlias(alias);
     history.push('/console');
   };
@@ -52,7 +49,7 @@ const LandingPage = ({
           <input
             className="landingInput"
             type="text"
-            value={alias}
+            // value={alias}
             placeholder="Enter Preferred Alias"
             onChange={(e) => setAlias(e.target.value)}
           />

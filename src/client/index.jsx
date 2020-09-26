@@ -25,6 +25,11 @@ import GamePage from './components/gamePage';
 // Importing Styles
 import '../assets/styles.css';
 
+//  Import Socket:
+import { startSocket } from './utils/socket';
+
+startSocket();
+
 const App = () => (
   <Provider store={store}>
     <ThemeProvider>

@@ -15,6 +15,12 @@ class RoundStartTimer extends Component {
   }
 
   componentDidMount() {
+    if (this.props.session.host) {
+      console.log('Entered if statement');
+      this.props.setRoundTimesThunk(this.props.match.params.id);
+      this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
+    }
+
     if (this.props.game.rounds > 1) {
       this.myInterval = setInterval(() => {
         const { seconds } = this.state;
@@ -39,8 +45,6 @@ class RoundStartTimer extends Component {
 
   async startNewRound() {
     await clearInterval(this.myInterval);
-    await this.props.setRoundTimesThunk(this.props.match.params.id);
-    await this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
     await window.location.reload(true);
   }
 

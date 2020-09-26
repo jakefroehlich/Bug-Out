@@ -1,6 +1,5 @@
 import {
   getPromptThunk,
-  findRandomGameThunk,
   getCurrentGameThunk,
   setCorrect,
   addScore,
@@ -10,6 +9,7 @@ import {
   updateGameThunk,
   updateGameCodeThunk,
   setRoundTimesThunk,
+  joinGameThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -28,7 +28,6 @@ import {
 export {
   updateNameThunk,
   getPromptThunk,
-  findRandomGameThunk,
   getCurrentGameThunk,
   loginThunk,
   logoutThunk,
@@ -45,4 +44,5 @@ export {
   setRoundTimesThunk,
   removeHostThunk,
   leaveGameThunk,
+  joinGameThunk,
 };

@@ -1,14 +1,13 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-alert */
+// import { test } from '../../server/utils/tests';
 import React, { useState, useRef } from 'react';
 import { connect } from 'react-redux';
 import Editor from '@monaco-editor/react';
 import { Button, Text, Box } from '@chakra-ui/core';
 import moment from 'moment';
-import { buildFunction } from '../../server/utils/buildFunction';
-import { test } from '../../server/utils/tests';
-import { setCorrect } from '../store/thunks/gameThunks';
-import { addScore } from '../store/thunks';
+// import { buildFunction } from '../../server/utils/buildFunction';
+import { addScore, setCorrect } from '../store/thunks';
 
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
@@ -23,10 +22,10 @@ const CodeEditor = (props) => {
   }
 
   function handleShowValue() {
-    const fn = buildFunction(valueGetter.current());
-    const ts = `test${prompt.id}`;
-    const correct = test[ts](fn);
-    // const correct = true;
+    // const fn = buildFunction(valueGetter.current());
+    // const ts = `test${prompt.id}`;
+    // const correct = test[ts](fn);
+    const correct = true;
     if (correct) {
       props.setCorrect(props.match.params.id);
 

@@ -56,10 +56,11 @@ export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
     });
 };
 
-export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer', { code })
+export const joinGameThunk = (code, history) => (dispatch) => axios.put('/game/addplayer', { code })
   .then(({ data }) => {
     dispatch(updateGame(data));
-    axios.put('/game/joinGame');
+    const { id } = data;
+    history.push(`/waiting/${id}`);
   })
   .catch((e) => {
     dispatch(updateGame('failed'));
@@ -67,7 +68,7 @@ export const joinGameThunk = (code) => (dispatch) => axios.put('/game/addplayer'
   });
 
 export const getCurrentGameThunk = (id) => (dispatch) => {
-  console.log(id);
+  console.log('id', id);
   if (id) {
     axios.get(`/game/current/${id}`)
       .then(({ data }) => {
@@ -79,14 +80,14 @@ export const getCurrentGameThunk = (id) => (dispatch) => {
   }
 };
 
-export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
-  .post('/game/findRandomGame', { currentGameId })
-  .then(({ data }) => {
-    dispatch(data);
-  })
-  .catch((e) => {
-    console.log(e);
-  });
+// export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
+//   .post('/game/findRandomGame', { currentGameId })
+//   .then(({ data }) => {
+//     dispatch(data);
+//   })
+//   .catch((e) => {
+//     console.log(e);
+//   });
 
 export const getPromptThunk = (difficulty, id) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)
@@ -154,7 +155,7 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   }
 
   const roundStart = `${year}-${month}-${day} ${hour}:${minute}:${seconds}`;
-  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds}`;
+  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds + 6}`;
 
   axios.put(`/game/game-times/${id}`, { roundStart, roundEnd })
     .then(() => {

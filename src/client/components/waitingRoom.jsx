@@ -15,6 +15,8 @@ const WaitingRoom = ({
   // setRoundTimes,
   match,
 }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   useEffect(() => {
     setSession();
   }, []);
@@ -40,8 +42,6 @@ const WaitingRoom = ({
       onOpen();
     }
   }, [game.active]);
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   console.log('game', game);
   // console.log('session', session);

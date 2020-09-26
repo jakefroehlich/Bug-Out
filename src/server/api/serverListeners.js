@@ -8,16 +8,12 @@ const serverListeners = (io, socket) => {
   let socketRoomId;
 
   socket.on('joinRoom', (gameSessionId) => {
-    for (const room in socket.rooms) {
-      if (room !== gameSessionId) {
-        socket.leave(room);
-      }
-    }
+    socket.join(gameSessionId);
+    socketRoomId = gameSessionId;
+  });
 
-    if (!socket.rooms.length) {
-      socket.join(gameSessionId);
-      socketRoomId = gameSessionId;
-    }
+  socket.on('leaveRoom', () => {
+    socket.leave(socketRoomId);
   });
 
   socket.on('chatMsg', (msg, name) => {
@@ -33,12 +29,11 @@ const serverListeners = (io, socket) => {
     io.emit('startGame', socketRoomId);
   });
 
-  socket.on('discon', () => {
-    socket.off('joinGame', () => {
-      console.log('removed all listeners');
-    });
-    console.log('disconnected');
-  });
+  // socket.on('discon', () => {
+  //   const rooms = Object.keys(socket.rooms);
+  //   rooms.forEach((room) => socket.leave(room));
+  //   console.log('disconnected', socket.rooms);
+  // });
 
   // socket.on('chatMsg', (msg, name) => {
   //   console.log('serverListeners: ', msg);

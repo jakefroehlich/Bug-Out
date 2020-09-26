@@ -1,5 +1,5 @@
 import store from '../store/index';
-import { addMessage, roundOver } from '../store/actions';
+import { addMessage, roundOver, startGame } from '../store/actions';
 import { setRoundTimesThunk } from '../store/thunks';
 
 const clientListeners = (socket) => {
@@ -16,8 +16,9 @@ const clientListeners = (socket) => {
     store.dispatch(roundOver());
   });
 
-  socket.on('startGame', () => {
-    store.dispatch(setRoundTimesThunk(store.game.id));
+  socket.on('startGame', (gameId) => {
+    store.dispatch(setRoundTimesThunk(gameId));
+    store.dispatch(startGame());
   });
 };
 

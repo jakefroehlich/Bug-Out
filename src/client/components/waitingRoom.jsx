@@ -34,22 +34,26 @@ const WaitingRoom = ({
     };
   }, [game.id]);
 
+  useEffect(() => {
+    if (game.active) {
+      onOpen();
+    }
+  }, [game.active])
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  // console.log('game', game);
+  console.log('game', game);
   // console.log('session', session);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onOpen();
-
-    socket.emit('gameStart');
-    if (game) {
-      // history.push(`/game/${match.params.id}`);
-      setRoundTimes(game.id);
-    } else {
-      console.log('no game!');
-    }
+    socket.emit('startGame');
+    // if (game) {
+    //   // history.push(`/game/${match.params.id}`);
+    //   setRoundTimes(game.id);
+    // } else {
+    //   console.log('no game!');
+    // }
   };
 
   return (

@@ -12,7 +12,6 @@ import { addScore, setCorrect } from '../store/thunks';
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
   const valueGetter = useRef();
-  console.log('editor props', props);
 
   const { prompt } = props.game;
 
@@ -28,27 +27,8 @@ const CodeEditor = (props) => {
     const correct = true;
     if (correct) {
       props.setCorrect(props.match.params.id);
-
-      const hour = moment().hour();
-      const minute = moment().minute();
-      const seconds = moment().seconds();
-
-      let currentTime = [`${hour}`, `${minute}`, `${seconds}`];
-      for (let i = 0; i < currentTime.length; i++) {
-        if (currentTime[i].length === 1) {
-          currentTime[i] = `0${currentTime[i]}`;
-        }
-      }
-      currentTime = Number(currentTime.join(''));
-
-      let finishTime = props.game.roundEnd.split(' ')[1].split(':');
-      for (let i = 0; i < finishTime.length; i++) {
-        if (finishTime[i].length === 1) {
-          finishTime[i] = `0${finishTime[i]}`;
-        }
-      }
-      finishTime = Number(finishTime.join(''));
-      const userScore = finishTime - currentTime;
+      const finishTime = moment().unix();
+      const userScore = props.game.roundEndUnix - finishTime;
       props.addScore(userScore);
     } else {
       alert('Sorry try again :(');

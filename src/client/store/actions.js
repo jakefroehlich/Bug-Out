@@ -114,11 +114,6 @@ const updateName = (name) => ({
   payload: name,
 });
 
-const updateHost = (hostId) => ({
-  type: types.UPDATE_HOST,
-  payload: hostId,
-});
-
 const setCorrectAnswer = () => ({
   type: types.SET_CORRECT,
 });
@@ -193,7 +188,6 @@ export {
   updateName,
   setSession,
   setPowerups,
-  updateHost,
   setCorrectAnswer,
   setWrongAnswer,
   addScoreAction,

@@ -25,9 +25,8 @@ const GamePage = ({
 
   useEffect(() => {
     getPowerUps();
-    getCurrentGame(match.params.id);
     setSession();
-    // fetchPrompt(game.difficulty);
+    getCurrentGame(match.params.id);
   }, []);
 
   const endRound = async () => {
@@ -40,7 +39,7 @@ const GamePage = ({
     if (game.roundOver) {
       endRound();
     }
-  }, [game.roundOver]);
+  }, [game.roundOver, game.players]);
   // const timerId = setInterval(() => {
   //   // console.log('timer run!');
   //   const powerUp = setPowerUp(game.powerUps);
@@ -57,7 +56,6 @@ const GamePage = ({
     let secondsLeft = game.roundEndUnix - current;
     const timeLeft = setInterval(() => {
       if (secondsLeft) {
-        console.log('secondsleft:', secondsLeft);
         secondsLeft -= 1;
       } else {
         endRound();

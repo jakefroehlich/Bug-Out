@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable max-len */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import { createGameThunk, makeHostThunk } from '../store/thunks';
 // import socket from '../utils/socket';
 
@@ -19,10 +18,6 @@ const CreateGame = ({
     createGame(rounds, difficulty, history);
     makeHost();
   };
-
-  useEffect(() => {
-    axios.put('/session/leaveGame');
-  });
 
   return (
     <form

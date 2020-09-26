@@ -90,6 +90,11 @@ const gameReducer = (state = initialGameState, action) => {
         roundEnd: action.payload.roundEnd,
         roundStart: action.payload.roundStart,
       };
+    case types.SET_GAME_SCORES:
+      return {
+        ...state,
+        players: action.payload,
+      };
     default:
       return state;
   }

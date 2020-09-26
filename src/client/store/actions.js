@@ -30,6 +30,7 @@ export const types = {
   SET_ROUND_OVER: 'SET_ROUND_OVER',
   LEAVE_GAME: 'LEAVE_GAME',
   NEW_ROUND: 'NEW_ROUND',
+  SET_GAME_SCORES: 'SET_GAME_SCORES',
 };
 
 const addPlayer = (player) => ({
@@ -166,6 +167,11 @@ const updateHostStatus = (status) => ({
   payload: status,
 });
 
+const setGameScores = (players) => ({
+  type: types.SET_GAME_SCORES,
+  payload: players,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -194,4 +200,5 @@ export {
   leaveGame,
   newRound,
   updateHostStatus,
+  setGameScores,
 };

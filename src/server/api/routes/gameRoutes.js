@@ -75,10 +75,10 @@ gameRouter.put('/addplayer', async (req, res) => {
 //  update timing on the game session
 gameRouter.put('/game-times/:id', async (req, res) => {
   try {
-    const { roundEnd, roundStart } = req.body;
+    const { roundEnd, roundStartUnix, roundEndUnix } = req.body;
     const { id } = req.params;
     const gameSession = await GameSession.findOne({ where: { id } });
-    await gameSession.update({ roundEnd, roundStart });
+    await gameSession.update({ roundEnd, roundStartUnix, roundEndUnix });
 
     const updatedGameSession = await GameSession.findOne({ where: { id }, include: [Session] });
 

@@ -43,8 +43,11 @@ const WaitingRoom = ({
     }
   }, [game.active]);
 
+<<<<<<< HEAD
   console.log('game', game);
 
+=======
+>>>>>>> master
   const handleSubmit = (e) => {
     e.preventDefault();
     socket.emit('startGame');

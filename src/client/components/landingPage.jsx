@@ -3,29 +3,17 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import {
-//   Button, FormControl, Text, Box, Input,
-// } from '@chakra-ui/core';
 import {
-  // getCurrentGaeThunk,
-  // findRandomGameThunk,
   updateNameThunk,
   setSessionThunk,
-  // makeHostThunk,
-  // updateGameCodeThunk,
 } from '../store/thunks';
-// import { updateAlias } from '../store/actions';
 
 const LandingPage = ({
-  session,
   setSession,
   updateUserAlias,
   history,
 }) => {
   const [alias, setAlias] = useState('Guest');
-
-  console.log('session', session);
-  console.log('alias', alias);
 
   useEffect(() => {
     setSession();
@@ -66,16 +54,8 @@ const mapStateToProps = ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  // getCurrentGame: () => dispatch(getCurrentGameThunk()),
   setSession: () => dispatch(setSessionThunk()),
-  // findRandomGame: (currentGameId) => dispatch(findRandomGameThunk(currentGameId)),
-  // updateName: (name) => dispatch(updateNameThunk(name)),
-  // removePlayer: (player) => dispatch(rmPlayer(player)),
-  // makeHost: () => dispatch(makeHostThunk()),
-  // generateCode: (code) => dispatch(updateGameCodeThunk(code)),
   updateUserAlias: (alias) => dispatch(updateNameThunk(alias)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
-
-// I made this one tonight

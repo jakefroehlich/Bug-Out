@@ -46,8 +46,12 @@ const GameSession = db.define('gameSession', {
     type: STRING,
     allowNull: true,
   },
-  roundStart: {
-    type: STRING,
+  roundStartUnix: {
+    type: INTEGER,
+    allowNull: true,
+  },
+  roundEndUnix: {
+    type: INTEGER,
     allowNull: true,
   },
 });

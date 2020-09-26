@@ -9,9 +9,10 @@ const initialGameState = {
   private: true,
   prompt: '',
   powerUps: [],
-  roundStart: '',
+  roundStartUnix: '',
   roundEnd: '',
   roundOver: false,
+  roundEndUnix: '',
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -43,13 +44,13 @@ const gameReducer = (state = initialGameState, action) => {
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
         // players: action.payload.sessions,
-        roundStart: action.payload.roundStart,
+        roundStartUnix: action.payload.roundStartUnix,
         roundEnd: action.payload.roundEnd,
         players: action.players,
         host: action.hostStatus,
+        roundEndUnix: action.payload.roundEndUnix,
       };
     case types.SET_PROMPT:
-      console.log(action.payload);
       return {
         ...state,
         prompt: action.payload,
@@ -73,7 +74,8 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         roundEnd: action.payload.end,
-        roundStart: action.payload.start,
+        roundStartUnix: action.payload.start,
+        roundEndUnix: action.payload.endUnix,
       };
     case types.SET_ROUND_OVER:
       return {

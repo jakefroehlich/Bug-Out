@@ -114,11 +114,6 @@ const updateName = (name) => ({
   payload: name,
 });
 
-const updateHostStatus = (status) => ({
-  type: types.UPDATE_HOST,
-  payload: status,
-});
-
 const setCorrectAnswer = () => ({
   type: types.SET_CORRECT,
 });
@@ -132,9 +127,9 @@ const addScoreAction = (score) => ({
   payload: score,
 });
 
-const setGameTimes = (roundStart, roundEnd) => ({
+const setGameTimes = (roundStartUnix, roundEnd, roundEndUnix) => ({
   type: types.SET_ROUND_TIMES,
-  payload: { start: roundStart, end: roundEnd },
+  payload: { start: roundStartUnix, end: roundEnd, endUnix: roundEndUnix },
 });
 
 const startGame = () => ({
@@ -156,8 +151,9 @@ const updateCode = (code) => ({
 
 // });
 
-const roundOver = () => ({
+const roundOver = (bool) => ({
   type: types.SET_ROUND_OVER,
+  payload: bool,
 });
 
 const leaveGame = (session) => ({
@@ -168,6 +164,11 @@ const leaveGame = (session) => ({
 const newRound = (game) => ({
   type: types.NEW_ROUND,
   payload: game,
+});
+
+const updateHostStatus = (status) => ({
+  type: types.UPDATE_HOST,
+  payload: status,
 });
 
 export {
@@ -187,7 +188,6 @@ export {
   updateName,
   setSession,
   setPowerups,
-  updateHostStatus,
   setCorrectAnswer,
   setWrongAnswer,
   addScoreAction,
@@ -198,6 +198,7 @@ export {
   roundOver,
   leaveGame,
   newRound,
+  updateHostStatus,
 };
 
 // AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

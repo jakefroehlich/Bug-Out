@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable max-len */
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
@@ -20,20 +21,25 @@ const GamePage = ({
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   // const [givenPowerUps, setGivenPowerUps] = useState([]);
+  const [standings, setStandings] = useState([]);
 
   useEffect(() => {
     getPowerUps();
-    getCurrentGame(match.params.id);
     setSession();
-    // fetchPrompt(game.difficulty);
+    getCurrentGame(match.params.id);
   }, []);
+
+  const endRound = async () => {
+    await setStandings(game.players.sort((a, b) => a.score - b.score));
+    onOpen();
+    socket.emit('roundOver');
+  };
 
   useEffect(() => {
     if (game.roundOver) {
-      onOpen();
-      socket.emit('roundOver');
+      endRound();
     }
-  }, [game.roundOver]);
+  }, [game.roundOver, game.players]);
   // const timerId = setInterval(() => {
   //   // console.log('timer run!');
   //   const powerUp = setPowerUp(game.powerUps);
@@ -50,14 +56,15 @@ const GamePage = ({
     let secondsLeft = game.roundEndUnix - current;
     const timeLeft = setInterval(() => {
       if (secondsLeft) {
-        console.log('secondsleft:', secondsLeft);
         secondsLeft -= 1;
       } else {
-        console.log('game over');
-        clearInterval(timeLeft);
+        endRound();
       }
     }, 1000);
-    return clearInterval(timeLeft);
+
+    return () => {
+      clearInterval(timeLeft);
+    };
   });
 
   return (
@@ -95,7 +102,10 @@ const GamePage = ({
             <ModalHeader>Round Over!</ModalHeader>
             <ModalBody>
               <div>
-                <p>The current scores are:</p>
+                <p>Current Scores:</p>
+                <ol>
+                  {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
+                </ol>
                 <RoundStartTimer match={match} history={history} />
               </div>
             </ModalBody>

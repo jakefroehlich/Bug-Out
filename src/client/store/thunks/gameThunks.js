@@ -15,6 +15,7 @@ import {
   setGameTimes,
   roundOver,
   newRound,
+  setGameScores,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
@@ -134,8 +135,9 @@ export const setCorrect = (id) => (dispatch) => {
 
 export const addScore = (score) => (dispatch) => {
   axios.put('/session/score', { score })
-    .then(() => {
-      dispatch(addScoreAction(score));
+    .then(({ data }) => {
+      dispatch(addScoreAction(data.score));
+      dispatch(setGameScores(data.players));
     });
 };
 
@@ -146,16 +148,22 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   let hour = moment().hour();
   const minute = moment().minute();
   const seconds = moment().seconds();
-  const roundEndUnix = moment().unix() + 605;
+  const roundEndUnix = moment().unix() + 65;
   const roundStartUnix = moment().unix();
 
-  let newMin = minute + 10;
+  let newMin = minute + 1;
   if (newMin > 59) {
     hour += 1;
     newMin -= 60;
   }
 
-  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${seconds + 6}`;
+  let newSec = seconds + 6;
+  if (newSec > 59) {
+    newMin += 1;
+    newSec -= 60;
+  }
+
+  const roundEnd = `${year}-${month + 1}-${day} ${hour}:${newMin}:${newSec}`;
 
   axios.put(`/game/game-times/${id}`, { roundStartUnix, roundEnd, roundEndUnix })
     .then(() => {
@@ -173,7 +181,7 @@ export const startGameThunk = (currentGameId) => (dispatch) => axios
   });
 
 export const roundReset = (id) => () => axios
-  .put(`/game/reset-correct/${id}`)
+  .put(`/session/reset-correct/${id}`)
   .catch((e) => {
     console.log(e);
   });

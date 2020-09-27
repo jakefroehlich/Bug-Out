@@ -30,6 +30,7 @@ export const types = {
   SET_ROUND_OVER: 'SET_ROUND_OVER',
   LEAVE_GAME: 'LEAVE_GAME',
   NEW_ROUND: 'NEW_ROUND',
+  SET_GAME_SCORES: 'SET_GAME_SCORES',
 };
 
 const addPlayer = (player) => ({
@@ -146,11 +147,6 @@ const updateCode = (code) => ({
   code,
 });
 
-// const getRoomPlayers = () => ({
-//   type: types.GET_ROOM_PLAYERS,
-
-// });
-
 const roundOver = (bool) => ({
   type: types.SET_ROUND_OVER,
   payload: bool,
@@ -169,6 +165,11 @@ const newRound = (game) => ({
 const updateHostStatus = (status) => ({
   type: types.UPDATE_HOST,
   payload: status,
+});
+
+const setGameScores = (players) => ({
+  type: types.SET_GAME_SCORES,
+  payload: players,
 });
 
 export {
@@ -199,6 +200,5 @@ export {
   leaveGame,
   newRound,
   updateHostStatus,
+  setGameScores,
 };
-
-// AND I FIGURE WE CAN GO THROUGH AND TRIM THE ACTIONS/THUNKS AFTER

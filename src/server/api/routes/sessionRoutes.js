@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-await-in-loop */
@@ -59,8 +60,10 @@ sessionRouter.put('/score', async (req, res) => {
     const { score } = req.body;
     const session = await Session.findOne({ where: { id: req.session_id } });
     const newScore = session.score + score;
-    session.update({ score: newScore });
-    res.status(201).send(session);
+    await session.update({ score: newScore });
+
+    const players = await Session.findAll({ where: { gameSessionId: session.gameSessionId } });
+    res.status(201).send({ session, players });
   } catch (e) {
     console.log('Error updating score');
     console.log(e);
@@ -100,7 +103,7 @@ sessionRouter.put('/correct/:id', async (req, res) => {
 sessionRouter.put('/reset-correct/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    const game = GameSession.findOne({ where: { id }, include: [Session] });
+    const game = await GameSession.findOne({ where: { id }, include: [Session] });
     const correctAnswer = false;
     game.sessions.forEach((session) => {
       session.update({ correctAnswer });
@@ -115,6 +118,17 @@ sessionRouter.put('/leaveGame', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
     session.update({ score: 0, gameSessionId: null });
+    res.status(201).send(session);
+  } catch (e) {
+    console.log('Error updating score');
+    console.log(e);
+  }
+});
+
+sessionRouter.put('/reset-score', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    session.update({ score: 0 });
     res.status(201).send(session);
   } catch (e) {
     console.log('Error updating score');

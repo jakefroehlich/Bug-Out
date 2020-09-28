@@ -1,10 +1,13 @@
 import { Button } from '@chakra-ui/core';
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 const powerUpButton = (powerUp) => {
   if (powerUp.name === 'Minimize') {
     return (
       <Button
+        key={uuidv4()}
+        className="powerUpButton"
         onClick={() => null}
       > Minimize
       </Button>
@@ -12,6 +15,8 @@ const powerUpButton = (powerUp) => {
   } if (powerUp.name === 'Max Font') {
     return (
       <Button
+        key={uuidv4()}
+        className="powerUpButton"
         onClick={() => null}
       >  Max Font
       </Button>
@@ -19,6 +24,8 @@ const powerUpButton = (powerUp) => {
   } if (powerUp.name === 'Popups') {
     return (
       <Button
+        key={uuidv4()}
+        className="powerUpButton"
         onClick={() => null}
       >  Popups
       </Button>
@@ -26,6 +33,7 @@ const powerUpButton = (powerUp) => {
   }
   return (
     <Button
+      key={uuidv4()}
       onClick={() => null}
     >  PowerUp Not Found
     </Button>

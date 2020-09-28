@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import CodeEditor2 from './codepen2'
 import {
   updateNameThunk,
   setSessionThunk,
@@ -12,6 +13,7 @@ const LandingPage = ({
   setSession,
   updateUserAlias,
   history,
+  match,
 }) => {
   const [alias, setAlias] = useState('Guest');
 
@@ -29,7 +31,7 @@ const LandingPage = ({
     <form
       onSubmit={handleSubmit}
     >
-      <div className="landing">
+      {/* <div className="landing">
         <div
           className="landingform"
         >
@@ -42,7 +44,8 @@ const LandingPage = ({
             onChange={(e) => setAlias(e.target.value)}
           />
         </div>
-      </div>
+      </div> */}
+      <CodeEditor2 match={match}/>
     </form>
   );
 };

@@ -11,6 +11,18 @@
     width: 100%;
 }
 
+.codeEditor {
+    height: 100%;
+    width: 100%;
+}
+
+.codeScreen {
+    height: 80%;
+    width: 80%;
+    color: blue;
+    background-color: coral;
+}
+
 .landing {
     display: flex;
     flex-direction: column;

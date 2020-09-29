@@ -80,6 +80,13 @@ export const getCurrentGameThunk = (id) => (dispatch) => {
   }
 };
 
+export const usePowerUpThunk = (powerUp) => (dispatch) => {
+  // make an if statement for each powerUP
+  if (powerUp.name) {
+    dispatch(null);
+  }
+};
+
 // export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
 //   .post('/game/findRandomGame', { currentGameId })
 //   .then(({ data }) => {

@@ -29,6 +29,10 @@ const serverListeners = (io, socket) => {
     io.emit('startGame', socketRoomId);
   });
 
+  socket.on('powerUp', (powerUpName) => {
+    socket.broadcast.emit('powerUp', powerUpName);
+  });
+
   // socket.on('discon', () => {
   //   const rooms = Object.keys(socket.rooms);
   //   rooms.forEach((room) => socket.leave(room));

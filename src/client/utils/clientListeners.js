@@ -20,6 +20,10 @@ const clientListeners = (socket) => {
     store.dispatch(setRoundTimesThunk(gameId));
     store.dispatch(startGame());
   });
+
+  socket.on('powerUp', (powerUpName) => {
+    store.dispatch(powerUpName);
+  });
 };
 
 export default clientListeners;

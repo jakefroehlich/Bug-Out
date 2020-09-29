@@ -12,7 +12,6 @@ import { test } from '../../server/utils/tests';
 import { buildFunction } from '../../server/utils/buildFunction';
 import { addScore, setCorrect } from '../store/thunks';
 import { powerUps } from '../../server/utils/powerups';
-import store from '../store/index';
 
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);
@@ -23,15 +22,15 @@ const CodeEditor = (props) => {
     }`);
 
   const runPowerUp = (pwName) => {
-    powerUps[pwName]();
+    const newCode = powerUps[pwName](valueGetter.current());
+    setCode(newCode);
   };
 
-  // add store variable
   useEffect(() => {
-    if (store.getState().game.sufferingPowerUp) {
-      runPowerUp(store.getState().game.sufferingPowerUp);
+    if (props.game.sufferingPowerUp) {
+      runPowerUp(props.game.sufferingPowerUp);
     }
-  }, store.getState().game.sufferingPowerUp);
+  });
 
   const { prompt } = props.game;
   const toast = useToast();
@@ -43,33 +42,43 @@ const CodeEditor = (props) => {
 
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
-    // const ts = `test${prompt.id}`;
-    // const correct = test[ts](fn);
-    console.log(valueGetter.current());
-    const correct = true;
-    if (correct) {
-      props.setCorrect(props.match.params.id);
-      const finishTime = moment().unix();
-      const userScore = props.game.roundEndUnix - finishTime;
-      props.addScore(userScore);
+    try {
+      const ts = `test${prompt.id}`;
+      const result = test[ts](fn);
+      console.log(valueGetter.current());
+      // const correct = true;
+      if (result === true) {
+        props.setCorrect(props.match.params.id);
+        const finishTime = moment().unix();
+        const userScore = props.game.roundEndUnix - finishTime;
+        props.addScore(userScore);
+        toast({
+          title: 'Correct',
+          description: 'Your code passes all tests!',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        });
+      } else {
+        toast({
+          title: 'Incorrect',
+          description: `Expected ${result.expected} but received ${result.res}`,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+    } catch (e) {
       toast({
-        title: 'Correct',
-        description: 'Your code passes all tests!',
-        status: 'success',
+        title: 'Warning.',
+        description: 'Error in your code',
+        status: 'warning',
         duration: 9000,
         isClosable: true,
       });
-    } else {
-      toast({
-        title: 'Incorrect',
-        description: 'Your code failed at least 1 test case.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      });
+      throw (e);
     }
   }
-
   return (
     <div
       style={{

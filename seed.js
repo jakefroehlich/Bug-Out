@@ -22,16 +22,16 @@ const users = [
 ];
 
 const powerups = [
-  {
-    id: 1,
-    name: 'Flip Screen',
-    rarity: 'Rare',
-  },
-  {
-    id: 2,
-    name: 'Minimize',
-    rarity: 'Common',
-  },
+  // {
+  //   id: 1,
+  //   name: 'Flip Screen',
+  //   rarity: 'Rare',
+  // },
+  // {
+  //   id: 2,
+  //   name: 'Minimize',
+  //   rarity: 'Common',
+  // },
   {
     id: 3,
     name: 'Delete Brackets',
@@ -83,11 +83,11 @@ const powerups = [
     rarity: 'Uncommon',
     funcName: 'changeBoolean',
   },
-  {
-    id: 13,
-    name: 'Popups',
-    rarity: 'Common',
-  },
+  // {
+  //   id: 13,
+  //   name: 'Popups',
+  //   rarity: 'Common',
+  // },
 ];
 const seed = async () => {
   try {

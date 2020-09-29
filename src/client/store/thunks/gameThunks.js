@@ -155,10 +155,10 @@ export const setRoundTimesThunk = (id) => (dispatch) => {
   let hour = moment().hour();
   const minute = moment().minute();
   const seconds = moment().seconds();
-  const roundEndUnix = moment().unix() + 65;
+  const roundEndUnix = moment().unix() + 605;
   const roundStartUnix = moment().unix();
 
-  let newMin = minute + 1;
+  let newMin = minute + 10;
   if (newMin > 59) {
     hour += 1;
     newMin -= 60;

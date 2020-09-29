@@ -1,41 +1,41 @@
 /* eslint-disable no-undef */
-const removeBrackets = () => {
-  const currentCode = valueGetter.current();
+const removeBrackets = (code) => {
+  const currentCode = code;
   let newCode = currentCode.replaceAll('{', '');
   newCode = newCode.replaceAll('}', '');
-  setCode(newCode);
+  return newCode;
 };
 
-const flipLet = () => {
-  const currentCode = valueGetter.current();
+const flipLet = (code) => {
+  const currentCode = code;
   const newCode = currentCode.replaceAll('let', 'const');
-  setCode(newCode);
+  return newCode;
 };
 
-const flipTrue = () => {
-  const currentCode = valueGetter.current();
+const flipTrue = (code) => {
+  const currentCode = code;
   const newCode = currentCode.replaceAll('true', 'false');
-  setCode(newCode);
+  return newCode;
 };
 
-const deleteCommas = () => {
-  const currentCode = valueGetter.current();
+const deleteCommas = (code) => {
+  const currentCode = code;
   const newCode = currentCode.replaceAll(',', '');
-  setCode(newCode);
+  return newCode;
 };
 
-const deleteParens = () => {
-  const currentCode = valueGetter.current();
+const deleteParens = (code) => {
+  const currentCode = code;
   let newCode = currentCode.replaceAll('(', '');
   newCode = newCode.replaceAll(')', '');
-  setCode(newCode);
+  return newCode;
 };
 
-const changeBoolean = () => {
-  const currentCode = valueGetter.current();
+const changeBoolean = (code) => {
+  const currentCode = code;
   let newCode = currentCode.replaceAll('===', '!==');
   newCode = newCode.replaceAll('==', '!=');
-  setCode(newCode);
+  return newCode;
 };
 
 module.exports = {

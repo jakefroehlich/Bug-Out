@@ -48,7 +48,7 @@ const GamePage = ({
         setGivenPowerUp(powerUp);
         clearInterval(powerUpTimerId);
       }
-    }, 20000); // runs every 20 seconds;
+    }, 5000); // runs every 20 seconds;
     return () => {
       clearInterval(powerUpTimerId);
     };

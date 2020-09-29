@@ -8,6 +8,7 @@ import { Button, Text, Box } from '@chakra-ui/core';
 import moment from 'moment';
 // import { buildFunction } from '../../server/utils/buildFunction';
 import { addScore, setCorrect } from '../store/thunks';
+import store from '../store/index';
 
 const CodeEditor = (props) => {
   const [isEditorReady, setIsEditorReady] = useState(false);

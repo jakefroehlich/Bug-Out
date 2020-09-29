@@ -14,6 +14,9 @@ const Powerup = db.define('powerup', {
     type: ENUM('Common', 'Uncommon', 'Rare', 'Legendary'),
     allowNull: false,
   },
+  funcName: {
+    type: STRING,
+  },
 });
 
 module.exports = Powerup;

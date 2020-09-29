@@ -22,46 +22,46 @@ const users = [
 ];
 
 const powerups = [
-  // {
-  //   id: 1,
-  //   name: 'Flip Screen',
-  //   rarity: 'Rare',
-  // },
+  {
+    id: 1,
+    name: 'Flip Screen',
+    rarity: 'Rare',
+  },
   {
     id: 2,
     name: 'Minimize',
     rarity: 'Common',
   },
-  // {
-  //   id: 3,
-  //   name: 'Bracket Change',
-  //   rarity: 'Rare',
-  // },
-  // {
-  //   id: 4,
-  //   name: 'Switch Code',
-  //   rarity: 'Legendary',
-  // },
-  // {
-  //   id: 5,
-  //   name: 'Cheat',
-  //   rarity: 'Rare',
-  // },
   {
-    id: 6,
-    name: 'Max Font',
-    rarity: 'Common',
+    id: 3,
+    name: 'Delete Brackets',
+    funcName: 'removeBrackets',
+    rarity: 'Rare',
   },
-  // {
-  //   id: 7,
-  //   name: 'Flip Declarations',
-  //   rarity: 'Uncommon',
-  // },
-  // {
-  //   id: 8,
-  //   name: 'Delete Commas',
-  //   rarity: 'Common',
-  // },
+  {
+    id: 4,
+    name: 'Delete Parenthesis',
+    rarity: 'Common',
+    funcName: 'deleteParens',
+  },
+  {
+    id: 5,
+    name: 'Delete Commas',
+    rarity: 'Common',
+    funcName: 'deleteCommas',
+  },
+  {
+    id: 7,
+    name: 'Flip Declarations',
+    rarity: 'Uncommon',
+    funcName: 'flipLet',
+  },
+  {
+    id: 8,
+    name: 'Flip True',
+    rarity: 'Common',
+    funcName: 'flipTrue',
+  },
   // {
   //   id: 9,
   //   name: 'Add Semicolons',
@@ -77,11 +77,12 @@ const powerups = [
   //   name: 'Change Truthy',
   //   rarity: 'Uncommon',
   // },
-  // {
-  //   id: 12,
-  //   name: 'Change Booleans',
-  //   rarity: 'Uncommon',
-  // },
+  {
+    id: 12,
+    name: 'Change Booleans',
+    rarity: 'Uncommon',
+    funcName: 'changeBoolean',
+  },
   {
     id: 13,
     name: 'Popups',

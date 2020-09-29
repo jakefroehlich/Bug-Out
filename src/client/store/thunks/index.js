@@ -11,6 +11,7 @@ import {
   setRoundTimesThunk,
   joinGameThunk,
   roundReset,
+  usePowerUpThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -47,4 +48,5 @@ export {
   leaveGameThunk,
   joinGameThunk,
   roundReset,
+  usePowerUpThunk,
 };

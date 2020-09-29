@@ -13,6 +13,7 @@ const initialGameState = {
   roundEnd: '',
   roundOver: false,
   roundEndUnix: '',
+  sufferingPowerUp: null,
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -94,6 +95,11 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         players: action.payload,
+      };
+    case types.SUFFER_POWER_UP:
+      return {
+        ...state,
+        sufferingPowerUp: action.payload,
       };
     default:
       return state;

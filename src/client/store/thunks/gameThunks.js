@@ -82,7 +82,7 @@ export const getCurrentGameThunk = (id) => (dispatch) => {
 
 export const usePowerUpThunk = (powerUp) => (dispatch) => {
   // make an if statement for each powerUP
-  if (powerUp.name) {
+  if (powerUp.name === 'Minimize') {
     dispatch(null);
   }
 };

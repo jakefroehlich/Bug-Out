@@ -31,6 +31,7 @@ export const types = {
   LEAVE_GAME: 'LEAVE_GAME',
   NEW_ROUND: 'NEW_ROUND',
   SET_GAME_SCORES: 'SET_GAME_SCORES',
+  SUFFER_POWER_UP: 'SUFFER_POWER_UP',
 };
 
 const addPlayer = (player) => ({
@@ -172,6 +173,11 @@ const setGameScores = (players) => ({
   payload: players,
 });
 
+const sufferPowerUp = (powerUpName) => ({
+  type: types.SUFFER_POWER_UP,
+  payload: powerUpName,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -201,4 +207,5 @@ export {
   newRound,
   updateHostStatus,
   setGameScores,
+  sufferPowerUp,
 };

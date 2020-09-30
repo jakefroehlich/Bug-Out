@@ -25,7 +25,7 @@ const clientListeners = (socket) => {
 
   socket.on('powerUp', (powerUpName) => {
     store.dispatch(sufferPowerUp(powerUpName));
-    console.log('received ', powerUpName);
+    console.log('dispatching', powerUpName);
   });
 };
 

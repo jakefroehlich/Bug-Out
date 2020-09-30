@@ -173,10 +173,13 @@ const setGameScores = (players) => ({
   payload: players,
 });
 
-const sufferPowerUp = (powerUpName) => ({
-  type: types.SUFFER_POWER_UP,
-  payload: powerUpName,
-});
+const sufferPowerUp = (funcName) => {
+  console.log(funcName);
+  return ({
+    type: types.SUFFER_POWER_UP,
+    payload: funcName,
+  });
+};
 
 export {
   changeInitialLoading,

@@ -44,7 +44,6 @@ const gameReducer = (state = initialGameState, action) => {
         private: action.payload.private,
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
-        // players: action.payload.sessions,
         roundStartUnix: action.payload.roundStartUnix,
         roundEnd: action.payload.roundEnd,
         players: action.players,

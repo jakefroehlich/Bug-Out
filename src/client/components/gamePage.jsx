@@ -42,8 +42,8 @@ const GamePage = ({
   }, [game.roundOver, game.players]);
   useEffect(() => {
     const powerUpTimerId = setInterval(() => {
-      const powerUp = setPowerUp(game.powerUps);
-      if (powerUp) {
+      if (!givenPowerUp) {
+        const powerUp = setPowerUp(game.powerUps);
         console.log('powerUp given ,', powerUp);
         setGivenPowerUp(powerUp);
         clearInterval(powerUpTimerId);
@@ -84,7 +84,7 @@ const GamePage = ({
             <Button
               className="powerUpButton"
               onClick={() => {
-                socket.emit('powerUp', givenPowerUp.name);
+                socket.emit('powerUp', givenPowerUp.funcName);
                 setGivenPowerUp(null);
               }}
             >{givenPowerUp.name}

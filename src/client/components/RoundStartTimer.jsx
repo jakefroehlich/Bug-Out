@@ -2,6 +2,7 @@
 /* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import { Text } from '@chakra-ui/core';
+import axios from 'axios';
 import { connect } from 'react-redux';
 import {
   setRoundTimesThunk, getPromptThunk, setSessionThunk, roundReset,
@@ -40,6 +41,7 @@ class RoundStartTimer extends Component {
         }
       }, 1000);
     } else {
+      axios.post('/game/leaderboard');
       this.props.history.push('/game-over');
     }
   }

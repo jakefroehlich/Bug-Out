@@ -32,6 +32,7 @@ export const types = {
   NEW_ROUND: 'NEW_ROUND',
   SET_GAME_SCORES: 'SET_GAME_SCORES',
   SUFFER_POWER_UP: 'SUFFER_POWER_UP',
+  GET_LEADERBOARD: 'UPDATE_LEADERBOARD',
 };
 
 const addPlayer = (player) => ({
@@ -173,13 +174,15 @@ const setGameScores = (players) => ({
   payload: players,
 });
 
-const sufferPowerUp = (funcName) => {
-  console.log(funcName);
-  return ({
-    type: types.SUFFER_POWER_UP,
-    payload: funcName,
-  });
-};
+const sufferPowerUp = (funcName) => ({
+  type: types.SUFFER_POWER_UP,
+  payload: funcName,
+});
+
+const updateLeaderboard = (leaderboard) => ({
+  type: types.GET_LEADERBOARD,
+  payload: leaderboard,
+});
 
 export {
   changeInitialLoading,
@@ -211,4 +214,5 @@ export {
   updateHostStatus,
   setGameScores,
   sufferPowerUp,
+  updateLeaderboard,
 };

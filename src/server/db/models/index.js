@@ -1,3 +1,4 @@
+const Leaderboard = require('./leaderboard');
 const User = require('./user');
 const Session = require('./session');
 const GameSession = require('./gameSession');
@@ -20,5 +21,6 @@ module.exports = {
     GameSession,
     Prompt,
     Powerup,
+    Leaderboard,
   },
 };

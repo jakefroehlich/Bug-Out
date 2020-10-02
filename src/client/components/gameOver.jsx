@@ -1,7 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import Leaderboard from './leaderboard';
 
 const GameOver = () => (
-  <div>Game Over</div>
+  <div>
+    <div>Game Over</div>
+    <Leaderboard />
+  </div>
 );
 
-export default GameOver;
+const mapStateToProps = ({
+  game, user, input, session,
+}) => ({
+  game, user, input, session,
+});
+
+export default connect(mapStateToProps, null)(GameOver);

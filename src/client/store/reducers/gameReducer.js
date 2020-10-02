@@ -100,6 +100,11 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         sufferingPowerUp: action.payload,
       };
+    case types.GET_LEADERBOARD:
+      return {
+        ...state,
+        leaderboard: action.payload,
+      };
     default:
       return state;
   }

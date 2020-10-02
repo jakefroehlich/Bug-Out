@@ -41,6 +41,7 @@ const GamePage = ({
       endRound();
     }
   }, [game.roundOver, game.players]);
+
   useEffect(() => {
     const powerUpTimerId = setInterval(() => {
       if (!givenPowerUp) {
@@ -72,10 +73,18 @@ const GamePage = ({
 
   return (
     <div className="gamepage">
-      <div className="gamesidebar">
+      <div
+        className="box gamepageL">
+        <h1>{game.prompt.name}</h1>
+        <p>{game.prompt.prompt}</p>
+      </div>
+      <Editor match={match} gamePageProps={game} />
+      <div
+        className="gamesidebar">
+        <Timer props={game} />
         <div className="box powerupcontainer">
           <span className="span">Power Up!</span>
-          {/* {givenPowerUp ? (
+          {givenPowerUp ? (
             <Button
               className="powerupbutton"
               onClick={() => {
@@ -84,17 +93,11 @@ const GamePage = ({
               }}
             >{givenPowerUp.name}
             </Button>
-          ) : */
-          <div className="loaderContainer" > 
-            <div className="loader" />
-          </div> }
+          ) : 
+            <div className="loaderContainer" >
+              <div className="loader" />
+            </div>}
         </div>
-        <TheCompetition />
-      </div>
-      <Editor match={match} gamePageProps={game} />
-      <div>
-        <Timer props={game} />
-          <ChatBox />
         <LeaveGameButton history={history} />
       </div>
       <div>

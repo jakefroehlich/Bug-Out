@@ -65,17 +65,20 @@ const WaitingRoom = ({
         </div>
         <div
           className='waitinginner'>
-          <TheCompetition />
           <Chatbox />
           <div
             className="buttons">
-            <button
-              type="submit"
-              className={session.host ? "button visible" : "hidden"}
-              onClick={handleSubmit}
-            >Start Game
-            </button>
-            <LeaveGameButton history={history} />
+            <TheCompetition />
+            <div
+              className="innerbuttons">
+              <button
+                type="submit"
+                className={session.host ? "button visible" : "hidden"}
+                onClick={handleSubmit}
+              >Start Game
+              </button>
+              <LeaveGameButton history={history} />
+            </div>
           </div>
         </div>
         <div>

@@ -32,7 +32,6 @@ const CodeEditor = (props) => {
     }
   });
 
-  const { prompt } = props.game;
   const toast = useToast();
 
   function handleEditorDidMount(_valueGetter) {
@@ -81,36 +80,8 @@ const CodeEditor = (props) => {
   }
   return (
     <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '50%',
-        margin: '15px',
-      }}
-    >
-      <Box
-        w="100%"
-        bg="#00c3d9"
-        color="white"
-        borderWidth="3px"
-        borderColor="#3674b5"
-        borderStyle="solid"
-        rounded="lg"
-        m={2}
-        p={4}
-        maxHeight="150px"
-        overflow="scroll"
-      >
-        <Text fontSize="lg" w="100%">
-          {prompt.name}
-        </Text>
-        <Text fontSize="sm" w="100%">
-          {prompt.prompt}
-        </Text>
-      </Box>
-      <div style={{ width: '100%' }}>
-        <Editor
+      className="editorcontainer">
+          <Editor
           height="50vh"
           width="100%"
           theme="dark"
@@ -118,24 +89,23 @@ const CodeEditor = (props) => {
           value={code}
           editorDidMount={handleEditorDidMount}
         />
-      </div>
-      {props.input.correctAnswer
+        {props.input.correctAnswer
       && (
-      <div style={{ textAlign: 'center' }}>
+      <div className="score">
         {props.input.score === 0
-          && <Text color="#2df50a" marginTop="0">Calculating Score...</Text>}
+          && <span>Calculating Score...</span>}
         {props.input.score > 0
-          && <Text color="#2df50a" marginTop="0">You earned {props.input.score} points!</Text>}
-        <Text color="#2df50a" marginTop="0">Feel free to keep bugging the competition while you wait.</Text>
+          && <span>You earned {props.input.score} points!</span>}
+        <span>Feel free to keep bugging the competition while you wait.</span>
       </div>
       )}
       {!props.input.correctAnswer
         && (
-        <Button onClick={handleShowValue} disabled={!isEditorReady} type="button" m={1} variantColor="teal" variant="outline" w="100%" marginTop={5}>
+        <button onClick={handleShowValue} disabled={!isEditorReady} type="button" className="button">
           Check Function
-        </Button>
+        </button>
         )}
-    </div>
+      </div>
   );
 };
 

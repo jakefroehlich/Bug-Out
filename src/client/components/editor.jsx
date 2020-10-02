@@ -44,8 +44,7 @@ const CodeEditor = (props) => {
     try {
       const ts = `test${prompt.id}`;
       const result = test[ts](fn);
-      console.log(valueGetter.current());
-      // const correct = true;
+      // const result = true;
       if (result === true) {
         props.setCorrect(props.match.params.id);
         const finishTime = moment().unix();

@@ -7,6 +7,7 @@ const {
     Session,
     Prompt,
     Powerup,
+    Leaderboard,
   },
 } = require('../../db/index');
 // const { codeGenerator } = require('../utils');
@@ -177,6 +178,32 @@ gameRouter.put('/update-prompt/:id', async (req, res) => {
   } catch (e) {
     console.log(e);
     console.log('error resetting round');
+  }
+});
+
+// Adds score to the leaderboard
+gameRouter.post('/leaderboard', async (req, res) => {
+  try {
+    const session = await Session.findOne({ where: { id: req.session_id } });
+    const { name, score } = session;
+    console.log(name, score);
+    await Leaderboard.create({ score, name });
+    res.sendStatus(201);
+  } catch (e) {
+    console.log(e);
+    console.log('error adding score');
+  }
+});
+
+// get leaderboard.
+gameRouter.get('/leaderboard', async (req, res) => {
+  try {
+    const scores = await Leaderboard.findAll();
+    const scoresSorted = scores.sort((a, b) => b.score - a.score);
+    res.send(scoresSorted);
+  } catch (e) {
+    console.log(e);
+    console.log('error getting scores');
   }
 });
 

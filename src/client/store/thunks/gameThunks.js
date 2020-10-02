@@ -11,11 +11,11 @@ import {
   startGame,
   updateName,
   updateGame,
-  updateCode,
   setGameTimes,
   roundOver,
   newRound,
   setGameScores,
+  updateLeaderboard,
 } from '../actions';
 
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
@@ -36,14 +36,14 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
     console.log(e);
   });
 
-export const updateGameCodeThunk = (code) => (dispatch) => axios
-  .put('/game/newGameCode', { code })
-  .then(({ data }) => {
-    dispatch(updateCode(data));
-  })
-  .catch((e) => {
-    console.log('failed to update code', e);
-  });
+// export const updateGameCodeThunk = (code) => (dispatch) => axios
+//   .put('/game/newGameCode', { code })
+//   .then(({ data }) => {
+//     dispatch(updateCode(data));
+//   })
+//   .catch((e) => {
+//     console.log('failed to update code', e);
+//   });
 
 export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);
@@ -86,15 +86,6 @@ export const usePowerUpThunk = (powerUp) => (dispatch) => {
     dispatch(null);
   }
 };
-
-// export const findRandomGameThunk = (currentGameId) => (dispatch) => axios
-//   .post('/game/findRandomGame', { currentGameId })
-//   .then(({ data }) => {
-//     dispatch(data);
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });
 
 export const getPromptThunk = (difficulty, id) => (dispatch) => axios
   .get(`/game/prompt/${difficulty}`)
@@ -182,6 +173,15 @@ export const startGameThunk = (currentGameId) => (dispatch) => axios
   .put('/game/startGame', { currentGameId })
   .then((res) => {
     dispatch(startGame(res.data));
+  })
+  .catch((e) => {
+    console.log(e);
+  });
+
+export const getLeaderboardThunk = () => (dispatch) => axios
+  .get('/game/leaderboard')
+  .then((res) => {
+    dispatch(updateLeaderboard(res.data));
   })
   .catch((e) => {
     console.log(e);

@@ -27,7 +27,7 @@ const CreateGame = ({
       <div className="creategame">
         <span>Create Game</span>
         <div className="diff">
-          <label>Difficulty: </label>
+          <label>Difficulty : </label>
           <select
             placeholder="Select Difficulty"
             onChange={(e) => setDifficulty(e.target.value)}
@@ -38,7 +38,7 @@ const CreateGame = ({
           </select>
         </div>
         <div className="rounds">
-          <label># of Rounds: </label>
+          <label># of Rounds : </label>
           <select
             placeholder="Select # of Rounds"
             onChange={(e) => setRounds(e.target.value)}
@@ -50,7 +50,7 @@ const CreateGame = ({
             <option value="5">5</option>
           </select>
         </div>
-        <button className="creategamebutton" type="submit">Create</button>
+        <button className="button" type="submit">Create</button>
       </div>
     </form>
   );

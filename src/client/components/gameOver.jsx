@@ -1,7 +1,13 @@
 import React from 'react';
 
 const GameOver = () => (
-  <div>Game Over</div>
+  <div
+    className="gameoverwrapper">
+    <div
+      className="gameover">
+      <span>Game Over</ span>
+    </div>
+  </div>
 );
 
 export default GameOver;

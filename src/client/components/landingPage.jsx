@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import CodeEditor2 from './codepen2'
+import CodeEditor2 from './codepen2';
 import {
   updateNameThunk,
   setSessionThunk,
@@ -31,21 +31,21 @@ const LandingPage = ({
     <form
       onSubmit={handleSubmit}
     >
-      {/* <div className="landing">
+      <div className="landing">
         <div
           className="landingform"
         >
-          <img className="landingimg" src="https://i.ibb.co/MDgDr1N/Bug-Out-Logo.png" alt="BugOut" />
+          <img className="landingimg" src="https://i.ibb.co/RhHJRWT/Bug-Out-Logo2.png" alt="BugOut" />
           <input
-            className="landingInput"
+            className="input"
             type="text"
             // value={alias}
             placeholder="Enter Preferred Alias"
             onChange={(e) => setAlias(e.target.value)}
           />
         </div>
-      </div> */}
-      <CodeEditor2 match={match}/>
+      </div>
+      {/* <CodeEditor2 match={match}/> */}
     </form>
   );
 };

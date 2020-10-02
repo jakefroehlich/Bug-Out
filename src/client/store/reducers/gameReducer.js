@@ -13,6 +13,7 @@ const initialGameState = {
   roundEnd: '',
   roundOver: false,
   roundEndUnix: '',
+  sufferingPowerUp: null,
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -43,7 +44,6 @@ const gameReducer = (state = initialGameState, action) => {
         private: action.payload.private,
         rounds: action.payload.rounds,
         difficulty: action.payload.difficulty,
-        // players: action.payload.sessions,
         roundStartUnix: action.payload.roundStartUnix,
         roundEnd: action.payload.roundEnd,
         players: action.players,
@@ -89,6 +89,16 @@ const gameReducer = (state = initialGameState, action) => {
         prompt: action.payload.prompt,
         roundEnd: action.payload.roundEnd,
         roundStart: action.payload.roundStart,
+      };
+    case types.SET_GAME_SCORES:
+      return {
+        ...state,
+        players: action.payload,
+      };
+    case types.SUFFER_POWER_UP:
+      return {
+        ...state,
+        sufferingPowerUp: action.payload,
       };
     default:
       return state;

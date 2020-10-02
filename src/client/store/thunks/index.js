@@ -10,6 +10,8 @@ import {
   updateGameCodeThunk,
   setRoundTimesThunk,
   joinGameThunk,
+  roundReset,
+  usePowerUpThunk,
 } from './gameThunks';
 import {
   loginThunk,
@@ -45,4 +47,6 @@ export {
   removeHostThunk,
   leaveGameThunk,
   joinGameThunk,
+  roundReset,
+  usePowerUpThunk,
 };

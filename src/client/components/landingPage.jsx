@@ -3,7 +3,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD
 import CodeEditor2 from './codepen2';
+=======
+import axios from 'axios';
+>>>>>>> master
 import {
   updateNameThunk,
   setSessionThunk,
@@ -20,6 +24,10 @@ const LandingPage = ({
   useEffect(() => {
     setSession();
   }, []);
+
+  useEffect(() => {
+    axios.put('/session/reset-score');
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

@@ -58,13 +58,28 @@ const WaitingRoom = ({
         className="waitingcomps"
       >
         <div
-          className="waitingheader"
+          className="nav"
         >
-          <TheCompetition />
+          <span>Alias : {session.name}</span>
+          <span>Game code : {game.code}</span>
         </div>
-        <Chatbox />
+        <div
+          className='waitinginner'>
+          <TheCompetition />
+          <Chatbox />
+          <div
+            className="buttons">
+            <button
+              type="submit"
+              className={session.host ? "button visible" : "hidden"}
+              onClick={handleSubmit}
+            >Start Game
+            </button>
+            <LeaveGameButton history={history} />
+          </div>
+        </div>
         <div>
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader>Prepare to Bugout!</ModalHeader>
@@ -78,13 +93,6 @@ const WaitingRoom = ({
           </Modal>
         </div>
       </div>
-      <button
-        type="submit"
-        className={session.host ? 'visible' : 'hidden'}
-        onClick={handleSubmit}
-      >Start Game
-      </button>
-      <LeaveGameButton history={history} />
     </div>
   );
 };

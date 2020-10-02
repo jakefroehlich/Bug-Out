@@ -3,7 +3,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    font-family: 'Miriam Libre', sans-serif;
+    font-family: 'Ubuntu', sans-serif;
     margin: 0;
 }
 
@@ -19,15 +19,24 @@
     color: white;
     padding: 15px 32px;
     text-align: center;
-    font-family: 'Enriqueta', serif;
+    font-family: 'VT323', monospace;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
 }
 
 .button:hover {
     border: 1px solid red;
     animation: buttonmove 2.5s infinite;
+}
+
+.buttons {
+    height: 50%;
+    width: 33%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
 }
   
 
@@ -46,11 +55,11 @@
 .input {
     background-color: black;
     color: white;
-    font-family: "Enriqueta", serif;
+    font-family: 'VT323', monospace;
     border: 1px solid #aaa;
     border-radius: 4px;
     padding: .5em .3em .5em .3em;
-    font-size: 16px;
+    font-size: 20px;
     text-align: center;
 }
 
@@ -127,6 +136,24 @@
     box-shadow: 0px 0px 40px 10px red;
 }
 
+.box {
+    background-image: linear-gradient(black, rgb(23, 41, 41));
+    font-size: 20px;
+    color: white;
+    border: 3px solid red;
+    border-radius: 3%;
+    animation: mymove 4s infinite;
+    box-shadow: 0px 0px 40px 10px red;
+}
+
+.competition {
+    height: 40%;
+    max-height: 75%;
+    width: 33%;
+    padding: 25px;
+    margin: 25px;
+}
+
 .creategame span {
     background: -webkit-linear-gradient(red, white);
     background-clip: text;
@@ -137,7 +164,7 @@
 
 .creategame select {
     display: block;
-    font-size: 16px;
+    font-size: 20px;
 	color: white;
 	line-height: 1.3;
 	padding: .3em .2em .5em .5em;
@@ -151,7 +178,7 @@
 	-moz-appearance: none;
 	-webkit-appearance: none;
 	appearance: none;
-    font-family: 'Enriqueta', serif;
+    font-family: 'VT323', monospace;
 }
 
 .creategame select:hover {
@@ -177,6 +204,28 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.gamepage {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.gamesidebar {
+    height: 100%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.gamesidebar div {
+    width: 75%;
 }
 
 .gameoverwrapper {
@@ -247,8 +296,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    width: 100%;
+    height: 75%;
+    width: 75%;
 }
 
 .messageform {
@@ -257,53 +306,79 @@
     align-items: center;
     justify-content: center;
     color: white;
-    height: 70%;
-    width: 60%;
-    background-image: linear-gradient(slategrey, darkslategrey);
+    height: 80%;
+    width: 100%;
     border-radius: 3%;
+    padding: 3%;
     border: 2px solid red;
     animation: mymove 4s infinite;
     box-shadow: 0px 0px 40px 10px red;
 }
 
 .messageinput {
+    width: 100%;
     display: flex;
 }
 
+.messageinput input {
+    width: 100%;
+    text-align: left;
+}
+
 .messages {
-    height: 80%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     border-radius: 3%;
-    background-color: black;
     box-shadow: 0px 0px -5px -10px white;
     overflow-y: scroll;
+    padding: 3%;
 }
 
 .nav {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
-    height: 12rem;
-    background-image: linear-gradient( red, black);
+    height: 5rem;
+    background-image: linear-gradient( rgb(23, 41, 41), black);
     border: solid 2px red;
     animation: mymove 4s infinite;
     box-shadow: 0px 0px 40px 10px red;
 }
 
-.navimg {
-    height: 9rem;
-    width: 11rem;
+.imgcontainer {
+    height: 11rem;
+    width: 30rem;
     align-self: center;
+    background-image: linear-gradient(red, black);
+    padding: 30px;
+    border-radius: 50%;
+    border: 2px solid red;
+    box-shadow: 0px 0px 40px 10px red;
+    animation: mymove 4s infinite;
 }
 
-.nav span {
-    background: -webkit-linear-gradient(grey, red);
+.logoimg {
+    height: 100%;
+    width: 100%;
+}
+
+.span {
+    background: -webkit-linear-gradient(red, white);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 40px;
+}
+
+.nav span {
+    background: -webkit-linear-gradient(red, white);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 40px;
+    padding: 15px 0px 20px 30px;
 }
 
 .rounds {
@@ -340,6 +415,15 @@
     box-shadow: 0px 0px 40px 10px red;
 }
 
+.waitinginner {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 .hidden {
     visibility: hidden;
 }
@@ -348,7 +432,7 @@
     visibility: visible;
 }
 
-.powerUpButton {
+.powerupbutton {
 background-color:tomato; /* Green */
 border: none;
 color: black;
@@ -359,6 +443,37 @@ display: inline-block;
 font-size: 16px;
 }
 
+.powerupcontainer {
+    height: 20%;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.loadercontainer {
+    height: 100%;
+    width: 100%;
+}
+
+.loader {
+    border: 3px solid #f3f3f3; /* Light grey */
+    border-top: 3px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50%;
+    /* animation: spin 2s linear infinite; */
+}
+  
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 @keyframes mymove {
     50% {box-shadow: 0px 0px 35px 5px red;}
-  }
+}
+
+@keyframes buttonmove {
+    50% {box-shadow: 0px 0px 8px 5px red;}
+}

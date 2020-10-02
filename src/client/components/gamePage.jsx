@@ -15,6 +15,7 @@ import {
   getPowerUpsThunk, getCurrentGameThunk, getPromptThunk, setSessionThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
+import TheCompetition from './theCompetition';
 
 const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match, setSession,
@@ -70,34 +71,30 @@ const GamePage = ({
   });
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ height: '80vh' }}>
-        <Box bg="tomato" h="40%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#c90c0c" borderStyle="solid" rounded="lg">
-          Competition
-          {game.players ? game.players.map((player) => (
-            <Text key={player.id}>{player.name ? player.name : 'Guest'}</Text>
-          )) : null}
-        </Box>
-        <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
-          Power Up
-          {givenPowerUp ? (
+    <div className="gamepage">
+      <div className="gamesidebar">
+        <div className="box powerupcontainer">
+          <span className="span">Power Up!</span>
+          {/* {givenPowerUp ? (
             <Button
-              className="powerUpButton"
+              className="powerupbutton"
               onClick={() => {
                 socket.emit('powerUp', givenPowerUp.funcName);
                 setGivenPowerUp(null);
               }}
             >{givenPowerUp.name}
             </Button>
-          ) : null }
-        </Box>
+          ) : */
+          <div className="loaderContainer" > 
+            <div className="loader" />
+          </div> }
+        </div>
+        <TheCompetition />
       </div>
       <Editor match={match} gamePageProps={game} />
       <div>
         <Timer props={game} />
-        <Box bg="black" height="75%" w="90%" color="white" m="15px" p={3} borderWidth="3px" borderStyle="solid" borderColor="#331566" rounded="lg">
           <ChatBox />
-        </Box>
         <LeaveGameButton history={history} />
       </div>
       <div>

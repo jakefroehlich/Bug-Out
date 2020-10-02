@@ -30,6 +30,9 @@ const GameConsole = ({
       <Nav session={session} />
       <div className="consolecontainer">
         <CreateGame history={history} />
+        <div className="imgcontainer">
+          <img className="logoimg" src="https://i.ibb.co/RhHJRWT/Bug-Out-Logo2.png" alt="BugOut" />
+        </div>
         <JoinGame history={history} />
       </div>
     </div>

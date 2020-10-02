@@ -10,6 +10,7 @@ const serverListeners = (io, socket) => {
   socket.on('joinRoom', (gameSessionId) => {
     socket.join(gameSessionId);
     socketRoomId = gameSessionId;
+    socket.broadcast.to(socketRoomId).emit('playerUpdate');
   });
 
   socket.on('leaveRoom', () => {

@@ -51,8 +51,9 @@ const ChatBox = ({ msgs, session }) => {
             placeholder="type something, n00b"
             onChange={handleChange}
             value={chatMsg}
+            className="input"
           />
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit} className="button">
             Send
           </button>
         </div>

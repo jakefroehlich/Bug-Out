@@ -2,7 +2,7 @@ import store from '../store/index';
 import {
   addMessage, roundOver, startGame, sufferPowerUp,
 } from '../store/actions';
-import { setRoundTimesThunk } from '../store/thunks';
+import { setRoundTimesThunk, getCurrentGameThunk } from '../store/thunks';
 
 const clientListeners = (socket) => {
   socket.on('message', (message) => {
@@ -22,6 +22,10 @@ const clientListeners = (socket) => {
     store.dispatch(setRoundTimesThunk(gameId));
     store.dispatch(startGame());
   });
+
+  socket.on('playerUpdate', () => {
+    store.dispatch(getCurrentGameThunk());
+  })
 
   socket.on('powerUp', (powerUpName) => {
     store.dispatch(sufferPowerUp(powerUpName));

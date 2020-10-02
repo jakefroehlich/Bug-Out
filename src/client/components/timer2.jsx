@@ -1,13 +1,13 @@
 /* eslint-disable no-shadow */
-// import { Box, Text } from '@chakra-ui/core';
 import { connect } from 'react-redux';
 import React from 'react';
 import FlipCountdown from '@rumess/react-flip-countdown';
-// import { addScore } from '../store/thunks/gameThunks';
 
-const Timer = (props) => (
-  <div>
-    { props.game.roundEnd
+const Timer = (props) => {
+  console.log(props.game.roundEnd);
+  return (
+    <div>
+      { props.game.roundEnd
       && (
         <div>
           <FlipCountdown
@@ -19,8 +19,9 @@ const Timer = (props) => (
           />
         </div>
       )}
-  </div>
-);
+    </div>
+  );
+};
 
 const mapStateToProps = (props) => (props);
 export default connect(mapStateToProps)(Timer);

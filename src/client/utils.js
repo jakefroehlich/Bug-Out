@@ -18,7 +18,8 @@ const selectPowerUp = (arr) => {
 
 const setPowerUp = (powerUps) => {
   const answer = 42; // Hitch Hiker's Guide to Galaxy
-  const randNum = Math.floor((Math.random() * 50));
+  const randNum = 42;
+  // const randNum = Math.floor((Math.random() * 50));
   if (answer === randNum) {
     return selectPowerUp(powerUps);
   }

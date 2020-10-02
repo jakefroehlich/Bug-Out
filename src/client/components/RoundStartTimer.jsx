@@ -3,7 +3,9 @@
 import React, { Component } from 'react';
 import { Text } from '@chakra-ui/core';
 import { connect } from 'react-redux';
-import { setRoundTimesThunk, getPromptThunk, setSessionThunk } from '../store/thunks';
+import {
+  setRoundTimesThunk, getPromptThunk, setSessionThunk, roundReset,
+} from '../store/thunks';
 
 class RoundStartTimer extends Component {
   constructor() {
@@ -15,11 +17,13 @@ class RoundStartTimer extends Component {
     this.startNewRound = this.startNewRound.bind(this);
   }
 
+  // resets the round clock, gets a new prompt, and sets all users correctAnswer back to false
   componentDidMount() {
     setSessionThunk();
     if (this.props.session.host) {
       this.props.setRoundTimesThunk(this.props.match.params.id);
       this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
+      this.props.roundReset(this.props.game.id);
     }
 
     if (this.props.game.rounds > 1) {
@@ -50,7 +54,6 @@ class RoundStartTimer extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { seconds } = this.state;
     return (
       <div>
@@ -63,4 +66,6 @@ class RoundStartTimer extends Component {
 }
 
 const mapStateToProps = (props) => (props);
-export default connect(mapStateToProps, { setRoundTimesThunk, getPromptThunk, setSessionThunk })(RoundStartTimer);
+export default connect(mapStateToProps, {
+  setRoundTimesThunk, getPromptThunk, setSessionThunk, roundReset,
+})(RoundStartTimer);

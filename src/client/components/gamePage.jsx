@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+/* eslint-disable max-len */
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
+  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
 } from '@chakra-ui/core';
 import moment from 'moment';
 import Editor from './editor';
@@ -9,7 +10,7 @@ import ChatBox from './ChatBox';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
 import { LeaveGameButton } from './index';
-// import { setPowerUp } from '../utils';
+import { setPowerUp } from '../utils';
 import {
   getPowerUpsThunk, getCurrentGameThunk, getPromptThunk, setSessionThunk,
 } from '../store/thunks';
@@ -19,45 +20,53 @@ const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match, setSession,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  // const [givenPowerUps, setGivenPowerUps] = useState([]);
+  const [givenPowerUp, setGivenPowerUp] = useState(null);
+  const [standings, setStandings] = useState([]);
 
   useEffect(() => {
     getPowerUps();
-    getCurrentGame(match.params.id);
     setSession();
-    // fetchPrompt(game.difficulty);
+    getCurrentGame(match.params.id);
   }, []);
+
+  const endRound = async () => {
+    await setStandings(game.players.sort((a, b) => a.score - b.score));
+    onOpen();
+    socket.emit('roundOver');
+  };
 
   useEffect(() => {
     if (game.roundOver) {
-      onOpen();
-      socket.emit('roundOver');
+      endRound();
     }
-  }, [game.roundOver]);
-  // const timerId = setInterval(() => {
-  //   // console.log('timer run!');
-  //   const powerUp = setPowerUp(game.powerUps);
-  //   if (powerUp) {
-  //     setGivenPowerUps([...givenPowerUps, powerUp]);
-  //     console.log('givenPowerUps is ', givenPowerUps);
-  //     // console.log('powerup given and givenPowerUps is ', givenPowerUps);
-  //   }
-  // }, 1000); // runs every 10 seconds;
-
-  // setTimeout(() => { clearInterval(timerId); }, 1000 * 60 * 10); // 10 minutes
+  }, [game.roundOver, game.players]);
+  useEffect(() => {
+    const powerUpTimerId = setInterval(() => {
+      if (!givenPowerUp) {
+        const powerUp = setPowerUp(game.powerUps);
+        console.log('powerUp given ,', powerUp);
+        setGivenPowerUp(powerUp);
+        clearInterval(powerUpTimerId);
+      }
+    }, 5000); // runs every 20 seconds;
+    return () => {
+      clearInterval(powerUpTimerId);
+    };
+  });
   useEffect(() => {
     const current = moment().unix();
     let secondsLeft = game.roundEndUnix - current;
     const timeLeft = setInterval(() => {
       if (secondsLeft) {
-        console.log('secondsleft:', secondsLeft);
         secondsLeft -= 1;
       } else {
-        console.log('game over');
-        clearInterval(timeLeft);
+        endRound();
       }
     }, 1000);
-    return clearInterval(timeLeft);
+
+    return () => {
+      clearInterval(timeLeft);
+    };
   });
 
   return (
@@ -70,14 +79,17 @@ const GamePage = ({
           )) : null}
         </Box>
         <Box bg="#fabc41" h="60%" w="110px" m={3} p={4} color="white" borderWidth="3px" borderColor="#d49619" borderStyle="solid" rounded="lg">
-          Power Ups
-          {/* <ul>
-            {givenPowerUps.map((el) => (
-              <li id>
-                {powerUpButton(el)}
-              </li>
-            ))}
-          </ul> */}
+          Power Up
+          {givenPowerUp ? (
+            <Button
+              className="powerUpButton"
+              onClick={() => {
+                socket.emit('powerUp', givenPowerUp.funcName);
+                setGivenPowerUp(null);
+              }}
+            >{givenPowerUp.name}
+            </Button>
+          ) : null }
         </Box>
       </div>
       <Editor match={match} gamePageProps={game} />
@@ -95,7 +107,10 @@ const GamePage = ({
             <ModalHeader>Round Over!</ModalHeader>
             <ModalBody>
               <div>
-                <p>The current scores are:</p>
+                <p>Current Scores:</p>
+                <ol>
+                  {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
+                </ol>
                 <RoundStartTimer match={match} history={history} />
               </div>
             </ModalBody>
@@ -105,6 +120,7 @@ const GamePage = ({
     </div>
   );
 };
+
 const mapStateToProps = (props) => (props);
 
 const mapDispatchToProps = (dispatch) => ({

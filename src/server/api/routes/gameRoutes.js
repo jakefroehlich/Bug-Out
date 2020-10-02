@@ -17,7 +17,6 @@ const gameRouter = Router();
 gameRouter.get('/current/:id', async (req, res) => {
   try {
     const { id } = req.params;
-    console.log('ID:', id);
     const session = await Session.findOne({ where: { id: req.session_id } });
     const game = await GameSession.findOne({ where: { id }, include: [Session] });
 

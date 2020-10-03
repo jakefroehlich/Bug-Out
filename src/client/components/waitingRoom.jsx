@@ -106,12 +106,10 @@ const WaitingRoom = ({
         <div>
           <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false}>
             <ModalOverlay />
-            <ModalContent className="modalcontainer">
-              <ModalHeader className="modalheader">Prepare to Bugout!</ModalHeader>
-              <ModalBody className="modal">
-                <div
-                  className="innermodal"
-                >
+            <ModalContent>
+              <ModalHeader>Prepare to Bugout!</ModalHeader>
+              <ModalBody>
+                <div>
                   <p>Game Starts in</p>
                   <GameStartTimer match={match} history={history} />
                 </div>

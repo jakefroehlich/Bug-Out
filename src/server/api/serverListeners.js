@@ -10,8 +10,12 @@ const serverListeners = (io, socket) => {
   socket.on('joinRoom', (gameSessionId, alias) => {
     socket.join(gameSessionId);
     socketRoomId = gameSessionId;
+<<<<<<< HEAD
     socket.broadcast.to(socketRoomId).emit('message', formatMessage('BugBot', `${alias} has joined the room!`));
     socket.broadcast.to(socketRoomId).emit('playerUpdate', socketRoomId);
+=======
+    socket.broadcast.to(socketRoomId).emit('playerUpdate');
+>>>>>>> parent of bbbee70... modal css complete
   });
 
   socket.on('leaveRoom', () => {

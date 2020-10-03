@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
 } from '@chakra-ui/core';
 import moment from 'moment';
 import GameNav from './GameNav';
@@ -79,6 +79,7 @@ const GamePage = ({
       <div
         className="gamepage"
       >
+<<<<<<< HEAD
         <div
           className="box gamepageL"
         >
@@ -105,6 +106,47 @@ const GamePage = ({
             ) : (
               <div className="loaderContainer">
                 <div className="loader" />
+=======
+        <h1>{game.prompt.name}</h1>
+        <p>{game.prompt.prompt}</p>
+      </div>
+      <Editor match={match} gamePageProps={game} />
+      <div
+        className="gamesidebar"
+      >
+        <Timer props={game} />
+        <div className="box powerupcontainer">
+          <span className="span">Power Up!</span>
+          {givenPowerUp ? (
+            <Button
+              className="powerupbutton"
+              onClick={() => {
+                socket.emit('powerUp', givenPowerUp.funcName);
+                setGivenPowerUp(null);
+              }}
+            >{givenPowerUp.name}
+            </Button>
+          ) : (
+            <div className="loaderContainer">
+              <div className="loader" />
+            </div>
+          )}
+        </div>
+        <LeaveGameButton history={history} />
+      </div>
+      <div>
+        <Modal isOpen={isOpen} onClose={onClose}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Round Over!</ModalHeader>
+            <ModalBody>
+              <div>
+                <p>Current Scores:</p>
+                <ol>
+                  {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
+                </ol>
+                <RoundStartTimer match={match} history={history} />
+>>>>>>> parent of bbbee70... modal css complete
               </div>
             )}
           </div>

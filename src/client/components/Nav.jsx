@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Nav = ({ session }) => (
   <div className="nav">
+<<<<<<< HEAD
     <span>
       Alias:
       <div className="navname">
@@ -29,6 +30,9 @@ const Nav = ({ session }) => (
         </p>
       </div>
     </div>
+=======
+    <span>Alias: {session.name}</span>
+>>>>>>> parent of bbbee70... modal css complete
     <span>
       <Link to="/login">Login</Link>
     </span>

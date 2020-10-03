@@ -8,6 +8,7 @@ const LeaveGameButton = (props) => {
   return (
     <button
       className="button"
+      type="button"
       onClick={async () => {
         await leaveGame(game.id);
         history.push('/');

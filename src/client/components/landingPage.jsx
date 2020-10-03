@@ -13,7 +13,6 @@ const LandingPage = ({
   setSession,
   updateUserAlias,
   history,
-  match,
 }) => {
   const [alias, setAlias] = useState('Guest');
 

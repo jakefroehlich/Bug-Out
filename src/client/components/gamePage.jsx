@@ -2,11 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Box, Text, Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
 } from '@chakra-ui/core';
 import moment from 'moment';
 import Editor from './editor';
-import ChatBox from './ChatBox';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
 import { LeaveGameButton } from './index';
@@ -15,7 +14,6 @@ import {
   getPowerUpsThunk, getCurrentGameThunk, getPromptThunk, setSessionThunk,
 } from '../store/thunks';
 import socket from '../utils/socket';
-import TheCompetition from './theCompetition';
 
 const GamePage = ({
   game, getPowerUps, getCurrentGame, history, match, setSession,
@@ -72,15 +70,19 @@ const GamePage = ({
   });
 
   return (
-    <div className="gamepage">
+    <div
+      className="gamepage"
+    >
       <div
-        className="box gamepageL">
+        className="box gamepageL"
+      >
         <h1>{game.prompt.name}</h1>
         <p>{game.prompt.prompt}</p>
       </div>
       <Editor match={match} gamePageProps={game} />
       <div
-        className="gamesidebar">
+        className="gamesidebar"
+      >
         <Timer props={game} />
         <div className="box powerupcontainer">
           <span className="span">Power Up!</span>
@@ -93,10 +95,11 @@ const GamePage = ({
               }}
             >{givenPowerUp.name}
             </Button>
-          ) : 
-            <div className="loaderContainer" >
+          ) : (
+            <div className="loaderContainer">
               <div className="loader" />
-            </div>}
+            </div>
+          )}
         </div>
         <LeaveGameButton history={history} />
       </div>

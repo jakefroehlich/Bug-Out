@@ -10,7 +10,8 @@ const Timer = (props) => {
       { props.game.roundEnd
       && (
         <div
-          className="box innertimer">
+          className="box innertimer"
+        >
           <FlipCountdown
             hideYear
             hideMonth

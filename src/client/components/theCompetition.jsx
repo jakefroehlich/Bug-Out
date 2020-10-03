@@ -14,7 +14,8 @@ const TheCompetition = ({ getCurrentGame, game }) => {
 
   return (
     <div
-      className="box competition">
+      className="box competition"
+    >
       <span className="span">The Competition</span>
       <div>
         {

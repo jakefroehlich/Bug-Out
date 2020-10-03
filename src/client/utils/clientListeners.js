@@ -25,7 +25,7 @@ const clientListeners = (socket) => {
 
   socket.on('playerUpdate', () => {
     store.dispatch(getCurrentGameThunk());
-  })
+  });
 
   socket.on('powerUp', (powerUpName) => {
     store.dispatch(sufferPowerUp(powerUpName));

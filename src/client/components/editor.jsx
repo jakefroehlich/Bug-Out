@@ -79,32 +79,33 @@ const CodeEditor = (props) => {
   }
   return (
     <div
-      className="editorcontainer">
-          <Editor
-          height="50vh"
-          width="100%"
-          theme="dark"
-          language="javascript"
-          value={code}
-          editorDidMount={handleEditorDidMount}
-        />
-        {props.input.correctAnswer
-      && (
-      <div className="score">
-        {props.input.score === 0
-          && <span>Calculating Score...</span>}
-        {props.input.score > 0
-          && <span>You earned {props.input.score} points!</span>}
-        <span>Feel free to keep bugging the competition while you wait.</span>
-      </div>
-      )}
+      className="editorcontainer"
+    >
+      <Editor
+        height="50vh"
+        width="100%"
+        theme="dark"
+        language="javascript"
+        value={code}
+        editorDidMount={handleEditorDidMount}
+      />
+      {props.input.correctAnswer
+        && (
+          <div className="score">
+            {props.input.score === 0
+              && <span>Calculating Score...</span>}
+            {props.input.score > 0
+              && <span>You earned {props.input.score} points!</span>}
+            <span>Feel free to keep bugging the competition while you wait.</span>
+          </div>
+        )}
       {!props.input.correctAnswer
         && (
-        <button onClick={handleShowValue} disabled={!isEditorReady} type="button" className="button">
-          Check Function
-        </button>
+          <button onClick={handleShowValue} disabled={!isEditorReady} type="button" className="button">
+            Check Function
+          </button>
         )}
-      </div>
+    </div>
   );
 };
 

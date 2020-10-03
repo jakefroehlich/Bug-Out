@@ -5,6 +5,9 @@ import { Link } from 'react-router-dom';
 const Nav = ({ session }) => (
   <div className="nav">
     <span>Alias: {session.name}</span>
+    <div className="imgcontainer">
+      <img className="logoimg" src="https://i.ibb.co/RhHJRWT/Bug-Out-Logo2.png" alt="BugOut" />
+    </div>
     <span>
       <Link to="/login">Login</Link>
     </span>

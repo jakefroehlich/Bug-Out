@@ -21,7 +21,6 @@ import {
 export const createGameThunk = (rounds, difficulty, history) => (dispatch) => axios
   .post('/game/createGame', { rounds, difficulty })
   .then(({ data }) => {
-    // console.log('data', data);
     const gameSessionId = data.id;
     axios.put('/game/player', { gameSessionId })
       .then(({ data }) => {
@@ -35,15 +34,6 @@ export const createGameThunk = (rounds, difficulty, history) => (dispatch) => ax
   .catch((e) => {
     console.log(e);
   });
-
-// export const updateGameCodeThunk = (code) => (dispatch) => axios
-//   .put('/game/newGameCode', { code })
-//   .then(({ data }) => {
-//     dispatch(updateCode(data));
-//   })
-//   .catch((e) => {
-//     console.log('failed to update code', e);
-//   });
 
 export const updateGameThunk = (rounds, difficulty) => (dispatch) => {
   console.log(rounds);

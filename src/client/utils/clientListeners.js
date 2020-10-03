@@ -23,8 +23,8 @@ const clientListeners = (socket) => {
     store.dispatch(startGame());
   });
 
-  socket.on('playerUpdate', () => {
-    store.dispatch(getCurrentGameThunk());
+  socket.on('playerUpdate', (gameId) => {
+    store.dispatch(getCurrentGameThunk(gameId));
   });
 
   socket.on('powerUp', (powerUpName) => {

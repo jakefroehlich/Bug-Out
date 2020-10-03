@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure, Button,
+  Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
 import moment from 'moment';
 import Editor from './editor';
@@ -84,17 +84,18 @@ const GamePage = ({
         className="gamesidebar"
       >
         <Timer props={game} />
-        <div className="box powerupcontainer">
+        <div className={givenPowerUp ? 'box powerupcontainer' : 'dimbox powerupcontainer'}>
           <span className="span">Power Up!</span>
           {givenPowerUp ? (
-            <Button
-              className="powerupbutton"
+            <button
+              type="button"
+              className="button"
               onClick={() => {
                 socket.emit('powerUp', givenPowerUp.funcName);
                 setGivenPowerUp(null);
               }}
             >{givenPowerUp.name}
-            </Button>
+            </button>
           ) : (
             <div className="loaderContainer">
               <div className="loader" />
@@ -106,10 +107,10 @@ const GamePage = ({
       <div>
         <Modal isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Round Over!</ModalHeader>
-            <ModalBody>
-              <div>
+          <ModalContent className="modalcontainer">
+            <ModalHeader className="modalheader">Round Over!</ModalHeader>
+            <ModalBody className="modal">
+              <div className="innermodal">
                 <p>Current Scores:</p>
                 <ol>
                   {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}

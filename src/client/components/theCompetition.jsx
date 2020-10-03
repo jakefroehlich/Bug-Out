@@ -20,7 +20,7 @@ const TheCompetition = ({ getCurrentGame, game }) => {
       <div>
         {
           roomPlayers.length
-            ? roomPlayers.map((player) => <p key={player.id}>n: {player.name} id: {player.id}</p>)
+            ? roomPlayers.map((player) => <p key={player.id}>{player.name}</p>)
             : ''
         }
       </div>

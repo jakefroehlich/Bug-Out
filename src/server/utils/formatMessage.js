@@ -1,6 +1,6 @@
 const moment = require('moment');
 
-const formatMessage = (playerName, text, socketId) => {
+const formatMessage = (playerName, text) => {
   const currentTime = moment();
 
   return {
@@ -8,7 +8,6 @@ const formatMessage = (playerName, text, socketId) => {
     text,
     time: currentTime.format('h:mm a'),
     id: currentTime.format(),
-    socketId,
   };
 };
 

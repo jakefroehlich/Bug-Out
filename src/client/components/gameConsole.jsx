@@ -25,12 +25,18 @@ const GameConsole = ({
     socket.emit('discon');
   }, []);
 
+  useEffect(() => {
+    setSession();
+  }, [session]);
+
   return (
-    <div className="outerconsole">
-      <Nav session={session} />
-      <div className="consolecontainer">
-        <CreateGame history={history} />
-        <JoinGame history={history} />
+    <div className="imgcontainer">
+      <div className="outerconsole">
+        <Nav session={session} />
+        <div className="consolecontainer">
+          <CreateGame history={history} />
+          <JoinGame history={history} />
+        </div>
       </div>
     </div>
   );

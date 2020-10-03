@@ -42,9 +42,9 @@ const CodeEditor = (props) => {
   function handleShowValue() {
     const fn = buildFunction(valueGetter.current());
     try {
-      const ts = `test${prompt.id}`;
-      const result = test[ts](fn);
-      // const result = true;
+      // const ts = `test${props.game.prompt.id}`;
+      // const result = test[ts](fn);
+      const result = true;
       if (result === true) {
         props.setCorrect(props.match.params.id);
         const finishTime = moment().unix();
@@ -89,7 +89,7 @@ const CodeEditor = (props) => {
         value={code}
         editorDidMount={handleEditorDidMount}
       />
-      {props.input.correctAnswer
+      {/* {props.input.correctAnswer
         && (
           <div className="score">
             {props.input.score === 0
@@ -98,7 +98,7 @@ const CodeEditor = (props) => {
               && <span>You earned {props.input.score} points!</span>}
             <span>Feel free to keep bugging the competition while you wait.</span>
           </div>
-        )}
+        )} */}
       {!props.input.correctAnswer
         && (
           <button onClick={handleShowValue} disabled={!isEditorReady} type="button" className="button">

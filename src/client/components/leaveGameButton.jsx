@@ -11,7 +11,7 @@ const LeaveGameButton = (props) => {
       type="button"
       onClick={async () => {
         await leaveGame(game.id);
-        history.push('/');
+        history.push('/console');
       }}
     >Leave Game
     </button>

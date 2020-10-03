@@ -18,11 +18,8 @@ const LandingPage = ({
 
   useEffect(() => {
     setSession();
-  }, []);
-
-  useEffect(() => {
     axios.put('/session/reset-score');
-  });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();

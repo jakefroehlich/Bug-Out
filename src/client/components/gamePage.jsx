@@ -5,6 +5,7 @@ import {
   Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, useDisclosure,
 } from '@chakra-ui/core';
 import moment from 'moment';
+import GameNav from './GameNav';
 import Editor from './editor';
 import Timer from './timer2';
 import RoundStartTimer from './RoundStartTimer';
@@ -29,6 +30,7 @@ const GamePage = ({
   }, []);
 
   const endRound = async () => {
+    await getCurrentGame(match.params.id);
     await setStandings(game.players.sort((a, b) => a.score - b.score));
     onOpen();
     socket.emit('roundOver');
@@ -71,55 +73,60 @@ const GamePage = ({
 
   return (
     <div
-      className="gamepage"
+      className="gamepagecontainer"
     >
+      <GameNav />
       <div
-        className="box gamepageL"
+        className="gamepage"
       >
-        <h1>{game.prompt.name}</h1>
-        <p>{game.prompt.prompt}</p>
-      </div>
-      <Editor match={match} gamePageProps={game} />
-      <div
-        className="gamesidebar"
-      >
-        <Timer props={game} />
-        <div className={givenPowerUp ? 'box powerupcontainer' : 'dimbox powerupcontainer'}>
-          <span className="span">Power Up!</span>
-          {givenPowerUp ? (
-            <button
-              type="button"
-              className="button"
-              onClick={() => {
-                socket.emit('powerUp', givenPowerUp.funcName);
-                setGivenPowerUp(null);
-              }}
-            >{givenPowerUp.name}
-            </button>
-          ) : (
-            <div className="loaderContainer">
-              <div className="loader" />
-            </div>
-          )}
+        <div
+          className="box gamepageL"
+        >
+          <h1>{game.prompt.name}</h1>
+          <p>{game.prompt.prompt}</p>
         </div>
-        <LeaveGameButton history={history} />
-      </div>
-      <div>
-        <Modal isOpen={isOpen} onClose={onClose}>
-          <ModalOverlay />
-          <ModalContent className="modalcontainer">
-            <ModalHeader className="modalheader">Round Over!</ModalHeader>
-            <ModalBody className="modal">
-              <div className="innermodal">
-                <p>Current Scores:</p>
-                <ol>
-                  {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
-                </ol>
-                <RoundStartTimer match={match} history={history} />
+        <Editor match={match} gamePageProps={game} />
+        <div
+          className="gamesidebar"
+        >
+          <Timer props={game} />
+          <div className={givenPowerUp ? 'box powerupcontainer' : 'dimbox powerupcontainer'}>
+            <span className="span">Power Up!</span>
+            {givenPowerUp ? (
+              <button
+                type="button"
+                className="button"
+                onClick={() => {
+                  socket.emit('powerUp', givenPowerUp.funcName);
+                  setGivenPowerUp(null);
+                }}
+              >{givenPowerUp.name}
+              </button>
+            ) : (
+              <div className="loaderContainer">
+                <div className="loader" />
               </div>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+            )}
+          </div>
+          <LeaveGameButton history={history} />
+        </div>
+        <div>
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent className="modalcontainer">
+              <ModalHeader className="modalheader">Round Over!</ModalHeader>
+              <ModalBody className="modal">
+                <div className="innermodal">
+                  <p>Current Scores:</p>
+                  <ol>
+                    {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
+                  </ol>
+                  <RoundStartTimer match={match} history={history} />
+                </div>
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </div>
       </div>
     </div>
   );

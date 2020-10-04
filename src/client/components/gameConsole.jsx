@@ -9,7 +9,6 @@ import JoinGame from './joinGame';
 import Nav from './Nav';
 import socket from '../utils/socket';
 import {
-  removeHostThunk,
   setSessionThunk,
   getCurrentGameThunk,
 } from '../store/thunks';
@@ -18,7 +17,6 @@ const GameConsole = ({
   history,
   session,
   setSession,
-  rmHost,
 }) => {
   useEffect(() => {
     setSession();
@@ -51,7 +49,6 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   setSession: () => dispatch(setSessionThunk()),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
-  rmHost: () => dispatch(removeHostThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);

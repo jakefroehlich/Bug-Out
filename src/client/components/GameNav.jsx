@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
-const Nav = ({ session }) => (
+const GameNav = ({ session }) => (
   <div className="nav">
     <span>
       Alias:
@@ -15,7 +14,7 @@ const Nav = ({ session }) => (
       <div className="dropdowncontent">
         <p>Each round you will be given a prompt (of selected difficulty) to complete.
           While you do so, you and your competitors will be given powerups randomly.
-          Use them to bug your competitors code and race to the finish
+          them to bug your competitors code and race to the finish
           - only first place of each round gets points!
         </p>
       </div>
@@ -30,11 +29,14 @@ const Nav = ({ session }) => (
       </div>
     </div>
     <span>
-      <Link to="/login">Login</Link>
+      Score:
+      <div className="navname">
+        {session.score}
+      </div>
     </span>
   </div>
 );
 
 const mapStateToProps = ({ session }) => ({ session });
 
-export default connect(mapStateToProps, null)(Nav);
+export default connect(mapStateToProps, null)(GameNav);

@@ -6,10 +6,12 @@ import FlipCountdown from '@rumess/react-flip-countdown';
 const Timer = (props) => {
   console.log(props.game.roundEnd);
   return (
-    <div>
+    <div className="timer">
       { props.game.roundEnd
       && (
-        <div>
+        <div
+          className="box innertimer"
+        >
           <FlipCountdown
             hideYear
             hideMonth

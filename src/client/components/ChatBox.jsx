@@ -16,8 +16,10 @@ const ChatBox = ({ msgs, session }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chatMsg', chatMsg, session.name);
-    setChatMsg('');
+    if (chatMsg !== '') {
+      socket.emit('chatMsg', chatMsg, session.name);
+      setChatMsg('');
+    }
   };
 
   return (
@@ -33,8 +35,11 @@ const ChatBox = ({ msgs, session }) => {
           {msgs ? (
             msgs.map((msg) => (
               <div key={msg.id}>
-                <span>
-                  {msg.playerName}: {msg.text} @{msg.time} from {msg.socketId}
+                <span className="messagespan">
+                  {msg.playerName}: {msg.text}
+                  <div>
+                    @{msg.time}
+                  </div>
                 </span>
               </div>
             ))
@@ -51,8 +56,9 @@ const ChatBox = ({ msgs, session }) => {
             placeholder="type something, n00b"
             onChange={handleChange}
             value={chatMsg}
+            className="input"
           />
-          <button type="submit" onClick={handleSubmit}>
+          <button type="submit" onClick={handleSubmit} className="button">
             Send
           </button>
         </div>

@@ -7,9 +7,11 @@ const serverListeners = (io, socket) => {
 
   let socketRoomId;
 
-  socket.on('joinRoom', (gameSessionId) => {
+  socket.on('joinRoom', (gameSessionId, alias) => {
     socket.join(gameSessionId);
     socketRoomId = gameSessionId;
+    socket.broadcast.to(socketRoomId).emit('message', formatMessage('BugBot', `${alias} has joined the room!`));
+    socket.broadcast.to(socketRoomId).emit('playerUpdate', socketRoomId);
   });
 
   socket.on('leaveRoom', () => {
@@ -18,7 +20,7 @@ const serverListeners = (io, socket) => {
 
   socket.on('chatMsg', (msg, name) => {
     console.log('chatMsg!', socket.rooms);
-    io.to(socketRoomId).emit('message', formatMessage(name, msg, socketRoomId));
+    io.to(socketRoomId).emit('message', formatMessage(name, msg));
   });
 
   socket.on('roundOver', () => {

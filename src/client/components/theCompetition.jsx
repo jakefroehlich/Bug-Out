@@ -6,22 +6,21 @@ import { getCurrentGameThunk } from '../store/thunks';
 const TheCompetition = ({ getCurrentGame, game }) => {
   const [roomPlayers, setRoomPlayers] = useState([]);
 
-  useEffect(() => {
-    getCurrentGame();
-  }, []);
-
   //  Update the players from redux store
   useEffect(() => {
+    getCurrentGame();
     setRoomPlayers(game.players);
-  }, [game.players.length]);
+  }, [game.players]);
 
   return (
-    <div>
-      <div>The Competition</div>
+    <div
+      className="box competition"
+    >
+      <span className="span">The Competition</span>
       <div>
         {
           roomPlayers.length
-            ? roomPlayers.map((player) => <p key={player.id}>n: {player.name} id: {player.id}</p>)
+            ? roomPlayers.map((player) => <p key={player.id}>{player.name}</p>)
             : ''
         }
       </div>

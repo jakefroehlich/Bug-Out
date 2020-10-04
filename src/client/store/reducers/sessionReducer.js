@@ -4,6 +4,7 @@ const initialState = {
   name: null,
   id: null,
   host: false,
+  score: 0,
 };
 
 const sessionReducer = (state = initialState, action) => {
@@ -14,6 +15,7 @@ const sessionReducer = (state = initialState, action) => {
         name: action.session.name,
         id: action.session.id,
         host: action.session.host,
+        score: action.session.score,
       };
     case types.LEAVE_GAME:
       return {

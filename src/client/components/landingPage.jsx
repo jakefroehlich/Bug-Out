@@ -18,11 +18,8 @@ const LandingPage = ({
 
   useEffect(() => {
     setSession();
-  }, []);
-
-  useEffect(() => {
     axios.put('/session/reset-score');
-  });
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,9 +35,9 @@ const LandingPage = ({
         <div
           className="landingform"
         >
-          <img className="landingimg" src="https://i.ibb.co/MDgDr1N/Bug-Out-Logo.png" alt="BugOut" />
+          <img className="landingimg" src="https://i.ibb.co/RhHJRWT/Bug-Out-Logo2.png" alt="BugOut" />
           <input
-            className="landingInput"
+            className="input"
             type="text"
             // value={alias}
             placeholder="Enter Preferred Alias"
@@ -48,6 +45,7 @@ const LandingPage = ({
           />
         </div>
       </div>
+      {/* <CodeEditor2 match={match}/> */}
     </form>
   );
 };

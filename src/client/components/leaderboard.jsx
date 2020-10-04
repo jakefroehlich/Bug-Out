@@ -16,8 +16,8 @@ const Leaderboard = ({
 
   let rank = 0;
   return (
-    <div>
-      <div>Leaderboard</div>
+    <div className="leaderboard">
+      <span>Leaderboard</span>
       <table>
         <thead>
           <tr>

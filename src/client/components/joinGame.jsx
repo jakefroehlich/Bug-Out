@@ -20,14 +20,14 @@ const JoinGame = ({ joinGame, rmHost, history }) => {
         <span>Join Game</span>
         {/* <div className="codeinput"> */}
         <input
-          className="joiningInput"
+          className="input"
           type="text"
           value={gameCode}
           placeholder="Enter Game Code"
           onChange={(e) => setGameCode(e.target.value)}
         />
         {/* </div> */}
-        <button className="joingamebutton" type="submit">Join</button>
+        <button className="button" type="submit">Join</button>
       </div>
     </form>
   );

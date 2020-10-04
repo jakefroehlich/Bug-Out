@@ -1,7 +1,10 @@
 const moment = require('moment');
+const swearjar = require('swearjar');
 
-const formatMessage = (playerName, text) => {
+const formatMessage = (playerName, incomingMsg) => {
   const currentTime = moment();
+
+  const text = swearjar.censor(incomingMsg);
 
   return {
     playerName,

@@ -8,6 +8,7 @@ import moment from 'moment';
 import GameNav from './GameNav';
 import Editor from './editor';
 import Timer from './timer2';
+import TheCompetition from './theCompetition';
 import RoundStartTimer from './RoundStartTimer';
 import { LeaveGameButton } from './index';
 import { setPowerUp } from '../utils';
@@ -84,6 +85,9 @@ const GamePage = ({
         >
           <h1>{game.prompt.name}</h1>
           <p>{game.prompt.prompt}</p>
+        </div>
+        <div>
+            <TheCompetition />
         </div>
         <Editor match={match} gamePageProps={game} />
         <div

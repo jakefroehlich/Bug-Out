@@ -27,6 +27,11 @@ const sessionReducer = (state = initialState, action) => {
         ...state,
         host: action.payload,
       };
+    case types.RESET_SCORE:
+      return {
+        ...state,
+        score: 0,
+      };
     default:
       return state;
   }

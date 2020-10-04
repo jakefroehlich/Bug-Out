@@ -34,17 +34,6 @@ const serverListeners = (io, socket) => {
   socket.on('powerUp', (powerUpName) => {
     socket.broadcast.emit('powerUp', powerUpName);
   });
-
-  // socket.on('discon', () => {
-  //   const rooms = Object.keys(socket.rooms);
-  //   rooms.forEach((room) => socket.leave(room));
-  //   console.log('disconnected', socket.rooms);
-  // });
-
-  // socket.on('chatMsg', (msg, name) => {
-  //   console.log('serverListeners: ', msg);
-  //   io.emit('message_sent', formatMessage(name, msg));
-  // });
 };
 
 module.exports = serverListeners;

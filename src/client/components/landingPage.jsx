@@ -3,7 +3,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import {
   updateNameThunk,
   setSessionThunk,
@@ -18,7 +17,6 @@ const LandingPage = ({
 
   useEffect(() => {
     setSession();
-    axios.put('/session/reset-score');
   }, []);
 
   const handleSubmit = (e) => {

@@ -33,6 +33,7 @@ export const types = {
   SET_GAME_SCORES: 'SET_GAME_SCORES',
   SUFFER_POWER_UP: 'SUFFER_POWER_UP',
   GET_LEADERBOARD: 'UPDATE_LEADERBOARD',
+  RESET_SCORE: 'RESET_SCORE',
 };
 
 const addPlayer = (player) => ({
@@ -184,6 +185,10 @@ const updateLeaderboard = (leaderboard) => ({
   payload: leaderboard,
 });
 
+const resetScore = () => ({
+  type: types.RESET_SCORE,
+});
+
 export {
   changeInitialLoading,
   login,
@@ -215,4 +220,5 @@ export {
   setGameScores,
   sufferPowerUp,
   updateLeaderboard,
+  resetScore,
 };

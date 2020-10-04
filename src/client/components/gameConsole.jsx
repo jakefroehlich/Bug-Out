@@ -2,12 +2,11 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import CreateGame from './createGame';
 import JoinGame from './joinGame';
 import Nav from './Nav';
-import socket from '../utils/socket';
 import {
   setSessionThunk,
   getCurrentGameThunk,
@@ -20,7 +19,6 @@ const GameConsole = ({
 }) => {
   useEffect(() => {
     setSession();
-    socket.emit('discon');
   }, []);
 
   useEffect(() => {

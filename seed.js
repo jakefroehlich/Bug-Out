@@ -32,18 +32,18 @@ const powerups = [
   //   name: 'Minimize',
   //   rarity: 'Common',
   // },
-  {
-    id: 3,
-    name: 'Delete Brackets',
-    funcName: 'removeBrackets',
-    rarity: 'Rare',
-  },
-  {
-    id: 4,
-    name: 'Delete Parenthesis',
-    rarity: 'Common',
-    funcName: 'deleteParens',
-  },
+  // {
+  //   id: 3,
+  //   name: 'Delete Brackets',
+  //   funcName: 'removeBrackets',
+  //   rarity: 'Rare',
+  // },
+  // {
+  //   id: 4,
+  //   name: 'Delete Parenthesis',
+  //   rarity: 'Common',
+  //   funcName: 'deleteParens',
+  // },
   {
     id: 5,
     name: 'Delete Commas',
@@ -88,6 +88,18 @@ const powerups = [
   //   name: 'Popups',
   //   rarity: 'Common',
   // },
+  {
+    id: 14,
+    name: '=== -> =',
+    rarity: 'Common',
+    funcName: 'equalsToAssignment',
+  },
+  {
+    id: 15,
+    name: '= -> ===',
+    rarity: 'Common',
+    funcName: 'assignmentToEquals',
+  },
 ];
 const seed = async () => {
   try {

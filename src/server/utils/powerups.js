@@ -51,11 +51,9 @@ const changeBoolean = (code) => {
 
 module.exports = {
   powerUps: {
-    removeBrackets,
     flipLet,
     flipTrue,
     deleteCommas,
-    deleteParens,
     changeBoolean,
     assignmentToEquals,
     equalsToAssignment,

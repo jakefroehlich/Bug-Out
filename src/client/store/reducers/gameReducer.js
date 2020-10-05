@@ -14,6 +14,7 @@ const initialGameState = {
   roundOver: false,
   roundEndUnix: '',
   sufferingPowerUp: null,
+  powerUpCount: 0,
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -101,6 +102,7 @@ const gameReducer = (state = initialGameState, action) => {
       return {
         ...state,
         sufferingPowerUp: action.payload,
+        powerUpCount: state.powerUpCount + 1,
       };
     case types.GET_LEADERBOARD:
       return {

@@ -23,7 +23,7 @@ const Nav = ({ session }) => (
     <div className="dropdown">
       <span>Credits</span>
       <div className="dropdowncontent">
-        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sanghyuk Kwon,
+        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sang-Hyuk Kwon,
           Chad Nuckols, and Jake Froehlich) in partnership with FullStack Academy
           (Special thanks to Eliot, Deanna, and Thompson - 2004FLEX fo lyfe)
         </p>

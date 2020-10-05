@@ -501,13 +501,44 @@ const data = [
   // }
 ];
 
+const presData = [
+  {
+    id: '535474308bb336c9980006f2',
+    name: 'Greet Me',
+    slug: 'greet-me',
+    completedLanguages: [Array],
+    completedAt: '2020-05-27T19:29:33.561Z',
+  },
+  {
+    id: '57eadb7ecd143f4c9c0000a3',
+    name: 'Abbreviate a Two Word Name',
+    slug: 'abbreviate-a-two-word-name',
+    completedLanguages: [Array],
+    completedAt: '2020-01-28T16:09:05.354Z',
+  },
+  {
+    id: '54ff3102c1bad923760001f3',
+    name: 'Vowel Count',
+    slug: 'vowel-count',
+    completedLanguages: [Array],
+    completedAt: '2020-01-21T23:13:28.574Z',
+  },
+  {
+    id: '5949481f86420f59480000e7',
+    name: 'Odd or Even?',
+    slug: 'odd-or-even',
+    completedLanguages: [Array],
+    completedAt: '2020-02-08T16:33:07.876Z',
+  },
+];
+
 // axios.get('https://www.codewars.com/api/v1/users/nickcarr51/code-challenges/completed?page=0/?access_key=QsVQKDG8_jqTJVwrWFWo')
 // .then(({data})=> console.log(data))
 
 // eslint-disable-next-line array-callback-return
 const seedPrompt = () => {
   // eslint-disable-next-line array-callback-return
-  data.map((prompt) => {
+  presData.map((prompt) => {
     axios.get(`https://www.codewars.com/api/v1/code-challenges/${prompt.slug}/?access_key=QsVQKDG8_jqTJVwrWFWo`)
     // eslint-disable-next-line no-shadow
       .then(({ data }) => {

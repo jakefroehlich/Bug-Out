@@ -1,6 +1,7 @@
 const axios = require('axios');
 const { models } = require('./src/server/db/models/index');
 
+// eslint-disable-next-line no-unused-vars
 const data = [
   {
     id: '59cfc000aeb2844d16000075',

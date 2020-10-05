@@ -80,14 +80,11 @@ const GamePage = ({
       <div
         className="gamepage"
       >
-        <div>
-          <div
-            className="box gamepageL"
-          >
-            <h1>{game.prompt.name}</h1>
-            <p>{game.prompt.prompt}</p>
-          </div>
-          <ChatBox />
+        <div
+          className="box gamepageL"
+        >
+          <h1>{game.prompt.name}</h1>
+          <p>{game.prompt.prompt}</p>
         </div>
         <Editor match={match} gamePageProps={game} />
         <div

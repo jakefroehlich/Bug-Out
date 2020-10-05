@@ -12,6 +12,7 @@ import {
   roundReset,
   usePowerUpThunk,
 } from './gameThunks';
+
 import {
   loginThunk,
   logoutThunk,
@@ -24,6 +25,7 @@ import {
   makeHostThunk,
   removeHostThunk,
   leaveGameThunk,
+  resetScoreThunk,
 } from './sessionThunks';
 
 export {
@@ -47,4 +49,5 @@ export {
   joinGameThunk,
   roundReset,
   usePowerUpThunk,
+  resetScoreThunk,
 };

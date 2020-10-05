@@ -46,6 +46,7 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
         roundStartUnix: action.payload.roundStartUnix,
         roundEnd: action.payload.roundEnd,
+        roundOver: action.payload.roundOver,
         players: action.players,
         host: action.hostStatus,
         roundEndUnix: action.payload.roundEndUnix,
@@ -89,6 +90,7 @@ const gameReducer = (state = initialGameState, action) => {
         prompt: action.payload.prompt,
         roundEnd: action.payload.roundEnd,
         roundStart: action.payload.roundStart,
+        roundOver: false,
       };
     case types.SET_GAME_SCORES:
       return {

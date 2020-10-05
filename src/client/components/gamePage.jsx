@@ -55,6 +55,7 @@ const GamePage = ({
       clearInterval(powerUpTimerId);
     };
   });
+
   useEffect(() => {
     const current = moment().unix();
     let secondsLeft = game.roundEndUnix - current;

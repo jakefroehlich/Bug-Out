@@ -23,12 +23,25 @@ const GamePage = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [givenPowerUp, setGivenPowerUp] = useState(null);
   const [standings, setStandings] = useState([]);
+  const [suffering, setSuffering] = useState(false);
+
+  console.log('powerups', game.powerUpCount);
+  console.log('suffering', suffering);
 
   useEffect(() => {
     getPowerUps();
     setSession();
     getCurrentGame(match.params.id);
   }, []);
+
+  useEffect(() => {
+    if (game.powerUpCount) {
+      setSuffering(true);
+      setTimeout(() => {
+        setSuffering(false);
+      }, 1000);
+    }
+  }, [game.powerUpCount]);
 
   const endRound = async () => {
     await getCurrentGame(match.params.id);
@@ -75,59 +88,63 @@ const GamePage = ({
 
   return (
     <div
-      className="gamepagecontainer"
+      className={suffering ? 'powerupdiv' : ''}
     >
-      <GameNav />
       <div
-        className="gamepage"
+        className="gamepagecontainer"
       >
+        <GameNav />
         <div
-          className="box gamepageL"
+          className="gamepage"
         >
-          <h1>{game.prompt.name}</h1>
-          <p>{game.prompt.prompt}</p>
-        </div>
-        <Editor match={match} gamePageProps={game} />
-        <div
-          className="gamesidebar"
-        >
-          <Timer props={game} />
-          <div className={givenPowerUp ? 'box powerupcontainer' : 'dimbox powerupcontainer'}>
-            <span className="span">Power Up!</span>
-            {givenPowerUp ? (
-              <button
-                type="button"
-                className="button"
-                onClick={() => {
-                  socket.emit('powerUp', givenPowerUp.funcName);
-                  setGivenPowerUp(null);
-                }}
-              >{givenPowerUp.name}
-              </button>
-            ) : (
-              <div className="loaderContainer">
-                <div className="loader" />
-              </div>
-            )}
+          <div
+            className="box gamepageL"
+          >
+            <h1>{game.prompt.name}</h1>
+            <p>{game.prompt.prompt}</p>
           </div>
-          <LeaveGameButton history={history} />
-        </div>
-        <div>
-          <Modal isOpen={isOpen} onClose={onClose}>
-            <ModalOverlay />
-            <ModalContent className="modalcontainer">
-              <ModalHeader className="modalheader">Round Over!</ModalHeader>
-              <ModalBody className="modal">
-                <div className="innermodal">
-                  <p>Current Scores:</p>
-                  <ol>
-                    {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
-                  </ol>
-                  <RoundStartTimer match={match} history={history} />
+          <Editor match={match} gamePageProps={game} />
+          <div
+            className="gamesidebar"
+          >
+            <Timer props={game} />
+            <div className={givenPowerUp ? 'box powerupcontainer' : 'dimbox powerupcontainer'}>
+              <span className="span">Power Up!</span>
+              {givenPowerUp ? (
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => {
+                    socket.emit('powerUp', givenPowerUp.funcName);
+                    setGivenPowerUp(null);
+                  }}
+                >{givenPowerUp.name}
+                </button>
+              ) : (
+                <div className="loaderContainer">
+                  <div className="loader" />
                 </div>
-              </ModalBody>
-            </ModalContent>
-          </Modal>
+              )}
+            </div>
+            <LeaveGameButton history={history} />
+          </div>
+          <div>
+            <Modal isOpen={isOpen} onClose={onClose}>
+              <ModalOverlay />
+              <ModalContent className="modalcontainer">
+                <ModalHeader className="modalheader">Round Over!</ModalHeader>
+                <ModalBody className="modal">
+                  <div className="innermodal">
+                    <p>Current Scores:</p>
+                    <ol>
+                      {standings.map((player) => <li key={player.id}>{player.name}: {player.score}</li>)}
+                    </ol>
+                    <RoundStartTimer match={match} history={history} />
+                  </div>
+                </ModalBody>
+              </ModalContent>
+            </Modal>
+          </div>
         </div>
       </div>
     </div>

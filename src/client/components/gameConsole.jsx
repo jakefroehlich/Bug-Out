@@ -19,10 +19,6 @@ const GameConsole = ({
 }) => {
   useEffect(() => {
     setSession();
-  }, []);
-
-  useEffect(() => {
-    setSession();
   }, [session]);
 
   return (

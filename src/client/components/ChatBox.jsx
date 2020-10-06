@@ -6,7 +6,7 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, session, game, }) => {
+const ChatBox = ({ msgs, session, game }) => {
   const [chatMsg, setChatMsg] = useState('');
 
   const handleChange = (e) => {

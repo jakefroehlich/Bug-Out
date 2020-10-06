@@ -5,18 +5,6 @@ const serverListeners = (io, socket) => {
   console.log('New client, who dis');
   console.log(chalk.yellow('socketid: ', socket.id));
 
-  socket.on('test', (id) => {
-    let keys = Object.keys(socket.rooms);
-
-    console.log('keys', keys)
-
-    if (keys.includes(id)) {
-      socket.emit('inRoom');
-    } else {
-      socket.emit('noRoom');
-    }
-  })
-
   socket.on('joinRoom', (id, alias) => {
     socket.join(id);
     socket.broadcast.to(id).emit('message', formatMessage('BugBot', `${alias} has joined the room!`));
@@ -47,7 +35,6 @@ const serverListeners = (io, socket) => {
   });
 
   socket.on('gameOver', (id) => {
-    console.log('got here!')
     socket.broadcast.to(id).emit('gameOver');
   });
 };

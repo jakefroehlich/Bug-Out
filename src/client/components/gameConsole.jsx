@@ -31,8 +31,6 @@ const GameConsole = ({
     }
   }, []);
 
-  console.log('game', game)
-
   return (
     <div className="imgcontainer">
       <div className="outerconsole">

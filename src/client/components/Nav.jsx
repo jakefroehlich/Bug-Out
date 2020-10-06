@@ -32,7 +32,7 @@ const Nav = ({ session }) => (
     <div className="dropdown">
       <span>Leaderboard</span>
       <div className="dropdowncontent">
-          <Leaderboard />
+        <Leaderboard />
       </div>
     </div>
   </div>

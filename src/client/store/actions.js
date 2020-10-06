@@ -203,7 +203,7 @@ const resetGame = () => ({
 
 const gameOver = () => ({
   type: types.GAME_OVER,
-})
+});
 
 export {
   changeInitialLoading,

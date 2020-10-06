@@ -31,7 +31,6 @@ const GamePage = ({
     getPowerUps();
     setSession();
     getCurrentGame(match.params.id);
-    socket.emit('test');
   }, []);
 
   useEffect(() => {
@@ -44,7 +43,7 @@ const GamePage = ({
     if (game.gameOver) {
       history.push('/game-over');
     }
-  }, [game.gameOver])
+  }, [game.gameOver]);
 
   useEffect(() => {
     if (game.powerUpCount) {

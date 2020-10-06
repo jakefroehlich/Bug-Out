@@ -21,10 +21,11 @@ class RoundStartTimer extends Component {
   // resets the round clock, gets a new prompt, and sets all users correctAnswer back to false
   componentDidMount() {
     setSessionThunk();
-    this.props.setRoundTimesThunk(this.props.match.params.id);
-    this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
-    this.props.roundReset(this.props.game.id);
-
+    if (this.props.session.host) {
+      this.props.setRoundTimesThunk(this.props.match.params.id);
+      this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
+      this.props.roundReset(this.props.game.id);
+    }
 
     if (this.props.game.rounds > 1) {
       this.myInterval = setInterval(() => {

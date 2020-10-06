@@ -648,6 +648,8 @@ font-size: 16px;
     min-width: 160px;
     width: 25%;
     height: auto;
+    max-height: 50%;
+    overflow-y: scroll;
     z-index: 1;
 }
   

@@ -10,15 +10,25 @@ import Nav from './Nav';
 import {
   setSessionThunk,
   getCurrentGameThunk,
+  removeHostThunk,
 } from '../store/thunks';
+import { resetGame } from '../store/actions';
+import socket from '../utils/socket';
 
 const GameConsole = ({
   history,
+  game,
   session,
   setSession,
+  rmHost,
 }) => {
   useEffect(() => {
     setSession();
+    if (game.id) {
+      rmHost();
+      resetGame();
+      socket.emit('leaveGame', game.id);
+    }
   }, [session]);
 
   return (
@@ -43,6 +53,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   setSession: () => dispatch(setSessionThunk()),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  rmHost: () => dispatch(removeHostThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);

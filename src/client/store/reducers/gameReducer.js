@@ -109,6 +109,10 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         leaderboard: action.payload,
       };
+    case types.RESET_GAME:
+      return {
+        ...initialGameState,
+      }
     default:
       return state;
   }

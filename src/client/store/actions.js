@@ -36,6 +36,7 @@ export const types = {
   RESET_SCORE: 'RESET_SCORE',
   SET_PLAYERS: 'SET_PLAYERS',
   RESET_GAME: 'RESET_GAME',
+  GAME_OVER: 'GAME_OVER',
 };
 
 const addPlayer = (player) => ({
@@ -198,6 +199,10 @@ const setPlayers = (players) => ({
 
 const resetGame = () => ({
   type: types.RESET_GAME,
+});
+
+const gameOver = () => ({
+  type: types.GAME_OVER,
 })
 
 export {
@@ -234,4 +239,5 @@ export {
   resetScore,
   setPlayers,
   resetGame,
+  gameOver,
 };

@@ -15,6 +15,7 @@ const initialGameState = {
   roundEndUnix: '',
   sufferingPowerUp: null,
   powerUpCount: 0,
+  gameOver: false,
 };
 
 const gameReducer = (state = initialGameState, action) => {
@@ -112,7 +113,12 @@ const gameReducer = (state = initialGameState, action) => {
     case types.RESET_GAME:
       return {
         ...initialGameState,
-      }
+      };
+    case types.GAME_OVER:
+      return {
+        ...state,
+        gameOver: true,
+      };
     default:
       return state;
   }

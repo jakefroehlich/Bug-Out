@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import {
   setRoundTimesThunk, getPromptThunk, setSessionThunk, roundReset,
 } from '../store/thunks';
+import socket from '../utils/socket';
 
 class RoundStartTimer extends Component {
   constructor() {
@@ -20,11 +21,10 @@ class RoundStartTimer extends Component {
   // resets the round clock, gets a new prompt, and sets all users correctAnswer back to false
   componentDidMount() {
     setSessionThunk();
-    if (this.props.session.host) {
-      this.props.setRoundTimesThunk(this.props.match.params.id);
-      this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
-      this.props.roundReset(this.props.game.id);
-    }
+    this.props.setRoundTimesThunk(this.props.match.params.id);
+    this.props.getPromptThunk(this.props.game.difficulty, this.props.match.params.id);
+    this.props.roundReset(this.props.game.id);
+
 
     if (this.props.game.rounds > 1) {
       this.myInterval = setInterval(() => {
@@ -41,6 +41,7 @@ class RoundStartTimer extends Component {
       }, 1000);
     } else {
       axios.post('/game/leaderboard');
+      socket.emit('gameOver', this.props.game.id);
       this.props.history.push('/game-over');
     }
   }

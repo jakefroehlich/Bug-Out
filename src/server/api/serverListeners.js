@@ -11,8 +11,10 @@ const serverListeners = (io, socket) => {
     socket.broadcast.to(id).emit('playerUpdate', id);
   });
 
-  socket.on('leaveRoom', (id) => {
+  socket.on('leaveRoom', (id, alias) => {
     socket.leave(id);
+    socket.broadcast.to(id).emit('message', formatMessage('BugBot', `${alias} has left the room!`));
+    socket.broadcast.to(id).emit('playerUpdate', id);
   });
 
   socket.on('chatMsg', (msg, name, id) => {
@@ -30,6 +32,11 @@ const serverListeners = (io, socket) => {
 
   socket.on('powerUp', (powerUpName, id) => {
     socket.broadcast.to(id).emit('powerUp', powerUpName);
+  });
+
+  socket.on('gameOver', (id) => {
+    console.log('got here!')
+    socket.broadcast.to(id).emit('gameOver');
   });
 };
 

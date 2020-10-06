@@ -34,6 +34,12 @@ const GamePage = ({
   }, []);
 
   useEffect(() => {
+    if (game.gameOver) {
+      history.push('/game-over');
+    }
+  }, [game.gameOver])
+
+  useEffect(() => {
     if (game.powerUpCount) {
       setSuffering(true);
       setTimeout(() => {
@@ -83,7 +89,7 @@ const GamePage = ({
     return () => {
       clearInterval(timeLeft);
     };
-  });
+  }, []);
 
   return (
     <div

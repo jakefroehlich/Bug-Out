@@ -29,7 +29,7 @@ const GameConsole = ({
       reset();
       socket.emit('leaveRoom', game.id, session.name);
     }
-  }, [session.id]);
+  }, []);
 
   console.log('game', game)
 

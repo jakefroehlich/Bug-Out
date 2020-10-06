@@ -30,7 +30,7 @@ const Nav = ({ session }) => (
       </div>
     </div>
     <span>
-      <Link to="/login">Login</Link>
+      
     </span>
   </div>
 );

@@ -24,11 +24,11 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         players: [...state.players, action.player],
       };
-    case types.RM_PLAYER:
+    case types.SET_PLAYERS:
       return {
         ...state,
-        players: state.players.filter((p) => p.id !== action.player.id),
-      };
+        players: action.players,
+      }
     case types.UPDATE_GAME:
       return {
         ...state,
@@ -36,6 +36,7 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
       };
     case types.GET_CURRENT_GAME:
+      console.log('payload', action.payload)
       return {
         ...state,
         id: action.payload.id,
@@ -47,7 +48,7 @@ const gameReducer = (state = initialGameState, action) => {
         difficulty: action.payload.difficulty,
         roundStartUnix: action.payload.roundStartUnix,
         roundEnd: action.payload.roundEnd,
-        roundOver: action.payload.roundOver,
+        // roundOver: action.payload.roundOver,
         players: action.players,
         host: action.hostStatus,
         roundEndUnix: action.payload.roundEndUnix,
@@ -87,7 +88,7 @@ const gameReducer = (state = initialGameState, action) => {
     case types.NEW_ROUND:
       return {
         ...state,
-        rounds: action.payload.rounds,
+        rounds: action.payload.rounds -1,
         prompt: action.payload.prompt,
         roundEnd: action.payload.roundEnd,
         roundStart: action.payload.roundStart,
@@ -109,6 +110,10 @@ const gameReducer = (state = initialGameState, action) => {
         ...state,
         leaderboard: action.payload,
       };
+    case types.RESET_GAME:
+      return {
+        ...initialGameState,
+      }
     default:
       return state;
   }

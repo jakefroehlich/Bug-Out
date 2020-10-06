@@ -7,19 +7,34 @@ import { connect } from 'react-redux';
 import CreateGame from './createGame';
 import JoinGame from './joinGame';
 import Nav from './Nav';
+import socket from '../utils/socket';
+import {
+  resetGame,
+} from '../store/actions';
 import {
   setSessionThunk,
   getCurrentGameThunk,
+  removePlayerThunk,
 } from '../store/thunks';
 
 const GameConsole = ({
   history,
   session,
+  game,
   setSession,
+  removePlayer,
+  getCurrentgame,
+  reset,
 }) => {
   useEffect(() => {
     setSession();
-  }, [session]);
+    if (game.id) {
+      socket.emit('leaveRoom', game.id);
+      reset();
+    }
+  }, []);
+
+  console.log('game', game)
 
   return (
     <div className="imgcontainer">
@@ -43,6 +58,8 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   setSession: () => dispatch(setSessionThunk()),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  removePlayer: (code) => dispatch(removePlayerThunk(code)),
+  reset: () => dispatch(resetGame()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);

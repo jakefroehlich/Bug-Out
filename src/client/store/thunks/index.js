@@ -11,6 +11,7 @@ import {
   joinGameThunk,
   roundReset,
   usePowerUpThunk,
+  removePlayerThunk,
 } from './gameThunks';
 
 import {
@@ -50,4 +51,5 @@ export {
   roundReset,
   usePowerUpThunk,
   resetScoreThunk,
+  removePlayerThunk,
 };

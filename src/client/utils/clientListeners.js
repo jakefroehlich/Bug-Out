@@ -14,8 +14,9 @@ const clientListeners = (socket) => {
     store.dispatch(addMessage(message));
   });
 
-  socket.on('roundOver', () => {
+  socket.on('roundOver', (id) => {
     store.dispatch(roundOver());
+    store.dispatch(getCurrentGameThunk(id))
   });
 
   socket.on('startGame', (gameId) => {

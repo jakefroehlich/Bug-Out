@@ -72,6 +72,22 @@ gameRouter.put('/addplayer', async (req, res) => {
   }
 });
 
+gameRouter.put('/removeplayer', async (req, res) => {
+  try {
+    const { code } = req.body;
+    const gameSession = await GameSession.findOne({ where: { code }, include: [Session] });
+    console.log('gamesession', gameSession);
+    const filteredPlayers = gameSession.players.filter(p => p.id !== req.cookies.session_id);
+
+    console.log('filtered players', filteredPlayers);
+
+    res.send(filteredPlayers).status(200);
+  } catch (e) {
+    res.status(404).send('Failed to remove player');
+    console.log(e);
+  }
+})
+
 //  update timing on the game session
 gameRouter.put('/game-times/:id', async (req, res) => {
   try {

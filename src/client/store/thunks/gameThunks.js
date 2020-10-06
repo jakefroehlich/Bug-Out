@@ -112,9 +112,9 @@ export const updateNameThunk = (name) => (dispatch) => axios
 
 export const setCorrect = (id) => (dispatch) => {
   axios.put(`/session/correct/${id}`)
-    .then(({ data }) => {
+    .then(() => {
       dispatch(setCorrectAnswer());
-      dispatch(roundOver(data));
+      dispatch(roundOver());
     })
     .catch((e) => {
       console.log(e);
@@ -177,8 +177,16 @@ export const getLeaderboardThunk = () => (dispatch) => axios
     console.log(e);
   });
 
-export const roundReset = (id) => () => axios
-  .put(`/session/reset-correct/${id}`)
+export const roundReset = (game) => (dispatch) => axios
+  .put(`/session/reset-correct/${game.id}`)
+  .then(({ data }) => dispatch(newRound(data)))
   .catch((e) => {
     console.log(e);
   });
+
+export const removePlayerThunk = (code) => (dispatch) => axios
+  .put('/game/removeplayer', { code })
+  .then((res) => dispatch(setPlayers(res.data)))
+  .catch((e) => {
+    console.log(e);
+  })

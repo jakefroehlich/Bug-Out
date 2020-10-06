@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Leaderboard from './leaderboard';
 
 const Nav = ({ session }) => (
   <div className="nav">
@@ -29,9 +29,12 @@ const Nav = ({ session }) => (
         </p>
       </div>
     </div>
-    <span>
-      <Link to="/login">Login</Link>
-    </span>
+    <div className="dropdown">
+      <span>Leaderboard</span>
+      <div className="dropdowncontent">
+          <Leaderboard />
+      </div>
+    </div>
   </div>
 );
 

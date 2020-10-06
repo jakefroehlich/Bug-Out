@@ -24,8 +24,7 @@ const GamePage = ({
   const [standings, setStandings] = useState([]);
   const [suffering, setSuffering] = useState(false);
 
-  console.log('powerups', game.powerUpCount);
-  console.log('suffering', suffering);
+  console.log('game', game)
 
   useEffect(() => {
     getPowerUps();
@@ -46,7 +45,7 @@ const GamePage = ({
     await getCurrentGame(match.params.id);
     await setStandings(game.players.sort((a, b) => a.score - b.score));
     onOpen();
-    socket.emit('roundOver');
+    socket.emit('roundOver', game.id);
   };
 
   useEffect(() => {
@@ -59,11 +58,9 @@ const GamePage = ({
     const powerUpTimerId = setInterval(() => {
       if (!givenPowerUp) {
         const powerUp = setPowerUp(game.powerUps);
-        console.log('powerUp given ,', powerUp);
         setGivenPowerUp(powerUp);
-        clearInterval(powerUpTimerId);
       }
-    }, 5000); // runs every 20 seconds;
+    }, 2000); // runs every 2 seconds;
     return () => {
       clearInterval(powerUpTimerId);
     };
@@ -114,7 +111,7 @@ const GamePage = ({
                   type="button"
                   className="button"
                   onClick={() => {
-                    socket.emit('powerUp', givenPowerUp.funcName);
+                    socket.emit('powerUp', givenPowerUp.funcName, game.id);
                     setGivenPowerUp(null);
                   }}
                 >{givenPowerUp.name}

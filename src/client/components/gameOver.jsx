@@ -2,11 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Nav from './Nav';
 import Leaderboard from './leaderboard';
-import { setSessionThunk } from '../store/thunks';
+import { setSessionThunk, removePlayerThunk } from '../store/thunks';
 
-const GameOver = ({ history, setSession }) => {
+const GameOver = ({ history, setSession, game, removePlayer, }) => {
   useEffect(() => {
     setSession();
+    removePlayer(game.id);
   }, []);
 
   const handleClick = () => {
@@ -43,6 +44,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => ({
   setSession: () => dispatch(setSessionThunk()),
+  removePlayer: (code) => dispatch(removePlayerThunk(code))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameOver);

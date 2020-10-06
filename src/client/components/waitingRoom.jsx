@@ -40,9 +40,9 @@ const WaitingRoom = ({
     if (game.id && session.name) {
       socket.emit('joinRoom', game.id, session.name);
     }
-    return () => {
-      socket.emit('leaveRoom', game.id);
-    };
+    // return () => {
+    //   socket.emit('leaveRoom', game.id);
+    // };
   }, [game.id, session.name]);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const WaitingRoom = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('startGame');
+    socket.emit('startGame', game.id);
   };
 
   return (

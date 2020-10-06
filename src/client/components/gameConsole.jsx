@@ -21,15 +21,18 @@ const GameConsole = ({
   session,
   setSession,
   rmHost,
+  reset,
 }) => {
   useEffect(() => {
     setSession();
     if (game.id) {
       rmHost();
-      resetGame();
-      socket.emit('leaveGame', game.id);
+      reset();
+      socket.emit('leaveRoom', game.id);
     }
-  }, [session]);
+  }, [session.id]);
+
+  console.log('game', game)
 
   return (
     <div className="imgcontainer">
@@ -54,6 +57,7 @@ const mapDispatchToProps = (dispatch) => ({
   setSession: () => dispatch(setSessionThunk()),
   getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
   rmHost: () => dispatch(removeHostThunk()),
+  reset: () => dispatch(resetGame()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameConsole);

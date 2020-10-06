@@ -6,7 +6,7 @@ import {
 import socket from '../utils/socket';
 import { addMessage } from '../store/actions';
 
-const ChatBox = ({ msgs, session }) => {
+const ChatBox = ({ msgs, session, game, }) => {
   const [chatMsg, setChatMsg] = useState('');
 
   const handleChange = (e) => {
@@ -17,7 +17,7 @@ const ChatBox = ({ msgs, session }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (chatMsg !== '') {
-      socket.emit('chatMsg', chatMsg, session.name);
+      socket.emit('chatMsg', chatMsg, session.name, game.id);
       setChatMsg('');
     }
   };

@@ -46,7 +46,7 @@ const GamePage = ({
     await getCurrentGame(match.params.id);
     await setStandings(game.players.sort((a, b) => a.score - b.score));
     onOpen();
-    socket.emit('roundOver');
+    socket.emit('roundOver', game.id);
   };
 
   useEffect(() => {
@@ -114,7 +114,7 @@ const GamePage = ({
                   type="button"
                   className="button"
                   onClick={() => {
-                    socket.emit('powerUp', givenPowerUp.funcName);
+                    socket.emit('powerUp', givenPowerUp.funcName, game.id);
                     setGivenPowerUp(null);
                   }}
                 >{givenPowerUp.name}

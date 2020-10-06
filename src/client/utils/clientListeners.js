@@ -16,7 +16,7 @@ const clientListeners = (socket) => {
 
   socket.on('roundOver', (id) => {
     store.dispatch(roundOver());
-    store.dispatch(getCurrentGameThunk(id))
+    store.dispatch(getCurrentGameThunk(id));
   });
 
   socket.on('startGame', (gameId) => {

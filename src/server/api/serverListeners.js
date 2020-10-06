@@ -5,34 +5,31 @@ const serverListeners = (io, socket) => {
   console.log('New client, who dis');
   console.log(chalk.yellow('socketid: ', socket.id));
 
-  let socketRoomId;
-
-  socket.on('joinRoom', (gameSessionId, alias) => {
-    socket.join(gameSessionId);
-    socketRoomId = gameSessionId;
-    socket.broadcast.to(socketRoomId).emit('message', formatMessage('BugBot', `${alias} has joined the room!`));
-    socket.broadcast.to(socketRoomId).emit('playerUpdate', socketRoomId);
+  socket.on('joinRoom', (id, alias) => {
+    socket.join(id);
+    socket.broadcast.to(id).emit('message', formatMessage('BugBot', `${alias} has joined the room!`));
+    socket.broadcast.to(id).emit('playerUpdate', id);
   });
 
-  socket.on('leaveRoom', () => {
-    socket.leave(socketRoomId);
+  socket.on('leaveRoom', (id) => {
+    socket.leave(id);
   });
 
-  socket.on('chatMsg', (msg, name) => {
+  socket.on('chatMsg', (msg, name, id) => {
     console.log('chatMsg!', socket.rooms);
-    io.to(socketRoomId).emit('message', formatMessage(name, msg));
+    io.to(id).emit('message', formatMessage(name, msg));
   });
 
-  socket.on('roundOver', () => {
-    io.emit('roundOver');
+  socket.on('roundOver', (id) => {
+    io.to(id).emit('roundOver', id);
   });
 
-  socket.on('startGame', () => {
-    io.emit('startGame', socketRoomId);
+  socket.on('startGame', (id) => {
+    io.to(id).emit('startGame', id);
   });
 
-  socket.on('powerUp', (powerUpName) => {
-    socket.broadcast.emit('powerUp', powerUpName);
+  socket.on('powerUp', (powerUpName, id) => {
+    socket.broadcast.to(id).emit('powerUp', powerUpName);
   });
 };
 

@@ -52,7 +52,7 @@ const WaitingRoom = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('startGame');
+    socket.emit('startGame', game.id);
   };
 
   return (

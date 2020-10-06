@@ -17,7 +17,7 @@ import {
 import socket from '../utils/socket';
 
 const GamePage = ({
-  game, getPowerUps, getCurrentGame, history, match, setSession,
+  game, getPowerUps, getCurrentGame, history, match, setSession, session,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [givenPowerUp, setGivenPowerUp] = useState(null);
@@ -31,7 +31,14 @@ const GamePage = ({
     getPowerUps();
     setSession();
     getCurrentGame(match.params.id);
+    socket.emit('test');
   }, []);
+
+  useEffect(() => {
+    if (game.id && session.name) {
+      socket.emit('joinRoom', game.id, session.name);
+    }
+  }, [game.id, session.name]);
 
   useEffect(() => {
     if (game.gameOver) {
@@ -50,7 +57,7 @@ const GamePage = ({
 
   const endRound = async () => {
     await getCurrentGame(match.params.id);
-    await setStandings(game.players.sort((a, b) => a.score - b.score));
+    await setStandings(game.players.sort((a, b) => b.score - a.score));
     onOpen();
     socket.emit('roundOver', game.id);
   };
@@ -69,7 +76,7 @@ const GamePage = ({
         setGivenPowerUp(powerUp);
         clearInterval(powerUpTimerId);
       }
-    }, 5000); // runs every 20 seconds;
+    }, 7000); // runs every 20 seconds;
     return () => {
       clearInterval(powerUpTimerId);
     };

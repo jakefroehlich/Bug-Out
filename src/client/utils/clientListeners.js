@@ -34,7 +34,15 @@ const clientListeners = (socket) => {
 
   socket.on('gameOver', () => {
     store.dispatch(gameOver());
-  })
+  });
+
+  socket.on('inRoom', () => {
+    console.log('Room!');
+  });
+
+  socket.on('noRoom', () => {
+    console.log('no room :(');
+  });
 };
 
 export default clientListeners;

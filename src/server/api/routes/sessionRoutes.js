@@ -80,7 +80,7 @@ sessionRouter.put('/correct/:id', async (req, res) => {
   try {
     const session = await Session.findOne({ where: { id: req.session_id } });
     const correctAnswer = true;
-    session.update({ correctAnswer });
+    await session.update({ correctAnswer });
     const { id } = req.params;
     const game = await GameSession.findOne({ where: { id }, include: [Session] });
     let correct = 0;

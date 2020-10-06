@@ -25,7 +25,6 @@ const GameConsole = ({
 }) => {
   useEffect(() => {
     setSession();
-    rmHost();
     if (game.id) {
       reset();
       socket.emit('leaveRoom', game.id, session.name);

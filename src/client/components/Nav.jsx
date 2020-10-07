@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Leaderboard from './leaderboard';
 
 const Nav = ({ session }) => (
   <div className="nav">
-<<<<<<< HEAD
     <span>
       Alias:
       <div className="navname">
-        {session.name}
+        {session.name} {session.host ? '(host)' : ''}
       </div>
     </span>
     <div className="dropdown">
@@ -22,20 +21,20 @@ const Nav = ({ session }) => (
       </div>
     </div>
     <div className="dropdown">
-      <span>Credit</span>
+      <span>Credits</span>
       <div className="dropdowncontent">
-        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sanghyuk Kwon,
+        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sang-Hyuk Kwon,
           Chad Nuckols, and Jake Froehlich) in partnership with FullStack Academy
           (Special thanks to Eliot, Deanna, and Thompson - 2004FLEX fo lyfe)
         </p>
       </div>
     </div>
-=======
-    <span>Alias: {session.name}</span>
->>>>>>> parent of bbbee70... modal css complete
-    <span>
-      <Link to="/login">Login</Link>
-    </span>
+    <div className="dropdown">
+      <span>Leaderboard</span>
+      <div className="dropdowncontent">
+        <Leaderboard />
+      </div>
+    </div>
   </div>
 );
 

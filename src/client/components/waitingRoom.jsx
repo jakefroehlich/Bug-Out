@@ -5,25 +5,33 @@ import {
 } from '@chakra-ui/core';
 import Chatbox from './ChatBox';
 import TheCompetition from './theCompetition';
-import { setSessionThunk, getCurrentGameThunk, setRoundTimesThunk } from '../store/thunks';
+import {
+  setSessionThunk, getCurrentGameThunk, setRoundTimesThunk, resetScoreThunk,
+} from '../store/thunks';
 import LeaveGameButton from './leaveGameButton';
 import socket from '../utils/socket';
 import GameStartTimer from './gameStartTimer';
 
 const WaitingRoom = ({
-  setSession, getCurrentGame, game, history, session,
-  // setRoundTimes,
+  setSession,
+  getCurrentGame,
+  game,
+  history,
+  session,
+  resetScore,
   match,
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     setSession();
+    if (!game.active) {
+      resetScore();
+    }
   }, []);
 
   useEffect(() => {
     if (match.params.id) {
-      console.log('match', match);
       getCurrentGame(match.params.id);
     }
   }, [match.params.id]);
@@ -60,7 +68,12 @@ const WaitingRoom = ({
         <div
           className="nav"
         >
-          <span>Alias: <div className="navname">{session.name}</div></span>
+          <span>
+            Alias:
+            <div className="navname">
+              {session.name} {session.host ? '(host)' : ''}
+            </div>
+          </span>
           <div className="dropdown">
             <span>Rules</span>
             <div className="dropdowncontent">
@@ -72,9 +85,9 @@ const WaitingRoom = ({
             </div>
           </div>
           <div className="dropdown">
-            <span>Credit</span>
+            <span>Credits</span>
             <div className="dropdowncontent">
-              <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sanghyuk Kwon,
+              <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sang-Hyuk Kwon,
                 Chad Nuckols, and Jake Froehlich) in partnership with FullStack Academy
                 (Special thanks to Eliot, Deanna, and Thompson - 2004FLEX fo lyfe)
               </p>
@@ -128,6 +141,7 @@ const mapDispatchToProps = (dispatch) => ({
   getCurrentGame: (id) => dispatch(getCurrentGameThunk(id)),
   setSession: () => dispatch(setSessionThunk()),
   setRoundTimes: (id) => dispatch(setRoundTimesThunk(id)),
+  resetScore: () => dispatch(resetScoreThunk()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WaitingRoom);

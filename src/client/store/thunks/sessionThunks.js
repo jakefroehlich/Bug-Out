@@ -2,7 +2,7 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
 import {
-  setSession, updateName, updateHostStatus, leaveGame,
+  setSession, updateName, updateHostStatus, leaveGame, resetScore,
 } from '../actions';
 
 export const setSessionThunk = () => (dispatch) => axios
@@ -48,5 +48,14 @@ export const leaveGameThunk = () => (dispatch) => axios
   })
   .catch((e) => {
     console.log('error leaving game');
+    console.log(e);
+  });
+
+export const resetScoreThunk = () => (dispatch) => axios
+  .put('/session/reset-score')
+  .then((res) => {
+    dispatch(resetScore());
+  })
+  .catch((e) => {
     console.log(e);
   });

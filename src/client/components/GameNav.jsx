@@ -6,7 +6,7 @@ const GameNav = ({ session }) => (
     <span>
       Alias:
       <div className="navname">
-        {session.name}
+        {session.name} {session.host ? '(host)' : ''}
       </div>
     </span>
     <div className="dropdown">
@@ -20,9 +20,9 @@ const GameNav = ({ session }) => (
       </div>
     </div>
     <div className="dropdown">
-      <span>Credit</span>
+      <span>Credits</span>
       <div className="dropdowncontent">
-        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sanghyuk Kwon,
+        <p>Bug Out was created by BugOutBrxs LLC (Joe Spicuzza, Sang-Hyuk Kwon,
           Chad Nuckols, and Jake Froehlich) in partnership with FullStack Academy
           (Special thanks to Eliot, Deanna, and Thompson - 2004FLEX fo lyfe)
         </p>

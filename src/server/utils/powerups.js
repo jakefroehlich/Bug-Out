@@ -1,8 +1,19 @@
 /* eslint-disable no-undef */
-const removeBrackets = (code) => {
+// const removeBrackets = (code) => {
+//   const currentCode = code;
+//   let newCode = currentCode.replaceAll('{', '');
+//   newCode = newCode.replaceAll('}', '');
+//   return newCode;
+// };
+const assignmentToEquals = (code) => {
   const currentCode = code;
-  let newCode = currentCode.replaceAll('{', '');
-  newCode = newCode.replaceAll('}', '');
+  const newCode = currentCode.replaceAll('=', '===');
+  return newCode;
+};
+
+const equalsToAssignment = (code) => {
+  const currentCode = code;
+  const newCode = currentCode.replaceAll('===', '=');
   return newCode;
 };
 
@@ -24,12 +35,12 @@ const deleteCommas = (code) => {
   return newCode;
 };
 
-const deleteParens = (code) => {
-  const currentCode = code;
-  let newCode = currentCode.replaceAll('(', '');
-  newCode = newCode.replaceAll(')', '');
-  return newCode;
-};
+// const deleteParens = (code) => {
+//   const currentCode = code;
+//   let newCode = currentCode.replaceAll('(', '');
+//   newCode = newCode.replaceAll(')', '');
+//   return newCode;
+// };
 
 const changeBoolean = (code) => {
   const currentCode = code;
@@ -40,11 +51,11 @@ const changeBoolean = (code) => {
 
 module.exports = {
   powerUps: {
-    removeBrackets,
     flipLet,
     flipTrue,
     deleteCommas,
-    deleteParens,
     changeBoolean,
+    assignmentToEquals,
+    equalsToAssignment,
   },
 };

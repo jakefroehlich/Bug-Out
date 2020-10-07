@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable no-shadow */
 import React, { Component } from 'react';
+import { Text } from '@chakra-ui/core';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import {
@@ -59,12 +60,10 @@ class RoundStartTimer extends Component {
   render() {
     const { seconds } = this.state;
     return (
-      <div
-        className="roundstarttimer"
-      >
+      <div>
         { seconds === 0
-          ? <span>Lets Play!</span>
-          : <span fontSize={70}>{seconds}</span>}
+          ? <Text>Lets Play!</Text>
+          : <Text fontSize={70}>{seconds}</Text>}
       </div>
     );
   }

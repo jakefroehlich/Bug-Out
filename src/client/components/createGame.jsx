@@ -65,6 +65,14 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch) => ({
   createGame: (rounds, difficulty, history) => dispatch(createGameThunk(rounds, difficulty, history)),
   makeHost: () => dispatch(makeHostThunk()),
+  // upPlayers: (name) => dispatch(updatePlayers(name)),
+  // getCurrentGame: (currentGameId) => dispatch(getCurrentGameThunk(currentGameId)),
+  // newPlayer: (player) => dispatch(addPlayer(player)),
+  // removePlayer: (player) => dispatch(rmPlayer(player)),
+  // updateGame: (rounds, difficulty) => dispatch(updateGameThunk(rounds, difficulty)),
+  // addMsg: (msg) => dispatch(addMessage(msg)),
+  // setSession: () => dispatch(setSessionThunk()),
+  // startGame: (currentGameId) => dispatch(startGameThunk(currentGameId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateGame);

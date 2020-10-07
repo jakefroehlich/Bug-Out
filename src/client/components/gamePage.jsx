@@ -8,6 +8,7 @@ import moment from 'moment';
 import GameNav from './GameNav';
 import Editor from './editor';
 import Timer from './timer2';
+// import ChatBox from './ChatBox';
 import RoundStartTimer from './RoundStartTimer';
 import { LeaveGameButton } from './index';
 import { setPowerUp } from '../utils';
